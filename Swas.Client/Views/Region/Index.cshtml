@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Swas.Client.Models.RegionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+
+        <p>
+            <a class="btn btn-primary" href="/Region/Create">ჩანაწერის დამატება</a>
+        </p>
+
+        <div class="flip-scroll">
+
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="bordered-danger">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink(" რედაქტირება", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm edit fa fa-edit" })
+                            @Html.ActionLink(" წაშლა", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm delete fa fa-trash-o" })
+
+
+                            @*@Html.ActionLink("რედაქტირება", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("წაშლა", "Delete", new { id = item.Id })*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>

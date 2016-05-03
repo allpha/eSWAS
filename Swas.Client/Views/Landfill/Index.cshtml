@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Swas.Client.Models.LandfillViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+
+        <p>
+            <a class="btn btn-primary fa fa-plus" href="/Landfill/Create">  ჩანაწერის დამატება</a>
+        </p>
+
+        <div class="flip-scroll">
+
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="bordered-danger">
+                    <tr>
+                        <th width="85px">
+
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RegionName)
+                        </th>
+                        @*<th></th>*@
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm edit fa fa-edit" })
+                            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm delete fa fa-trash-o" })
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegionName)
+                        </td>
+                        @*<td>
+                            @Html.ActionLink(" რედაქტირება", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm edit fa fa-edit" } )
+                            @Html.ActionLink(" წაშლა", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm delete fa fa-trash-o" })
+                        </td>*@
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>
+

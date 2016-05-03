@@ -1,0 +1,31 @@
+﻿@model Swas.Client.Models.LandfillViewModel
+
+@{
+    ViewBag.Title = "ჩანაწერის წაშლა";
+}
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>ჩანაწერის წაშლა</h4>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label>ნამდვილად გსურთ წაშალოთ ჩანაწერი: "@Html.DisplayFor(model => model.Name)"? </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <input type="submit" value="წაშლა" class="btn btn-primary" />
+                        <a class="btn btn-primary" href="/Landfill/Index">გაუქმება</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

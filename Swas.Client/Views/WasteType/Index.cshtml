@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Swas.Client.Models.WasteTypeViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+
+        <p>
+            <a class="btn btn-primary fa fa-plus" href="/WasteType/Create">  ჩანაწერის დამატება</a>
+        </p>
+
+        <div class="flip-scroll">
+
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="bordered-danger">
+                    <tr>
+                        <th width="85px">
+                        </th>
+
+                        <th>
+                            მყარი ნარჩენების სახეობა
+                        </th>
+
+                        <th colspan="3" style="text-align:center">
+                            ლარი/ტონაში
+                        </th>
+
+                        <th style="text-align:center">
+                            1მ.კუბი ტონაში
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm edit fa fa-edit" })
+                            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm delete fa fa-trash-o" })
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td style="text-align:center">
+                            <b> < @Html.DisplayFor(modelItem => item.LessQuantity) ტ.</b>
+                        </td>
+                        <td style="text-align:center">
+                            <b>  @Html.DisplayFor(modelItem => item.FromQuantity) - @Html.DisplayFor(modelItem => item.EndQuantity) ტ.</b>
+                        </td>
+                        <td style="text-align:center">
+                            <b> > @Html.DisplayFor(modelItem => item.MoreQuantity) ტ.</b>
+                        </td>
+                        <td style="text-align:center">
+                            <b> @Html.DisplayFor(modelItem => item.Coeficient) ტ.</b>
+                        </td>
+                    </tr>
+
+                    <tr style="text-align:right">
+                        <td style="border:none;" bgcolor="white"></td>
+                        <td>
+                            <b> @Html.DisplayNameFor(model => model.MunicipalityDescription) </b>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MunicipalityLessQuantityPrice) ₾
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MunicipalityIntervalQuantityPrice) ₾
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MunicipalityMoreQuantityPrice) ₾
+                        </td>
+                        <td style="display:none"></td>
+                    </tr>
+
+                    <tr style="text-align:right">
+                        <td style="border:none;" bgcolor="white"></td>
+                        <td>
+                            <b>  @Html.DisplayNameFor(model => model.LegalPersionDescription) </b>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LegalPersonLessQuantityPrice) ₾
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LegalPersonIntervalQuantityPrice) ₾
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LegalPersonMoreQuantityPrice) ₾
+                        </td>
+                        <td style="display:none"></td>
+                    </tr>
+                    <tr style="text-align:right">
+                        <td style="border:none;" bgcolor="white"></td>
+                        <td>
+                            <b> @Html.DisplayNameFor(model => model.PhisicalPersionDestcription) </b>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhysicalPersonLessQuantityPrice) ₾
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhysicalPersonIntervalQuantityPrice) ₾
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhysicalPersonMoreQuantityPrice) ₾
+                        </td>
+                        <td style="display:none"></td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,185 @@
+﻿@model Swas.Client.Models.WasteTypeViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>ახალი ჩანაწერი</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" style="text-align: center;  vertical-align: middle;">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-1" >
+                        @Html.LabelFor(model => model.LessQuantity)
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.LabelFor(model => model.FromQuantity)
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.LabelFor(model => model.EndQuantity)
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.LabelFor(model => model.MoreQuantity)
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.LessQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LessQuantity, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.FromQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FromQuantity, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.EndQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EndQuantity, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.MoreQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MoreQuantity, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                @*Municipality Prices*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MunicipalityDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.MunicipalityLessQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MunicipalityLessQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.MunicipalityIntervalQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MunicipalityIntervalQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.MunicipalityMoreQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MunicipalityMoreQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                @*Legal Person Prices*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LegalPersionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.LegalPersonLessQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LegalPersonLessQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.LegalPersonIntervalQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LegalPersonIntervalQuantityPrice, "", new { @class = "text-danger" })
+
+
+                    </div>
+
+                    <div class="col-md-1">
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.LegalPersonMoreQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LegalPersonMoreQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                @*Psicical Person Prices*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhisicalPersionDestcription, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.PhysicalPersonLessQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhysicalPersonLessQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.PhysicalPersonIntervalQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhysicalPersonIntervalQuantityPrice, "", new { @class = "text-danger" })
+
+
+                    </div>
+
+                    <div class="col-md-1">
+                    </div>
+
+                    <div class="col-md-1">
+                        @Html.EditorFor(model => model.PhysicalPersonMoreQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhysicalPersonMoreQuantityPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Coeficient, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Coeficient, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Coeficient, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="შენახვა" class="btn btn-primary" />
+                        <a class="btn btn-primary" href="/WasteType/Index">გაუქმება</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

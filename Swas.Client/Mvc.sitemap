@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="მყარი ნარჩენები" controller="Home" action="Index" imageUrl="fa fa-pencil-square-o" description="განთავსების აქტი">
+
+    <mvcSiteMapNode title="ცნობარი" controller="Region" action="Index" imageUrl="fa fa-th" description="elements">
+      <mvcSiteMapNode title="მდებარეობა" controller="Region" action="Index" description="ა"/>
+      <mvcSiteMapNode title="ნაგავსაყრელი" controller="Landfill" action="Index" description=""/>
+      <mvcSiteMapNode title="ნარჩენის სახეობა" controller="WasteType" action="Index" description="dragable list items"/>
+      <mvcSiteMapNode title="ცნობარი 4" controller="Region" action="Index" description="Fuel UX's tree"/>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="ადმინისტრირება" controller="Home" action="Index" imageUrl="fa fa-desktop" description="flexible containers">
+      <mvcSiteMapNode title="მომხმარებლები" controller="Home" action="Index" description="Basics"/>
+      <mvcSiteMapNode title="ცნობარი 2" controller="Home" action="Index" description=""/>
+    </mvcSiteMapNode>
+
+  </mvcSiteMapNode>
+
+</mvcSiteMap>
