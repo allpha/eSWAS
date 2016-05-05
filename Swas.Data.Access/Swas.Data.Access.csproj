@@ -52,6 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
+    <Compile Include="Maps\CustomerMap.cs" />
+    <Compile Include="Maps\CustomerRepresentativeMap.cs" />
+    <Compile Include="Maps\PositionMapMap .cs" />
+    <Compile Include="Maps\ReceiverMap.cs" />
+    <Compile Include="Maps\ReceiverPositionMap.cs" />
+    <Compile Include="Maps\RepresentativeMap.cs" />
+    <Compile Include="Maps\SolidWasteActDetailMap.cs" />
+    <Compile Include="Maps\SolidWasteActMap.cs" />
+    <Compile Include="Maps\TransporterMap.cs" />
     <Compile Include="Maps\WasteTypeMap.cs" />
     <Compile Include="Maps\LandfillMap.cs" />
     <Compile Include="Maps\RegionMap.cs" />
@@ -70,6 +79,10 @@
     <Compile Include="Migrations\201605021238104_WasteType_Update_Amounts.cs" />
     <Compile Include="Migrations\201605021238104_WasteType_Update_Amounts.Designer.cs">
       <DependentUpon>201605021238104_WasteType_Update_Amounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605051748428_solid_waste_act.cs" />
+    <Compile Include="Migrations\201605051748428_solid_waste_act.Designer.cs">
+      <DependentUpon>201605051748428_solid_waste_act.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605021238104_WasteType_Update_Amounts.resx">
       <DependentUpon>201605021238104_WasteType_Update_Amounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605051748428_solid_waste_act.resx">
+      <DependentUpon>201605051748428_solid_waste_act.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

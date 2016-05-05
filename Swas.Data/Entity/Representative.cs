@@ -2,14 +2,13 @@
 {
     using System.Collections.Generic;
 
-    public class Landfill
+    public class Representative
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public int RegionId { get; set; }
-
-        public virtual Region Region { get; set; }
+        public virtual ICollection<CustomerRepresentative> CustomerRepresentatives { get; set; }
         public virtual ICollection<SolidWasteAct> SolidWasteActs { get; set; }
     }
 }
+

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Swas.Data.Entity
+﻿namespace Swas.Data.Entity
 {
+    using System.Collections.Generic;
+
     public class WasteType
     {
         public int Id { get; set; }
@@ -30,5 +26,7 @@ namespace Swas.Data.Entity
         public decimal PhysicalPersonMoreQuantityPrice { get; set; }
 
         public decimal Coeficient { get; set; }
+
+        public virtual ICollection<SolidWasteActDetail> SolidWasteActDetails { get; set; }
     }
 }

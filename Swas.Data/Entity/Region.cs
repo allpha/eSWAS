@@ -1,7 +1,7 @@
 ﻿namespace Swas.Data.Entity
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+
     public class Region
     {
         public int Id { get; set; }
