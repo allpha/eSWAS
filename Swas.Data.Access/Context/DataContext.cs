@@ -16,7 +16,16 @@
 
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Landfill> Landfills { get; set; }
+        public virtual DbSet<Transporter> Transporters { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
+        public virtual DbSet<Receiver> Receivers { get; set; }
+        public virtual DbSet<Representative> Representatives { get; set; }
         public virtual DbSet<WasteType> WasteTypes { get; set; }
+        public virtual DbSet<CustomerRepresentative> CustomerRepresentatives { get; set; }
+        public virtual DbSet<ReceiverPosition> ReceiverPositions { get; set; }
+        public virtual DbSet<SolidWasteAct> SolidWasteActs { get; set; }
+        public virtual DbSet<SolidWasteActDetail> SolidWasteActDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,6 +34,17 @@
             modelBuilder.Configurations.Add(new RegionMap());
             modelBuilder.Configurations.Add(new LandfillMap());
             modelBuilder.Configurations.Add(new WasteTypeMap());
+
+
+            modelBuilder.Configurations.Add(new TransporterMap());
+            modelBuilder.Configurations.Add(new CustomerMap());
+            modelBuilder.Configurations.Add(new ReceiverMap());
+            modelBuilder.Configurations.Add(new PositionMap());
+            modelBuilder.Configurations.Add(new RepresentativeMap());
+            modelBuilder.Configurations.Add(new CustomerRepresentativeMap());
+            modelBuilder.Configurations.Add(new ReceiverPositionMap());
+            modelBuilder.Configurations.Add(new SolidWasteActMap());
+            modelBuilder.Configurations.Add(new SolidWasteActDetailMap());
         }
 
         public void OpenConection()
@@ -48,3 +68,5 @@
 
     }
 }
+
+

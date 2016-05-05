@@ -10,6 +10,7 @@
         {
             HasKey(a => a.Id);
             Property(a => a.Name).HasMaxLength(500).IsRequired();
+            Property(a => a.LastName).HasMaxLength(500).IsRequired();
         }
 
     }

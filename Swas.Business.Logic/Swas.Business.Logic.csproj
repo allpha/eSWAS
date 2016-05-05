@@ -50,12 +50,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Customer.cs" />
+    <Compile Include="Classes\SolidWasteActBusinessLogic.cs" />
     <Compile Include="Classes\WasteTypeBusinessLogic.cs" />
     <Compile Include="Classes\LandfillBusinessLogic.cs" />
     <Compile Include="Classes\RegionBusinessLogic.cs" />
     <Compile Include="Common\BusinessLogicBase.cs" />
     <Compile Include="Entity\Landfill.cs" />
+    <Compile Include="Entity\Position.cs" />
+    <Compile Include="Entity\Receiver.cs" />
     <Compile Include="Entity\RegionItem.cs" />
+    <Compile Include="Entity\Representative.cs" />
+    <Compile Include="Entity\SolidWasteAct.cs" />
+    <Compile Include="Entity\SolidWasteActDetail.cs" />
+    <Compile Include="Entity\Transporter.cs" />
     <Compile Include="Entity\WasteType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
