@@ -18,4 +18,18 @@
         Juridical = 1,
         Personal = 2
     }
+
+    public class CustomerSearchItem
+    {
+        public string Description { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string ContactInfo { get; set; }
+        public string RepresentativeName { get; set; }
+        public string CarNumber { get; set; }
+        public string CarModel { get; set; }
+        public string DriverInfo { get; set; }
+
+
+    }
 }

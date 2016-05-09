@@ -1,0 +1,503 @@
+﻿@model Swas.Client.Models.SolidWasteActViewModel
+
+@{
+    ViewBag.Title = "პოლიგონზე მყარი ნარჩენების შექმნის აქტი";
+}
+
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="form-horizontal">
+                <h4>ახალი ჩანაწერი</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div>
+                    <div class="form-horizontal col-md-6">
+
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.ActDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ActDate, new { htmlAttributes = new { @class = "form-control date-picker", @id = "id-date-picker-1", style = "width: 100px" } })
+                                @Html.ValidationMessageFor(model => model.ActDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.LandfillId, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("LandfillId", (IEnumerable<SelectListItem>)ViewBag.LandfillItemSource)
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ReceiverName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.ReceiverLastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ReceiverLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ReceiverLastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.PositionName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-horizontal col-md-6">
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.LandTypeItemSource)
+                                @*@Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.CustomerCode, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.CustomerCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CustomerCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.CustomerContactInfo, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.CustomerContactInfo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CustomerContactInfo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.RepresentativeName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.RepresentativeName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RepresentativeName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.TransporterCarNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.TransporterCarNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TransporterCarNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.TransporterCarModel, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.TransporterCarModel, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TransporterCarModel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="input-group col-md-12">
+                            @Html.LabelFor(model => model.TransporterDriverInfo, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.TransporterDriverInfo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TransporterDriverInfo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="col-md-2">
+
+                    </div>
+
+                    <div class="col-md-8">
+
+
+                        <button class="mybutoon" type="button">ჩანაწერის დამატება</button>
+
+                        <button id="addDetailItem" class="btn btn-default" type="button" data-toggle="modal" data-target="#SolidWasteActDetailEditor">ჩანაწერის დამატება</button>
+
+                        <table id="example" class="table table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ნარჩენის ტიპი</th>
+                                    <th width="100px">რ-ბ[ტონა]</th>
+                                    <th width="100px">ერთეულის ფასი [დღგ-ს ჩათვლისთ]</th>
+                                    <th width="100px">ჯამი დღგ-ს ჩათვლით</th>
+                                    <th width="100px"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@using (var modal = Html.Bootstrap().Begin(new Modal().Id("SolidWasteActDetailEditor").Closeable().Size(BootstrapSizes.Normal).Color(BootstrapColors.Primary)))
+
+{
+    using (var header = modal.BeginHeader())
+    {
+        <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+    }
+    using (var body = modal.BeginBody())
+    {
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.Label("ნარჩენის ტიპი", new { htmlAttributes = new { @class = "control-label" } })
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownList("WasteTypeId", (IEnumerable<SelectListItem>)ViewBag.WasteTypeItemSource)
+                    @Html.ValidationMessageFor(model => model.WasteTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.Label("რაოდენობა", new { htmlAttributes = new { @class = "control-label" } })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", style = "width: 100%" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-10">
+                    @Html.Bootstrap().CheckBox("IsCubeMeter").Text("კუბური მეტრი").IsChecked(false)
+                </div>
+            </div>
+
+
+        </div>
+    }
+    using (var header = modal.BeginFooter())
+    {
+        <button class="btn btn-default" id="btSave">შენახვა</button>
+        <button class="btn btn-default" id="btClose" data-dismiss="modal">გაუქმება</button>
+    }
+}
+
+
+
+<style type="text/css">
+    .loader {
+        background: url('../../assets/img/loading.gif');
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+</style>
+
+@section PageScripts{
+
+    <link href="~/assets/css/jquery-ui.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+    <script src="~/assets/js/select2/select2.js"></script>
+    <script src="~/assets/js/tagsinput/bootstrap-tagsinput.js"></script>
+    <script src="~/assets/js/datetime/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.date-picker').datepicker();
+            $("#LandfillId").select2();
+            $("#WasteTypeId").select2();
+
+        });
+    </script>
+
+    <script>
+
+        var count = 1;
+        var editorMode = 'ADD';
+
+        $('.addDetailItem').click(function () {
+
+            editorMode = "ADD";
+
+        });
+
+        $('#btSave').click(function () {
+            if (editorMode == 'ADD') {
+
+                var hiddentWasteTypeID = 'hidden' + document.getElementById("WasteTypeId").value;
+                if (document.getElementById(hiddentWasteTypeID) === null) {
+
+                    $.ajax({
+                        url: "/SolidWasteAct/CalculateWasteAmount",
+                        type: "POST",
+                        dataType: "json",
+                        data: { customerType: document.getElementById("Type").value, wasteTypeId: document.getElementById("WasteTypeId").value, quantity: document.getElementById("Quantity").value, isInQubeMeter: document.getElementById('IsCubeMeter').checked },
+                        success: function (data) {
+
+                            count++;
+
+                            editButton = '<td><button type="button" id="edit' + count + '"' +
+                                          'onClick="EditButtonClickHandler(' + data.WasteTypeId + ')"  ' +
+                                         'class="btn btn-default btn-sm" data-toggle="modal" data-target="#SolidWasteActDetailEditor"><span class="glyphicon glyphicon-edit"></span></button>'
+                            removeButton = '<button type="button" id="remove' + count + '" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>'
+
+                            var hidden = '<input type="hidden" id="hidden' + data.WasteTypeId + '" value="Norway">'
+                            var row = '<tr><td class="trWasteTypeName">' + data.WasteTypeName +
+                                       '</td> <td class="trQuantity">' + data.Quantity +
+                                       '</td> <td class="trUnitPrice">' + data.UnitPrice +
+                                       '</td><td class="trAmount">' + data.Amount +
+                                        '</td>' + editButton + removeButton + ' </tr>' + hidden;
+
+                            $('#example tr:last').after(row);
+
+                            $('#edit' + count).unbind("click");
+                            $('#edit' + count).bind("click", EditButtonClickUpdateQuantity);
+
+                            $('#remove' + count).unbind("click");
+                            $('#remove' + count).bind("click", RemoveButtonClickHandler);
+
+                            $('#btClose').click();
+                        }
+                    })
+
+                }
+                else alert('ასეთი ჩანაწერი უკვე არსებობს');
+            } else
+            {
+                alert('edit')
+            }
+
+
+            //selectedRow.find(".nr").html(document.getElementById("Edit_Id").value) // Find the text
+            //selectedRow.find(".tdname").html(document.getElementById("Edit_Name").value) // Find the text
+
+            //  $('#largeModal').modal('data-dismiss')
+
+
+        });
+
+        function EditButtonClickHandler(wasteTypeID) {
+            var quantity = selectedRow.find(".trQuantity").text();
+            var $wasteTypeItemSource = $("#WasteTypeId").select2();
+
+            $wasteTypeItemSource.val(wasteTypeID).trigger("change");
+            editorMode = "EDIT";
+
+
+        }
+
+        function EditButtonClickUpdateQuantity() {
+
+            selectedRow = $(this).closest("tr");
+            var quantity = selectedRow.find(".trQuantity").text();
+
+            document.getElementById("Quantity").value = quantity;
+        }
+        
+        function RemoveButtonClickHandler() {
+            $(this).closest("tr").remove();    // Find the row
+        }
+
+        $("#ReceiverName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SolidWasteAct/LoadReciever",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Description, value: item.ReceiverName, ReceiverLastName: item.ReceiverLastName, Posistion: item.Posistion };
+                        }))
+                    }
+                })
+            },
+            search: function (e, u) {
+                $(this).addClass('loader');
+            },
+            response: function (e, u) {
+                $(this).removeClass('loader');
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            select: function (event, ui) {
+
+                document.getElementById("ReceiverLastName").value = ui.item.ReceiverLastName
+                document.getElementById("PositionName").value = ui.item.Posistion
+
+            }
+
+        });
+
+        $("#CustomerCode").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SolidWasteAct/LoadCustomerByCode",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term, CustomerType: document.getElementById("Type").value },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Description, value: item.Code, Name: item.Name, ContactInfo: item.ContactInfo, RepresentativeName: item.RepresentativeName, CarNumber: item.CarNumber, CarModel: item.CarModel, DriverInfo: item.DriverInfo };
+                        }))
+                    }
+                })
+            },
+            search: function (e, u) {
+                $(this).addClass('loader');
+            },
+            response: function (e, u) {
+                $(this).removeClass('loader');
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            select: function (event, ui) {
+
+                document.getElementById("CustomerName").value = ui.item.Name
+                document.getElementById("CustomerContactInfo").value = ui.item.ContactInfo
+                document.getElementById("RepresentativeName").value = ui.item.RepresentativeName
+                document.getElementById("TransporterCarNumber").value = ui.item.CarNumber
+                document.getElementById("TransporterCarModel").value = ui.item.CarModel
+                document.getElementById("TransporterDriverInfo").value = ui.item.DriverInfo
+            }
+
+        });
+
+        $("#CustomerName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SolidWasteAct/LoadCustomerByName",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term, CustomerType: document.getElementById("Type").value },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Description, value: item.Name, Code: item.Code, ContactInfo: item.ContactInfo, RepresentativeName: item.RepresentativeName, CarNumber: item.CarNumber, CarModel: item.CarModel, DriverInfo: item.DriverInfo };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            search: function (e, u) {
+                $(this).addClass('loader');
+            },
+            response: function (e, u) {
+                $(this).removeClass('loader');
+            },
+            select: function (event, ui) {
+
+                document.getElementById("CustomerCode").value = ui.item.Code
+                document.getElementById("CustomerContactInfo").value = ui.item.ContactInfo
+                document.getElementById("RepresentativeName").value = ui.item.RepresentativeName
+                document.getElementById("TransporterCarNumber").value = ui.item.CarNumber
+                document.getElementById("TransporterCarModel").value = ui.item.CarModel
+                document.getElementById("TransporterDriverInfo").value = ui.item.DriverInfo
+            }
+
+        });
+
+        $("#TransporterCarNumber").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SolidWasteAct/LoadTransporter",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Description, value: item.CarNumber, CarModel: item.CarModel, DriverInfo: item.DriverInfo };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            search: function (e, u) {
+                $(this).addClass('loader');
+            },
+            response: function (e, u) {
+                $(this).removeClass('loader');
+            },
+            select: function (event, ui) {
+
+                //document.getElementById("TransporterCarNumber").value = ui.item.CarNumber
+                document.getElementById("TransporterCarModel").value = ui.item.CarModel
+                document.getElementById("TransporterDriverInfo").value = ui.item.DriverInfo
+            }
+
+        });
+
+        $("#TransporterCarModel").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SolidWasteAct/LoadCarModel",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item, value: item };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            search: function (e, u) {
+                $(this).addClass('loader');
+            },
+            response: function (e, u) {
+                $(this).removeClass('loader');
+            },
+        });
+
+    </script>
+}

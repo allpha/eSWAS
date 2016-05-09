@@ -213,6 +213,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SolidWasteActController.cs" />
     <Compile Include="Controllers\WasteTypeController.cs" />
     <Compile Include="Controllers\LandfillController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -222,6 +223,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SolidWasteActViewModel.cs" />
+    <Compile Include="Models\WasteTypeDetailViewModels.cs" />
     <Compile Include="Models\WasteTypeViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\LandfillViewModels.cs" />
@@ -252,6 +255,7 @@
     <Content Include="assets\css\demo.min.css" />
     <Content Include="assets\css\font-awesome.css" />
     <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\jquery-ui.css" />
     <Content Include="assets\css\other-less\LessHat.css" />
     <Content Include="assets\css\other-less\lesshat.min.css" />
     <Content Include="assets\css\skins\azure.css" />
@@ -308,6 +312,7 @@
     <Content Include="assets\img\avatars\Stephanie-Walter.jpg" />
     <Content Include="assets\img\favicon.png" />
     <Content Include="assets\img\jquery.minicolors.png" />
+    <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\logo-inverted.png" />
     <Content Include="assets\img\logo-rtl.png" />
     <Content Include="assets\img\logo-solo.png" />
@@ -422,6 +427,7 @@
     <Content Include="assets\js\textarea\jquery.autosize.min.js" />
     <Content Include="assets\js\toastr\toastr.js" />
     <Content Include="assets\js\toastr\toastr.min.js" />
+    <Content Include="assets\js\typeahead.bundle.js" />
     <Content Include="assets\js\validation\bootstrapValidator.js" />
     <Content Include="assets\js\validation\bootstrapValidator.min.js" />
     <Content Include="assets\sound\alert.mp3" />
@@ -735,6 +741,7 @@
     <Content Include="Views\WasteType\Create.cshtml" />
     <Content Include="Views\WasteType\Edit.cshtml" />
     <Content Include="Views\WasteType\Delete.cshtml" />
+    <Content Include="Views\SolidWasteAct\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -627,5 +627,54 @@
                 Dispose();
             }
         }
+
+        public SolidWasteActHelperDataItem LoadHellperSource()
+        {
+            var result = new SolidWasteActHelperDataItem
+            {
+                LandfillItemSource = new List<LandfillItem>()
+            };
+
+            try
+            {
+                Connect();
+
+                var landfillItemSource = (from region in Context.Regions
+                                          join landfill in Context.Landfills on region.Id equals landfill.RegionId
+                                          orderby region.Name ascending
+                                          select new
+                                          {
+                                              Id = landfill.Id,
+                                              LandfillName = landfill.Name,
+                                              RegionName = region.Name
+                                          }).ToList();
+
+                foreach (var item in landfillItemSource)
+                    result.LandfillItemSource.Add(new LandfillItem
+                    {
+                        Id = item.Id,
+                        Name = string.Format("{0} - {1}", item.RegionName.Trim(), item.LandfillName.Trim())
+                    });
+
+                result.WasteTypeItemSource = (from wasteType in Context.WasteTypes
+                                              select new WasteTypeSmartItem
+                                              {
+                                                  Id = wasteType.Id,
+                                                  Name = wasteType.Name,
+                                              }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
     }
 }

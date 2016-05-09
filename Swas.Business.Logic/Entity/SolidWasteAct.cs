@@ -36,4 +36,10 @@
         public virtual RepresentativeItem Representative { get; set; }
         public virtual List<SolidWasteActDetailItem> SolidWasteActDetails { get; set; }
     }
+
+    public class SolidWasteActHelperDataItem
+    {
+        public List<LandfillItem> LandfillItemSource { get; set; }
+        public List<WasteTypeSmartItem> WasteTypeItemSource { get; set; }
+    }
 }

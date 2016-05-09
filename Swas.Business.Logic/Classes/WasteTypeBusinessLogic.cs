@@ -205,5 +205,93 @@
                 Dispose();
             }
         }
+
+        private decimal WastePrice(decimal quantity, decimal lessQuantity, decimal fromQuantity, decimal endQuantity, decimal moreQuantity, decimal lessQuantityPrice, decimal intervalQuantityPrice, decimal moreQuantityPrice)
+        {
+            if (quantity <= lessQuantity)
+                return lessQuantityPrice;
+            else
+                if (fromQuantity <= quantity && quantity <= endQuantity)
+                return intervalQuantityPrice;
+            else
+                return moreQuantityPrice;
+        }
+
+        public SolidWasteActDetailItem CalculateWastePrice(CustomerType customerType, int wasteTypeId, decimal quantity, bool isInQubeMeter)
+        {
+            var result = new SolidWasteActDetailItem();
+
+            try
+            {
+                Connect();
+
+                var wasteTypeInfo = (from wasteType in Context.WasteTypes
+                                     where wasteType.Id == wasteTypeId
+                                     select new WasteTypeItem
+                                     {
+                                         Id = wasteType.Id,
+                                         Name = wasteType.Name,
+                                         LessQuantity = wasteType.LessQuantity,
+                                         FromQuantity = wasteType.FromQuantity,
+                                         EndQuantity = wasteType.EndQuantity,
+                                         MoreQuantity = wasteType.MoreQuantity,
+                                         MunicipalityLessQuantityPrice = wasteType.MunicipalityLessQuantityPrice,
+                                         MunicipalityIntervalQuantityPrice = wasteType.MunicipalityIntervalQuantityPrice,
+                                         MunicipalityMoreQuantityPrice = wasteType.MunicipalityMoreQuantityPrice,
+                                         LegalPersonLessQuantityPrice = wasteType.LegalPersonLessQuantityPrice,
+                                         LegalPersonIntervalQuantityPrice = wasteType.LegalPersonIntervalQuantityPrice,
+                                         LegalPersonMoreQuantityPrice = wasteType.LegalPersonMoreQuantityPrice,
+                                         PhysicalPersonLessQuantityPrice = wasteType.PhysicalPersonLessQuantityPrice,
+                                         PhysicalPersonIntervalQuantityPrice = wasteType.PhysicalPersonIntervalQuantityPrice,
+                                         PhysicalPersonMoreQuantityPrice = wasteType.PhysicalPersonMoreQuantityPrice,
+                                         Coeficient = wasteType.Coeficient,
+                                     }).FirstOrDefault();
+
+                if (wasteTypeInfo != null)
+                {
+                    if (isInQubeMeter)
+                        quantity *= wasteTypeInfo.Coeficient;
+
+                    result.WasteTypeId = wasteTypeInfo.Id;
+                    result.WasteTypeName = wasteTypeInfo.Name;
+                    result.Quantity = quantity;
+
+                    switch (customerType)
+                    {
+                        case CustomerType.Municipal:
+                            {
+                                result.UnitPrice = WastePrice(quantity, wasteTypeInfo.LessQuantity, wasteTypeInfo.FromQuantity, wasteTypeInfo.EndQuantity, wasteTypeInfo.MoreQuantity, wasteTypeInfo.MunicipalityLessQuantityPrice, wasteTypeInfo.MunicipalityIntervalQuantityPrice, wasteTypeInfo.MunicipalityMoreQuantityPrice);
+                                break;
+                            }
+                        case CustomerType.Juridical:
+                            {
+                                result.UnitPrice = WastePrice(quantity, wasteTypeInfo.LessQuantity, wasteTypeInfo.FromQuantity, wasteTypeInfo.EndQuantity, wasteTypeInfo.MoreQuantity, wasteTypeInfo.LegalPersonLessQuantityPrice, wasteTypeInfo.LegalPersonIntervalQuantityPrice, wasteTypeInfo.LegalPersonMoreQuantityPrice);
+                                break;
+                            }
+
+                        case CustomerType.Personal:
+                            {
+                                result.UnitPrice = WastePrice(quantity, wasteTypeInfo.LessQuantity, wasteTypeInfo.FromQuantity, wasteTypeInfo.EndQuantity, wasteTypeInfo.MoreQuantity, wasteTypeInfo.PhysicalPersonLessQuantityPrice, wasteTypeInfo.PhysicalPersonIntervalQuantityPrice, wasteTypeInfo.PhysicalPersonMoreQuantityPrice);
+                                break;
+                            }
+
+                    }
+
+                    result.Amount = result.Quantity * result.UnitPrice;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
     }
 }
