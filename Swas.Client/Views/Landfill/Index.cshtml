@@ -8,7 +8,7 @@
     <div id="fontawesome-container">
 
         <p>
-            <a class="btn btn-primary fa fa-plus" href="/Landfill/Create">  ჩანაწერის დამატება</a>
+            <a class="btn btn-primary fa fa-plus" href="/Landfill/Create">&nbsp;&nbsp;ჩანაწერის დამატება</a>
         </p>
 
         <div class="flip-scroll">
@@ -25,7 +25,6 @@
                         <th>
                             @Html.DisplayNameFor(model => model.RegionName)
                         </th>
-                        @*<th></th>*@
                     </tr>
                 </thead>
 
@@ -43,10 +42,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.RegionName)
                         </td>
-                        @*<td>
-                            @Html.ActionLink(" რედაქტირება", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm edit fa fa-edit" } )
-                            @Html.ActionLink(" წაშლა", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm delete fa fa-trash-o" })
-                        </td>*@
                     </tr>
                 }
 

@@ -221,6 +221,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\MapProvider.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SolidWasteActViewModel.cs" />
@@ -299,29 +300,20 @@
     <Content Include="assets\img\attach-green.png" />
     <Content Include="assets\img\attach-red.png" />
     <Content Include="assets\img\attach-yellow.png" />
-    <Content Include="assets\img\avatars\adam-jansen.jpg" />
-    <Content Include="assets\img\avatars\bing.png" />
-    <Content Include="assets\img\avatars\divyia.jpg" />
-    <Content Include="assets\img\avatars\Javi-Jimenez.jpg" />
-    <Content Include="assets\img\avatars\John-Smith.jpg" />
-    <Content Include="assets\img\avatars\Lee-Munroe.jpg" />
-    <Content Include="assets\img\avatars\Matt-Cheuvront.jpg" />
-    <Content Include="assets\img\avatars\Nicolai-Larson.jpg" />
-    <Content Include="assets\img\avatars\Osvaldus-Valutis.jpg" />
-    <Content Include="assets\img\avatars\Sergey-Azovskiy.jpg" />
-    <Content Include="assets\img\avatars\Stephanie-Walter.jpg" />
     <Content Include="assets\img\favicon.png" />
     <Content Include="assets\img\jquery.minicolors.png" />
     <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\logo-inverted.png" />
     <Content Include="assets\img\logo-rtl.png" />
     <Content Include="assets\img\logo-solo.png" />
-    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\Logo.png" />
+    <Content Include="assets\img\logo11.png" />
     <Content Include="assets\img\sort_asc.png" />
     <Content Include="assets\img\sort_asc_disabled.png" />
     <Content Include="assets\img\sort_both.png" />
     <Content Include="assets\img\sort_desc.png" />
     <Content Include="assets\img\sort_desc_disabled.png" />
+    <Content Include="assets\img\spinner.gif" />
     <Content Include="assets\img\temp1.png" />
     <Content Include="assets\img\tree-icons.png" />
     <Content Include="assets\js\beyond.js" />
@@ -742,9 +734,14 @@
     <Content Include="Views\WasteType\Edit.cshtml" />
     <Content Include="Views\WasteType\Delete.cshtml" />
     <Content Include="Views\SolidWasteAct\Create.cshtml" />
+    <Content Include="Views\SolidWasteAct\Index.cshtml" />
+    <Content Include="Views\SolidWasteAct\Edit.cshtml" />
+    <Content Include="Views\SolidWasteAct\Delete.cshtml" />
+    <None Include="Properties\PublishProfiles\eSwas.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\img\avatars\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

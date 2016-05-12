@@ -7,12 +7,34 @@ using System.Threading.Tasks;
 
 namespace Swas.Client.Models
 {
+    public class SolidWasteActInfoViewModel
+    {
+        [Display(Name = "N")]
+        public int Id { get; set; }
+        [Display(Name = "თარიღი")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ActDate { get; set; }
+        [Display(Name = "ნაგავსაყრელი")]
+        public string LandfillName { get; set; }
+        [Display(Name = "მიმღების სახელი")]
+        public string ReceiverName { get; set; }
+        [Display(Name = "მომღების გვარი")]
+        public string ReceiverLastName { get; set; }
+        [Display(Name = "შემომტანის სანდედიფიკაციო კოდი")]
+        public string CustomerCode { get; set; }
+        [Display(Name = "შემომტანის დასახელება")]
+        public string CustomerName { get; set; }
+        [Display(Name = "ღირებულება")]
+        public decimal Price { get; set; }
+    }
+
+
     public class SolidWasteActViewModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "მიუთითეთ თარიღი!")]
         [Display(Name = "თარიღი")]
-        [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ActDate { get; set; }
         [Display(Name = "ნაგავსაყრელის მდებარეობა")]
         public int LandfillId { get; set; }
@@ -56,7 +78,8 @@ namespace Swas.Client.Models
         [StringLength(200), Display(Name = "მძღოლი")]
         public string TransporterDriverInfo { get; set; }
 
-        [StringLength(200), Display(Name = "შენიშვნა")]
+        [StringLength(1000), Display(Name = "შენიშვნა")]
+        [DataType(DataType.MultilineText)]
         public string Remark { get; set; }
 
         public int WasteTypeId { get; set; }

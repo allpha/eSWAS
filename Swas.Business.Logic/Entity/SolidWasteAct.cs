@@ -12,6 +12,7 @@
         public string ReceiverLastName { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
+        public decimal Price { get; set; }
     }
 
 
@@ -28,18 +29,19 @@
         public string Remark { get; set; }
         public DateTime CreateDate { get; set; }
 
-        public virtual CustomerItem Customer { get; set; }
-        public virtual TransporterItem Transporter { get; set; }
-        public virtual LandfillItem Landfill { get; set; }
-        public virtual ReceiverItem Receiver { get; set; }
-        public virtual PositionItem Position { get; set; }
-        public virtual RepresentativeItem Representative { get; set; }
-        public virtual List<SolidWasteActDetailItem> SolidWasteActDetails { get; set; }
+        public CustomerItem Customer { get; set; }
+        public TransporterItem Transporter { get; set; }
+        public LandfillItem Landfill { get; set; }
+        public ReceiverItem Receiver { get; set; }
+        public PositionItem Position { get; set; }
+        public RepresentativeItem Representative { get; set; }
+        public List<SolidWasteActDetailItem> SolidWasteActDetails { get; set; }
     }
 
     public class SolidWasteActHelperDataItem
     {
         public List<LandfillItem> LandfillItemSource { get; set; }
         public List<WasteTypeSmartItem> WasteTypeItemSource { get; set; }
+        public SolidWasteActItem EditorItem { get; set; }
     }
 }

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Swas.Client.Models.SolidWasteActInfoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="widget-body" style="margin-top: -10px;">
+    <div id="fontawesome-container">
+
+        <p>
+            <a class="btn btn-primary fa fa-plus" href="/SolidWasteAct/Create">&nbsp;&nbsp;ჩანაწერის დამატება</a>
+        </p>
+
+        <div class="flip-scroll">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="85px">
+
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LandfillName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReceiverLastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-default btn-sm edit fa fa-edit" })
+                            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-default btn-sm delete fa fa-trash-o" })
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ActDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LandfillName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReceiverName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReceiverLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>
+

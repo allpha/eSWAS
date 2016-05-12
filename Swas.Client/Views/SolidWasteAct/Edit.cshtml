@@ -1,15 +1,10 @@
 ﻿@model Swas.Client.Models.SolidWasteActViewModel
 
 @{
-    ViewBag.Title = "პოლიგონზე მყარი ნარჩენების შექმნის აქტი";
+    ViewBag.Title = "პოლიგონზე მყარი ნარჩენების აქტის რედაქტირება";
 }
 
 <div class="widget-body" style="margin-top: -10px;">
-
-    @*<div id="FormLoader" class="loading-container">
-        <div class="loader"></div>
-    </div>*@
-
     <div class="row">
         @using (Html.BeginForm())
         {
@@ -19,6 +14,7 @@
                 <h4 style="margin-left: 20px">ახალი ჩანაწერი</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
 
 
                 <div>
@@ -262,31 +258,56 @@
         var $editId = 0;
         var $editorMode = 'ADD';
         var $selectedRow = null;
+        var $editedDataSource = [];
 
         $(document).ready(function () {
             $('.date-picker').datepicker();
             $("#LandfillId").select2();
             $("#WasteTypeId").select2();
 
+            var model = @Html.Raw(Json.Encode(Model.SolidWasteActDetails));
+            AddDetailTableDataSource(model);
         });
 
-        //$.ajaxSetup({
-        //    complete: function () {
-        //        $('.loading-container').removeClass('loading-inactive');
+        function AddDetailTableDataSource(dataSourse) {
 
-        //    },
-        //    beforeSend: function () {
-        //        $('.loading-container')
-        //            .addClass('loading-inactive');
-        //    },
-        //    complete: function () {
-        //        //// hide gif here, eg:
-        //        //$("#loading").hide();
+            for (var i = 0; i < dataSourse.length; i++) {
 
-        //        $('.loading-container')
-        //            .removeClass('loading-inactive');
-        //    }
-        //});
+                $itemIncriment++;
+                var data = dataSourse[i];
+
+                editButton = '<td><button type="button" id="edit' + $itemIncriment + '"' +
+                              'onClick="EditButtonClickHandler(' + data.WasteTypeId + ')"  ' +
+                             'class="btn btn-default btn-sm" data-toggle="modal" data-target="#SolidWasteActDetailEditor"><span class="glyphicon glyphicon-edit"></span></button>'
+
+                removeButton = '<button type="button" id="remove' + $itemIncriment + '"' +
+                                'onClick="RemoveFromItemSource(' + data.WasteTypeId + ')"  ' +
+                               ' class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>'
+
+                var hidden = '<input type="hidden" id="hidden' + data.WasteTypeId + '" value="Norway">'
+                var row = '<tr><td class="trWasteTypeName">' + data.WasteTypeName +
+                           '</td> <td class="trQuantity">' + data.Quantity +
+                           '</td> <td class="trUnitPrice">' + data.UnitPrice +
+                           '</td><td class="trAmount">' + data.Amount +
+                            '</td>' + editButton + removeButton + ' </tr>' + hidden;
+
+                $('#SolidWastActDetailTable tr:last').after(row);
+
+                $('#edit' + $itemIncriment).unbind("click");
+                $('#edit' + $itemIncriment).bind("click", EditButtonClickUpdateQuantity);
+
+                $('#remove' + $itemIncriment).unbind("click");
+                $('#remove' + $itemIncriment).bind("click", RemoveButtonClickHandler);
+
+                $itemSource.push({
+                    Id: $itemIncriment,
+                    WasteTypeId: data.WasteTypeId,
+                    Quantity: data.Quantity,
+                    UnitPrice: data.UnitPrice,
+                    Amount: data.Amount
+                });
+            }
+        }
 
 
         function FindItem(wasteTypeId) {
@@ -327,10 +348,11 @@
             $('.loading-container').removeClass('loading-inactive');
 
             $.ajax({
-                url: "/SolidWasteAct/Create",
+                url: "/SolidWasteAct/Edit",
                 type: "POST",
                 dataType: "json",
                 data: {
+                    id: document.getElementById("Id").value,
                     actDate: document.getElementById("id-date-picker-1").value,
                     landfillId: document.getElementById("LandfillId").value,
                     receiverName: document.getElementById("ReceiverName").value,

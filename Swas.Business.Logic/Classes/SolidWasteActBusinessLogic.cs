@@ -26,15 +26,28 @@
                           join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
                           join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
                           join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
-                          select new SolidWasteActInfoItem
+                          join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
+                          from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
+                          group solidWasteActDetail by new
                           {
                               Id = solidWasteAct.Id,
                               ActDate = solidWasteAct.ActDate,
-                              CustomerCode = customer.Code,
+                              CusotmerCode = customer.Code,
                               CustomerName = customer.Name,
                               LandfillName = landfill.Name,
                               ReceiverName = receiver.Name,
-                              ReceiverLastName = receiver.LastName,
+                              ReceiverLastName = receiver.LastName
+                          } into Group
+                          select new SolidWasteActInfoItem
+                          {
+                              Id = Group.Key.Id,
+                              ActDate = Group.Key.ActDate,
+                              CustomerCode = Group.Key.CusotmerCode,
+                              CustomerName = Group.Key.CustomerName,
+                              LandfillName = Group.Key.LandfillName,
+                              ReceiverName = Group.Key.ReceiverName,
+                              ReceiverLastName = Group.Key.ReceiverLastName,
+                              Price = Group.Sum(a => a == null ? 0 : a.Amount)
                           }).ToList();
             }
             catch (Exception ex)
@@ -88,6 +101,8 @@
                     LastName = string.Empty,
                 };
 
+            if (string.IsNullOrEmpty(item.Remark))
+                item.Remark = string.Empty;
             #endregion Validation
         }
 
@@ -108,9 +123,10 @@
                 {
                     customerInfo = new Customer()
                     {
+                        Type = (int)item.Customer.Type,
                         Code = item.Customer.Code.Trim(),
                         Name = item.Customer.Name.Trim(),
-                        ContactInfo = customerInfo.ContactInfo.Trim(),
+                        ContactInfo = item.Customer.ContactInfo.Trim(),
                     };
 
                     Context.Customers.Add(customerInfo);
@@ -253,7 +269,7 @@
 
                 #region SolidWasteActs
 
-                Context.SolidWasteActs.Add(new SolidWasteAct
+                var newItem = new SolidWasteAct
                 {
                     LandfillId = item.LandfillId,
                     ActDate = item.ActDate,
@@ -264,7 +280,9 @@
                     RepresentativeId = representativeInfo.Id,
                     TransporterId = transporterInfo.Id,
                     Remark = item.Remark
-                });
+                };
+
+                Context.SolidWasteActs.Add(newItem);
                 Context.SaveChanges();
 
                 #endregion SolidWasteActs
@@ -274,7 +292,7 @@
                 foreach (var detailItem in item.SolidWasteActDetails)
                     Context.SolidWasteActDetails.Add(new SolidWasteActDetail
                     {
-                        SolidWasteActId = item.Id,
+                        SolidWasteActId = newItem.Id,
                         WasteTypeId = detailItem.WasteTypeId,
                         Quantity = detailItem.Quantity,
                         UnitPrice = detailItem.UnitPrice,
@@ -295,76 +313,89 @@
             }
         }
 
-        public SolidWasteActItem Get(int Id)
+        public SolidWasteActHelperDataItem Get(int Id)
         {
-            var result = (SolidWasteActItem)null;
+
+            var result = (SolidWasteActHelperDataItem)null;
 
             try
             {
                 Connect();
 
-                result = (from solidWasteAct in Context.SolidWasteActs
-                          join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
-                          join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
-                          join position in Context.Positions on solidWasteAct.PositionId equals position.Id
-                          join representative in Context.Representatives on solidWasteAct.ReceiverId equals representative.Id
-                          join transporter in Context.Transporters on solidWasteAct.TransporterId equals transporter.Id
-                          where solidWasteAct.Id == Id
-                          select new SolidWasteActItem
-                          {
-                              Id = solidWasteAct.Id,
-                              CustomerId = customer.Id,
-                              ReceiverId = receiver.Id,
-                              PositionId = position.Id,
-                              RepresentativeId = representative.Id,
-                              TransporterId = transporter.Id,
-                              Customer = new CustomerItem
-                              {
-                                  Id = customer.Id,
-                                  Type = (CustomerType)customer.Type,
-                                  Name = customer.Name,
-                                  Code = customer.Code,
-                                  ContactInfo = customer.ContactInfo,
+                result = LoadHellperItemSource();
 
-                              },
-                              Receiver = new ReceiverItem
-                              {
-                                  Id = receiver.Id,
-                                  Name = receiver.Name,
-                                  LastName = receiver.LastName
-                              },
-                              Position = new PositionItem
-                              {
-                                  Id = position.Id,
-                                  Name = position.Name
-                              },
-                              Representative = new RepresentativeItem
-                              {
-                                  Id = representative.Id,
-                                  Name = representative.Name,
-                              },
-                              Transporter = new TransporterItem
-                              {
-                                  Id = transporter.Id,
-                                  CarModel = transporter.CarModel,
-                                  CarNumber = transporter.CarNumber,
-                                  DriverInfo = transporter.DriverInfo
-                              },
-                          }).FirstOrDefault();
+                result.EditorItem = (from solidWasteAct in Context.SolidWasteActs
+                                     join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
+                                     join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
+                                     join position in Context.Positions on solidWasteAct.PositionId equals position.Id
+                                     join representative in Context.Representatives on solidWasteAct.RepresentativeId equals representative.Id
+                                     join transporter in Context.Transporters on solidWasteAct.TransporterId equals transporter.Id
+                                     where solidWasteAct.Id == Id
+                                     select new SolidWasteActItem
+                                     {
+                                         Id = solidWasteAct.Id,
+                                         ActDate = solidWasteAct.ActDate,
+                                         CustomerId = customer.Id,
+                                         ReceiverId = receiver.Id,
+                                         PositionId = position.Id,
+                                         RepresentativeId = representative.Id,
+                                         TransporterId = transporter.Id,
+                                         Customer = new CustomerItem
+                                         {
+                                             Id = customer.Id,
+                                             Type = (CustomerType)customer.Type,
+                                             Name = customer.Name,
+                                             Code = customer.Code,
+                                             ContactInfo = customer.ContactInfo,
+
+                                         },
+                                         Receiver = new ReceiverItem
+                                         {
+                                             Id = receiver.Id,
+                                             Name = receiver.Name,
+                                             LastName = receiver.LastName
+                                         },
+                                         Position = new PositionItem
+                                         {
+                                             Id = position.Id,
+                                             Name = position.Name
+                                         },
+                                         Representative = new RepresentativeItem
+                                         {
+                                             Id = representative.Id,
+                                             Name = representative.Name,
+                                         },
+                                         Transporter = new TransporterItem
+                                         {
+                                             Id = transporter.Id,
+                                             CarModel = transporter.CarModel,
+                                             CarNumber = transporter.CarNumber,
+                                             DriverInfo = transporter.DriverInfo
+                                         },
+                                     }).FirstOrDefault();
 
                 if (result != null)
                 {
-                    result.SolidWasteActDetails = (from solidWasteActDetail in Context.SolidWasteActDetails
-                                                   where solidWasteActDetail.SolidWasteActId == Id
-                                                   select new SolidWasteActDetailItem
-                                                   {
-                                                       Id = solidWasteActDetail.Id,
-                                                       WasteTypeId = solidWasteActDetail.WasteTypeId,
-                                                       Amount = solidWasteActDetail.Amount,
-                                                       Quantity = solidWasteActDetail.Quantity,
-                                                       UnitPrice = solidWasteActDetail.UnitPrice
-                                                   }).ToList();
+                    //result.EditorItem = new SolidWasteActItem();
+                    result.EditorItem.SolidWasteActDetails = (from solidWasteActDetail in Context.SolidWasteActDetails
+                                                              join wasteType in Context.WasteTypes on solidWasteActDetail.WasteTypeId equals wasteType.Id
+                                                              where solidWasteActDetail.SolidWasteActId == Id
+                                                              select new SolidWasteActDetailItem
+                                                              {
+                                                                  Id = solidWasteActDetail.Id,
+                                                                  WasteTypeId = solidWasteActDetail.WasteTypeId,
+                                                                  WasteTypeName = wasteType.Name,
+                                                                  Amount = solidWasteActDetail.Amount,
+                                                                  Quantity = solidWasteActDetail.Quantity,
+                                                                  UnitPrice = solidWasteActDetail.UnitPrice
+                                                              }).ToList();
                 }
+                else
+                    result.EditorItem = new SolidWasteActItem
+                    {
+                        ActDate = DateTime.Now,
+                        SolidWasteActDetails = new List<SolidWasteActDetailItem>()
+                    };
             }
             catch (Exception ex)
             {
@@ -394,9 +425,10 @@
                 {
                     customerInfo = new Customer()
                     {
+                        Type = (int)item.Customer.Type,
                         Code = item.Customer.Code.Trim(),
                         Name = item.Customer.Name.Trim(),
-                        ContactInfo = customerInfo.ContactInfo.Trim(),
+                        ContactInfo = item.Customer.ContactInfo.Trim(),
                     };
 
                     Context.Customers.Add(customerInfo);
@@ -628,6 +660,39 @@
             }
         }
 
+        private SolidWasteActHelperDataItem LoadHellperItemSource()
+        {
+            var result = new SolidWasteActHelperDataItem
+            {
+                LandfillItemSource = new List<LandfillItem>()
+            };
+
+            var landfillItemSource = (from region in Context.Regions
+                                      join landfill in Context.Landfills on region.Id equals landfill.RegionId
+                                      orderby region.Name ascending
+                                      select new
+                                      {
+                                          Id = landfill.Id,
+                                          LandfillName = landfill.Name,
+                                          RegionName = region.Name
+                                      }).ToList();
+
+            foreach (var item in landfillItemSource)
+                result.LandfillItemSource.Add(new LandfillItem
+                {
+                    Id = item.Id,
+                    Name = string.Format("{0} - {1}", item.RegionName.Trim(), item.LandfillName.Trim())
+                });
+
+            result.WasteTypeItemSource = (from wasteType in Context.WasteTypes
+                                          select new WasteTypeSmartItem
+                                          {
+                                              Id = wasteType.Id,
+                                              Name = wasteType.Name,
+                                          }).ToList();
+            return result;
+        }
+
         public SolidWasteActHelperDataItem LoadHellperSource()
         {
             var result = new SolidWasteActHelperDataItem
@@ -638,30 +703,7 @@
             try
             {
                 Connect();
-
-                var landfillItemSource = (from region in Context.Regions
-                                          join landfill in Context.Landfills on region.Id equals landfill.RegionId
-                                          orderby region.Name ascending
-                                          select new
-                                          {
-                                              Id = landfill.Id,
-                                              LandfillName = landfill.Name,
-                                              RegionName = region.Name
-                                          }).ToList();
-
-                foreach (var item in landfillItemSource)
-                    result.LandfillItemSource.Add(new LandfillItem
-                    {
-                        Id = item.Id,
-                        Name = string.Format("{0} - {1}", item.RegionName.Trim(), item.LandfillName.Trim())
-                    });
-
-                result.WasteTypeItemSource = (from wasteType in Context.WasteTypes
-                                              select new WasteTypeSmartItem
-                                              {
-                                                  Id = wasteType.Id,
-                                                  Name = wasteType.Name,
-                                              }).ToList();
+                result = LoadHellperItemSource();
 
             }
             catch (Exception ex)
