@@ -63,7 +63,7 @@
                     SolidWasteActDetails = new List<SolidWasteActDetailViewModel>()
                 };
 
-                var hellperDataSource = bussinessLogic.LoadHellperSource();
+                var hellperDataSource = bussinessLogic.LoadHellperSource(CustomerType.Municipal);
                 var selectedLandfillId = (int?)null;
                 var selectedWasteTypeId = (int?)null;
                 if (hellperDataSource.LandfillItemSource.Count > 0)
@@ -382,7 +382,7 @@
 
             try
             {
-                result = bussinessLogic.Find(Prefix.Trim());
+                //result = bussinessLogic.Find(Prefix.Trim());
             }
             catch (Exception ex)
             {
@@ -397,14 +397,14 @@
         }
 
         [HttpPost]
-        public JsonResult LoadCustomerByCode(string Prefix, int CustomerType)
+        public JsonResult LoadCustomerByCode(int CustomerType)
         {
             var result = new List<CustomerSearchItem>();
             var bussinessLogic = new CustomerBusinessLogic();
 
             try
             {
-                result = bussinessLogic.FindByCode(Prefix.Trim(), CustomerType);
+                result = bussinessLogic.FindByCode(CustomerType);
             }
             catch (Exception ex)
             {
@@ -419,14 +419,14 @@
         }
 
         [HttpPost]
-        public JsonResult LoadCustomerByName(string Prefix, int CustomerType)
+        public JsonResult LoadCustomerByName(int CustomerType)
         {
             var result = new List<CustomerSearchItem>();
             var bussinessLogic = new CustomerBusinessLogic();
 
             try
             {
-                result = bussinessLogic.FindByName(Prefix.Trim(), CustomerType);
+                result = bussinessLogic.FindByName(CustomerType);
             }
             catch (Exception ex)
             {

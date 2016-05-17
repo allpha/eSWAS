@@ -12,6 +12,7 @@
         public string ReceiverLastName { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
+        public decimal Quantity { get; set; }
         public decimal Price { get; set; }
     }
 
@@ -43,5 +44,11 @@
         public List<LandfillItem> LandfillItemSource { get; set; }
         public List<WasteTypeSmartItem> WasteTypeItemSource { get; set; }
         public SolidWasteActItem EditorItem { get; set; }
+        
+        public List<ReceiverPositionSearchItem> RecieverItemSource { get; set; }
+
+        public List<CustomerSearchItem> CustomerItemSource { get; set; }
+
+        public List<TransporterSearchItem> TransporterItemSource { get; set; }
     }
 }

@@ -13,7 +13,7 @@
             : base()
         {
         }
-        public List<CustomerSearchItem> FindByCode(string findText, int customerType)
+        public List<CustomerSearchItem> FindByCode(int customerType)
         {
             var result = new List<CustomerSearchItem>();
 
@@ -21,13 +21,11 @@
             {
                 Connect();
 
-                findText = findText.Trim();
-
                 var searchItemSource = (from customerRepresentative in Context.CustomerRepresentatives
                                         join customer in Context.Customers on customerRepresentative.CustomerId equals customer.Id
                                         join representative in Context.Representatives on customerRepresentative.RepresentativeId equals representative.Id
                                         join transporter in Context.Transporters on customerRepresentative.TransporterId equals transporter.Id
-                                        where customer.Code.Contains(findText) && customer.Type == customerType
+                                        where customer.Type == customerType
                                         select new
                                         {
                                             Name = customer.Name,
@@ -65,7 +63,7 @@
             return result;
         }
 
-        public List<CustomerSearchItem> FindByName(string findText, int customerType)
+        public List<CustomerSearchItem> FindByName(int customerType)
         {
             var result = new List<CustomerSearchItem>();
 
@@ -73,13 +71,11 @@
             {
                 Connect();
 
-                findText = findText.Trim();
-
                 var searchItemSource = (from customerRepresentative in Context.CustomerRepresentatives
                                         join customer in Context.Customers on customerRepresentative.CustomerId equals customer.Id
                                         join representative in Context.Representatives on customerRepresentative.RepresentativeId equals representative.Id
                                         join transporter in Context.Transporters on customerRepresentative.TransporterId equals transporter.Id
-                                        where customer.Name.Contains(findText) && customer.Type == customerType
+                                        where customer.Type == customerType
                                         select new
                                         {
                                             Name = customer.Name,
