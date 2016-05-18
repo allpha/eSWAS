@@ -29,7 +29,17 @@
         public string CarNumber { get; set; }
         public string CarModel { get; set; }
         public string DriverInfo { get; set; }
+    }
 
+    public class CustomerRootItem
+    {
+        public string TypeDescription { get; set; }
+        public List<CustomerChildItem> ChildItemSource { get; set; }
+    }
 
+    public class CustomerChildItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

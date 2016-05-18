@@ -28,7 +28,7 @@ function initTableItemSource(itemSource) {
     for (var i = 0; i < itemSource.length; i++) {
         //var actDate = dateFormat(itemSource[i].ActDate, "mm/dd/yyyy");
         var d = new Date(parseInt(itemSource[i].ActDate.slice(6, -2)));
-      //  alert('' + (1 + d.getMonth()) + '/' + d.getDate() + '/' + d.getFullYear().toString().slice(-2));
+        //  alert('' + (1 + d.getMonth()) + '/' + d.getDate() + '/' + d.getFullYear().toString().slice(-2));
 
 
         var row = '<tr>' +
@@ -65,6 +65,168 @@ function remove(id) {
     $('#ajax-model-dialog-editor').click();
 }
 
+function loadRegoinItemSource() {
+    $.ajax({
+        url: "/SolidWasteAct/LoadFilterRegions",
+        type: "POST",
+        dataType: "json",
+        data: {
+
+        },
+        success: function (data) {
+            var select2Name = "#regionSearchCombo";
+            $(select2Name).empty();
+            for (var i = 0; i < data.length; i++) {
+                $(select2Name).append('<optgroup label="' + data[i].Name + '">');
+                for (var j = 0; j < data[i].LandfillItemSource.length; j++) {
+                    $(select2Name).append('<option value="' + data[i].LandfillItemSource[j].Id + '">&nbsp&nbsp&nbsp' + data[i].LandfillItemSource[j].Name + '</option>');
+                }
+                $(select2Name).append('</optgroup>');
+            }
+        },
+        error: function (request, status, error) {
+        }
+    });
+
+}
+
+function loadWasteTypeItemSource() {
+    $.ajax({
+        url: "/SolidWasteAct/LoadFilterWasteType",
+        type: "POST",
+        dataType: "json",
+        data: {
+
+        },
+        success: function (data) {
+            var select2Name = "#wasteTypeSearchCombo";
+            $(select2Name).empty();
+            for (var i = 0; i < data.length; i++) {
+                $(select2Name).append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
+            }
+
+        },
+        error: function (request, status, error) {
+        }
+    });
+
+}
+
+function loadCustomerItemSource() {
+    $.ajax({
+        url: "/SolidWasteAct/LoadFilterCustomer",
+        type: "POST",
+        dataType: "json",
+        data: {
+
+        },
+        success: function (data) {
+            var select2Name = "#customerSearchCombo";
+            $(select2Name).empty();
+            for (var i = 0; i < data.length; i++) {
+                $(select2Name).append('<optgroup label="' + data[i].TypeDescription + '">');
+                for (var j = 0; j < data[i].ChildItemSource.length; j++) {
+                    $(select2Name).append('<option value="' + data[i].ChildItemSource[j].Id + '">&nbsp&nbsp&nbsp' + data[i].ChildItemSource[j].Name + '</option>');
+                }
+                $(select2Name).append('</optgroup>');
+            }
+
+        },
+        error: function (request, status, error) {
+        }
+    });
+
+}
+
+function InitSearchCombos() {
+    $.fn.select2.defaults.set("theme", "bootstrap");
+
+    var comboPlaceholder = 'არჩეულია ყველა ჩანაწერი';
+    var comboPlaceholderToSelect = 'გთხოვთ აირჩიოთ ჩანაწერი';
+
+    $("#regionSearchCombo").select2({
+        placeholder: comboPlaceholder,
+        allowClear: true,
+        width: null
+    });
+
+    $("#wasteTypeSearchCombo").select2({
+        placeholder: comboPlaceholder,
+        allowClear: true,
+        width: null
+    });
+
+    $("#customerSearchCombo").select2({
+        placeholder: comboPlaceholder,
+        allowClear: true,
+        width: null
+    });
+
+
+
+    $("#allRegionSelected").on("click", function () {
+        $('#regionSearchCombo').prop("disabled", this.checked);
+        if (this.checked) {
+            $('#regionSearchCombo').select2('val', '');
+            $("#regionSearchCombo").select2({ placeholder: comboPlaceholder });
+        }
+        else {
+            $("#regionSearchCombo").select2({ placeholder: comboPlaceholderToSelect });
+        }
+    });
+
+    $("#allWasteTypeSelected").on("click", function () {
+        $('#wasteTypeSearchCombo').prop("disabled", this.checked);
+        if (this.checked) {
+            $('#wasteTypeSearchCombo').select2('val', '');
+            $("#wasteTypeSearchCombo").select2({ placeholder: comboPlaceholder });
+        }
+        else {
+            $("#wasteTypeSearchCombo").select2({ placeholder: comboPlaceholderToSelect });
+        }
+    });
+
+    $("#allCustomerSelected").on("click", function () {
+        $('#customerSearchCombo').prop("disabled", this.checked);
+        if (this.checked) {
+            $('#customerSearchCombo').select2('val', '');
+            $("#customerSearchCombo").select2({ placeholder: comboPlaceholder });
+        }
+        else {
+            $("#customerSearchCombo").select2({ placeholder: comboPlaceholderToSelect });
+        }
+    });
+
+
+
+
+}
+
+function InitDate() {
+    $('.date-picker').datepicker({
+        rtl: App.isRTL(),
+        orientation: "left",
+        autoclose: true
+    });
+}
+
+function InitFilter() {
+    $('#filterButton').click(function () {
+        if ($('#filterDiv').is(":hidden"))
+            $('#filterDiv').show();
+        else
+            $('#filterDiv').hide();
+    });
+
+    
+}
+
 jQuery(document).ready(function () {
+    InitDate();
+    InitFilter();
+    InitSearchCombos();
     loadSolidWasteActs();
+    loadRegoinItemSource();
+    loadWasteTypeItemSource();
+    loadCustomerItemSource();
 });

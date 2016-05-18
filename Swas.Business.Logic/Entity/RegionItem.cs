@@ -11,4 +11,11 @@ namespace Swas.Business.Logic.Entity
         public int Id { get; set; }
         public string Name { get; set; }
     }
+
+    public class RegionSearchItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<LandfillItem> LandfillItemSource { get; set; }
+    }
 }

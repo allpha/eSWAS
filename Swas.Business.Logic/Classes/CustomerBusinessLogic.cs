@@ -13,6 +13,77 @@
             : base()
         {
         }
+
+        public List<CustomerRootItem> LoadForSearch()
+        {
+            var result = new List<CustomerRootItem>();
+
+            try
+            {
+                Connect();
+
+                var searchItemSource = (from customer in Context.Customers
+                                        orderby new { customer.Type, customer.Code }
+                                        select new
+                                        {
+                                            Id = customer.Id,
+                                            Name = customer.Name,
+                                            Type = customer.Type
+                                        }).ToList();
+
+                var dictionary = new Dictionary<string, List<CustomerChildItem>>();
+
+                foreach (var item in searchItemSource)
+                {
+                    var customerName = string.Empty;
+                    switch ((CustomerType)item.Type)
+                    {
+                        case CustomerType.Municipal:
+                            {
+                                customerName = "მუნიციპალიტეტები";
+                                break;
+                            }
+                        case CustomerType.Juridical:
+                            {
+                                customerName = "იურიდიული პირები";
+                                break;
+                            }
+                        case CustomerType.Personal:
+                            {
+                                customerName = "ფიზიკური პირები";
+                                break;
+                            }
+                    }
+
+                    if (dictionary.ContainsKey(customerName))
+                        dictionary[customerName].Add(new CustomerChildItem
+                        {
+                            Id = item.Id,
+                            Name = item.Name
+                        });
+                    else
+                        dictionary.Add(customerName, new List<CustomerChildItem>() { new CustomerChildItem { Id = item.Id, Name = item.Name } });
+
+                }
+
+                foreach (var item in dictionary)
+                    result.Add(new CustomerRootItem
+                    {
+                        TypeDescription = item.Key,
+                        ChildItemSource = item.Value
+                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
         public List<CustomerSearchItem> FindByCode(int customerType)
         {
             var result = new List<CustomerSearchItem>();

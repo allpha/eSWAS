@@ -56,6 +56,33 @@
             return result;
         }
 
+        public List<WasteTypeSmartItem> LoadForSearch()
+        {
+            var result = new List<WasteTypeSmartItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from wasteType in Context.WasteTypes
+                          select new WasteTypeSmartItem
+                          {
+                              Id = wasteType.Id,
+                              Name = wasteType.Name,
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
         public void Create(WasteTypeItem item)
         {
             try

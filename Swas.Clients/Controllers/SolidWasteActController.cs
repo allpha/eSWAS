@@ -533,6 +533,76 @@
             ViewBag.LandTypeItemSource = new SelectList(typeDataSource, "Id", "Name", selectedType);
         }
 
+        #region Filter
+
+        [HttpPost]
+        public JsonResult LoadFilterRegions()
+        {
+            var result = new List<RegionSearchItem>();
+            var bussinessLogic = new RegionBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadSearchSource();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult LoadFilterWasteType()
+        {
+            var result = new List<WasteTypeSmartItem>();
+            var bussinessLogic = new WasteTypeBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForSearch();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult LoadFilterCustomer()
+        {
+            var result = new List<CustomerRootItem>();
+            var bussinessLogic = new CustomerBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForSearch();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion Filter
+
     }
 }
 

@@ -8,18 +8,18 @@ var ComponentsSelect2 = function () {
         // @see https://github.com/select2/select2/issues/2927
         $.fn.select2.defaults.set("theme", "bootstrap");
 
-        var placeholder = "Select a State";
+        var placeholder = "aaa";
 
-        $(".select2, .select2-multiple").select2({
-            placeholder: placeholder,
-            width: null
-        });
+        //$(".select2, .select2-multiple").select2({
+        //    placeholder: placeholder,
+        //    width: null
+        //});
 
-        $(".select2-allow-clear").select2({
-            allowClear: true,
-            placeholder: placeholder,
-            width: null
-        });
+        //$(".select2-allow-clear").select2({
+        //    allowClear: true,
+        //    placeholder: placeholder,
+        //    width: null
+        //});
 
         // @see https://select2.github.io/examples.html#data-ajax
         function formatRepo(repo) {
@@ -121,5 +121,5 @@ var ComponentsSelect2 = function () {
 }();
 
 jQuery(document).ready(function () {
-    ComponentsSelect2.init();
+    //ComponentsSelect2.init();
 });
