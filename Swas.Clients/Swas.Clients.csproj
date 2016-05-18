@@ -261,6 +261,7 @@
     </Content>
     <Content Include="fonts\lgv-bebas-neue-bold-bold.ttf" />
     <Content Include="fonts\BOGMtavruli-Bold.ttf" />
+    <None Include="Properties\PublishProfiles\new.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
