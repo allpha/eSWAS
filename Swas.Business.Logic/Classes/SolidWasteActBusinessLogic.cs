@@ -63,6 +63,136 @@
             return result;
         }
 
+        public List<SolidWasteActInfoItem> Load(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+                                                List<int> wasteTypeIdSource, List<int> customerIdSource,
+                                                bool isAllLandfill, bool isAllWasteType, bool isAllCustomer)
+        {
+            var result = new List<SolidWasteActInfoItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from solidWasteAct in Context.SolidWasteActs
+                          join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                          join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
+                          join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
+                          join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
+                          from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
+                          where (id.HasValue && solidWasteAct.Id == id.Value) ||
+                                 (!id.HasValue &&
+                                  ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
+                                 ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
+                                 ((isAllLandfill) || (!isAllLandfill && landFillIdSource.Contains(solidWasteAct.LandfillId))) &&
+                                 ((isAllCustomer) || (!isAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
+                                 ((isAllWasteType) || (!isAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
+                          group solidWasteActDetail by new
+                          {
+                              Id = solidWasteAct.Id,
+                              ActDate = solidWasteAct.ActDate,
+                              CusotmerCode = customer.Code,
+                              CustomerName = customer.Name,
+                              LandfillName = landfill.Name,
+                              ReceiverName = receiver.Name,
+                              ReceiverLastName = receiver.LastName
+                          } into Group
+
+                          select new SolidWasteActInfoItem
+                          {
+                              Id = Group.Key.Id,
+                              ActDate = Group.Key.ActDate,
+                              CustomerCode = Group.Key.CusotmerCode,
+                              CustomerName = Group.Key.CustomerName,
+                              LandfillName = Group.Key.LandfillName,
+                              ReceiverName = Group.Key.ReceiverName,
+                              ReceiverLastName = Group.Key.ReceiverLastName,
+                              Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
+                              Price = Group.Sum(a => a == null ? 0 : a.Amount)
+                          }).ToList();
+
+                //var query = Context.SolidWasteActs.Select(a=>a);
+
+                //if (id.HasValue)
+                //{
+
+                //}
+                //else
+                //{
+                //    if (endDate.HasValue)
+                //        query = query.Where(a => a.ActDate >= fromDate.Value);
+                //    if (endDate.HasValue)
+                //        query = query.Where(a => a.ActDate <= endDate.Value);
+
+                //    if (!isAllLandfill)
+                //        query = query.Where(a => landFillIdSource.Contains(a.LandfillId));
+
+                //    if (!isAllCustomer)
+                //        query = query.Where(a => customerIdSource.Contains(a.CustomerId));
+
+                //    if (!isAllWasteType)
+                //        query = query.Join(c)
+                //            //query.Where(a => a.SolidWasteActDetails.Contains(base=)
+                //        //landFillIdSource.Contains(.spl));
+
+                //}
+
+                //var query = ctn.ShopSales.Where(sale => sale.DateSold >= reportreq.FromDate
+                // && sale.DateSold <= reportreq.ToDate);
+                //if (reportreq.OwnerId.HasValue)
+                //{
+                //    query = query.Where(sale => sale.Shop.OwnerId == reportreq.OwnerId);
+                //}
+                //if (!string.IsNullOrEmpty(reportreq.ShopTypeCode))
+                //{
+                //    query = query.Where(sale.Shop.ShopTypeCode.ToUpper()
+                //                            .Contains(reportreq.ShopTypeCode.ToUpper());
+                //}
+
+                //var shopSales = query.ToList();
+
+
+                //result = (from solidWasteAct in Context.SolidWasteActs
+                //          join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                //          join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
+                //          join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
+                //          join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
+                //          from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
+                //          group solidWasteActDetail by new
+                //          {
+                //              Id = solidWasteAct.Id,
+                //              ActDate = solidWasteAct.ActDate,
+                //              CusotmerCode = customer.Code,
+                //              CustomerName = customer.Name,
+                //              LandfillName = landfill.Name,
+                //              ReceiverName = receiver.Name,
+                //              ReceiverLastName = receiver.LastName
+                //          } into Group
+                //          select new SolidWasteActInfoItem
+                //          {
+                //              Id = Group.Key.Id,
+                //              ActDate = Group.Key.ActDate,
+                //              CustomerCode = Group.Key.CusotmerCode,
+                //              CustomerName = Group.Key.CustomerName,
+                //              LandfillName = Group.Key.LandfillName,
+                //              ReceiverName = Group.Key.ReceiverName,
+                //              ReceiverLastName = Group.Key.ReceiverLastName,
+                //              Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
+                //              Price = Group.Sum(a => a == null ? 0 : a.Amount)
+                //          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+
         private void Validate(SolidWasteActItem item)
         {
             #region Validtaion

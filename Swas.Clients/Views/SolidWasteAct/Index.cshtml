@@ -35,9 +35,9 @@
                         <div class="row">
                             <div>
                                 <div class="form-group col-md-4">
-                                    <label for="exampleInputPassword1">ჩანაწერის ნომერი</label>
+                                    <label for="solidWasteActNumber">ჩანაწერის ნომერი</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="exampleInputPassword1">
+                                        <input type="text" class="form-control" id="solidWasteActNumber">
                                     </div>
                                 </div>
 
@@ -45,7 +45,7 @@
                                     <label for="ActDateFromPicker">შემოტანის თარიღი(-დან)</label>
                                     <div class="input-group">
                                         <div class="input-group input-medium date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
-                                            <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom" data-date-format="dd/mm/yyyy" readonly>
+                                            <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom"  readonly>
                                             <span class="input-group-btn">
                                                 <button class="btn default" type="button">
                                                     <i class="fa fa-calendar"></i>
@@ -104,14 +104,14 @@
 
                             <div class="btn-group pull-right">
 
-                                <button class="btn red btn-outline" type="button" id="filterButton1">
+                                <button class="btn red btn-outline" type="button" id="filterSolidWasteAct">
                                     <span class="glyphicon glyphicon-search"></span>
                                     გაფილტვრა
                                 </button>
 
-                                <button class="btn red btn-outline" type="button" id="filterButton2">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    გასუფთავება
+                                <button class="btn red btn-outline" type="button" id="cencelSolidWasteAct">
+                                    <span class="glyphicon glyphicon-cancel"></span>
+                                    გაუქმება
                                 </button>
 
                             </div>
@@ -119,8 +119,6 @@
                         </div>
                     </form>
                 </div>
-
-
             </div>
 
             <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>

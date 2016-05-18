@@ -601,6 +601,42 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult FilterSolidWasteAct(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+                                                List<int> wasteTypeIdSource, List<int> customerIdSource,
+                                                bool isAllLandfill, bool isAllWasteType, bool isAllCustomer)
+        {
+            var result = new List<SolidWasteActInfoViewModel>();
+            var bussinessLogic = new SolidWasteActBusinessLogic();
+
+            try
+            {
+                var itemSource = bussinessLogic.Load(id, fromDate, endDate, landFillIdSource, wasteTypeIdSource, customerIdSource, isAllLandfill, isAllWasteType, isAllCustomer);
+                
+                foreach (var item in itemSource)
+                    result.Add(new SolidWasteActInfoViewModel
+                    {
+                        Id = item.Id,
+                        ActDate = item.ActDate,
+                        Customer = string.Format("{0} {1}", item.CustomerCode, item.CustomerName),
+                        LandfillName = item.LandfillName,
+                        Receiver = string.Format("{0} {1}", item.ReceiverName, item.ReceiverLastName),
+                        Quantity = item.Quantity,
+                        Price = item.Price
+                    });
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion Filter
 
     }

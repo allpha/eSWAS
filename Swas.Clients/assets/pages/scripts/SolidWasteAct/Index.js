@@ -23,14 +23,70 @@
     });
 }
 
+function FilterSolidWasteAct() {
+
+
+    $('#cencelSolidWasteAct').click(function () {
+        $('#filterDiv').hide();
+        loadSolidWasteActs()
+    });
+
+    $('#filterSolidWasteAct').click(function () {
+
+        editorName = '#viewBody'
+        App.blockUI({
+            target: editorName,
+            animate: true
+        });
+
+        var actNumber = $('#solidWasteActNumber').val();
+        var fromDate = document.getElementById("ActDateFrom").value; //$('#ActDateFrom').val();
+        var ActDateTo = document.getElementById("ActDateTo").value; //$('#ActDateTo').val();
+
+        //if (!(fromDate == null || fromDate.length === 0))
+        //    fromDate =moment(fromDate).unix();//  moment(fromDate).format('DD-MM-YYYY');
+
+
+        //if (!(ActDateTo == null || ActDateTo.length === 0))
+        //    ActDateTo = moment(ActDateTo).format('DD-MM-YYYY');
+
+        //alert(fromDate);
+
+        $.ajax({
+            url: "/SolidWasteAct/FilterSolidWasteAct",
+            type: "POST",
+            dataType: "json",
+            data: {
+                id: actNumber,
+                fromDate: fromDate,
+                endDate: ActDateTo,
+                landFillIdSource: $('#regionSearchCombo').val(),
+                wasteTypeIdSource: $('#wasteTypeSearchCombo').val(),
+                customerIdSource: $('#customerSearchCombo').val(),
+                isAllLandfill: $('#allRegionSelected').is(':checked'),
+                isAllWasteType: $('#allWasteTypeSelected').is(':checked'),
+                isAllCustomer: $('#allCustomerSelected').is(':checked')
+            },
+            success: function (data) {
+                initTableItemSource(data);
+                App.unblockUI(editorName);
+
+            },
+            error: function (request, status, error) {
+                alert('shecdomaa');
+                App.unblockUI(editorName);
+            }
+        });
+    });
+
+}
+
+
 function initTableItemSource(itemSource) {
 
+    $("#itemSource").find("tr:not(:first)").remove();
+
     for (var i = 0; i < itemSource.length; i++) {
-        //var actDate = dateFormat(itemSource[i].ActDate, "mm/dd/yyyy");
-        var d = new Date(parseInt(itemSource[i].ActDate.slice(6, -2)));
-        //  alert('' + (1 + d.getMonth()) + '/' + d.getDate() + '/' + d.getFullYear().toString().slice(-2));
-
-
         var row = '<tr>' +
                        '<td>' + itemSource[i].Id + '</td>' +
                        '<td>' + moment(itemSource[i].ActDate).format('DD/MM/YYYY') + '</td>' +
@@ -135,7 +191,6 @@ function loadCustomerItemSource() {
         error: function (request, status, error) {
         }
     });
-
 }
 
 function InitSearchCombos() {
@@ -218,8 +273,9 @@ function InitFilter() {
             $('#filterDiv').hide();
     });
 
-    
+
 }
+
 
 jQuery(document).ready(function () {
     InitDate();
@@ -229,4 +285,5 @@ jQuery(document).ready(function () {
     loadRegoinItemSource();
     loadWasteTypeItemSource();
     loadCustomerItemSource();
+    FilterSolidWasteAct();
 });
