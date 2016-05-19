@@ -10,18 +10,27 @@
         <div class="portlet light bordered" id="viewBody">
             <div class="portlet-title">
                 <div class="caption caption-md">
-                    <i class="icon-pointer font-red"></i>
-                    <span class="caption-subject font-red bold uppercase" style="font-family: mtavrulibold">მყარი ნარჩენების რეგისტრაცია</span>
+                    <span class="caption-subject font-blue bold uppercase" style="font-family: mtavrulibold">მყარი ნარჩენების რეგისტრაცია</span>
                 </div>
                 <div class="btn-group pull-right">
 
-                    <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
-                        <i class="fa fa-plus"></i>
-                        ახალი ჩანაწერის დამატება
+                    @*<div class="btn-group">
+                        <button type="button" class="btn btn-default" onclick="javascript:create();">
+                            <i class="fa fa-plus"></i>
+                            ახალი აქტი
+                        </button>
+                        <button type="button" class="btn btn-default" id="filterButton">
+                            <i class="fa fa-search"></i> ფილტრი
+                        </button>
+                    </div>*@
+
+                    <button class="btn blue btn-outline"  onclick="javascript:create();">
+                        <i class="fa fa-plus" style="margin-top:5px"></i>
+                        ახალი აქტი
                     </button>
 
-                    <button class="btn red btn-outline" type="button" id="filterButton" >
-                        <span class="glyphicon glyphicon-search"></span>
+                    <button  class="btn blue btn-outline" type="button" id="filterButton" >
+                        <span class="glyphicon glyphicon-search" style="margin-top:3px"></span>
                         ფილტრი
                     </button>
 
@@ -122,7 +131,7 @@
             </div>
 
             <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>
-            <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="800"> </div>
+            <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="800"  data-backdrop="static" > </div>
 
             <div class="portlet-body">
 

@@ -13,214 +13,179 @@
         <div class="row">
             <div class="col-md-12 ">
                 <!-- BEGIN SAMPLE FORM PORTLET-->
-                <div class="portlet-body">
+                <div class="portlet-body" id="createDiv">
                     <!-- BEGIN FORM-->
                     <form action="#" class="form-horizontal" id="registrationForm">
                         <div class="form-body">
-                            <div class="alert alert-danger display-hide">
+                            <div class="alert alert-danger" hidden>
 
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="tabbable-line boxless tabbable-reversed">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active">
-                                                <a href="#tab_0" data-toggle="tab">მიმღები </a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_1" data-toggle="tab"> შემომტანი </a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_2" data-toggle="tab"> მყარი მარჩენები </a>
-                                            </li>
-                                        </ul>
-
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="tab_0">
-                                                <div class="portlet light bordered">
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="ReceiverName"> @Html.DisplayNameFor(model => model.ActDate) </label>
-                                                        <div class="col-md-9">
-                                                            <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
-                                                                <input type="datetime" class="form-control" name="ActDate" id="ActDate" value="@Model.ActDate" data-date-format="dd/mm/yyyy" readonly>
-                                                                <span class="input-group-btn">
-                                                                    <button class="btn default" type="button">
-                                                                        <i class="fa fa-calendar"></i>
-                                                                    </button>
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">აირჩიეთ თარიღი.</span>
-                                                        </div>
+                            <div class="portlet light bordered">
 
 
-                                                    </div>
+                                <div class="portlet-body form">
 
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label" for="LandfillId">@Html.DisplayNameFor(model => model.LandfillId)</label>
-                                                        <div class="col-md-9">
-                                                            @Html.DropDownList("LandfillId", (IEnumerable<SelectListItem>)ViewBag.LandfillItemSource, new { @class = "form-control select2" })
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">აირჩიეთ ნაგავსაყრელი.</span>
-                                                        </div>
-                                                    </div>
+                                    @*<div class="portlet-title">
+                                        <div class="caption font-black">
+                                            <span class="caption-subject bold uppercase" style="font-family: mtavrulibold;">მიმღები</span>
+                                            <hr style="margin-top:4px">
+                                        </div>
+                                    </div>*@
 
 
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="ReceiverName"> @Html.DisplayNameFor(model => model.ReceiverName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="ReceiverName" id="ReceiverName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მიმღების სახელი.</span>
-                                                        </div>
-                                                    </div>
+                                    <div class="form-group col-md-12;">
+                                        <span class="caption-subject bold uppercase" style="color:darkslategrey; font-family: mtavrulibold; margin-left: 10px;">მიმღები</span>
+                                        <hr style="margin-top:4px">
 
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="ReceiverLastName"> @Html.DisplayNameFor(model => model.ReceiverLastName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="ReceiverLastName" id="ReceiverLastName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მიმღების გვარი.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="PositionName"> @Html.DisplayNameFor(model => model.PositionName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="PositionName" id="PositionName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მიმღების თანამდებობა.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="PositionName"> @Html.DisplayNameFor(model => model.Remark) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="Remark" id="Remark">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ შენიშვნა.</span>
-                                                        </div>
-                                                    </div>
+                                    </div>
 
 
-                                                </div>
+                                    <div class="form-group" style="margin-top:-20px;">
+                                        <div class="col-md-3">
+                                            <label for="ActDateFrom">@Html.DisplayNameFor(model => model.ActDate)</label>
+                                            <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy">
+                                                <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom" readonly value="@Model.ActDate">
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button" style="margin-left:0.3px;">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <label>@Html.DisplayNameFor(model => model.LandfillId)</label>
+                                            <div>
+                                                @Html.DropDownList("LandfillId", (IEnumerable<SelectListItem>)ViewBag.LandfillItemSource, new { @class = "form-control select2" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ReceiverName">@Html.DisplayNameFor(model => model.ReceiverName)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="ReceiverName" id="ReceiverName">
 
                                             </div>
-                                            <div class="tab-pane" id="tab_1">
-                                                <div class="portlet light bordered">
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label" for="Type">@Html.DisplayNameFor(model => model.Type)</label>
-                                                        <div class="col-md-9">
-                                                            @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.LandTypeItemSource, new { @class = "form-control" })
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">აირჩიეთ შემომტანის ტიპი.</span>
-                                                        </div>
-                                                    </div>
+                                            <span class="help-block"></span>
+                                        </div>
 
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="CustomerCode"> @Html.DisplayNameFor(model => model.CustomerCode) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="CustomerCode" id="CustomerCode">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ შემომტანის საინდეტიფიკაციო კოდი.</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="CustomerName"> @Html.DisplayNameFor(model => model.CustomerName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="CustomerName" id="CustomerName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ შემომტანის დასახელება.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="CustomerContactInfo"> @Html.DisplayNameFor(model => model.CustomerContactInfo) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="CustomerContactInfo" id="CustomerContactInfo">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ საკონტაქტო ინფორმაცია.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="RepresentativeName"> @Html.DisplayNameFor(model => model.RepresentativeName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="RepresentativeName" id="RepresentativeName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ წარმომადგენელი.</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="TransporterCarNumber"> @Html.DisplayNameFor(model => model.TransporterCarNumber) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="TransporterCarNumber" id="TransporterCarNumber">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ ავტომობილის მარკა.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="TransporterCarModel"> @Html.DisplayNameFor(model => model.TransporterCarModel) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="TransporterCarModel" id="TransporterCarModel">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ ავტომობილის მოდელი.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="TransporterDriverInfo"> @Html.DisplayNameFor(model => model.TransporterDriverInfo) </label>
-                                                        <div class="col-md-9 ">
-                                                            <input type="text" class="form-control input-sm" name="TransporterDriverInfo" id="TransporterDriverInfo">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მძღოლი.</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-                                            <div class="tab-pane" id="tab_2">
-                                                <div class="portlet light bordered">
-
-                                                    <div>
-                                                        <div class="btn-group pull-right" style="margin-bottom: 10px;">
-                                                            <a id="addWaste" class="btn red btn-outline" data-target="#detailEditorDialog" data-toggle="modal">
-                                                                <i class="fa fa-plus"></i>
-                                                                ნარჩენის დამატება
-                                                            </a>
-                                                        </div>
-                                                        <div class="table-scrollable">
-
-                                                            <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="line-height: 60px;  text-align: center;">ნარჩენი</th>
-                                                                        <th style="line-height: 60px;  text-align: center; width: 100px;">რ-ბ[ტონა]</th>
-                                                                        <th style="text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი<br /> [დღგ-ს&#13;&#10; <br />ჩათვლისთ]</th>
-                                                                        <th style="line-height: 20px;text-align: center; width: 100px;">ჯამი <br />დღგ-ს ჩათვლით</th>
-                                                                        <th style="text-align: center; width: 80px;"></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody></tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                        <div class="col-md-3">
+                                            <label for="ReceiverLastName">@Html.DisplayNameFor(model => model.ReceiverLastName)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="ReceiverLastName" id="ReceiverLastName">
+                                                <span class="help-block"></span>
                                             </div>
 
                                         </div>
 
+                                        <div class="col-md-6">
+                                            <label for="PositionName">@Html.DisplayNameFor(model => model.PositionName)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="PositionName" id="PositionName">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+
                                     </div>
+
+                                    <div class="form-group col-md-12;">
+                                        <span class="caption-subject bold uppercase" style="color:darkslategrey; font-family: mtavrulibold; margin-left: 10px;">შემომტანი</span>
+                                        <hr style="margin-top:4px">
+
+                                    </div>
+
+
+                                    <div class="form-group" style="margin-top:-20px;">
+
+                                        <div class="col-md-4">
+                                            <label for="Type">@Html.DisplayNameFor(model => model.Type)</label>
+                                            <div>
+                                                @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.LandTypeItemSource, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <label for="CustomerCode">@Html.DisplayNameFor(model => model.CustomerCode)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="CustomerCode" id="CustomerCode">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="CustomerName">@Html.DisplayNameFor(model => model.CustomerName)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="CustomerName" id="CustomerName">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label for="CustomerContactInfo">@Html.DisplayNameFor(model => model.CustomerContactInfo)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="CustomerContactInfo" id="CustomerContactInfo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label for="RepresentativeName">@Html.DisplayNameFor(model => model.RepresentativeName)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="RepresentativeName" id="RepresentativeName">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-4">
+                                            <label for="TransporterCarNumber">@Html.DisplayNameFor(model => model.TransporterCarNumber)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="TransporterCarNumber" id="TransporterCarNumber">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="TransporterCarModel">@Html.DisplayNameFor(model => model.TransporterCarModel)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="TransporterCarModel" id="TransporterCarModel">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="TransporterDriverInfo">@Html.DisplayNameFor(model => model.TransporterDriverInfo)</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="TransporterDriverInfo" id="TransporterDriverInfo">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group col-md-12;">
+                                        <span class="caption-subject bold uppercase" style="color:darkslategrey; font-family: mtavrulibold; margin-left: 10px;">მყარი ნარჩენები</span>
+                                        <hr style="margin-top:4px">
+                                    </div>
+
+                                    <div class="btn-group pull-right" style="margin-bottom:10px; margin-top:-25px;">
+                                        <a id="addWaste" class="btn default" data-target="#detailEditorDialog" data-toggle="modal">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+
+                                    <table id="SolidWastActDetailTable" class="table table-bordered table-hover" border="1">
+                                        <thead>
+                                            <tr>
+                                                <th style="height: 100%;vertical-align: middle; text-align: center;">დასახელება</th>
+                                                <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>
+                                                <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი</th>
+                                                <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი</th>
+                                                <th style="height: 100%;vertical-align: middle; text-align: center;width: 79px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+
                                 </div>
                             </div>
 
@@ -299,13 +264,115 @@
                     </form>
                     <!-- END FORM-->
                 </div>
+
+                <div id="confirmInformation" hidden>
+
+
+
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject bold uppercase">პოლიგონზე მყარი ნარჩენებსი განთავსების აქტი</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+
+                                <table>
+                                    <tr>
+                                        <td style="text-align:right; color:darkslategray"><b>თარიღი:</b></td>
+                                        <td style="padding-left:5px;">15/14/2015</td>
+                                        <td style="text-align:right;"><b>ფიზიკური/იურიდიული <br /> პირის დასახელება:</b></td>
+                                        <td style="padding-left:5px;">ინდ.მეწარმე ტ.ნადარიძე</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;"><b>ნაგავსაყრელის მდებარეობა:</b></td>
+                                        <td style="padding-left:5px;">ქუთაისის ნაგავსაყრელი</td>
+                                        <td style="text-align:right;"><b>პირადი/საინდენდიფიკაციო<br /> კოდი:</b></td>
+                                        <td style="padding-left:5px;">60001054030</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:right;"><b>მიმღების სახელი:</b></td>
+                                        <td style="padding-left:5px;">გივი</td>
+                                        <td style="text-align:right;"><b>საკონტაქტო ინფორმაცია:</b></td>
+                                        <td style="padding-left:5px;">595175151</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;"><b>მიმღების გვარი:</b></td>
+                                        <td style="padding-left:5px;">თარგამაძე</td>
+                                        <td style="text-align:right;"><b>იურიდიული პირის წარმომადგენელი:</b></td>
+                                        <td style="padding-left:5px;">სერგი სულაბერიძე</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;"><b>მიმღების თანამდებობა:</b></td>
+                                        <td style="padding-left:5px;">ოპერატორი</td>
+                                        <td style="text-align:right;"><b>ავტომობილის მარკა:</b></td>
+                                        <td style="padding-left:5px;">ფოედი</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right;"><b>ავტომობილის ნომერი:</b></td>
+                                        <td style="padding-left: 5px;">AA-ZZ-TT</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right;"><b>მძღოლი:</b></td>
+                                        <td style="padding-left: 5px;">ანრი მანია</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <table id="SolidWastActDetailTable" class="table table-bordered table-hover" border="1">
+                                    <thead>
+                                        <tr>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center;">ნარჩენის ტიპი</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი&#13;&#10;[დღგ-ს ჩათვლით]</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი&#13;&#10;[დღგ-ს ჩათვლით]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>ხორცის ნარჩეების საწარმო</td>
+                                            <td style="text-align:right">0,3</td>
+                                            <td style="text-align:right">100</td>
+                                            <td style="text-align:right">30</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
             </div>
 
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn green" id="btSave">შენახვა</button>
-        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+        <div class="btn-group pull-right">
+            <a id="next" class="btn green">
+                შემდეგი
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
     </div>
 
 </div>
@@ -318,3 +385,10 @@
 
 <script src="~/assets/pages/scripts/SolidWasteAct/Create.js"></script>
 
+<script>
+    $('#next').click(function() {
+        $('#createDiv').hide();
+        $('#confirmInformation').show();
+
+    });
+</script>
