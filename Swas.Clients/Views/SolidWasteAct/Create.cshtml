@@ -12,7 +12,7 @@
     <div class="modal-body">
         <div class="row" id="createDiv">
 
-            <div class="portlet-body form" >
+            <div class="portlet-body form">
                 <form action="#" class="form-horizontal form-row-seperated" id="registrationForm">
                     <div class="form-body">
                         <div class="alert alert-danger" hidden>
@@ -77,7 +77,7 @@
                             <div class="col-sm-2" style="text-align:right; font-size:13px;">
                                 მიმღების გვარი:
                             </div>
-                            <div class="col-sm-4" style="text-align:left">
+                            <div class="col-sm-4" style="text-align:left;">
                                 <input type="text" class="form-control" name="ReceiverLastName" id="ReceiverLastName">
                             </div>
                             <div class="col-sm-2" style="text-align:right; font-size:13px;">
@@ -165,9 +165,8 @@
                                     <tbody></tbody>
                                 </table>
                                 <div class="btn-group pull-right">
-                                    <b>სულ:</b> 200₾
+                                    <b>სულ:</b> <label id="totalSum">0 ₾</label>
                                 </div>
-
                             </div>
                         </div>
 
@@ -384,23 +383,3 @@
 
 <script src="~/assets/pages/scripts/SolidWasteAct/Create.js"></script>
 
-<script>
-    $('#next').click(function() {
-        $('#createDiv').hide();
-        $('#confirmInformation').show();
-
-        $('#btEditDiv').show();
-        $('#btSaveDiv').show();
-        $('#btNexDiv').hide();
-    });
-
-    $('#btEdit').click(function() {
-        $('#createDiv').show();
-        $('#confirmInformation').hide();
-
-        $('#btEditDiv').hide();
-        $('#btSaveDiv').hide();
-        $('#btNexDiv').show();
-    });
-
-</script>

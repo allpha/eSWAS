@@ -67,6 +67,7 @@ function RemoveFromItemSource(wasteTypeId) {
 
 function RemoveButtonClickHandler() {
     $(this).closest("tr").remove();
+    updataTotalSumValue();
 }
 
 function saveSolidWasteAct() {
@@ -115,10 +116,11 @@ function updateErrorEditor(source, text) {
     source.show();
 }
 
-
-$('#btSave').click(function () {
-    $('#registrationForm').submit();
-});
+function removeTableData() {
+    $("#SolidWastActDetailTable").find("tr:not(:first)").remove();
+    $itemSource = [];
+    updataTotalSumValue();
+}
 
 
 $('#addWaste').click(function () {
@@ -130,13 +132,23 @@ $('#addWaste').click(function () {
     $('#wasteEditorErrorText').hide();
 });
 
-function updateWasteEditorError( text) {
+function updateWasteEditorError(text) {
     var editorSource = $('#wasteEditorErrorText');
     editorSource.text(text);
     editorSource.append(' <button class="close" data-close="alert"></button> ');
     editorSource.show();
 }
 
+
+function updataTotalSumValue() {
+    totalSum = 0;
+
+    for (var i = 0; i < $itemSource.length; i++) {
+        totalSum += $itemSource[i].Amount;
+    }
+
+    $('#totalSum').text(totalSum + ' ₾');
+}
 
 $('#btWasteSave').click(function () {
 
@@ -151,16 +163,14 @@ $('#btWasteSave').click(function () {
             animate: true
         });
 
-        var quantity =0;
+        var quantity = 0;
         var isCubeChecked = false;
 
-        if($("input[name='radioQuantity']:checked").val() == -1)
-        {
+        if ($("input[name='radioQuantity']:checked").val() == -1) {
             quantity = $('#M3Quantity').val();
             isCubeChecked = true;
         }
-        else
-        {
+        else {
             quantity = $('#TonQuantity').val();
             isCubeChecked = false;
         }
@@ -207,6 +217,7 @@ $('#btWasteSave').click(function () {
                         Amount: data.Amount
                     });
 
+                    updataTotalSumValue();
                     $('#btWasteClose').click();
                     App.unblockUI($detailEditorName);
                 }
@@ -218,7 +229,7 @@ $('#btWasteSave').click(function () {
                     $selectedRow.find(".trAmount").html(data.Amount);
 
                     UpdateItemSource(data.WasteTypeId, data.Quantity, data.UnitPrice, data.Amount);
-
+                    updataTotalSumValue();
                     $('#btWasteClose').click();
                 }
 
@@ -281,10 +292,10 @@ var FormValidationMd = function () {
                     minlength: 3,
                     required: true
                 },
-                RepresentativeName: {
-                    minlength: 3,
-                    required: true
-                },
+                //RepresentativeName: {
+                //    minlength: 3,
+                //    required: true
+                //},
                 TransporterCarNumber: {
                     minlength: 3,
                     required: true
@@ -305,7 +316,8 @@ var FormValidationMd = function () {
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+                .closest('.form-group').addClass('has-error'); // set error class to the control group
+                //.closest('.form-control').addClass('has-error').css('color','red'); // set error class to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
@@ -320,7 +332,12 @@ var FormValidationMd = function () {
 
             submitHandler: function (form) {
                 errorEditor.hide();
-                saveSolidWasteAct(errorEditor);
+                $('#createDiv').hide();
+                $('#confirmInformation').show();
+
+                $('#btEditDiv').show();
+                $('#btSaveDiv').show();
+                $('#btNexDiv').hide();
             }
         });
     }
@@ -344,13 +361,13 @@ jQuery(document).ready(function () {
         });
     }
 
-    $('#TonQuantity').focus(function() {
+    $('#TonQuantity').focus(function () {
         $('#radioQuantityTon').prop('checked', true);
         $('#radioQuantityM3').prop('checked', false);
         $('#M3Quantity').val('0');
     })
 
-    $('#M3Quantity').focus(function() {
+    $('#M3Quantity').focus(function () {
         $('#radioQuantityM3').prop('checked', true);
         $('#radioQuantityTon').prop('checked', false);
         $('#TonQuantity').val('0');
@@ -363,8 +380,6 @@ jQuery(document).ready(function () {
     $("#WasteTypeId").select2({
         width: null
     });
-
-
 
     var recieverDataSource = new Bloodhound({
         datumTokenizer: function (d) { return Bloodhound.tokenizers.whitespace(d.Description); },
@@ -411,7 +426,6 @@ jQuery(document).ready(function () {
         $('#TransporterCarNumber').attr("dir", "rtl");
     }
 
-
     $('#ReceiverName').typeahead(null, {
         displayKey: 'ReceiverName',
         hint: (App.isRTL() ? false : true),
@@ -431,7 +445,6 @@ jQuery(document).ready(function () {
         $("#ReceiverLastName").val(selection.ReceiverLastName);
         $("#PositionName").val(selection.Posistion);
     });
-
 
     $('#CustomerCode').typeahead(null, {
         displayKey: 'Code',
@@ -532,6 +545,7 @@ jQuery(document).ready(function () {
                 $("#TransporterCarNumber").val('');
                 $("#TransporterCarModel").val('');
                 $("#TransporterDriverInfo").val('');
+                removeTableData();
 
                 customerCodeDataSource.clear();
                 customerNameDataSource.clear();
@@ -551,6 +565,20 @@ jQuery(document).ready(function () {
         })
 
     });
+
+    $('#next').click(function () {
+        $('#registrationForm').submit();
+    });
+
+    $('#btEdit').click(function () {
+        $('#createDiv').show();
+        $('#confirmInformation').hide();
+
+        $('#btEditDiv').hide();
+        $('#btSaveDiv').hide();
+        $('#btNexDiv').show();
+    });
+
 
     FormValidationMd.init();
 });
