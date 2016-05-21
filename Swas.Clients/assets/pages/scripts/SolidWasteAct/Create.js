@@ -21,10 +21,11 @@ function FindItemForEdit(wasteTypeId, editId) {
         }
 }
 
-function UpdateItemSource(wasteTypeId, quantity, unitPrice, amount) {
+function UpdateItemSource(wasteTypeId, wasteTypeName, quantity, unitPrice, amount) {
     for (var i = 0; i < $itemSource.length; i++) {
         if ($itemSource[i].WasteTypeId == wasteTypeId) {
             $itemSource[i].WasteTypeId = wasteTypeId;
+            $itemSource[i].WasteTypeId = WasteTypeName;
             $itemSource[i].Quantity = quantity;
             $itemSource[i].UnitPrice = unitPrice;
             $itemSource[i].Amount = amount;
@@ -212,6 +213,7 @@ $('#btWasteSave').click(function () {
                     $itemSource.push({
                         Id: $itemIncriment,
                         WasteTypeId: data.WasteTypeId,
+                        WasteTypeName:data.WasteTypeName,
                         Quantity: data.Quantity,
                         UnitPrice: data.UnitPrice,
                         Amount: data.Amount
@@ -228,7 +230,7 @@ $('#btWasteSave').click(function () {
                     $selectedRow.find(".trUnitPrice").html(data.UnitPrice);
                     $selectedRow.find(".trAmount").html(data.Amount);
 
-                    UpdateItemSource(data.WasteTypeId, data.Quantity, data.UnitPrice, data.Amount);
+                    UpdateItemSource(data.WasteTypeId, data.WasteTypeName, data.Quantity, data.UnitPrice, data.Amount);
                     updataTotalSumValue();
                     $('#btWasteClose').click();
                 }
@@ -331,6 +333,7 @@ var FormValidationMd = function () {
             },
 
             submitHandler: function (form) {
+                generateActReview();
                 errorEditor.hide();
                 $('#createDiv').hide();
                 $('#confirmInformation').show();
@@ -349,6 +352,113 @@ var FormValidationMd = function () {
         }
     };
 }();
+
+function getActReviewDetail() {
+    var text = '';
+    var totalAmount = 0;
+    for (var i = 0; i < $itemSource.length; i++) {
+
+        text += '<tr>' +
+                        '<td>' + $itemSource[i].WasteTypeName + '</td>' +
+                        '<td style="text-align:right">' + $itemSource[i].Quantity + '</td>' +
+                        '<td style="text-align:right">' + $itemSource[i].UnitPrice + '</td>' +
+                        '<td style="text-align:right">' + $itemSource[i].Amount + '</td>' +
+                      '</tr>';
+
+        totalAmount += $itemSource[i].Amount;
+    }
+
+    return { htmlText: text, TotalAmount: totalAmount  };
+}
+
+function generateActReview() {
+
+    var actDetailInfo = getActReviewDetail();
+
+    var x = '<div class="portlet-body form">' +
+        '<form action="#" class="form-horizontal form-row-seperated">' +
+            '<div class="form-body">' +
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>თარიღი:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ActDate").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ფიზიკური/იურიდიული პირის დასახელება:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerName").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>ნაგავსაყრელის მდებარეობა:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + $('#LandfillId').select2('data')[0].text + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>პირადი/ საინდენდიფიკაციო კოდი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerCode").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების სახელი:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ReceiverName").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>საკონტაქტო ინფორმაცია:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerContactInfo").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების გვარი:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ReceiverLastName").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>იურიდიული პირის წარმომადგენელი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("RepresentativeName").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების თანამდებობა:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("PositionName").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მარკა:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterCarNumber").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"></div>' +
+                    '<div class="col-sm-3" style="text-align:left"></div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის ნომერი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterCarModel").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"></div>' +
+                    '<div class="col-sm-3" style="text-align:left"></div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>მძღოლი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterDriverInfo").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div style="padding:10px;">' +
+                        '<table class="table table-bordered table-hover" width="100%">' +
+                            '<thead>' +
+                                '<tr>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center;">ნარჩენის ტიპი</th>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის ფასი [დღგ-ს ჩათვლით]</th>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი[დღგ-ს ჩათვლით]</th>' +
+                                '</tr>' +
+                            '</thead>' +
+                            '<tbody>' +
+                                actDetailInfo.htmlText +
+                            '</tbody>' +
+                        '</table>' +
+                        '<div class="btn-group pull-right">' +
+                            '<b>სულ:&nbsp&nbsp</b>' + actDetailInfo.TotalAmount + ' ₾' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>შენიშვნა:</b></div>' +
+                    '<div class="col-sm-10" style="text-align:left">' + document.getElementById("Remark").value + '</div>' +
+                '</div>' +
+
+            '</div>' +
+        '</form>' +
+    '</div>';
+
+    $('#confirmInformation').html(x);
+}
 
 
 jQuery(document).ready(function () {

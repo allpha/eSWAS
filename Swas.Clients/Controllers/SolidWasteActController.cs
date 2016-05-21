@@ -639,6 +639,12 @@
 
         #endregion Filter
 
+        
+        [HttpGet]
+        public ActionResult Print(int documentId)
+        {
+            return View();
+        }
     }
 }
 

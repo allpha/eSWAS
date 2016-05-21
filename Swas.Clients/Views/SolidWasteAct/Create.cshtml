@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy">
-                                    <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom" readonly value="@Model.ActDate">
+                                    <input type="datetime" class="form-control" name="ActDate" id="ActDate" readonly value="@Model.ActDate">
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button" style="margin-left:0.3px;">
                                             <i class="fa fa-calendar"></i>
@@ -151,8 +151,7 @@
                             </div>
 
                             <div class="col-md-12">
-
-                                <table id="SolidWastActDetailTable" class="table table-bordered table-hover" border="1">
+                                <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
                                     <thead>
                                         <tr>
                                             <th style="height: 100%;vertical-align: middle; text-align: center;">დასახელება</th>
@@ -165,7 +164,7 @@
                                     <tbody></tbody>
                                 </table>
                                 <div class="btn-group pull-right">
-                                    <b>სულ:</b> <label id="totalSum">0 ₾</label>
+                                    <b>სულ:&nbsp&nbsp</b> <label id="totalSum">0 ₾</label>
                                 </div>
                             </div>
                         </div>
@@ -253,99 +252,7 @@
         </div>
 
         <div class="row" id="confirmInformation" hidden>
-            <div class="portlet-body form">
-                <form action="#" class="form-horizontal form-row-seperated">
-                    <div class="form-body">
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"><b>თარიღი:</b></div>
-                            <div class="col-sm-3" style="text-align:left">03/14/2015</div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ფიზიკური/იურიდიული პირის დასახელება:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">ინდ.მეწარმე ტ.ნადარიძე</div>
-                        </div>
 
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"><b>ნაგავსაყრელის მდებარეობა:</b></div>
-                            <div class="col-sm-3" style="text-align:left">ქუთაისის ნაგავსაყრელი</div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ფიზიკური/იურიდიული პირის დასახელება:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">ინდ.მეწარმე ტ.ნადარიძე</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების სახელი:</b></div>
-                            <div class="col-sm-3" style="text-align:left">გივი</div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>პირადი/ საინდენდიფიკაციო კოდი:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">60001054030</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების გვარი:</b></div>
-                            <div class="col-sm-3" style="text-align:left">თარგამაძე</div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>საკონტაქტო ინფორმაცია:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">595175151</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების თანამდებობა:</b></div>
-                            <div class="col-sm-3" style="text-align:left">ოპერატორი</div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>იურიდიული პირის წარმომადგენელი:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">სერგი სულაბერიძე</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"></div>
-                            <div class="col-sm-3" style="text-align:left"></div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მარკა:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">Ford Mustang</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"></div>
-                            <div class="col-sm-3" style="text-align:left"></div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის ნომერი:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">AA-ZZ-TT</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"></div>
-                            <div class="col-sm-3" style="text-align:left"></div>
-                            <div class="col-sm-3" style="text-align:right; font-size:13px;"><b>მძღოლი:</b> </div>
-                            <div class="col-sm-4" style="text-align:left">ანრი მანია</div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div style="padding:10px;">
-                                <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center;">ნარჩენის ტიპი</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის ფასი [დღგ-ს ჩათვლით]</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი[დღგ-ს ჩათვლით]</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>ხორცის ნარჩეების საწარმო</td>
-                                            <td style="text-align:right">0,3</td>
-                                            <td style="text-align:right">100</td>
-                                            <td style="text-align:right">30</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="btn-group pull-right">
-                                    <b>სულ:</b> 200₾
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="col-sm-2" style="text-align:right; font-size:13px;"><b>შენიშვნა:</b></div>
-                            <div class="col-sm-10" style="text-align:left">asdf;klj lk;l j;klj;lk;jlk ;lkj;lkj;lkj; ;lkj;lkj;lkj ;lkj ;lkj adssafadf;klj</div>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
         </div>
 
     </div>
