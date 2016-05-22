@@ -124,7 +124,7 @@
         {
 
             var bussinessLogic = new SolidWasteActBusinessLogic();
-
+            var solidWasteActId = (int?)null;
             try
             {
                 var validationText = Validation(actDate, landfillId, receiverName, receiverLastName, positionName, type,
@@ -180,7 +180,7 @@
                             UnitPrice = item.UnitPrice
                         });
 
-                bussinessLogic.Create(newItem);
+                solidWasteActId = bussinessLogic.Create(newItem);
 
             }
             catch (Exception ex)
@@ -193,7 +193,7 @@
                 bussinessLogic = null;
             }
 
-            return Json("OK", JsonRequestBehavior.AllowGet);
+            return Json(solidWasteActId, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int Id)
@@ -638,13 +638,7 @@
         }
 
         #endregion Filter
-
-        
-        [HttpGet]
-        public ActionResult Print(int documentId)
-        {
-            return View();
-        }
+       
     }
 }
 

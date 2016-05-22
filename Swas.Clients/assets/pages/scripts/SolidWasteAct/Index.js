@@ -286,4 +286,10 @@ jQuery(document).ready(function () {
     loadWasteTypeItemSource();
     loadCustomerItemSource();
     FilterSolidWasteAct();
+
+    //$('#ajax-modal').on('hidden.bs.modal', function (e) {
+    //    alert(e.result);
+    //})
+
+
 });

@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+#footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+.products {
+    border: 1px solid black;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+    .products tr td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        vertical-align: top;
+    }
+
+    .products th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        vertical-align: top;
+    }
+
+
+@page {
+    size: auto A4;
+    margin-top:20px;
+    margin-left:30px;
+    margin-right:30px;
+    margin-bottom:30px;
+}
+

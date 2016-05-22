@@ -1,0 +1,266 @@
+﻿@model Swas.Clients.Models.SolidWasteActPrintViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/assets/css/PrintPage.css" rel="stylesheet" />
+</head>
+<body onload="window.print()" onfocus="window.close()">
+
+    <div id="header">
+
+        <table width="100%">
+
+
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <p>პოლიგონზე მყარი ნარჩენების განთავსების აქტი #@Html.DisplayFor(model => model.Id)</p>
+                    <p>თარიღი @Html.DisplayFor(model => model.ActDate)</p>
+                </td>
+
+            </tr>
+
+            @*<tr>
+                    <td colspan="2" style="text-align:left;">
+                        <p style="font-size:11px;">შპს "საქართველოს მყარი ნარჩენების მართვის კომპანია"</p>
+                    </td>
+
+                </tr>*@
+
+
+            <tr style="font-size:13px;">
+                <td width="50%">
+                    <table align="left">
+                        <tr>
+                            <td width="170px" style="text-align:right">ნაგავსაყრელის მდებარეობა:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.LandfillName)</td>
+                        </tr>
+                        <tr>
+                            <td width="170px" style="text-align:right">მიმღების სახელი:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.ReceiverName)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="170px" style="text-align:right">მიმღების გვარი:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.ReceiverLastName)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="170px" style="text-align:right">მიმღების თანამდებობა:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.PositionName)</td>
+                        </tr>
+
+                    </table>
+                </td>
+
+                <td width="50%">
+                    <table align="right">
+                        <tr>
+                            <td width="330px" style="text-align:right">ფიზიკური იურიდიული პირის დასახელება:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerName)</td>
+                        </tr>
+                        <tr>
+                            <td width="330px" style="text-align:right">პირადი ნომერი / საინდენტიფიკაციო კოდი:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerCode)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="330px" style="text-align:right">საკონტაქტო ინფორმაცია:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerContactInfo)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="330px" style="text-align:right">იურიდიული პირის წარმომადგენელი:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.RepresentativeName)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="330px" style="text-align:right">ავტომობილის მარკა:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterCarModel)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="330px" style="text-align:right">ავტომობილის ნომერი:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterCarNumber)</td>
+                        </tr>
+
+                        <tr>
+                            <td width="330px" style="text-align:right">მძღოლი:</td>
+                            <td>&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterDriverInfo)</td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+
+
+
+
+            <tr>
+                <td colspan="2">
+                    <table class="products" width="100%">
+                        <thead>
+                            <tr>
+                                <th style="height: 100%;vertical-align: middle; text-align: center;width: 30px;">#</th>
+                                <th style="height: 100%;vertical-align: middle; text-align: center;"><p style="font-size:13px;">ნარჩენის ტიპი</p></th>
+                                <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;"><p style="font-size:13px;">რ-ბ</br>[ტონა]</p></th>
+                                <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;"><p style="font-size:13px;">ერთეულის ფასი <br /> [დღგ-ს ჩათვლით]</p></th>
+                                <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;"><p style="font-size:13px;">ჯამი <br /> [დღგ-ს ჩათვლით]</p></th>
+                            </tr>
+                        </thead>
+                        @for (var i = 1; i <= Model.SolidWasteActDetails.Count; i++)
+                        {
+                            <tr>
+                                <td style="text-align:center;font-size:13px;">
+                                    @Html.DisplayFor(modelItem => i)
+                                </td>
+
+                                <td style="text-align:left;font-size:13px;">
+                                    &nbsp;@Html.DisplayFor(modelItem => Model.SolidWasteActDetails[i - 1].WasteTypeName)
+                                </td>
+                                <td style="text-align:right;font-size:13px;">
+                                    @Html.DisplayFor(modelItem => Model.SolidWasteActDetails[i - 1].Quantity)&nbsp;
+                                </td>
+                                <td style="text-align:right;font-size:13px;">
+                                    @Html.DisplayFor(modelItem => Model.SolidWasteActDetails[i - 1].UnitPrice)&nbsp;
+                                </td>
+                                <td style="text-align:right;font-size:13px;">
+                                    @Html.DisplayFor(modelItem => Model.SolidWasteActDetails[i - 1].Amount)&nbsp;
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <p style="text-align:right;font-size:13px;">სულ&nbsp;@Html.DisplayFor(model => model.TotalAmount)&nbsp;ლარი</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr style="font-size:13px;">
+                            <td width="160px" style="text-align:right">შენიშვნა:</td>
+                            <td>&nbsp;@Html.DisplayFor(model => model.Remark)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+        </table>
+
+
+
+    </div>
+
+    <div id="footer">
+
+        <table style="font-size:8px;" width="100%">
+            <tr>
+                <td colspan="2">
+                    <p style="font-size:9px;">დამატებითი ინფორმაცია</p>
+                    <p style="font-size:9px; font-style:italic;">აღნიშნული თანხა ჩარიცხული უნდა იქნეს ქვემოთ მითითებულ საბანკო ანგარიშზე. აქტის გამოწერიდან არაუგვიანეს 10(ათი) კალენდარული დღის განმავლობაში. წინააღმდეგ შემთხვევაში გავრცელდება საქართველოს კანონიმდებლობით გათვალისწინებული საჯარიმო სანქციები</p>
+                </td>
+            </tr>
+
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+
+
+            <tr>
+                <td colspan="2">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%" style="text-align:left">....................................................</td>
+                            <td width="50%" style="text-align:right">....................................................</td>
+                        </tr>
+
+                        <tr>
+                            <td width="50%" style="text-align:left; font-size:9px;">მიმღების ხელმოწერა</td>
+                            <td width="50%" style="text-align:right; font-size:9px;">შემომტანი ფიზ.იურ. პირის ხელმოწერა</td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2">&nbsp;</td></tr>
+            <tr> <td colspan="2"><hr /></td></tr>
+
+            <tr>
+                <td width="50&">
+                    <table>
+                        <tr><td>საკონტაქტო ინფორმაცია</td></tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr><td>ს/კ: 40494270</td></tr>
+                        <tr><td>პოლიტკოვსკაიას ქ.10, თბილისი, 0186</td></tr>
+                        <tr><td>ტელ: (+995) 32 / 243 88 30</td></tr>
+                        <tr><td>www.waste.gov.ge&nbsp;&nbsp;&nbsp;&nbsp;info@waste.gov.ge</td></tr>
+                    </table>
+                </td>
+                <td width="50&">
+                    <table align="right">
+                        <tr>
+                            <td colspan="2">
+                                საბანკო რეკვიზიტები
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                &nbsp;
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:80px;">მომსახურე ბანკი</td>
+                            <td>სს "თიბისი ბანკი"</td>
+                        </tr>
+                        <tr>
+                            <td>ბანკის კოდი</td>
+                            <td>TBCBGE22</td>
+                        </tr>
+                        <tr>
+                            <td>ანგარიშის ნომერი</td>
+                            <td>GE 51TB 7161 9360 8010 0005</td>
+                        </tr>
+                        <tr>
+                            <td>მიმღები</td>
+                            <td>შპს "საქართველოს მყარი ნარჩენების მართვის კომპანია"</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>
+
+@*<script>
+    window.print();
+</script>*@

@@ -237,7 +237,7 @@
             #endregion Validation
         }
 
-        public void Create(SolidWasteActItem item)
+        public int Create(SolidWasteActItem item)
         {
             try
             {
@@ -415,6 +415,7 @@
 
                 Context.SolidWasteActs.Add(newItem);
                 Context.SaveChanges();
+                item.Id = newItem.Id;
 
                 #endregion SolidWasteActs
 
@@ -442,6 +443,8 @@
             {
                 Dispose();
             }
+
+            return item.Id;
         }
 
         public SolidWasteActHelperDataItem Get(int Id)
@@ -556,6 +559,80 @@
 
             return result;
         }
+
+        public SolidWasteActPrintItem GetForPrint(int Id)
+        {
+
+            var result = new SolidWasteActPrintItem()
+            {
+                DetailItemSource = new List<SolidWasteActDetailPrintItem>()
+            };
+
+            try
+            {
+                Connect();
+
+                result = (from solidWasteAct in Context.SolidWasteActs
+                          join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                          join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
+                          join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
+                          join position in Context.Positions on solidWasteAct.PositionId equals position.Id
+                          join representative in Context.Representatives on solidWasteAct.RepresentativeId equals representative.Id
+                          join transporter in Context.Transporters on solidWasteAct.TransporterId equals transporter.Id
+                          where solidWasteAct.Id == Id
+                          select new SolidWasteActPrintItem
+                          {
+                              Id = solidWasteAct.Id,
+                              ActDate = solidWasteAct.ActDate,
+                              LandfillName = landfill.Name,
+                              Remark = solidWasteAct.Remark,
+                              CustomerName = customer.Name,
+                              CustomerCode = customer.Code,
+                              CustomerContactInfo = customer.ContactInfo,
+                              ReceiverName = receiver.Name,
+                              ReceiverLastName = receiver.LastName,
+                              PositionName = position.Name,
+                              RepresentativeName = representative.Name,
+                              TransporterCarModel = transporter.CarModel,
+                              TransporterCarNumber = transporter.CarNumber,
+                              TransporterDriverInfo = transporter.DriverInfo
+                          }).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.DetailItemSource = (from solidWasteActDetail in Context.SolidWasteActDetails
+                                               join wasteType in Context.WasteTypes on solidWasteActDetail.WasteTypeId equals wasteType.Id
+                                               where solidWasteActDetail.SolidWasteActId == Id
+                                               select new SolidWasteActDetailPrintItem
+                                               {
+                                                   WasteTypeName = wasteType.Name,
+                                                   Amount = solidWasteActDetail.Amount,
+                                                   Quantity = solidWasteActDetail.Quantity,
+                                                   UnitPrice = solidWasteActDetail.UnitPrice
+                                               }).ToList();
+                    result.TotalAmount = 0;
+                    foreach (var item in result.DetailItemSource)
+                        result.TotalAmount += item.Amount;
+                }
+                else
+                    result = new  SolidWasteActPrintItem
+                    {
+                        ActDate = DateTime.Now,
+                        DetailItemSource = new List<SolidWasteActDetailPrintItem>()
+                    };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
 
         public void Edit(SolidWasteActItem item)
         {

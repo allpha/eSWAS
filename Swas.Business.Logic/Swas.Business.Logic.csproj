@@ -59,6 +59,7 @@
     <Compile Include="Classes\LandfillBusinessLogic.cs" />
     <Compile Include="Classes\RegionBusinessLogic.cs" />
     <Compile Include="Common\BusinessLogicBase.cs" />
+    <Compile Include="Entity\SolidWastePrintItem.cs" />
     <Compile Include="Entity\Landfill.cs" />
     <Compile Include="Entity\ReceiverPosition.cs" />
     <Compile Include="Entity\Position.cs" />

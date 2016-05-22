@@ -101,8 +101,12 @@ function saveSolidWasteAct() {
         },
         success: function (data) {
             App.unblockUI(editorName);
-
-            location.href = '/SolidWasteAct/Index';
+            $('#btEditDiv').hide();
+            $('#btSaveDiv').hide();
+            $('#btNexDiv').hide();
+            $('#confirmInformation').hide();
+            $('#print').show();
+            $("#printData").attr("href", "/SolidWasteActPrint/Index/" + data);
         },
         error: function (textStatus, errorThrown) {
             updateErrorEditor(errorEditor, request.responseText)
@@ -689,6 +693,13 @@ jQuery(document).ready(function () {
         $('#btNexDiv').show();
     });
 
+    $('#btSave').click(function () {
+        saveSolidWasteAct();
+    });
+
+    $('#closeWindow').click(function () {
+        location.href = '/SolidWasteAct/Index';
+    });
 
     FormValidationMd.init();
 });

@@ -201,6 +201,7 @@
     <Compile Include="Controllers\LandfillController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\SolidWasteActPrintController.cs" />
     <Compile Include="Controllers\SolidWasteActController.cs" />
     <Compile Include="Controllers\WasteTypeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -212,12 +213,14 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\SolidWasteActViewModel.cs" />
+    <Compile Include="Models\SolidWastePrintViewModel.cs" />
     <Compile Include="Models\WasteTypeDetailViewModels.cs" />
     <Compile Include="Models\WasteTypeViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\PrintPage.css" />
     <Content Include="assets\global\plugins\autocomplite\auto-complete.css" />
     <Content Include="assets\global\plugins\autocomplite\auto-complete.js" />
     <Content Include="assets\global\plugins\jquery-validation\js\additional-methods.js" />
@@ -329,6 +332,7 @@
     <Content Include="Views\SolidWasteAct\Create - Copy.cshtml" />
     <Content Include="Views\SolidWasteAct\Create - Copy %282%29.cshtml" />
     <Content Include="Views\SolidWasteAct\Create - Copy %283%29.cshtml" />
+    <Content Include="Views\SolidWasteActPrint\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
