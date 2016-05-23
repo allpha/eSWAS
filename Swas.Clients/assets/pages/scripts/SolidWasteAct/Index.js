@@ -43,15 +43,6 @@ function FilterSolidWasteAct() {
         var fromDate = document.getElementById("ActDateFrom").value; //$('#ActDateFrom').val();
         var ActDateTo = document.getElementById("ActDateTo").value; //$('#ActDateTo').val();
 
-        //if (!(fromDate == null || fromDate.length === 0))
-        //    fromDate =moment(fromDate).unix();//  moment(fromDate).format('DD-MM-YYYY');
-
-
-        //if (!(ActDateTo == null || ActDateTo.length === 0))
-        //    ActDateTo = moment(ActDateTo).format('DD-MM-YYYY');
-
-        //alert(fromDate);
-
         $.ajax({
             url: "/SolidWasteAct/FilterSolidWasteAct",
             type: "POST",
@@ -272,8 +263,6 @@ function InitFilter() {
         else
             $('#filterDiv').hide();
     });
-
-
 }
 
 
@@ -286,10 +275,4 @@ jQuery(document).ready(function () {
     loadWasteTypeItemSource();
     loadCustomerItemSource();
     FilterSolidWasteAct();
-
-    //$('#ajax-modal').on('hidden.bs.modal', function (e) {
-    //    alert(e.result);
-    //})
-
-
 });

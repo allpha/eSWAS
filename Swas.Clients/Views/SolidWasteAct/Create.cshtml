@@ -6,7 +6,8 @@
 
 <div id="editorDialog">
     <div class="modal-header" style="vertical-align:middle">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <button type="button" class="close" onclick="windowCloseClick()" aria-hidden="true"></button>
+        <button type="button" id="windlowCloseHiddenButton" style="display: none;" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">პოლიგონზე მყარი ნარჩენებსი განთავსების აქტი</h5>
     </div>
     <div class="modal-body">
@@ -178,7 +179,7 @@
                         </div>
 
 
-                        <div id="detailEditorDialog" class="modal fade" tabindex="-1" data-focus-on="input:first">
+                        <div id="detailEditorDialog" class="modal fade" tabindex="-2" data-focus-on="input:first">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">ნარჩენის დამატება/რედაქტირება</h5>
@@ -200,8 +201,24 @@
                                     <label class="col-md-3 control-label" for="form_control_1" style="text-align:right;">რაოდენობა</label>
                                     <div class="col-md-9">
                                         <div class="md-radio-list">
+
                                             <div class="md-radio">
-                                                <input type="radio" id="radioQuantityM3" name="radioQuantity" class="md-radiobtn" checked value="-1">
+                                                <input type="radio" id="radioQuantityTon" name="radioQuantity" class="md-radiobtn"  checked value="1">
+                                                <label for="radioQuantityTon">
+                                                    <span></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span>
+                                                    <div class="col-md-4 input-group" style="margin-top: -10px;">
+                                                        <input type="text" class="form-control" id="TonQuantity" name="TonQuantity">
+                                                        <div class="form-control-focus"> </div>
+                                                        <span class="input-group-addon">ტ.</span>
+                                                        <span style="margin-top: 0px; margin-left:10px;" class="help-block">შეიყვანეთ რაოდენობა ტონაში.</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+
+                                            <div class="md-radio">
+                                                <input type="radio" id="radioQuantityM3" name="radioQuantity" class="md-radiobtn" value="-1">
                                                 <label for="radioQuantityM3">
                                                     <span></span>
                                                     <span class="check"></span>
@@ -215,20 +232,6 @@
                                                 </label>
                                             </div>
 
-                                            <div class="md-radio">
-                                                <input type="radio" id="radioQuantityTon" name="radioQuantity" class="md-radiobtn" value="1">
-                                                <label for="radioQuantityTon">
-                                                    <span></span>
-                                                    <span class="check"></span>
-                                                    <span class="box"></span>
-                                                    <div class="col-md-4 input-group" style="margin-top: -10px;">
-                                                        <input type="text" class="form-control" id="TonQuantity" name="TonQuantity">
-                                                        <div class="form-control-focus"> </div>
-                                                        <span class="input-group-addon">ტ.</span>
-                                                        <span style="margin-top: 0px; margin-left:10px;" class="help-block">შეიყვანეთ რაოდენობა ტონაში.</span>
-                                                    </div>
-                                                </label>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -250,14 +253,13 @@
                 <!-- END FORM-->
             </div>
         </div>
-
+        <input type="hidden" id="isSaved" value="notSaved" />
         <div class="row" id="confirmInformation" hidden>
 
         </div>
 
         <div class="row" id="print" hidden>
-            <p style="text-align:center; font-size:16px;"><b>აქტის შექმნა დასრულებულია</b></p>
-            <br />
+            <p style="text-align:center; font-size:16px;"><b>აქტის შექმნა დასრულებულია.</b></p>
             <br />
             <br />
             <table align="center">
@@ -268,10 +270,10 @@
                             <div> ბეჭდვა </div>
                         </a>
 
-                        <a id="closeWindow" href="javascript:;" class="icon-btn">
+                        @*<a id="closeWindow" href="javascript:;" class="icon-btn">
                             <i class="fa fa-close"></i>
                             <div> დახურვა </div>
-                        </a>
+                        </a>*@
 
                     </td>
                 </tr>
@@ -315,3 +317,17 @@
 
 <script src="~/assets/pages/scripts/SolidWasteAct/Create.js"></script>
 
+<script>
+
+    $('#detailEditorDialog').on('shown.bs.modal', function () {
+        $('#radioQuantityTon').focus();
+    })  
+
+
+    function windowCloseClick() {
+        if ( $('#isSaved').val() == 'saved')
+            location.href = '/SolidWasteAct/Index';
+        else
+            windlowCloseHiddenButton.click();
+    }
+</script>

@@ -31,7 +31,6 @@
 
                     <button  class="btn blue btn-outline" type="button" id="filterButton" >
                         <span class="glyphicon glyphicon-search" style="margin-top:3px"></span>
-                        ფილტრი
                     </button>
 
                 </div>
@@ -43,14 +42,14 @@
                     <form role="form">
                         <div class="row">
                             <div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-2">
                                     <label for="solidWasteActNumber">ჩანაწერის ნომერი</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="solidWasteActNumber">
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="ActDateFromPicker">შემოტანის თარიღი(-დან)</label>
                                     <div class="input-group">
                                         <div class="input-group input-medium date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
@@ -64,7 +63,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="ActDateTo">შემოტანის თარიღი(-მდე)</label>
                                     <div class="input-group">
                                         <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
@@ -77,11 +76,21 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="multi-prepend" class="control-label">ნარჩენის სახეობა</label>
+                                    <div class="input-group select2-bootstrap-prepend">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="allWasteTypeSelected" checked>
+                                        </span>
+                                        <select id="wasteTypeSearchCombo" class="form-control select2" multiple disabled></select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div>
                                 <div class="form-group col-md-4">
-                                    <label for="multi-prepend" class="control-label">გეოგრაფიული არეალი</label>
+                                    <label for="multi-prepend" class="control-label">რეგიონი</label>
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon">
                                             <input type="checkbox" id="allRegionSelected" checked>
@@ -91,12 +100,12 @@
                                 </div>
 
                                 <div class="form-group col-md-4">
-                                    <label for="multi-prepend" class="control-label">ნარჩენის სახეობა</label>
+                                    <label for="multi-prepend" class="control-label">ნაგავსაყრელი</label>
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon">
                                             <input type="checkbox" id="allWasteTypeSelected" checked>
                                         </span>
-                                        <select id="wasteTypeSearchCombo" class="form-control select2" multiple disabled></select>
+                                        <select id="wasteTypeSearchCom1bo" class="form-control select2" multiple disabled></select>
                                     </div>
                                 </div>
 
@@ -115,11 +124,11 @@
 
                                 <button class="btn red btn-outline" type="button" id="filterSolidWasteAct">
                                     <span class="glyphicon glyphicon-search"></span>
-                                    გაფილტვრა
+                                    ძიება
                                 </button>
 
                                 <button class="btn red btn-outline" type="button" id="cencelSolidWasteAct">
-                                    <span class="glyphicon glyphicon-cancel"></span>
+                                    <span class="glyphicon glyphicon-close"></span>
                                     გაუქმება
                                 </button>
 
@@ -131,7 +140,7 @@
             </div>
 
             <a id="ajax-model-dialog-editor" data-url="/home/NotFound" data-toggle="modal"> </a>
-            <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="900"  data-backdrop="static" > </div>
+            <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="900"  data-backdrop="static" data-keyboard="false" > </div>
 
             <div class="portlet-body">
 

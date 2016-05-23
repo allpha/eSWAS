@@ -25,7 +25,7 @@ function UpdateItemSource(wasteTypeId, wasteTypeName, quantity, unitPrice, amoun
     for (var i = 0; i < $itemSource.length; i++) {
         if ($itemSource[i].WasteTypeId == wasteTypeId) {
             $itemSource[i].WasteTypeId = wasteTypeId;
-            $itemSource[i].WasteTypeId = WasteTypeName;
+            $itemSource[i].WasteTypeName = wasteTypeName;
             $itemSource[i].Quantity = quantity;
             $itemSource[i].UnitPrice = unitPrice;
             $itemSource[i].Amount = amount;
@@ -107,6 +107,7 @@ function saveSolidWasteAct() {
             $('#confirmInformation').hide();
             $('#print').show();
             $("#printData").attr("href", "/SolidWasteActPrint/Index/" + data);
+            $('#isSaved').val('saved')
         },
         error: function (textStatus, errorThrown) {
             updateErrorEditor(errorEditor, request.responseText)
@@ -130,8 +131,8 @@ function removeTableData() {
 
 $('#addWaste').click(function () {
     $editorMode = 'ADD';
-    $('#radioQuantityTon').prop('checked', false);
-    $('#radioQuantityM3').prop('checked', true);
+    $('#radioQuantityTon').prop('checked', true);
+    $('#radioQuantityM3').prop('checked', false);
     $('#M3Quantity').val('0');
     $('#TonQuantity').val('0');
     $('#wasteEditorErrorText').hide();
@@ -697,9 +698,9 @@ jQuery(document).ready(function () {
         saveSolidWasteAct();
     });
 
-    $('#closeWindow').click(function () {
-        location.href = '/SolidWasteAct/Index';
-    });
+    //$('#closeWindow').click(function () {
+    //    location.href = '/SolidWasteAct/Index';
+    //});
 
     FormValidationMd.init();
 });
