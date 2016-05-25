@@ -25,8 +25,9 @@
                                 თარიღი:
                             </div>
                             <div class="col-sm-4">
-                                <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy">
-                                    <input type="datetime" class="form-control" name="ActDate" id="ActDate" readonly value="@Model.ActDate">
+                                <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="mm/dd/yyyy" >
+                                    <input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate.Month.ToString("00")/@Model.ActDate.Day.ToString("00")/@Model.ActDate.Year.ToString()">
+                                    @*<input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate">*@
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button" style="margin-left:0.3px;">
                                             <i class="fa fa-calendar"></i>

@@ -624,7 +624,7 @@
         }
 
         [HttpPost]
-        public JsonResult FilterSolidWasteAct(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+        public JsonResult FilterSolidWasteAct(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource,
                                                 bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber)
         {
@@ -633,7 +633,7 @@
 
             try
             {
-                var itemSource = bussinessLogic.Load(id, fromDate, endDate, landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, pageNumber);
+                var itemSource = bussinessLogic.Load(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, pageNumber);
 
                 foreach (var item in itemSource)
                     result.Add(new SolidWasteActInfoViewModel
@@ -660,8 +660,22 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        private DateTime? ConvertStringToDate(string date)
+        {
+            var result = (DateTime?)null;
+
+            if (!string.IsNullOrEmpty(date))
+            {
+                var splitSource = date.Split('/');
+                if (splitSource.Count() == 3)
+                    result = new DateTime(Convert.ToInt32(splitSource[2]), Convert.ToInt32(splitSource[1]), Convert.ToInt32(splitSource[0]));
+            }
+
+            return result;
+        }
+
         [HttpPost]
-        public JsonResult LoadPageCount(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+        public JsonResult LoadPageCount(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                         List<int> wasteTypeIdSource, List<int> customerIdSource,
                                         bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
         {
@@ -670,7 +684,7 @@
 
             try
             {
-                result = bussinessLogic.LoadPageCount(id, fromDate, endDate, landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
+                result = bussinessLogic.LoadPageCount(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
             }
             catch (Exception ex)
             {
@@ -689,5 +703,6 @@
 
     }
 }
+
 
 

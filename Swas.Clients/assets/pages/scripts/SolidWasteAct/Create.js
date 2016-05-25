@@ -110,7 +110,7 @@ function saveSolidWasteAct() {
             $('#isSaved').val('saved')
         },
         error: function (textStatus, errorThrown) {
-            updateErrorEditor(errorEditor, request.responseText)
+            updateErrorEditor($('.alert-danger'), textStatus)
             App.unblockUI(editorName);
         }
     });

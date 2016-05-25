@@ -29,15 +29,15 @@ function FilterSolidWasteAct() {
     $('#cencelSolidWasteAct').click(function () {
         $('#filterDiv').hide();
 
-        var $fromDate = null;
-        var $endDate = null;
-        var $landfillDataSource = [];
-        var $recordNumber = null;
-        var $wasteTypeDataSource = [];
-        var $customerDataSource = [];
-        var $loadAllLandfill = true;
-        var $loadAllWasteType = true;
-        var $loadAllCustomer = true;
+        $fromDate = null;
+        $endDate = null;
+        $landfillDataSource = [];
+        $recordNumber = null;
+        $wasteTypeDataSource = [];
+        $customerDataSource = [];
+        $loadAllLandfill = true;
+        $loadAllWasteType = true;
+        $loadAllCustomer = true;
 
         loadPageCount();
     });
@@ -63,8 +63,10 @@ function FilterSolidWasteAct() {
             landfillItemSource = [0];
 
         $recordNumber = document.getElementById("solidWasteActNumber").value;
-        $fromDate = new Date(fromDate);
-        $endDate = new Date(ActDateTo);
+        //$fromDate = new Date(fromDate);
+        //$endDate = new Date(ActDateTo);
+        $fromDate = fromDate;
+        $endDate = ActDateTo;
         $landfillDataSource = landfillItemSource;
         $wasteTypeDataSource = $('#wasteTypeSearchCombo').val();
         $customerDataSource = $('#customerSearchCombo').val();
@@ -180,7 +182,6 @@ function loadLandfillSource(selectAll) {
 
 }
 
-
 function loadWasteTypeItemSource() {
     $.ajax({
         url: "/SolidWasteAct/LoadFilterWasteType",
@@ -287,7 +288,9 @@ function InitSearchCombos() {
     });
 
     $("#regionSearchCombo").on("change", function (e) {
-        loadLandfillSource(false);
+        if (!$('#allRegionSelected').is(':checked')) {
+            loadLandfillSource(false);
+        }
     });
 
     $("#allWasteTypeSelected").on("click", function () {
@@ -372,7 +375,7 @@ function loadPageCount() {
             App.unblockUI(editorName);
         },
         error: function (request, status, error) {
-            alert('shecdomaa');
+            alert('მოხდა სერვერსული შეცდომა');
             App.unblockUI(editorName);
         }
     });
@@ -400,14 +403,14 @@ function loadData(pageNum) {
             loadAllWasteType: $loadAllWasteType,
             loadAllCustomer: $loadAllCustomer,
             loadAllLandfill: $loadAllLandfill,
-            pageNumber :pageNum,
+            pageNumber: pageNum,
         },
         success: function (data) {
             initTableItemSource(data);
             App.unblockUI(editorName);
         },
         error: function (request, status, error) {
-            alert('shecdomaa');
+            alert('მოხდა სერვერსული შეცდომა');
             App.unblockUI(editorName);
         }
     });
@@ -415,23 +418,25 @@ function loadData(pageNum) {
 }
 
 function InitPages(count) {
-    $('#tablePages').bootpag({
-        paginationClass: 'pagination pagination-sm',
-        next: '<i class="fa fa-angle-right"></i>',
-        prev: '<i class="fa fa-angle-left"></i>',
-        total: count,
-        page: 1,
-        maxVisible: 6
-    }).on('page', function (event, num) {
-        loadData(num)
-    });
+    $('#tablePages').bootpag({ total: count });
 }
 
 jQuery(document).ready(function () {
     InitDate();
     InitFilter();
     InitSearchCombos();
-    //InitPages();
+
+    $('#tablePages').bootpag({
+        paginationClass: 'pagination pagination-sm',
+        next: '<i class="fa fa-angle-right"></i>',
+        prev: '<i class="fa fa-angle-left"></i>',
+        total: 0,
+        page: 1,
+        maxVisible: 6
+    }).on('page', function (event, num) {
+        loadData(num)
+    });
+
     loadPageCount();
     loadRegoinItemSource();
     loadLandfillSource(true);

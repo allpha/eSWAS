@@ -22,64 +22,57 @@
                     <button class="btn blue btn-outline" type="button" id="filterButton">
                         <span class="glyphicon glyphicon-search" style="margin-top:3px"></span>
                     </button>
-
                 </div>
 
             </div>
+
+            @*col-md-12 col-sm-12 col-xs-12*@
 
             <div class="portlet light bordered" id="filterDiv" hidden>
                 <div class="portlet-body form">
                     <form role="form">
                         <div class="row">
-                            <div>
-                                <div class="form-group col-md-2">
+                            <div class="col-sm-12">
+                                <div class="form-group col-sm-3">
+                                    <label for="ActDateFromPicker">შემოტანის თარიღი(-დან)</label>
+                                    <div class="input-group">
+                                        <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy" >
+                                            <input type="text" class="form-control" name="ActDateFrom"  size="16" id="ActDateFrom" >
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-3">
+                                    <label for="ActDateTo">შემოტანის თარიღი(-მდე)</label>
+                                    <div class="input-group">
+                                        <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy">
+                                            <input type="text" class="form-control" name="ActDateTo" id="ActDateTo" >
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-sm-6">
                                     <label for="solidWasteActNumber">ჩანაწერის ნომერი</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="solidWasteActNumber">
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <label for="ActDateFromPicker">შემოტანის თარიღი(-დან)</label>
-                                    <div class="input-group">
-                                        <div class="input-group input-medium date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy">
-                                            <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom" readonly>
-                                            <span class="input-group-btn">
-                                                <button class="btn default" type="button">
-                                                    <i class="fa fa-calendar"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="form-group col-md-3">
-                                    <label for="ActDateTo">შემოტანის თარიღი(-მდე)</label>
-                                    <div class="input-group">
-                                        <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy">
-                                            <input type="datetime" class="form-control" name="ActDateTo" id="ActDateTo" data-date-format="dd/mm/yyyy" readonly>
-                                            <span class="input-group-btn">
-                                                <button class="btn default" type="button">
-                                                    <i class="fa fa-calendar"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="form-group col-md-4">
-                                    <label for="multi-prepend" class="control-label">ნარჩენის სახეობა</label>
-                                    <div class="input-group select2-bootstrap-prepend">
-                                        <span class="input-group-addon">
-                                            <input type="checkbox" id="allWasteTypeSelected" checked>
-                                        </span>
-                                        <select id="wasteTypeSearchCombo" class="form-control select2" multiple disabled></select>
-                                    </div>
-                                </div>
                             </div>
-
-                            <div>
-                                <div class="form-group col-md-4">
+                            <div class="form-group col-sm-12">
+                                <div class="form-group col-sm-6">
                                     <label for="multi-prepend" class="control-label">რეგიონი</label>
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon">
@@ -89,7 +82,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-sm-6">
                                     <label for="multi-prepend" class="control-label">ნაგავსაყრელი</label>
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon">
@@ -99,7 +92,20 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-4">
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group col-sm-6">
+                                    <label for="multi-prepend" class="control-label">ნარჩენის სახეობა</label>
+                                    <div class="input-group select2-bootstrap-prepend">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="allWasteTypeSelected" checked>
+                                        </span>
+                                        <select id="wasteTypeSearchCombo" class="form-control select2" multiple disabled></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
                                     <label for="multi-prepend" class="control-label">შემომტანი</label>
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon">
@@ -110,18 +116,20 @@
                                 </div>
                             </div>
 
-                            <div class="btn-group pull-right">
+                            <div class="col-sm-12">
+                                <div class="form-group col-sm-12">
+                                    <div class="btn-group pull-right">
+                                        <button class="btn red btn-outline" type="button" id="filterSolidWasteAct">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                            ძიება
+                                        </button>
 
-                                <button class="btn red btn-outline" type="button" id="filterSolidWasteAct">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    ძიება
-                                </button>
-
-                                <button class="btn red btn-outline" type="button" id="cencelSolidWasteAct">
-                                    <span class="glyphicon glyphicon-close"></span>
-                                    გაუქმება
-                                </button>
-
+                                        <button class="btn red btn-outline" type="button" id="cencelSolidWasteAct">
+                                            <span class="glyphicon glyphicon-close"></span>
+                                            გაუქმება
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -133,13 +141,6 @@
             <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="900" data-backdrop="static" data-keyboard="false"> </div>
 
             <div class="portlet-body">
-
-                @*<div class="table-toolbar">
-                        <div class="row">
-                            <div class="col-md-12">
-                            </div>
-                        </div>
-                    </div>*@
 
                 <div class="table-scrollable table-scrollable-borderless">
                     <table class="table table-hover table-light" id="itemSource">
