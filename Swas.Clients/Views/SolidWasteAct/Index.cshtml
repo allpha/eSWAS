@@ -14,22 +14,12 @@
                 </div>
                 <div class="btn-group pull-right">
 
-                    @*<div class="btn-group">
-                        <button type="button" class="btn btn-default" onclick="javascript:create();">
-                            <i class="fa fa-plus"></i>
-                            ახალი აქტი
-                        </button>
-                        <button type="button" class="btn btn-default" id="filterButton">
-                            <i class="fa fa-search"></i> ფილტრი
-                        </button>
-                    </div>*@
-
-                    <button class="btn blue btn-outline"  onclick="javascript:create();">
+                    <button class="btn blue btn-outline" onclick="javascript:create();">
                         <i class="fa fa-plus" style="margin-top:5px"></i>
                         ახალი აქტი
                     </button>
 
-                    <button  class="btn blue btn-outline" type="button" id="filterButton" >
+                    <button class="btn blue btn-outline" type="button" id="filterButton">
                         <span class="glyphicon glyphicon-search" style="margin-top:3px"></span>
                     </button>
 
@@ -52,8 +42,8 @@
                                 <div class="form-group col-md-3">
                                     <label for="ActDateFromPicker">შემოტანის თარიღი(-დან)</label>
                                     <div class="input-group">
-                                        <div class="input-group input-medium date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
-                                            <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom"  readonly>
+                                        <div class="input-group input-medium date date-picker" id="ActDateFromPicker" data-date-format="dd/mm/yyyy">
+                                            <input type="datetime" class="form-control" name="ActDateFrom" id="ActDateFrom" readonly>
                                             <span class="input-group-btn">
                                                 <button class="btn default" type="button">
                                                     <i class="fa fa-calendar"></i>
@@ -66,7 +56,7 @@
                                 <div class="form-group col-md-3">
                                     <label for="ActDateTo">შემოტანის თარიღი(-მდე)</label>
                                     <div class="input-group">
-                                        <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
+                                        <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy">
                                             <input type="datetime" class="form-control" name="ActDateTo" id="ActDateTo" data-date-format="dd/mm/yyyy" readonly>
                                             <span class="input-group-btn">
                                                 <button class="btn default" type="button">
@@ -103,9 +93,9 @@
                                     <label for="multi-prepend" class="control-label">ნაგავსაყრელი</label>
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon">
-                                            <input type="checkbox" id="allWasteTypeSelected" checked>
+                                            <input type="checkbox" id="allLandfillSelected" checked>
                                         </span>
-                                        <select id="wasteTypeSearchCom1bo" class="form-control select2" multiple disabled></select>
+                                        <select id="landfillSearchCombo" class="form-control select2" multiple disabled></select>
                                     </div>
                                 </div>
 
@@ -140,16 +130,16 @@
             </div>
 
             <a id="ajax-model-dialog-editor" data-url="/home/NotFound" data-toggle="modal"> </a>
-            <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="900"  data-backdrop="static" data-keyboard="false" > </div>
+            <div id="ajax-modal" class="modal container fade" tabindex="-1" data-width="900" data-backdrop="static" data-keyboard="false"> </div>
 
             <div class="portlet-body">
 
                 @*<div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
 
                 <div class="table-scrollable table-scrollable-borderless">
                     <table class="table table-hover table-light" id="itemSource">
@@ -168,6 +158,12 @@
                         <tbody></tbody>
                     </table>
                 </div>
+
+                <hr>
+
+                <div>
+                    <p style="text-align:right" id="tablePages"> </p>
+                </div>
             </div>
         </div>
     </div>
@@ -182,5 +178,6 @@
     <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js" type="text/javascript"></script>
 }
 

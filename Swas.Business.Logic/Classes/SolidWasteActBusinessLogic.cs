@@ -14,6 +14,8 @@
         {
         }
 
+        private int _recordCount = 5;
+
         public List<SolidWasteActInfoItem> Load()
         {
             var result = new List<SolidWasteActInfoItem>();
@@ -63,15 +65,71 @@
             return result;
         }
 
+        public int LoadPageCount(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+                                 List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
+        {
+            var result = (int)0;
+
+            try
+            {
+                Connect();
+
+                if (customerIdSource == null) customerIdSource = new List<int>();
+                if (wasteTypeIdSource == null) wasteTypeIdSource = new List<int>();
+                if (landFillIdSource == null) landFillIdSource = new List<int>();
+
+                var pageCount = (from solidWasteAct in Context.SolidWasteActs
+                                 join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                                 join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
+                                 join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
+                                 join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
+                                 from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
+                                 where (id.HasValue && solidWasteAct.Id == id.Value) ||
+                                        (!id.HasValue &&
+                                        ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
+                                        ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
+                                        ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
+                                        ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
+                                        ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
+                                 group solidWasteActDetail by new
+                                 {
+                                     Id = solidWasteAct.Id,
+                                 } into Group
+                                 select new
+                                 {
+                                     Id = Group.Key.Id
+                                 }).Count();
+
+                result = pageCount / _recordCount;
+                if (pageCount % _recordCount != 0)
+                    result++;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+
+
         public List<SolidWasteActInfoItem> Load(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
-                                                List<int> wasteTypeIdSource, List<int> customerIdSource,
-                                                bool isAllLandfill, bool isAllWasteType, bool isAllCustomer)
+                                                List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber)
         {
             var result = new List<SolidWasteActInfoItem>();
 
             try
             {
                 Connect();
+
+                if (customerIdSource == null) customerIdSource = new List<int>();
+                if (wasteTypeIdSource == null) wasteTypeIdSource = new List<int>();
+                if (landFillIdSource == null) landFillIdSource = new List<int>();
 
                 result = (from solidWasteAct in Context.SolidWasteActs
                           join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
@@ -81,11 +139,11 @@
                           from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
                           where (id.HasValue && solidWasteAct.Id == id.Value) ||
                                  (!id.HasValue &&
-                                  ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
+                                 ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
                                  ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
-                                 ((isAllLandfill) || (!isAllLandfill && landFillIdSource.Contains(solidWasteAct.LandfillId))) &&
-                                 ((isAllCustomer) || (!isAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
-                                 ((isAllWasteType) || (!isAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
+                                 ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
+                                 ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
+                                 ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
                           group solidWasteActDetail by new
                           {
                               Id = solidWasteAct.Id,
@@ -96,7 +154,6 @@
                               ReceiverName = receiver.Name,
                               ReceiverLastName = receiver.LastName
                           } into Group
-
                           select new SolidWasteActInfoItem
                           {
                               Id = Group.Key.Id,
@@ -108,77 +165,7 @@
                               ReceiverLastName = Group.Key.ReceiverLastName,
                               Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
                               Price = Group.Sum(a => a == null ? 0 : a.Amount)
-                          }).ToList();
-
-                //var query = Context.SolidWasteActs.Select(a=>a);
-
-                //if (id.HasValue)
-                //{
-
-                //}
-                //else
-                //{
-                //    if (endDate.HasValue)
-                //        query = query.Where(a => a.ActDate >= fromDate.Value);
-                //    if (endDate.HasValue)
-                //        query = query.Where(a => a.ActDate <= endDate.Value);
-
-                //    if (!isAllLandfill)
-                //        query = query.Where(a => landFillIdSource.Contains(a.LandfillId));
-
-                //    if (!isAllCustomer)
-                //        query = query.Where(a => customerIdSource.Contains(a.CustomerId));
-
-                //    if (!isAllWasteType)
-                //        query = query.Join(c)
-                //            //query.Where(a => a.SolidWasteActDetails.Contains(base=)
-                //        //landFillIdSource.Contains(.spl));
-
-                //}
-
-                //var query = ctn.ShopSales.Where(sale => sale.DateSold >= reportreq.FromDate
-                // && sale.DateSold <= reportreq.ToDate);
-                //if (reportreq.OwnerId.HasValue)
-                //{
-                //    query = query.Where(sale => sale.Shop.OwnerId == reportreq.OwnerId);
-                //}
-                //if (!string.IsNullOrEmpty(reportreq.ShopTypeCode))
-                //{
-                //    query = query.Where(sale.Shop.ShopTypeCode.ToUpper()
-                //                            .Contains(reportreq.ShopTypeCode.ToUpper());
-                //}
-
-                //var shopSales = query.ToList();
-
-
-                //result = (from solidWasteAct in Context.SolidWasteActs
-                //          join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
-                //          join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
-                //          join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
-                //          join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
-                //          from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
-                //          group solidWasteActDetail by new
-                //          {
-                //              Id = solidWasteAct.Id,
-                //              ActDate = solidWasteAct.ActDate,
-                //              CusotmerCode = customer.Code,
-                //              CustomerName = customer.Name,
-                //              LandfillName = landfill.Name,
-                //              ReceiverName = receiver.Name,
-                //              ReceiverLastName = receiver.LastName
-                //          } into Group
-                //          select new SolidWasteActInfoItem
-                //          {
-                //              Id = Group.Key.Id,
-                //              ActDate = Group.Key.ActDate,
-                //              CustomerCode = Group.Key.CusotmerCode,
-                //              CustomerName = Group.Key.CustomerName,
-                //              LandfillName = Group.Key.LandfillName,
-                //              ReceiverName = Group.Key.ReceiverName,
-                //              ReceiverLastName = Group.Key.ReceiverLastName,
-                //              Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
-                //              Price = Group.Sum(a => a == null ? 0 : a.Amount)
-                //          }).ToList();
+                          }).OrderByDescending(a=>a.Id).Skip((pageNumber - 1) * _recordCount).Take(_recordCount).ToList();
             }
             catch (Exception ex)
             {
@@ -615,7 +602,7 @@
                         result.TotalAmount += item.Amount;
                 }
                 else
-                    result = new  SolidWasteActPrintItem
+                    result = new SolidWasteActPrintItem
                     {
                         ActDate = DateTime.Now,
                         DetailItemSource = new List<SolidWasteActDetailPrintItem>()
@@ -1028,3 +1015,5 @@
 
     }
 }
+
+

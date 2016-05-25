@@ -47,46 +47,20 @@
             return result;
         }
 
-        public List<RegionSearchItem> LoadSearchSource()
+        public List<RegionItem> LoadSearchSource()
         {
-            var result = new List<RegionSearchItem>();
+            var result = new List<RegionItem>();
 
             try
             {
                 Connect();
 
                 result = (from region in Context.Regions
-                          select new RegionSearchItem
+                          select new RegionItem
                           {
                               Id = region.Id,
                               Name = region.Name
                           }).ToList();
-
-
-                var landfillItemSource = (from landfill in Context.Landfills
-                                          select new LandfillItem
-                                          {
-                                              Id = landfill.Id,
-                                              Name = landfill.Name,
-                                              RegionId = landfill.RegionId
-                                          }).ToList();
-                var dictionary = new Dictionary<int, List<LandfillItem>>();
-                foreach (var item in landfillItemSource)
-                    if (dictionary.ContainsKey(item.RegionId))
-                        dictionary[item.RegionId].Add(item);
-                    else
-                        dictionary.Add(item.RegionId, new List<LandfillItem>() { item });
-
-
-                foreach(var item in result)
-                {
-                    if (item.LandfillItemSource == null)
-                        item.LandfillItemSource = new List<LandfillItem>();
-
-                    if (dictionary.ContainsKey(item.Id))
-                        item.LandfillItemSource.AddRange(dictionary[item.Id]);
-                }
-
             }
             catch (Exception ex)
             {
@@ -98,7 +72,6 @@
             }
 
             return result;
-
         }
 
         public void Create(RegionItem item)

@@ -44,6 +44,35 @@
             return result;
         }
 
+        public List<LandfillItem> LoadForSearch(bool selectAll, List<int> regionItemSource)
+        {
+            var result = new List<LandfillItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from landfill in Context.Landfills
+                          where selectAll || regionItemSource.Contains(landfill.RegionId)
+                          select new LandfillItem
+                          {
+                              Id = landfill.Id,
+                              Name = landfill.Name,
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+
         public void Create(LandfillItem item)
         {
             try

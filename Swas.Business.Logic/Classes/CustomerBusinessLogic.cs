@@ -27,7 +27,7 @@
                                         select new
                                         {
                                             Id = customer.Id,
-                                            Name = customer.Name,
+                                            Name = customer.Code + " - " + customer.Name,
                                             Type = customer.Type
                                         }).ToList();
 

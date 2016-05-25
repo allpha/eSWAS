@@ -538,12 +538,34 @@
         [HttpPost]
         public JsonResult LoadFilterRegions()
         {
-            var result = new List<RegionSearchItem>();
+            var result = new List<RegionItem>();
             var bussinessLogic = new RegionBusinessLogic();
 
             try
             {
                 result = bussinessLogic.LoadSearchSource();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult LoadFilterLandfills(bool selectAll, List<int> regionItemSource)
+        {
+            var result = new List<LandfillItem>();
+            var bussinessLogic = new LandfillBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForSearch(selectAll, regionItemSource);
             }
             catch (Exception ex)
             {
@@ -601,17 +623,18 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult FilterSolidWasteAct(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource,
-                                                bool isAllLandfill, bool isAllWasteType, bool isAllCustomer)
+                                                bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber)
         {
             var result = new List<SolidWasteActInfoViewModel>();
             var bussinessLogic = new SolidWasteActBusinessLogic();
 
             try
             {
-                var itemSource = bussinessLogic.Load(id, fromDate, endDate, landFillIdSource, wasteTypeIdSource, customerIdSource, isAllLandfill, isAllWasteType, isAllCustomer);
-                
+                var itemSource = bussinessLogic.Load(id, fromDate, endDate, landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, pageNumber);
+
                 foreach (var item in itemSource)
                     result.Add(new SolidWasteActInfoViewModel
                     {
@@ -637,8 +660,33 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult LoadPageCount(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+                                        List<int> wasteTypeIdSource, List<int> customerIdSource,
+                                        bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
+        {
+            var result = (int)0;
+            var bussinessLogic = new SolidWasteActBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadPageCount(id, fromDate, endDate, landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(new { pageCount = result }, JsonRequestBehavior.AllowGet);
+        }
+
+
         #endregion Filter
-       
+
     }
 }
 
