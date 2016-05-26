@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
+    <Compile Include="Maps\AgreementMap.cs" />
     <Compile Include="Maps\CustomerMap.cs" />
     <Compile Include="Maps\CustomerRepresentativeMap.cs" />
     <Compile Include="Maps\PositionMap.cs" />
@@ -88,6 +89,14 @@
     <Compile Include="Migrations\201605051816133_solid_waste_act_update1.Designer.cs">
       <DependentUpon>201605051816133_solid_waste_act_update1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605261928137_Agreement.cs" />
+    <Compile Include="Migrations\201605261928137_Agreement.Designer.cs">
+      <DependentUpon>201605261928137_Agreement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605261935436_Agreement_Add_Start_AND_DATE.cs" />
+    <Compile Include="Migrations\201605261935436_Agreement_Add_Start_AND_DATE.Designer.cs">
+      <DependentUpon>201605261935436_Agreement_Add_Start_AND_DATE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605051816133_solid_waste_act_update1.resx">
       <DependentUpon>201605051816133_solid_waste_act_update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605261928137_Agreement.resx">
+      <DependentUpon>201605261928137_Agreement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605261935436_Agreement_Add_Start_AND_DATE.resx">
+      <DependentUpon>201605261935436_Agreement_Add_Start_AND_DATE.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

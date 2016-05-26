@@ -26,6 +26,8 @@
         public virtual DbSet<ReceiverPosition> ReceiverPositions { get; set; }
         public virtual DbSet<SolidWasteAct> SolidWasteActs { get; set; }
         public virtual DbSet<SolidWasteActDetail> SolidWasteActDetails { get; set; }
+        public virtual DbSet<Agreement> Agreements { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -45,6 +47,7 @@
             modelBuilder.Configurations.Add(new ReceiverPositionMap());
             modelBuilder.Configurations.Add(new SolidWasteActMap());
             modelBuilder.Configurations.Add(new SolidWasteActDetailMap());
+            modelBuilder.Configurations.Add(new AgreementMap());
         }
 
         public void OpenConection()

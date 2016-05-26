@@ -206,6 +206,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandfillController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\AgreementController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Controllers\SolidWasteActPrintController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LandfillViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\AgreementViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\SolidWasteActViewModel.cs" />
@@ -242,6 +244,10 @@
     <Content Include="assets\global\plugins\jquery-validation\js\jquery.validate.js" />
     <Content Include="assets\global\plugins\jquery-validation\js\jquery.validate.min.js" />
     <Content Include="assets\global\plugins\jquery.autocomplete.js" />
+    <Content Include="assets\pages\scripts\Agreement\Delete.js" />
+    <Content Include="assets\pages\scripts\Agreement\Edit.js" />
+    <Content Include="assets\pages\scripts\Agreement\Create.js" />
+    <Content Include="assets\pages\scripts\Agreement\Index.js" />
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Detail.js" />
@@ -352,6 +358,10 @@
     <Content Include="Views\SolidWasteActPrint\Index.cshtml" />
     <Content Include="Views\SolidWasteAct\Detail.cshtml" />
     <Content Include="Views\SolidWasteAct\Register.cshtml" />
+    <Content Include="Views\Agreement\Index.cshtml" />
+    <Content Include="Views\Agreement\Create.cshtml" />
+    <Content Include="Views\Agreement\Edit.cshtml" />
+    <Content Include="Views\Agreement\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

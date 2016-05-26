@@ -1,0 +1,91 @@
+﻿@model Swas.Clients.Models.AgreementViewModel
+
+@{
+    Layout = null;
+}
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">იურიდიული პირები ხელშეკრულების შექმნა</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row" id="createDiv">
+
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal" id="registrationForm">
+                    <div class="form-body">
+                        <div class="alert alert-danger" hidden>
+
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-4" style="text-align:right; font-size:13px;">
+                                ხელშეკრულების ნომერი
+                            </div>
+                            <div class="col-sm-8" style="text-align:left">
+                                <input type="text" class="form-control" name="Code" id="Code">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-4" style="text-align:right; font-size:13px;">
+                                იურიდიული პირი
+                            </div>
+                            <div class="col-sm-8" style="text-align:left">
+                                <select id="CustomerId" name="CustomerId" class="form-control select2"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-4" style="text-align:right; font-size:13px;">
+                                დაწყების თარიღი
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="input-group date date-picker" id="StartDateDataPicker" data-date-format="mm/dd/yyyy">
+                                    <input type="datetime" class="form-control" name="StartDate" id="StartDate" size="6" readonly value="@Model.StartDate.Month.ToString("00")/@Model.StartDate.Day.ToString("00")/@Model.StartDate.Year.ToString()">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button" style="margin-left:0.3px;">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-4" style="text-align:right; font-size:13px;">
+                                დასრულების თარიღი
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="input-group date date-picker" id="EndDateDataPicker" data-date-format="mm/dd/yyyy">
+                                    <input type="datetime" class="form-control" name="EndDate" id="EndDate" size="6" readonly value="@Model.EndDate.Month.ToString("00")/@Model.EndDate.Day.ToString("00")/@Model.EndDate.Year.ToString()">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button" style="margin-left:0.3px;">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn green" id="btSave">შენახვა</button>
+            <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/assets/pages/scripts/Agreement/Create.js"></script>

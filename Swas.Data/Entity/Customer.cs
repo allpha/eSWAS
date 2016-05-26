@@ -11,6 +11,7 @@
         public string ContactInfo { get; set; }
 
         public virtual ICollection<SolidWasteAct> SolidWasteActs { get; set; }
+        public virtual ICollection<Agreement> Agreements { get; set; }
         public virtual ICollection<CustomerRepresentative> CustomerRepresentative { get; set; }
     }
 }

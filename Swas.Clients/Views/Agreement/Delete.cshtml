@@ -1,0 +1,42 @@
+﻿@model Swas.Clients.Models.AgreementViewModel
+
+@{
+    Layout = null;
+}
+
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">რეგიონის წაშლა</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 ">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet-body">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal" id="registrationForm">
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+
+                            </div>
+                            @Html.HiddenFor(model => model.Id)
+                            ნამდვილად გსურთ წაშალოთ ხელშეკრულება "@Model.Code" ?
+                        </div>
+
+                    </form>
+                    <!-- END FORM-->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn green" id="btSave">წაშლა</button>
+        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+    </div>
+
+</div>
+
+<script src="~/assets/pages/scripts/Agreement/Delete.js"></script>

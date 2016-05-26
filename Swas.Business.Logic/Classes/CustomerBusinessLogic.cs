@@ -133,7 +133,6 @@
 
             return result;
         }
-
         public List<CustomerSearchItem> FindByName(int customerType)
         {
             var result = new List<CustomerSearchItem>();
@@ -171,6 +170,35 @@
                               DriverInfo = item.DriverInfo,
                           }).ToList();
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+        public List<ComboBoxItem> LoadJuridicalPersons()
+        {
+            var result = new List<ComboBoxItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from customer in Context.Customers
+                                        where customer.Type == (int)CustomerType.Juridical
+                                        orderby customer.Code ascending
+                                        select new ComboBoxItem
+                                        {
+                                            Id = customer.Id,
+                                            Name = customer.Code + " - " + customer.Name,
+                                        }).ToList();
             }
             catch (Exception ex)
             {
