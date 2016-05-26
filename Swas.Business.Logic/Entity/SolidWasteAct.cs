@@ -14,6 +14,8 @@
         public string CustomerName { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
+        public decimal PaydAmount { get; set; }
+        public decimal DebtAmount { get; set; }
     }
 
 

@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
+    <Compile Include="Maps\PaymentMap.cs" />
     <Compile Include="Maps\AgreementMap.cs" />
     <Compile Include="Maps\CustomerMap.cs" />
     <Compile Include="Maps\CustomerRepresentativeMap.cs" />
@@ -97,6 +98,14 @@
     <Compile Include="Migrations\201605261935436_Agreement_Add_Start_AND_DATE.Designer.cs">
       <DependentUpon>201605261935436_Agreement_Add_Start_AND_DATE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605262238404_Payment.cs" />
+    <Compile Include="Migrations\201605262238404_Payment.Designer.cs">
+      <DependentUpon>201605262238404_Payment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605262329027_Payment_DateField.cs" />
+    <Compile Include="Migrations\201605262329027_Payment_DateField.Designer.cs">
+      <DependentUpon>201605262329027_Payment_DateField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605261935436_Agreement_Add_Start_AND_DATE.resx">
       <DependentUpon>201605261935436_Agreement_Add_Start_AND_DATE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605262238404_Payment.resx">
+      <DependentUpon>201605262238404_Payment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605262329027_Payment_DateField.resx">
+      <DependentUpon>201605262329027_Payment_DateField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

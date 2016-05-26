@@ -23,5 +23,6 @@
         public virtual Position Position { get; set; }
         public virtual Representative Representative { get; set; }
         public virtual ICollection<SolidWasteActDetail> SolidWasteActDetails { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

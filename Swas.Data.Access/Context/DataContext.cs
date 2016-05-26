@@ -27,6 +27,7 @@
         public virtual DbSet<SolidWasteAct> SolidWasteActs { get; set; }
         public virtual DbSet<SolidWasteActDetail> SolidWasteActDetails { get; set; }
         public virtual DbSet<Agreement> Agreements { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -36,7 +37,6 @@
             modelBuilder.Configurations.Add(new RegionMap());
             modelBuilder.Configurations.Add(new LandfillMap());
             modelBuilder.Configurations.Add(new WasteTypeMap());
-
 
             modelBuilder.Configurations.Add(new TransporterMap());
             modelBuilder.Configurations.Add(new CustomerMap());
@@ -48,6 +48,7 @@
             modelBuilder.Configurations.Add(new SolidWasteActMap());
             modelBuilder.Configurations.Add(new SolidWasteActDetailMap());
             modelBuilder.Configurations.Add(new AgreementMap());
+            modelBuilder.Configurations.Add(new PaymentMap());
         }
 
         public void OpenConection()

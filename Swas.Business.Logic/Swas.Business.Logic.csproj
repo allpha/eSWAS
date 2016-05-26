@@ -50,11 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\PaymentBusinessLogic.cs" />
     <Compile Include="Classes\AgreementBusinessLogic.cs" />
     <Compile Include="Classes\ReportBusinessLogic.cs" />
     <Compile Include="Classes\TransporterBusinessLogic.cs" />
     <Compile Include="Classes\CustomerBusinessLogic.cs" />
     <Compile Include="Classes\ReceiverPositionBusinessLogic.cs" />
+    <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Agreement.cs" />
     <Compile Include="Entity\ComboBoxItem.cs" />
     <Compile Include="Entity\Customer.cs" />
