@@ -21,10 +21,11 @@ function FindItemForEdit(wasteTypeId, editId) {
         }
 }
 
-function UpdateItemSource(wasteTypeId, quantity, unitPrice, amount) {
+function UpdateItemSource(wasteTypeId, wasteTypeName, quantity, unitPrice, amount) {
     for (var i = 0; i < $itemSource.length; i++) {
         if ($itemSource[i].WasteTypeId == wasteTypeId) {
             $itemSource[i].WasteTypeId = wasteTypeId;
+            $itemSource[i].WasteTypeName = wasteTypeName;
             $itemSource[i].Quantity = quantity;
             $itemSource[i].UnitPrice = unitPrice;
             $itemSource[i].Amount = amount;
@@ -67,6 +68,7 @@ function RemoveFromItemSource(wasteTypeId) {
 
 function RemoveButtonClickHandler() {
     $(this).closest("tr").remove();
+    updataTotalSumValue();
 }
 
 function saveSolidWasteAct() {
@@ -100,11 +102,16 @@ function saveSolidWasteAct() {
         },
         success: function (data) {
             App.unblockUI(editorName);
-
-            location.href = '/SolidWasteAct/Index';
+            $('#btEditDiv').hide();
+            $('#btSaveDiv').hide();
+            $('#btNexDiv').hide();
+            $('#confirmInformation').hide();
+            $('#print').show();
+            $("#printData").attr("href", "/SolidWasteActPrint/Index/" + data);
+            $('#isSaved').val('saved')
         },
         error: function (textStatus, errorThrown) {
-            updateErrorEditor(errorEditor, request.responseText)
+            updateErrorEditor($('.alert-danger'), textStatus)
             App.unblockUI(editorName);
         }
     });
@@ -116,16 +123,17 @@ function updateErrorEditor(source, text) {
     source.show();
 }
 
-
-$('#btSave').click(function () {
-    $('#registrationForm').submit();
-});
+function removeTableData() {
+    $("#SolidWastActDetailTable").find("tr:not(:first)").remove();
+    $itemSource = [];
+    updataTotalSumValue();
+}
 
 
 $('#addWaste').click(function () {
     $editorMode = 'ADD';
-    $('#radioQuantityTon').prop('checked', false);
-    $('#radioQuantityM3').prop('checked', true);
+    $('#radioQuantityTon').prop('checked', true);
+    $('#radioQuantityM3').prop('checked', false);
     $('#M3Quantity').val('0');
     $('#TonQuantity').val('0');
     $('#wasteEditorErrorText').hide();
@@ -138,6 +146,16 @@ function updateWasteEditorError(text) {
     editorSource.show();
 }
 
+
+function updataTotalSumValue() {
+    totalSum = 0;
+
+    for (var i = 0; i < $itemSource.length; i++) {
+        totalSum += $itemSource[i].Amount;
+    }
+
+    $('#totalSum').text(totalSum + ' ₾');
+}
 
 $('#btWasteSave').click(function () {
 
@@ -201,11 +219,13 @@ $('#btWasteSave').click(function () {
                     $itemSource.push({
                         Id: $itemIncriment,
                         WasteTypeId: data.WasteTypeId,
+                        WasteTypeName: data.WasteTypeName,
                         Quantity: data.Quantity,
                         UnitPrice: data.UnitPrice,
                         Amount: data.Amount
                     });
 
+                    updataTotalSumValue();
                     $('#btWasteClose').click();
                     App.unblockUI($detailEditorName);
                 }
@@ -216,8 +236,8 @@ $('#btWasteSave').click(function () {
                     $selectedRow.find(".trUnitPrice").html(data.UnitPrice);
                     $selectedRow.find(".trAmount").html(data.Amount);
 
-                    UpdateItemSource(data.WasteTypeId, data.Quantity, data.UnitPrice, data.Amount);
-
+                    UpdateItemSource(data.WasteTypeId, data.WasteTypeName, data.Quantity, data.UnitPrice, data.Amount);
+                    updataTotalSumValue();
                     $('#btWasteClose').click();
                 }
 
@@ -280,10 +300,10 @@ var FormValidationMd = function () {
                     minlength: 3,
                     required: true
                 },
-                RepresentativeName: {
-                    minlength: 3,
-                    required: true
-                },
+                //RepresentativeName: {
+                //    minlength: 3,
+                //    required: true
+                //},
                 TransporterCarNumber: {
                     minlength: 3,
                     required: true
@@ -304,7 +324,8 @@ var FormValidationMd = function () {
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+                .closest('.form-group').addClass('has-error'); // set error class to the control group
+                //.closest('.form-control').addClass('has-error').css('color','red'); // set error class to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
@@ -318,8 +339,14 @@ var FormValidationMd = function () {
             },
 
             submitHandler: function (form) {
+                generateActReview();
                 errorEditor.hide();
-                saveSolidWasteAct(errorEditor);
+                $('#createDiv').hide();
+                $('#confirmInformation').show();
+
+                $('#btEditDiv').show();
+                $('#btSaveDiv').show();
+                $('#btNexDiv').hide();
             }
         });
     }
@@ -331,6 +358,113 @@ var FormValidationMd = function () {
         }
     };
 }();
+
+function getActReviewDetail() {
+    var text = '';
+    var totalAmount = 0;
+    for (var i = 0; i < $itemSource.length; i++) {
+
+        text += '<tr>' +
+                        '<td>' + $itemSource[i].WasteTypeName + '</td>' +
+                        '<td style="text-align:right">' + $itemSource[i].Quantity + '</td>' +
+                        '<td style="text-align:right">' + $itemSource[i].UnitPrice + '</td>' +
+                        '<td style="text-align:right">' + $itemSource[i].Amount + '</td>' +
+                      '</tr>';
+
+        totalAmount += $itemSource[i].Amount;
+    }
+
+    return { htmlText: text, TotalAmount: totalAmount };
+}
+
+function generateActReview() {
+
+    var actDetailInfo = getActReviewDetail();
+
+    var x = '<div class="portlet-body form">' +
+        '<form action="#" class="form-horizontal form-row-seperated">' +
+            '<div class="form-body">' +
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>თარიღი:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ActDate").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ფიზიკური/იურიდიული პირის დასახელება:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerName").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>ნაგავსაყრელის მდებარეობა:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + $('#LandfillId').select2('data')[0].text + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>პირადი/ საინდენდიფიკაციო კოდი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerCode").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების სახელი:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ReceiverName").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>საკონტაქტო ინფორმაცია:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerContactInfo").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების გვარი:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ReceiverLastName").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>იურიდიული პირის წარმომადგენელი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("RepresentativeName").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების თანამდებობა:</b></div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + document.getElementById("PositionName").value + '</div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მარკა:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterCarNumber").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"></div>' +
+                    '<div class="col-sm-3" style="text-align:left"></div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის ნომერი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterCarModel").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"></div>' +
+                    '<div class="col-sm-3" style="text-align:left"></div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>მძღოლი:</b> </div>' +
+                    '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterDriverInfo").value + '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div style="padding:10px;">' +
+                        '<table class="table table-bordered table-hover" width="100%">' +
+                            '<thead>' +
+                                '<tr>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center;">ნარჩენის ტიპი</th>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის ფასი [დღგ-ს ჩათვლით]</th>' +
+                                    '<th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი[დღგ-ს ჩათვლით]</th>' +
+                                '</tr>' +
+                            '</thead>' +
+                            '<tbody>' +
+                                actDetailInfo.htmlText +
+                            '</tbody>' +
+                        '</table>' +
+                        '<div class="btn-group pull-right">' +
+                            '<b>სულ:&nbsp&nbsp</b>' + actDetailInfo.TotalAmount + ' ₾' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+
+                '<div class="form-group col-sm-12">' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>შენიშვნა:</b></div>' +
+                    '<div class="col-sm-10" style="text-align:left">' + document.getElementById("Remark").value + '</div>' +
+                '</div>' +
+
+            '</div>' +
+        '</form>' +
+    '</div>';
+
+    $('#confirmInformation').html(x);
+}
 
 function AddDetailTableDataSource(dataSourse) {
 
@@ -366,14 +500,13 @@ function AddDetailTableDataSource(dataSourse) {
         $itemSource.push({
             Id: $itemIncriment,
             WasteTypeId: data.WasteTypeId,
+            WasteTypeName: data.WasteTypeName,
             Quantity: data.Quantity,
             UnitPrice: data.UnitPrice,
             Amount: data.Amount
         });
     }
 }
-
-
 
 jQuery(document).ready(function () {
 
@@ -384,8 +517,6 @@ jQuery(document).ready(function () {
             autoclose: true
         });
     }
-
-    AddDetailTableDataSource(modelSolidWasteTypeItemSource);
 
     $('#TonQuantity').focus(function () {
         $('#radioQuantityTon').prop('checked', true);
@@ -406,8 +537,6 @@ jQuery(document).ready(function () {
     $("#WasteTypeId").select2({
         width: null
     });
-
-
 
     var recieverDataSource = new Bloodhound({
         datumTokenizer: function (d) { return Bloodhound.tokenizers.whitespace(d.Description); },
@@ -454,7 +583,6 @@ jQuery(document).ready(function () {
         $('#TransporterCarNumber').attr("dir", "rtl");
     }
 
-
     $('#ReceiverName').typeahead(null, {
         displayKey: 'ReceiverName',
         hint: (App.isRTL() ? false : true),
@@ -474,7 +602,6 @@ jQuery(document).ready(function () {
         $("#ReceiverLastName").val(selection.ReceiverLastName);
         $("#PositionName").val(selection.Posistion);
     });
-
 
     $('#CustomerCode').typeahead(null, {
         displayKey: 'Code',
@@ -575,6 +702,7 @@ jQuery(document).ready(function () {
                 $("#TransporterCarNumber").val('');
                 $("#TransporterCarModel").val('');
                 $("#TransporterDriverInfo").val('');
+                removeTableData();
 
                 customerCodeDataSource.clear();
                 customerNameDataSource.clear();
@@ -594,6 +722,25 @@ jQuery(document).ready(function () {
         })
 
     });
+
+    $('#next').click(function () {
+        $('#registrationForm').submit();
+    });
+
+    $('#btEdit').click(function () {
+        $('#createDiv').show();
+        $('#confirmInformation').hide();
+
+        $('#btEditDiv').hide();
+        $('#btSaveDiv').hide();
+        $('#btNexDiv').show();
+    });
+
+    $('#btSave').click(function () {
+        saveSolidWasteAct();
+    });
+
+    AddDetailTableDataSource(modelSolidWasteTypeItemSource);
 
     FormValidationMd.init();
 });

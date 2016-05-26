@@ -38,8 +38,6 @@
             landfillItemSource = [0];
 
         $recordNumber = document.getElementById("solidWasteActNumber").value;
-        //$fromDate = new Date(fromDate);
-        //$endDate = new Date(ActDateTo);
         $fromDate = fromDate;
         $endDate = ActDateTo;
         $landfillDataSource = landfillItemSource;
@@ -69,8 +67,10 @@ function initTableItemSource(itemSource) {
                        '<td>' + itemSource[i].Quantity + '</td>' +
                        '<td>' + itemSource[i].Price + '</td>' +
                        '<td>' +
-                            '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="icon-tag"></i></a>' +
+                            '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>' +
+                            '<a href="javascript:priview(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="icon-tag"></i></a>' +
                             '<a target="_blank" href="/SolidWasteActPrint/Index/' + itemSource[i].Id + '" class="btn btn-xs default"><i class="fa fa-print"></i></a>' +
+                            '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>'
                        '</td>' +
                   '</tr>';
         $('#itemSource tr:last').after(row);
@@ -78,12 +78,12 @@ function initTableItemSource(itemSource) {
 
 }
 
-function create() {
-    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteAct/Create");
+function edit(id) {
+    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteAct/Edit/" + id);
     $('#ajax-model-dialog-editor').click();
 }
 
-function edit(id) {
+function priview(id) {
     $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteAct/Detail/" + id);
     $('#ajax-model-dialog-editor').click();
 }

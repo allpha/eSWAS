@@ -25,7 +25,7 @@
                                 თარიღი:
                             </div>
                             <div class="col-sm-4">
-                                <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="mm/dd/yyyy" >
+                                <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="mm/dd/yyyy">
                                     <input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate.Month.ToString("00")/@Model.ActDate.Day.ToString("00")/@Model.ActDate.Year.ToString()">
                                     @*<input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate">*@
                                     <span class="input-group-btn">
@@ -204,7 +204,7 @@
                                         <div class="md-radio-list">
 
                                             <div class="md-radio">
-                                                <input type="radio" id="radioQuantityTon" name="radioQuantity" class="md-radiobtn"  checked value="1">
+                                                <input type="radio" id="radioQuantityTon" name="radioQuantity" class="md-radiobtn" checked value="1">
                                                 <label for="radioQuantityTon">
                                                     <span></span>
                                                     <span class="check"></span>
@@ -272,9 +272,9 @@
                         </a>
 
                         @*<a id="closeWindow" href="javascript:;" class="icon-btn">
-                            <i class="fa fa-close"></i>
-                            <div> დახურვა </div>
-                        </a>*@
+                                <i class="fa fa-close"></i>
+                                <div> დახურვა </div>
+                            </a>*@
 
                     </td>
                 </tr>
@@ -322,7 +322,7 @@
 
     $('#detailEditorDialog').on('shown.bs.modal', function () {
         $('#radioQuantityTon').focus();
-    })  
+    })
 
 
     function windowCloseClick() {

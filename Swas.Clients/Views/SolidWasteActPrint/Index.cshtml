@@ -22,18 +22,10 @@
             <tr>
                 <td colspan="2" style="text-align:center;">
                     <p>პოლიგონზე მყარი ნარჩენების განთავსების აქტი #@Html.DisplayFor(model => model.Id)</p>
-                    <p>თარიღი @Html.DisplayFor(model => model.ActDate)</p>
+                    <p>თარიღი: @Model.ActDate.Day.ToString("00")/@Model.ActDate.Month.ToString("00")/@Model.ActDate.Year.ToString()</p>
                 </td>
 
             </tr>
-
-            @*<tr>
-                    <td colspan="2" style="text-align:left;">
-                        <p style="font-size:11px;">შპს "საქართველოს მყარი ნარჩენების მართვის კომპანია"</p>
-                    </td>
-
-                </tr>*@
-
 
             <tr style="font-size:13px;">
                 <td width="50%">

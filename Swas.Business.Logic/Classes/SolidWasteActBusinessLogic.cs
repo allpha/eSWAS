@@ -14,7 +14,7 @@
         {
         }
 
-        private int _recordCount = 5;
+        private int _recordCount = 25;
 
         public List<SolidWasteActInfoItem> Load()
         {
@@ -621,8 +621,10 @@
         }
 
 
-        public void Edit(SolidWasteActItem item)
+        public int Edit(SolidWasteActItem item)
         {
+            var result = 0;
+
             try
             {
                 Connect();
@@ -825,6 +827,8 @@
 
                 #endregion SolidWasteActDetails
 
+                result = updateItem.Id;
+
             }
             catch (Exception ex)
             {
@@ -834,6 +838,8 @@
             {
                 Dispose();
             }
+
+            return result;
         }
 
         public void Remove(int solidWasteActId)

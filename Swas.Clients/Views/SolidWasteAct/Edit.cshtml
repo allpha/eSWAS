@@ -6,310 +6,310 @@
 
 <div id="editorDialog">
     <div class="modal-header" style="vertical-align:middle">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">მყარი ნარჩენის რედაქტირება</h5>
+        <button type="button" class="close" onclick="windowCloseClick()" aria-hidden="true"></button>
+        <button type="button" id="windlowCloseHiddenButton" style="display: none;" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">მყარი ნარჩენების განთავსების აქტის რედაქტირება</h5>
     </div>
     <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12 ">
-                <!-- BEGIN SAMPLE FORM PORTLET-->
-                <div class="portlet-body">
-                    <!-- BEGIN FORM-->
-                    <form action="#" class="form-horizontal" id="registrationForm">
-                        <div class="form-body">
-                            <div class="alert alert-danger display-hide">
+        <div class="row" id="createDiv">
 
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal form-row-seperated" id="registrationForm">
+                    <div class="form-body">
+                        <div class="alert alert-danger" hidden>
+
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                თარიღი:
                             </div>
-                            @Html.HiddenFor(model => model.Id)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="tabbable-line boxless tabbable-reversed">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active">
-                                                <a href="#tab_0" data-toggle="tab">მიმღები </a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_1" data-toggle="tab"> შემომტანი </a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_2" data-toggle="tab"> მყარი მარჩენები </a>
-                                            </li>
-                                        </ul>
-
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="tab_0">
-                                                <div class="portlet light bordered">
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="ReceiverName"> @Html.DisplayNameFor(model => model.ActDate) </label>
-                                                        <div class="col-md-9">
-                                                            <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
-                                                                <input type="datetime" class="form-control" name="ActDate" id="ActDate" value="@Model.ActDate" data-date-format="dd/mm/yyyy" readonly>
-                                                                <span class="input-group-btn">
-                                                                    <button class="btn default" type="button">
-                                                                        <i class="fa fa-calendar"></i>
-                                                                    </button>
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">აირჩიეთ თარიღი.</span>
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label" for="LandfillId">@Html.DisplayNameFor(model => model.LandfillId)</label>
-                                                        <div class="col-md-9">
-                                                            @Html.DropDownList("LandfillId", (IEnumerable<SelectListItem>)ViewBag.LandfillItemSource, new { @class = "form-control select2" })
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">აირჩიეთ ნაგავსაყრელი.</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="ReceiverName"> @Html.DisplayNameFor(model => model.ReceiverName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="ReceiverName" id="ReceiverName" value="@Model.ReceiverName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მიმღების სახელი.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="ReceiverLastName"> @Html.DisplayNameFor(model => model.ReceiverLastName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="ReceiverLastName" id="ReceiverLastName" value="@Model.ReceiverLastName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მიმღების გვარი.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="PositionName"> @Html.DisplayNameFor(model => model.PositionName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="PositionName" id="PositionName" value="@Model.PositionName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მიმღების თანამდებობა.</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="PositionName"> @Html.DisplayNameFor(model => model.Remark) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="Remark" id="Remark" value="@Model.Remark">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ შენიშვნა.</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-
-                                            </div>
-                                            <div class="tab-pane" id="tab_1">
-                                                <div class="portlet light bordered">
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label" for="Type">@Html.DisplayNameFor(model => model.Type)</label>
-                                                        <div class="col-md-9">
-                                                            @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.LandTypeItemSource, new { @class = "form-control" })
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">აირჩიეთ შემომტანის ტიპი.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="CustomerCode"> @Html.DisplayNameFor(model => model.CustomerCode) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="CustomerCode" id="CustomerCode" value="@Model.CustomerCode">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ შემომტანის საინდეტიფიკაციო კოდი.</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="CustomerName"> @Html.DisplayNameFor(model => model.CustomerName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="CustomerName" id="CustomerName" value="@Model.CustomerName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ შემომტანის დასახელება.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="CustomerContactInfo"> @Html.DisplayNameFor(model => model.CustomerContactInfo) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="CustomerContactInfo" id="CustomerContactInfo" value="@Model.CustomerContactInfo">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ საკონტაქტო ინფორმაცია.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="RepresentativeName"> @Html.DisplayNameFor(model => model.RepresentativeName) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="RepresentativeName" id="RepresentativeName" value="@Model.RepresentativeName">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ წარმომადგენელი.</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="TransporterCarNumber"> @Html.DisplayNameFor(model => model.TransporterCarNumber) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="TransporterCarNumber" id="TransporterCarNumber" value="@Model.TransporterCarNumber">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ ავტომობილის მარკა.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="TransporterCarModel"> @Html.DisplayNameFor(model => model.TransporterCarModel) </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" class="form-control" name="TransporterCarModel" id="TransporterCarModel" value="@Model.TransporterCarModel">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ ავტომობილის მოდელი.</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group form-md-line-input">
-                                                        <label class="col-md-3 control-label input-sm" for="TransporterDriverInfo"> @Html.DisplayNameFor(model => model.TransporterDriverInfo) </label>
-                                                        <div class="col-md-9 ">
-                                                            <input type="text" class="form-control input-sm" name="TransporterDriverInfo" id="TransporterDriverInfo" value="@Model.TransporterDriverInfo">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="help-block">შეიყვანეთ მძღოლი.</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-                                            <div class="tab-pane" id="tab_2">
-                                                <div class="portlet light bordered">
-
-                                                    <div>
-                                                        <div class="btn-group pull-right" style="margin-bottom: 10px;">
-                                                            <a id="addWaste" class="btn red btn-outline" data-target="#detailEditorDialog" data-toggle="modal">
-                                                                <i class="fa fa-plus"></i>
-                                                                ნარჩენის დამატება
-                                                            </a>
-                                                        </div>
-                                                        <div class="table-scrollable">
-
-                                                            <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="line-height: 60px;  text-align: center;">ნარჩენი</th>
-                                                                        <th style="line-height: 60px;  text-align: center; width: 100px;">რ-ბ[ტონა]</th>
-                                                                        <th style="text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი<br /> [დღგ-ს&#13;&#10; <br />ჩათვლისთ]</th>
-                                                                        <th style="line-height: 20px;text-align: center; width: 100px;">ჯამი <br />დღგ-ს ჩათვლით</th>
-                                                                        <th style="text-align: center; width: 80px;"></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody></tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
+                            <div class="col-sm-4">
+                                <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="mm/dd/yyyy">
+                                    <input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate.Month.ToString("00")/@Model.ActDate.Day.ToString("00")/@Model.ActDate.Year.ToString()">
+                                    @*<input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate">*@
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button" style="margin-left:0.3px;">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
-
-                            <div id="detailEditorDialog" class="modal fade" tabindex="-1" data-focus-on="input:first">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">ნარჩენის დამატება/რედაქტირება</h5>
-                                </div>
-                                <div class="modal-body">
-
-                                    <div id="wasteEditorErrorText" class="alert alert-danger display-hide">
-
-                                    </div>
-
-
-                                    <div class="form-group form-md-line-input">
-                                        <label class="col-md-3 control-label" style="text-align:right;" for="WasteTypeId">ნარჩენი</label>
-                                        <div class="col-md-9">
-                                            @Html.DropDownList("WasteTypeId", (IEnumerable<SelectListItem>)ViewBag.WasteTypeItemSource, new { @class = "form-control select2" })
-                                            <div class="form-control-focus"> </div>
-                                            <span class="help-block">აირჩიეთ ნარჩენი.</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group form-md-line-input">
-                                        <label class="col-md-3 control-label" for="form_control_1" style="text-align:right;">რაოდენობა</label>
-                                        <div class="col-md-9">
-                                            <div class="md-radio-list">
-                                                <div class="md-radio">
-                                                    <input type="radio" id="radioQuantityM3" name="radioQuantity" class="md-radiobtn" checked value="-1">
-                                                    <label for="radioQuantityM3">
-                                                        <span></span>
-                                                        <span class="check"></span>
-                                                        <span class="box"></span>
-                                                        <div class="col-md-4 input-group" style="margin-top: -10px;">
-                                                            <input type="text" class="form-control" id="M3Quantity" name="M3Quantity" />
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="input-group-addon">მ<sup>3</sup></span>
-                                                            <span style="margin-top: 0px; margin-left:10px;" class="help-block">შეიყვანეთ რაოდენობა მ<sup>3</sup>-ში.</span>
-                                                        </div>
-                                                    </label>
-                                                </div>
-
-                                                <div class="md-radio">
-                                                    <input type="radio" id="radioQuantityTon" name="radioQuantity" class="md-radiobtn" value="1">
-                                                    <label for="radioQuantityTon">
-                                                        <span></span>
-                                                        <span class="check"></span>
-                                                        <span class="box"></span>
-                                                        <div class="col-md-4 input-group" style="margin-top: -10px;">
-                                                            <input type="text" class="form-control" id="TonQuantity" name="TonQuantity">
-                                                            <div class="form-control-focus"> </div>
-                                                            <span class="input-group-addon">ტ.</span>
-                                                            <span style="margin-top: 0px; margin-left:10px;" class="help-block">შეიყვანეთ რაოდენობა ტონაში.</span>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn green" id="btWasteSave">შენახვა</button>
-                                    <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal" id="btWasteClose">გაუქმება</button>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                შემომტანის ტიპი:
+                            </div>
+                            <div class="col-sm-4">
+                                <div>
+                                    @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.LandTypeItemSource, new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>
 
-                    </form>
-                    <!-- END FORM-->
-                </div>
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                ნაგავსაყრელი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                @Html.DropDownList("LandfillId", (IEnumerable<SelectListItem>)ViewBag.LandfillItemSource, new { @class = "form-control select2" })
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                პირადი/ საინდენდიფიკაციო კოდი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="CustomerCode" id="CustomerCode" value="@Model.CustomerCode">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                მიმღების სახელი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="ReceiverName" id="ReceiverName" value="@Model.ReceiverName">
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                ფიზიკური/იურიდიული პირის დასახელება:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="CustomerName" id="CustomerName" value="@Model.CustomerName">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                მიმღების გვარი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left;">
+                                <input type="text" class="form-control" name="ReceiverLastName" id="ReceiverLastName" value="@Model.ReceiverLastName">
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                საკონტაქტო ინფორმაცია:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="CustomerContactInfo" id="CustomerContactInfo" value="@Model.CustomerContactInfo">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                მიმღების თანამდებობა:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="PositionName" id="PositionName" value="@Model.PositionName">
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                იურიდიული პირის წარმომადგენელი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="RepresentativeName" id="RepresentativeName" value="@Model.RepresentativeName">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                ავტომობილის ნომერი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="TransporterCarNumber" id="TransporterCarNumber" value="@Model.TransporterCarNumber">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                ავტომობილის მარკა:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="TransporterCarModel" id="TransporterCarModel" value="@Model.TransporterCarModel">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">
+                                მძღოლი:
+                            </div>
+                            <div class="col-sm-4" style="text-align:left">
+                                <input type="text" class="form-control" name="TransporterDriverInfo" id="TransporterDriverInfo" value="@Model.TransporterDriverInfo">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12" style="padding:10px;">
+                            <div class="btn-group pull-right" style="margin-bottom:10px; margin-right:14px;">
+                                <a id="addWaste" class="btn default" data-target="#detailEditorDialog" data-toggle="modal">
+                                    <i class="fa fa-plus"></i>
+                                    მყარი ნარჩენის დამატება
+                                </a>
+                            </div>
+
+                            <div class="col-md-12">
+                                <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center;">დასახელება</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი</th>
+                                            <th style="height: 100%;vertical-align: middle; text-align: center;width: 79px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div class="btn-group pull-right">
+                                    <b>სულ:&nbsp&nbsp</b> <label id="totalSum">0 ₾</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-sm-12">
+                            <div class="col-sm-2" style="text-align:right; font-size:13px;">შენიშვნა:</div>
+                            <div class="col-sm-10" style="text-align:left">
+                                <input type="text" class="form-control" name="Remark" id="Remark">
+                            </div>
+                        </div>
+
+
+                        <div id="detailEditorDialog" class="modal fade" tabindex="-2" data-focus-on="input:first">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">ნარჩენის დამატება/რედაქტირება</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div id="wasteEditorErrorText" class="alert alert-danger display-hide">
+
+                                </div>
+                                <div class="form-group form-md-line-input">
+                                    <label class="col-md-3 control-label" style="text-align:right;" for="WasteTypeId">ნარჩენი</label>
+                                    <div class="col-md-9">
+                                        @Html.DropDownList("WasteTypeId", (IEnumerable<SelectListItem>)ViewBag.WasteTypeItemSource, new { @class = "form-control select2" })
+                                        <div class="form-control-focus"> </div>
+                                        <span class="help-block">აირჩიეთ ნარჩენი.</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input">
+                                    <label class="col-md-3 control-label" for="form_control_1" style="text-align:right;">რაოდენობა</label>
+                                    <div class="col-md-9">
+                                        <div class="md-radio-list">
+
+                                            <div class="md-radio">
+                                                <input type="radio" id="radioQuantityTon" name="radioQuantity" class="md-radiobtn" checked value="1">
+                                                <label for="radioQuantityTon">
+                                                    <span></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span>
+                                                    <div class="col-md-4 input-group" style="margin-top: -10px;">
+                                                        <input type="text" class="form-control" id="TonQuantity" name="TonQuantity">
+                                                        <div class="form-control-focus"> </div>
+                                                        <span class="input-group-addon">ტ.</span>
+                                                        <span style="margin-top: 0px; margin-left:10px;" class="help-block">შეიყვანეთ რაოდენობა ტონაში.</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+
+                                            <div class="md-radio">
+                                                <input type="radio" id="radioQuantityM3" name="radioQuantity" class="md-radiobtn" value="-1">
+                                                <label for="radioQuantityM3">
+                                                    <span></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span>
+                                                    <div class="col-md-4 input-group" style="margin-top: -10px;">
+                                                        <input type="text" class="form-control" id="M3Quantity" name="M3Quantity" />
+                                                        <div class="form-control-focus"> </div>
+                                                        <span class="input-group-addon">მ<sup>3</sup></span>
+                                                        <span style="margin-top: 0px; margin-left:10px;" class="help-block">შეიყვანეთ რაოდენობა მ<sup>3</sup>-ში.</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn green" id="btWasteSave">შენახვა</button>
+                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal" id="btWasteClose">გაუქმება</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
             </div>
+        </div>
+        <input type="hidden" id="isSaved" value="notSaved" />
+        <div class="row" id="confirmInformation" hidden>
 
         </div>
+
+        <div class="row" id="print" hidden>
+            <p style="text-align:center; font-size:16px;"><b>აქტის შექმნა დასრულებულია.</b></p>
+            <br />
+            <br />
+            <table align="center">
+                <tr>
+                    <td>
+                        <a id="printData" href="javascript:;" target="_blank" class="icon-btn">
+                            <i class="fa fa-print"></i>
+                            <div> ბეჭდვა </div>
+                        </a>
+
+                        @*<a id="closeWindow" href="javascript:;" class="icon-btn">
+                                <i class="fa fa-close"></i>
+                                <div> დახურვა </div>
+                            </a>*@
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
     </div>
+
     <div class="modal-footer">
-        <button type="button" class="btn green" id="btSave">შენახვა</button>
-        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+        <div class="btn-group pull-left display-hide" id="btEditDiv">
+            <a id="btEdit" class="btn green">
+                <i class="fa fa-angle-left"></i>
+                რედაქტირება
+            </a>
+        </div>
+
+        <div class="btn-group pull-right" id="btNexDiv">
+            <a id="next" class="btn green">
+                შემდეგი
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+
+        <div class="btn-group pull-right display-hide" id="btSaveDiv">
+            <a id="btSave" class="btn green">
+                დასრულება
+            </a>
+        </div>
+
     </div>
+    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
 
 </div>
-
 <script>
     var recieverItemSource = @Html.Raw(Json.Encode(Model.RecieverItemSource));
     var customerItemSource = @Html.Raw(Json.Encode(Model.CustomerItemSource));
@@ -317,6 +317,23 @@
     var modelSolidWasteTypeItemSource = @Html.Raw(Json.Encode(Model.SolidWasteActDetails));
 </script>
 
+<script src="~/assets/pages/scripts/SolidWasteAct/Edit.js"
+        ></script>
 
-<script src="~/assets/pages/scripts/SolidWasteAct/Edit.js"></script>
+
+
+<script>
+
+    $('#detailEditorDialog').on('shown.bs.modal', function () {
+        $('#radioQuantityTon').focus();
+    })
+
+
+    function windowCloseClick() {
+        if ( $('#isSaved').val() == 'saved')
+            location.href = '/SolidWasteAct/Register';
+        else
+            windlowCloseHiddenButton.click();
+    }
+</script>
 

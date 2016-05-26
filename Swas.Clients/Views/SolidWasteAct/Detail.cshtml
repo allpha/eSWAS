@@ -1,0 +1,27 @@
+﻿@model Swas.Clients.Models.SolidWasteActPrintViewModel
+
+@{
+    Layout = null;
+}
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">პოლიგონზე მყარი ნარჩენებსი განთავსების აქტი</h5>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" id="Id" value="@Model.Id" />
+        <div class="row" id="confirmInformation" >
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="btn-group pull-right" data-dismiss="modal" id="btSaveDiv">
+            <a id="btSave" class="btn green">
+                დახურვა
+            </a>
+        </div>
+    </div>
+
+</div>
+<script src="~/assets/pages/scripts/SolidWasteAct/Detail.js"></script>

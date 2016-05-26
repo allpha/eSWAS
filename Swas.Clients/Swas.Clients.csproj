@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.0.1.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -195,12 +199,15 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\CustomerTypeEnumDescirption.cs" />
     <Compile Include="Common\ClientErrorHandler.cs" />
+    <Compile Include="Common\ExcelExporter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandfillController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Controllers\SolidWasteActPrintController.cs" />
     <Compile Include="Controllers\SolidWasteActController.cs" />
     <Compile Include="Controllers\WasteTypeController.cs" />
@@ -211,6 +218,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LandfillViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\SolidWasteActViewModel.cs" />
     <Compile Include="Models\SolidWastePrintViewModel.cs" />
@@ -220,9 +228,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assemblies\EPPlus.dll" />
     <Content Include="assets\css\PrintPage.css" />
     <Content Include="assets\global\plugins\autocomplite\auto-complete.css" />
     <Content Include="assets\global\plugins\autocomplite\auto-complete.js" />
+    <Content Include="assets\global\plugins\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\global\plugins\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\global\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\global\plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\global\plugins\bootstrap\js\bootstrap.min.js" />
     <Content Include="assets\global\plugins\jquery-validation\js\additional-methods.js" />
     <Content Include="assets\global\plugins\jquery-validation\js\additional-methods.min.js" />
     <Content Include="assets\global\plugins\jquery-validation\js\jquery.validate.js" />
@@ -230,9 +244,11 @@
     <Content Include="assets\global\plugins\jquery.autocomplete.js" />
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
+    <Content Include="assets\pages\scripts\SolidWasteAct\Detail.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Create.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Delete.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Edit.js" />
+    <Content Include="assets\pages\scripts\SolidWasteAct\Register.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Index.js" />
     <Content Include="assets\pages\scripts\Landfill\Create.js" />
     <Content Include="assets\pages\scripts\Landfill\Delete.js" />
@@ -268,6 +284,10 @@
     <Content Include="fonts\bpg_nino_mtavruli_normal-webfont.eot" />
     <Content Include="fonts\bpg_nino_mtavruli_normal-webfont.ttf" />
     <Content Include="fonts\bpg_nino_mtavruli_normal-webfont.woff" />
+    <Content Include="assets\global\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\global\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\global\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\global\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\new.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -329,13 +349,13 @@
     <Content Include="Views\SolidWasteAct\Create.cshtml" />
     <Content Include="Views\SolidWasteAct\Edit.cshtml" />
     <Content Include="Views\SolidWasteAct\Delete.cshtml" />
-    <Content Include="Views\SolidWasteAct\Create - Copy.cshtml" />
-    <Content Include="Views\SolidWasteAct\Create - Copy %282%29.cshtml" />
-    <Content Include="Views\SolidWasteAct\Create - Copy %283%29.cshtml" />
     <Content Include="Views\SolidWasteActPrint\Index.cshtml" />
+    <Content Include="Views\SolidWasteAct\Detail.cshtml" />
+    <Content Include="Views\SolidWasteAct\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

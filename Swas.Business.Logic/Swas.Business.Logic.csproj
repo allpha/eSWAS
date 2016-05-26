@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ReportBusinessLogic.cs" />
     <Compile Include="Classes\TransporterBusinessLogic.cs" />
     <Compile Include="Classes\CustomerBusinessLogic.cs" />
     <Compile Include="Classes\ReceiverPositionBusinessLogic.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Classes\LandfillBusinessLogic.cs" />
     <Compile Include="Classes\RegionBusinessLogic.cs" />
     <Compile Include="Common\BusinessLogicBase.cs" />
+    <Compile Include="Entity\ReportItem.cs" />
     <Compile Include="Entity\SolidWastePrintItem.cs" />
     <Compile Include="Entity\Landfill.cs" />
     <Compile Include="Entity\ReceiverPosition.cs" />

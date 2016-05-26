@@ -16,6 +16,17 @@
         // GET: SolidWasteAct
         public ActionResult Index(int id)
         {
+            return View(loadData(id));
+        }
+
+        [HttpPost]
+        public JsonResult Load(int id)
+        {
+            return Json(loadData(id), JsonRequestBehavior.AllowGet);
+        }
+
+        private SolidWasteActPrintViewModel loadData(int id)
+        {
             var result = new SolidWasteActPrintViewModel();
             var bussinessLogic = new SolidWasteActBusinessLogic();
 
@@ -62,7 +73,7 @@
                 bussinessLogic = null;
             }
 
-            return View(result);
+            return result;
         }
 
     }

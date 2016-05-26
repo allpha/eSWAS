@@ -19,6 +19,12 @@
             return View(new List<SolidWasteActInfoViewModel>());
         }
 
+        public ActionResult Register()
+        {
+            return View(new List<SolidWasteActInfoViewModel>());
+        }
+
+
         public JsonResult LoadSolidWasteActs()
         {
             var bussinessLogic = new SolidWasteActBusinessLogic();
@@ -196,6 +202,14 @@
             return Json(solidWasteActId, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Detail(int Id)
+        {
+            return View(new SolidWasteActPrintViewModel
+            {
+                Id = Id
+            });
+        }
+
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new SolidWasteActBusinessLogic();
@@ -272,7 +286,7 @@
                            string transporterCarModel, string transporterDriverInfo, string remark,
                            List<SolidWasteActDetailViewModel> solidWasteActDetails)
         {
-
+            var result = (int?)null;
             var bussinessLogic = new SolidWasteActBusinessLogic();
 
             try
@@ -329,7 +343,7 @@
                             UnitPrice = item.UnitPrice
                         });
 
-                bussinessLogic.Edit(newItem);
+               result = bussinessLogic.Edit(newItem);
 
             }
             catch (Exception ex)
@@ -342,7 +356,7 @@
                 bussinessLogic = null;
             }
 
-            return Json("OK", JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(int id)
