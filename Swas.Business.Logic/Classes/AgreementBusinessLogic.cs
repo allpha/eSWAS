@@ -53,7 +53,7 @@
             return result;
         }
 
-        private void AgreementValidation(AgreementItem item)
+        private void AgreementValidationBeforInsert(AgreementItem item)
         {
             if (item.StartDate>=item.EndDate)
                 throw new Exception(string.Format("ხელშეკრულების შენახვა შეუძლებელია. ხელშეკრულების დაწყების თარიღი ნაკლები უნდა იყოს დასრულების თარიღზე.", item.Code));
@@ -91,12 +91,50 @@
             }
         }
 
+        private void AgreementValidationBeforUpdate(AgreementItem item)
+        {
+            if (item.StartDate >= item.EndDate)
+                throw new Exception(string.Format("ხელშეკრულების შენახვა შეუძლებელია. ხელშეკრულების დაწყების თარიღი ნაკლები უნდა იყოს დასრულების თარიღზე.", item.Code));
+
+            item.Code = item.Code.Trim();
+            var validationByCode = (from agreement in Context.Agreements
+                                    where agreement.Code.Trim() == item.Code && agreement.Id != item.Id
+                                    select new
+                                    {
+                                        Id = agreement.Id,
+                                        Code = agreement.Code,
+                                        CustomerId = agreement.CustomerId,
+                                        StartDate = agreement.StartDate,
+                                        EndDate = agreement.EndDate
+                                    }).FirstOrDefault();
+
+            if (validationByCode != null)
+                throw new Exception(string.Format("ხელშეკრულების შენახვა შეუძლებელია. ხელშეკრულება '{0}'-ნომრით უკვე დარეგისტრირებულია.", item.Code));
+
+            var validationByCustomerAndDate = (from agreement in Context.Agreements
+                                               where agreement.CustomerId == item.CustomerId &&   agreement.Id != item.Id &&
+                                                     ((item.StartDate <= agreement.StartDate && item.EndDate >= agreement.StartDate && item.EndDate <= agreement.EndDate) ||
+                                                     (item.StartDate <= agreement.StartDate && item.EndDate >= agreement.EndDate) ||
+                                                     (item.StartDate >= agreement.StartDate && item.StartDate <= agreement.EndDate && item.EndDate <= agreement.EndDate) ||
+                                                     (item.StartDate >= agreement.StartDate && item.StartDate <= agreement.EndDate && item.EndDate >= agreement.EndDate))
+                                               select new
+                                               {
+                                                   Id = agreement.Id,
+                                                   Code = agreement.Code
+                                               }).FirstOrDefault();
+
+            if (validationByCustomerAndDate != null)
+            {
+                throw new Exception(string.Format("ხელშეკრულების შენახვა შეუძლებელია. არსებულ ხელშეკრულებას '{0}' ხელშეკრულებასთან აქვს თანაკვეთა.", validationByCustomerAndDate.Code));
+            }
+        }
+
         public void Create(AgreementItem item)
         {
             try
             {
                 Connect();
-                AgreementValidation(item);
+                AgreementValidationBeforInsert(item);
                 Context.Agreements.Add(new Agreement()
                 {
                     Code = item.Code,
@@ -154,7 +192,7 @@
             try
             {
                 Connect();
-                AgreementValidation(item);
+                AgreementValidationBeforUpdate(item);
                 var editItem = (from agreement in Context.Agreements
                                 where agreement.Id == item.Id
                                 select agreement).FirstOrDefault();
