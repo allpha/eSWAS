@@ -37,7 +37,6 @@
 
                 var pageCount = (from solidWasteAct in Context.SolidWasteActs
                                  join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
-                                 join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
                                  join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
                                  join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
                                  from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
@@ -73,12 +72,10 @@
             return result;
         }
 
-
-
-        public List<SolidWasteActInfoItem> Load(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+        public List<PaymentInfoItem> Load(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber)
         {
-            var result = new List<SolidWasteActInfoItem>();
+            var result = new List<PaymentInfoItem>();
 
             try
             {
@@ -90,7 +87,6 @@
 
                 result = (from solidWasteAct in Context.SolidWasteActs
                           join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
-                          join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
                           join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
                           join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
                           from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
@@ -107,25 +103,23 @@
                               ActDate = solidWasteAct.ActDate,
                               CusotmerCode = customer.Code,
                               CustomerName = customer.Name,
+                              ContactInfo = customer.ContactInfo,
                               LandfillName = landfill.Name,
-                              ReceiverName = receiver.Name,
-                              ReceiverLastName = receiver.LastName
                           } into Group
-                          select new SolidWasteActInfoItem
+                          select new PaymentInfoItem
                           {
-                              Id = Group.Key.Id,
+                              ActId = Group.Key.Id,
                               ActDate = Group.Key.ActDate,
                               CustomerCode = Group.Key.CusotmerCode,
                               CustomerName = Group.Key.CustomerName,
                               LandfillName = Group.Key.LandfillName,
-                              ReceiverName = Group.Key.ReceiverName,
-                              ReceiverLastName = Group.Key.ReceiverLastName,
+                              CustomerInfo = Group.Key.ContactInfo,
                               Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
                               Price = Group.Sum(a => a == null ? 0 : a.Amount)
-                          }).OrderByDescending(a => a.Id).Skip((pageNumber - 1) * _recordCount).Take(_recordCount).ToList();
+                          }).OrderByDescending(a => a.ActId).Skip((pageNumber - 1) * _recordCount).Take(_recordCount).ToList();
 
 
-                var solidWasteActIdSource = result.Select(a => a.Id).ToList();
+                var solidWasteActIdSource = result.Select(a => a.ActId).ToList();
 
                 var paymentItemSource = (from payment in Context.Payments
                                          where solidWasteActIdSource.Contains(payment.SolidWasteActId)
@@ -140,17 +134,16 @@
                                          }).ToDictionary(key => key.SolidWasteActId, value => value.Amount);
 
                 foreach (var item in result)
-                    if (paymentItemSource.ContainsKey(item.Id))
+                    if (paymentItemSource.ContainsKey(item.ActId))
                     {
-                        item.PaydAmount = paymentItemSource[item.Id];
-                        item.DebtAmount = item.Price - item.PaydAmount;
+                        item.PaidAmount = paymentItemSource[item.ActId];
+                        item.DebtAmount = item.Price - item.PaidAmount;
                     }
                     else
                     {
-                        item.PaydAmount = 0;
+                        item.PaidAmount = 0;
                         item.DebtAmount = 0;
                     }
-
             }
             catch (Exception ex)
             {
@@ -177,12 +170,14 @@
                 Connect();
 
                 result = (from solidWasteAct in Context.SolidWasteActs
+                          join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
                           join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
                           where solidWasteAct.Id == solidWasteActId
                           select new PaymentInfoItem
                           {
                               ActId = solidWasteAct.Id,
-                              ActDate = solidWasteAct.Id,
+                              ActDate = solidWasteAct.ActDate,
+                              LandfillName = landfill.Name,
                               CustomerCode = customer.Code,
                               CustomerName = customer.Name,
                               CustomerInfo = customer.ContactInfo,
@@ -201,7 +196,7 @@
 
                     result.Quantity = 0;
                     result.Price = 0;
-                    result.PayedAmount = 0;
+                    result.PaidAmount = 0;
                     result.DebtAmount = 0;
 
                     if (solidWasteActDetailInfo != null)
@@ -223,7 +218,7 @@
 
                     foreach (var item in result.HistoryItemSource)
                     {
-                        result.PayedAmount += item.Amount;
+                        result.PaidAmount += item.Amount;
                         result.DebtAmount -= item.Amount;
                     }
                 }

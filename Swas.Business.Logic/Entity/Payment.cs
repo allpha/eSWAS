@@ -6,14 +6,14 @@
     public class PaymentInfoItem
     {
         public int ActId { get; set; }
-        public int ActDate { get; set; }
+        public DateTime ActDate { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
         public string CustomerInfo { get; set; }
-
+        public string LandfillName { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
-        public decimal PayedAmount { get; set; }
+        public decimal PaidAmount { get; set; }
         public decimal DebtAmount { get; set; }
 
         public List<PaymentHistoryItem> HistoryItemSource { get; set; }
