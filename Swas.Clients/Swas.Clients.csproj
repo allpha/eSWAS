@@ -207,6 +207,8 @@
     <Compile Include="Controllers\LandfillController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\AgreementController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -222,6 +224,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\AgreementViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\SolidWasteActViewModel.cs" />
@@ -255,6 +259,10 @@
     <Content Include="assets\pages\scripts\Payment\Detail.js" />
     <Content Include="assets\pages\scripts\Payment\Edit.js" />
     <Content Include="assets\pages\scripts\Payment\Index.js" />
+    <Content Include="assets\pages\scripts\Permission\Create.js" />
+    <Content Include="assets\pages\scripts\Permission\Delete.js" />
+    <Content Include="assets\pages\scripts\Permission\Edit.js" />
+    <Content Include="assets\pages\scripts\Permission\Index.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Detail.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Create.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Delete.js" />
@@ -323,9 +331,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -369,6 +374,14 @@
     <Content Include="Views\Agreement\Delete.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\Edit.cshtml" />
+    <Content Include="Views\Permission\Index.cshtml" />
+    <Content Include="Views\Permission\Create.cshtml" />
+    <Content Include="Views\Permission\Edit.cshtml" />
+    <Content Include="Views\Permission\Delete.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

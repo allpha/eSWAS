@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
+    <Compile Include="Maps\RolePermissionMap.cs" />
+    <Compile Include="Maps\PermissionMap.cs" />
+    <Compile Include="Maps\RoleMap.cs" />
     <Compile Include="Maps\PaymentMap.cs" />
     <Compile Include="Maps\AgreementMap.cs" />
     <Compile Include="Maps\CustomerMap.cs" />
@@ -106,6 +109,10 @@
     <Compile Include="Migrations\201605262329027_Payment_DateField.Designer.cs">
       <DependentUpon>201605262329027_Payment_DateField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605291110495_Permission_Role_RollePermision.cs" />
+    <Compile Include="Migrations\201605291110495_Permission_Role_RollePermision.Designer.cs">
+      <DependentUpon>201605291110495_Permission_Role_RollePermision.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605262329027_Payment_DateField.resx">
       <DependentUpon>201605262329027_Payment_DateField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605291110495_Permission_Role_RollePermision.resx">
+      <DependentUpon>201605291110495_Permission_Role_RollePermision.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

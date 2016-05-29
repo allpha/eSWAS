@@ -28,6 +28,9 @@
         public virtual DbSet<SolidWasteActDetail> SolidWasteActDetails { get; set; }
         public virtual DbSet<Agreement> Agreements { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<RolePermission> RolePermissions { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -49,6 +52,9 @@
             modelBuilder.Configurations.Add(new SolidWasteActDetailMap());
             modelBuilder.Configurations.Add(new AgreementMap());
             modelBuilder.Configurations.Add(new PaymentMap());
+            modelBuilder.Configurations.Add(new PermissionMap());
+            modelBuilder.Configurations.Add(new RoleMap());
+            modelBuilder.Configurations.Add(new RolePermissionMap());
         }
 
         public void OpenConection()
@@ -72,5 +78,6 @@
 
     }
 }
+
 
 

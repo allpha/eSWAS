@@ -78,6 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\RolePermission.cs" />
+    <Compile Include="Entity\Role.cs" />
+    <Compile Include="Entity\Permission.cs" />
     <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Agreement.cs" />
     <Compile Include="Entity\Customer.cs" />
