@@ -61,7 +61,9 @@
 
                     if (item.RolePermissions != null)
                         foreach (var permission in item.RolePermissions)
-                            Context.RolePermissions.Add(new RolePermission { RoleId = item.Id, PermissionId = permission.PermissionId });
+                            Context.RolePermissions.Add(new RolePermission { RoleId = role.Id, PermissionId = permission.PermissionId });
+
+                    Context.SaveChanges();
                 }
             }
             catch (Exception ex)

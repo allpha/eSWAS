@@ -48,6 +48,33 @@
             return result;
         }
 
+        public List<ComboBoxItem> LoadForRole()
+        {
+            var result = new List<ComboBoxItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from permission in Context.Permissions
+                          select new ComboBoxItem
+                          {
+                              Id = permission.Id,
+                              Name = permission.Description
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
         public void Create(PermissionItem item)
         {
             try

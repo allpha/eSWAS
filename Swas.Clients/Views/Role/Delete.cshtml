@@ -3,38 +3,40 @@
 @{
     Layout = null;
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>RoleViewModel</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">უფლების წაშლა</h5>
     </div>
-</body>
-</html>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 ">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet-body">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal" id="registrationForm">
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+
+                            </div>
+                            @Html.HiddenFor(model => model.Id)
+                            ნამდვილად გსურთ წაშალოთ ჩანაწერი "@Model.Description" ?
+                        </div>
+
+                    </form>
+                    <!-- END FORM-->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn green" id="btSave">წაშლა</button>
+        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+    </div>
+
+</div>
+
+<script src="~/assets/pages/scripts/BusyIndicator/BusyIndicator.js"></script>
+<script src="~/assets/pages/scripts/Role/Delete.js"></script>

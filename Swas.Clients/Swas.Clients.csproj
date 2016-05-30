@@ -254,6 +254,7 @@
     <Content Include="assets\pages\scripts\Agreement\Edit.js" />
     <Content Include="assets\pages\scripts\Agreement\Create.js" />
     <Content Include="assets\pages\scripts\Agreement\Index.js" />
+    <Content Include="assets\pages\scripts\BusyIndicator\BusyIndicator.js" />
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
     <Content Include="assets\pages\scripts\Payment\Detail.js" />
@@ -263,6 +264,10 @@
     <Content Include="assets\pages\scripts\Permission\Delete.js" />
     <Content Include="assets\pages\scripts\Permission\Edit.js" />
     <Content Include="assets\pages\scripts\Permission\Index.js" />
+    <Content Include="assets\pages\scripts\Role\Create.js" />
+    <Content Include="assets\pages\scripts\Role\Delete.js" />
+    <Content Include="assets\pages\scripts\Role\Edit.js" />
+    <Content Include="assets\pages\scripts\Role\Index.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Detail.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Create.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Delete.js" />

@@ -43,6 +43,29 @@ namespace Swas.Clients.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult LoadPermissions()
+        {
+            var result = new List<ComboBoxItem>();
+            var bussinessLogic = new PermissionBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForRole();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult Create()
         {
             var NewItem = new RoleViewModel
@@ -54,7 +77,7 @@ namespace Swas.Clients.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create(string descirption, List<PermissionViewModel> permissions)
+        public JsonResult Create(string descirption, List<int> permissions)
         {
             var bussinessLogic = new RoleBusinessLogic();
 
@@ -72,7 +95,7 @@ namespace Swas.Clients.Controllers
                     foreach (var permission in permissions)
                         role.RolePermissions.Add(new RolePermissionItem
                         {
-                            PermissionId = permission.Id
+                            PermissionId = permission
                         });
 
                 }
@@ -109,11 +132,11 @@ namespace Swas.Clients.Controllers
 
                 if (role.RolePermissions != null)
                 {
-                    role.RolePermissions = new List<RolePermissionItem>();
+                    model.Periossions = new List<PermissionViewModel>();
                     foreach (var permission in role.RolePermissions)
                         model.Periossions.Add(new PermissionViewModel
                         {
-                            Id = permission.Id,
+                            Id = permission.PermissionId,
                             Description = permission.PermissionDescription
                         });
                 }
@@ -131,7 +154,7 @@ namespace Swas.Clients.Controllers
         }
 
         [HttpPost]
-        public JsonResult Edit(string descirption, List<PermissionViewModel> permissions)
+        public JsonResult Edit(int id, string descirption, List<int> permissions)
         {
             var bussinessLogic = new RoleBusinessLogic();
 
@@ -139,6 +162,7 @@ namespace Swas.Clients.Controllers
             {
                 var role = new RoleItem
                 {
+                    Id = id,
                     Description = descirption,
                     RolePermissions = new List<RolePermissionItem>(),
                 };
@@ -149,7 +173,7 @@ namespace Swas.Clients.Controllers
                     foreach (var permission in permissions)
                         role.RolePermissions.Add(new RolePermissionItem
                         {
-                            PermissionId = permission.Id
+                            PermissionId = permission
                         });
                 }
 

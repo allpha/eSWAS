@@ -8,6 +8,7 @@
         public string Name { get; set; }
 
         public virtual ICollection<Landfill> Landfills { get; set; }
+        public virtual ICollection<UserRegion> UserRegions { get; set; }
     }
 
 }

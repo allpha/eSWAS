@@ -31,6 +31,10 @@
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RolePermission> RolePermissions { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<UserRegion> UserRegions { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -55,6 +59,9 @@
             modelBuilder.Configurations.Add(new PermissionMap());
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new RolePermissionMap());
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new UserRegionMap());
+            modelBuilder.Configurations.Add(new UserDetailMap());
         }
 
         public void OpenConection()
