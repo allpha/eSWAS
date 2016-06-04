@@ -74,6 +74,34 @@
             return result;
         }
 
+        public List<ComboBoxItem> LoadForUsers()
+        {
+            var result = new List<ComboBoxItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from region in Context.Regions
+                          select new ComboBoxItem
+                          {
+                              Id = region.Id,
+                              Name = region.Name
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+
         public void Create(RegionItem item)
         {
             try

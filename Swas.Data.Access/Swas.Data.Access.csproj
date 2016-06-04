@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
-    <Compile Include="Maps\UserDetailMap.cs" />
     <Compile Include="Maps\UserRegionMap.cs" />
     <Compile Include="Maps\UserMap.cs" />
     <Compile Include="Maps\RolePermissionMap.cs" />
@@ -124,6 +123,26 @@
     <Compile Include="Migrations\201605302311227_hotfix.Designer.cs">
       <DependentUpon>201605302311227_hotfix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606031807140_Remove_UserDetail_Table_Update_UsersTable.cs" />
+    <Compile Include="Migrations\201606031807140_Remove_UserDetail_Table_Update_UsersTable.Designer.cs">
+      <DependentUpon>201606031807140_Remove_UserDetail_Table_Update_UsersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606031811343_Remove_UserDetail_Table_Update_UsersTable_HotFix.cs" />
+    <Compile Include="Migrations\201606031811343_Remove_UserDetail_Table_Update_UsersTable_HotFix.Designer.cs">
+      <DependentUpon>201606031811343_Remove_UserDetail_Table_Update_UsersTable_HotFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606031814088_User_Change_JobPosition_Name.cs" />
+    <Compile Include="Migrations\201606031814088_User_Change_JobPosition_Name.Designer.cs">
+      <DependentUpon>201606031814088_User_Change_JobPosition_Name.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606032049294_User_Add_ChangePassword.cs" />
+    <Compile Include="Migrations\201606032049294_User_Add_ChangePassword.Designer.cs">
+      <DependentUpon>201606032049294_User_Add_ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606040952400_Users_Update_CreateDate.cs" />
+    <Compile Include="Migrations\201606040952400_Users_Update_CreateDate.Designer.cs">
+      <DependentUpon>201606040952400_Users_Update_CreateDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -176,6 +195,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605302311227_hotfix.resx">
       <DependentUpon>201605302311227_hotfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606031807140_Remove_UserDetail_Table_Update_UsersTable.resx">
+      <DependentUpon>201606031807140_Remove_UserDetail_Table_Update_UsersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606031811343_Remove_UserDetail_Table_Update_UsersTable_HotFix.resx">
+      <DependentUpon>201606031811343_Remove_UserDetail_Table_Update_UsersTable_HotFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606031814088_User_Change_JobPosition_Name.resx">
+      <DependentUpon>201606031814088_User_Change_JobPosition_Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606032049294_User_Add_ChangePassword.resx">
+      <DependentUpon>201606032049294_User_Add_ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606040952400_Users_Update_CreateDate.resx">
+      <DependentUpon>201606040952400_Users_Update_CreateDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

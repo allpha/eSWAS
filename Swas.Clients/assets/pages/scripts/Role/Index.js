@@ -29,8 +29,8 @@ function initTableItemSource(itemSource) {
         var row = '<tr><td>' +
                         itemSource[i].Description +
                     '</td><td>' +
-                    '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-icon-only default"><i class="fa fa-edit"></i></a>' +
-                    '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-icon-only default"><i class="fa fa-remove"></i></a>' +
+                    '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>' +
+                    '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>' +
                     '</td></tr>';
 
         $('#itemSource tr:last').after(row);

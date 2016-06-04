@@ -2,6 +2,7 @@
 {
     using Entity;
     using System.Data.Entity.ModelConfiguration;
+    using System.ComponentModel.DataAnnotations.Schema;
 
 
     public class UserMap : EntityTypeConfiguration<User>
@@ -17,7 +18,13 @@
             Property(one => one.MaxAttamptPassword).IsRequired();
             Property(one => one.IsLocked).IsRequired();
             Property(one => one.IsDisabled).IsRequired();
-            Property(one => one.CreateDate).IsRequired();
+            Property(one => one.CreateDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+
+
+            Property(one => one.FirstName).HasMaxLength(200).IsRequired();
+            Property(one => one.LastName).HasMaxLength(200).IsRequired();
+            Property(one => one.JobPosition).HasMaxLength(500).IsRequired();
+            Property(one => one.ChangePassword).IsRequired();
 
             HasRequired(a => a.Role)
               .WithMany(a => a.Users)

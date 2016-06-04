@@ -47,6 +47,33 @@
             return result;
         }
 
+        public List<ComboBoxItem> LoadForUser()
+        {
+            var result = new List<ComboBoxItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from role in Context.Roles
+                          select new ComboBoxItem
+                          {
+                              Id = role.Id,
+                              Name = role.Description,
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
         public void Create(RoleItem item)
         {
             try

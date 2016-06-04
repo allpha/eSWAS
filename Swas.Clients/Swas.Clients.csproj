@@ -203,6 +203,7 @@
     <Compile Include="Common\ClientErrorHandler.cs" />
     <Compile Include="Common\ExcelExporter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandfillController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -219,6 +220,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EditViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LandfillViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -264,6 +266,13 @@
     <Content Include="assets\pages\scripts\Permission\Delete.js" />
     <Content Include="assets\pages\scripts\Permission\Edit.js" />
     <Content Include="assets\pages\scripts\Permission\Index.js" />
+    <Content Include="assets\script\User\Disible.js" />
+    <Content Include="assets\script\User\UnlockUser.js" />
+    <Content Include="assets\script\User\Create.js" />
+    <Content Include="assets\script\User\ChangePassword.js" />
+    <Content Include="assets\script\User\Delete.js" />
+    <Content Include="assets\script\User\Edit.js" />
+    <Content Include="assets\script\User\Index.js" />
     <Content Include="assets\pages\scripts\Role\Create.js" />
     <Content Include="assets\pages\scripts\Role\Delete.js" />
     <Content Include="assets\pages\scripts\Role\Edit.js" />
@@ -387,6 +396,13 @@
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\PasswordReset.cshtml" />
+    <Content Include="Views\User\UnlockPromt.cshtml" />
+    <Content Include="Views\User\DisiblePromt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

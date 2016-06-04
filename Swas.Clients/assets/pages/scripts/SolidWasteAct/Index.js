@@ -20,8 +20,8 @@
     $('#filterSolidWasteAct').click(function () {
 
         var actNumber = $('#solidWasteActNumber').val();
-        var fromDate = document.getElementById("ActDateFrom").value; //$('#ActDateFrom').val();
-        var ActDateTo = document.getElementById("ActDateTo").value; //$('#ActDateTo').val();
+        var fromDate = document.getElementById("ActDateFrom").value;
+        var ActDateTo = document.getElementById("ActDateTo").value;
         var landfillItemSource = [];
         if ($('#allLandfillSelected').is(':checked')) {
             var landfillData = $('#landfillSearchCombo').find("option");
@@ -38,8 +38,6 @@
             landfillItemSource = [0];
 
         $recordNumber = document.getElementById("solidWasteActNumber").value;
-        //$fromDate = new Date(fromDate);
-        //$endDate = new Date(ActDateTo);
         $fromDate = fromDate;
         $endDate = ActDateTo;
         $landfillDataSource = landfillItemSource;

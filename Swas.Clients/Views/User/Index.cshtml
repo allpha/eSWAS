@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-12 ">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light bordered" id="viewBody">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-pointer font-red"></i>
+                    <span class="caption-subject font-red bold uppercase" style="font-family: mtavrulibold">მომხმარებლები</span>
+                </div>
+            </div>
+
+            <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>
+            <div id="ajax-modal" class="modal fade" data-width="800"  tabindex="-1"> </div>
+
+            <div class="portlet-body">
+
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group pull-right">
+                                <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
+                                    <i class="fa fa-plus"></i>
+                                    ახალი
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light" id="itemSource">
+                        <thead>
+                            <tr class="uppercase">
+                                <th style="font-family: mtavrulibold"> სახელი, გვარი</th>
+                                <th style="font-family: mtavrulibold"> პირადი #</th>
+                                <th style="font-family: mtavrulibold"> მომხმარებლის სახელი</th>
+                                <th style="font-family: mtavrulibold"> ელ.ფოსტა</th>
+                                <th style="font-family: mtavrulibold"> სამუშაო პოზიცია</th>
+                                <th style="font-family: mtavrulibold"> მომხმარებელთა ჯგუფი</th>
+                                <th style="font-family: mtavrulibold"> სტატუსი</th>
+                                <th width="205px">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section PageScripts{
+    <script src="~/assets/pages/scripts/BusyIndicator/BusyIndicator.js"></script>
+    <script src="~/assets/script/User/Index.js"></script>
+}
+
+
