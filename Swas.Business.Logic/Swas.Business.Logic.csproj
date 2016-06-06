@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\LoginBusinessLogic.cs" />
     <Compile Include="Classes\PaymentBusinessLogic.cs" />
     <Compile Include="Classes\AgreementBusinessLogic.cs" />
     <Compile Include="Classes\UserBusinessLogic.cs" />

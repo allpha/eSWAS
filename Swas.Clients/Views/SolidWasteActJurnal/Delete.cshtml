@@ -1,4 +1,4 @@
-﻿@model Swas.Clients.Models.AgreementViewModel
+﻿@model Swas.Clients.Models.SolidWasteActInfoViewModel
 
 @{
     Layout = null;
@@ -7,7 +7,7 @@
 <div id="editorDialog">
     <div class="modal-header" style="vertical-align:middle">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">რეგიონის წაშლა</h5>
+        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">ნაგავსაყრელის წაშლა</h5>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -21,7 +21,7 @@
 
                             </div>
                             @Html.HiddenFor(model => model.Id)
-                            ნამდვილად გსურთ წაშალოთ ხელშეკრულება "@Model.Code" ?
+                            ნამდვილად გსურთ წაშალოთ ჩანაწერი "@Model.Id" ?
                         </div>
 
                     </form>
@@ -39,4 +39,4 @@
 
 </div>
 
-<script src="~/assets/script/Agreement/Delete.js"></script>
+<script src="~/assets/script/SolidWasteActJunal/Delete.js"></script>

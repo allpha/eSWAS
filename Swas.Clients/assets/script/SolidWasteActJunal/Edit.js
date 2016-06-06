@@ -79,7 +79,7 @@ function saveSolidWasteAct() {
     });
 
     $.ajax({
-        url: "/SolidWasteAct/Edit",
+        url: "/SolidWasteActJurnal/Edit",
         type: "POST",
         dataType: "json",
         data: {
@@ -183,7 +183,7 @@ $('#btWasteSave').click(function () {
         }
 
         $.ajax({
-            url: "/SolidWasteAct/CalculateWasteAmount",
+            url: "/SolidWasteActJurnal/CalculateWasteAmount",
             type: "POST",
             dataType: "json",
             data: { customerType: document.getElementById("Type").value, wasteTypeId: document.getElementById("WasteTypeId").value, quantity: quantity, isInQubeMeter: isCubeChecked },
@@ -690,7 +690,7 @@ jQuery(document).ready(function () {
         });
 
         $.ajax({
-            url: "/SolidWasteAct/LoadCustomerByCode",
+            url: "/SolidWasteActJurnal/LoadCustomerByCode",
             type: "GET",
             dataType: "json",
             data: { CustomerType: document.getElementById("Type").value },

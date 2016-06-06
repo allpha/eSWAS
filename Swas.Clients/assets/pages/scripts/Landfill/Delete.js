@@ -11,14 +11,14 @@ function saveRegion() {
     });
 
     $.ajax({
-        url: "/SolidWasteAct/DeleteSolidWasteAct",
+        url: "/Landfill/Remove",
         type: "POST",
         dataType: "json",
         data: {
             id: $("#Id").val(),
         },
         success: function (data) {
-            location.href = '/SolidWasteAct/Index';
+            location.href = '/Landfill/Index';
             App.unblockUI(editorName);
         },
         error: function (request, status, error) {

@@ -12,65 +12,8 @@
     using System.Web;
     using System.Web.Mvc;
 
-    public class SolidWasteActController : Controller
+    public class SolidWasteActJurnalController : Controller
     {
-        #region Registration
-
-        [Authorization("SolidWasteAct.View")]
-        public ActionResult Index()
-        {
-            return View(new List<SolidWasteActInfoViewModel>());
-        }
-
-
-        [Authorization("SolidWasteAct.Create")]
-        public ActionResult Create()
-        {
-            var bussinessLogic = new SolidWasteActBusinessLogic();
-
-            try
-            {
-
-                var model = new SolidWasteActViewModel()
-                {
-                    ActDate = DateTime.Now,
-                    SolidWasteActDetails = new List<SolidWasteActDetailViewModel>()
-                };
-
-                var hellperDataSource = bussinessLogic.LoadHellperSource(CustomerType.Municipal);
-
-                model.RecieverItemSource = hellperDataSource.RecieverItemSource;
-                model.CustomerItemSource = hellperDataSource.CustomerItemSource;
-                model.TransporterItemSource = hellperDataSource.TransporterItemSource;
-
-                var selectedLandfillId = (int?)null;
-                var selectedWasteTypeId = (int?)null;
-                if (hellperDataSource.LandfillItemSource.Count > 0)
-                    selectedLandfillId = hellperDataSource.LandfillItemSource[0].Id;
-                if (hellperDataSource.WasteTypeItemSource.Count > 0)
-                    selectedWasteTypeId = hellperDataSource.WasteTypeItemSource[0].Id;
-
-                LoadTypeItemSource(new List<LandfillItem>() {
-                                        new LandfillItem { Id = 0, Name = "მუნიციპალიტეტი" },
-                                        new LandfillItem { Id = 1, Name = "იურიდიული პირი" },
-                                        new LandfillItem { Id = 2, Name = "ფიზიკური პირი" },
-                                    }, 0);
-
-                LoadlandfillItemSource(hellperDataSource.LandfillItemSource, selectedLandfillId);
-                LoadWasteTypeItemSource(hellperDataSource.WasteTypeItemSource, selectedWasteTypeId);
-
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                return View();
-            }
-            finally
-            {
-                bussinessLogic = null;
-            }
-        }
-
         private string Validation(DateTime actDate, int landfillId, string receiverName, string receiverLastName, string positionName, int type,
                                 string customerName, string customerCode, string customerContactInfo, string representativeName, string transporterCarNumber,
                                 string transporterCarModel, string transporterDriverInfo, string remark)
@@ -86,16 +29,235 @@
 
         }
 
-        [HttpPost]
-        [Authorization("SolidWasteAct.Create")]
-        public JsonResult Create(DateTime actDate, int landfillId, string receiverName, string receiverLastName, string positionName, int type,
-                                   string customerName, string customerCode, string customerContactInfo, string representativeName, string transporterCarNumber,
-                                   string transporterCarModel, string transporterDriverInfo, string remark,
-                                   List<SolidWasteActDetailViewModel> solidWasteActDetails)
+        [Authorization("SolidWasteActJunal.Detail")]
+        public ActionResult Detail(int Id)
         {
+            return View(new SolidWasteActPrintViewModel
+            {
+                Id = Id
+            });
+        }
 
+        [HttpGet]
+        [Authorization("SolidWasteActJunal.Edit")]
+        public JsonResult LoadCustomerByCode(int CustomerType)
+        {
+            var result = new List<CustomerSearchItem>();
+            var bussinessLogic = new CustomerBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.FindByCode(CustomerType);
+            }
+            catch (Exception ex)
+            {
+                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorization("SolidWasteActJunal.Edit")]
+        public JsonResult LoadCustomerByName(int CustomerType)
+        {
+            var result = new List<CustomerSearchItem>();
+            var bussinessLogic = new CustomerBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.FindByName(CustomerType);
+            }
+            catch (Exception ex)
+            {
+                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization("SolidWasteActJunal.Edit")]
+        public JsonResult LoadTransporter(string Prefix)
+        {
+            var result = new List<TransporterSearchItem>();
+            var bussinessLogic = new TransporterBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.FindByCarNumber(Prefix.Trim());
+            }
+            catch (Exception ex)
+            {
+                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization("SolidWasteActJunal.Edit")]
+        public JsonResult LoadCarModel(string Prefix)
+        {
+            var result = new List<string>();
+            var bussinessLogic = new TransporterBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.FindCarModel(Prefix.Trim());
+            }
+            catch (Exception ex)
+            {
+                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization("SolidWasteActJunal.Edit")]
+        public JsonResult CalculateWasteAmount(int customerType, int wasteTypeId, decimal quantity, bool isInQubeMeter)
+        {
+            var result = new SolidWasteActDetailItem();
+            var bussinessLogic = new WasteTypeBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.CalculateWastePrice((CustomerType)customerType, wasteTypeId, quantity, isInQubeMeter);
+            }
+            catch (Exception ex)
+            {
+                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        private void LoadWasteTypeItemSource(IList<WasteTypeSmartItem> wasteTypeDataSource, object selectedWasteTypeId)
+        {
+            ViewBag.WasteTypeItemSource = new SelectList(wasteTypeDataSource, "Id", "Name", selectedWasteTypeId);
+        }
+
+        private void LoadlandfillItemSource(IList<LandfillItem> landfillDataSource, object selectedLandfillId)
+        {
+            ViewBag.LandfillItemSource = new SelectList(landfillDataSource, "Id", "Name", selectedLandfillId);
+        }
+
+        private void LoadTypeItemSource(IList<LandfillItem> typeDataSource, object selectedType)
+        {
+            ViewBag.LandTypeItemSource = new SelectList(typeDataSource, "Id", "Name", selectedType);
+        }
+
+        [Authorization("SolidWasteActJunal.Veiw")]
+
+        public ActionResult Index()
+        {
+            return View(new List<SolidWasteActInfoViewModel>());
+        }
+
+        [Authorization("SolidWasteActJunal.Edit")]
+        public ActionResult Edit(int Id)
+        {
             var bussinessLogic = new SolidWasteActBusinessLogic();
-            var solidWasteActId = (int?)null;
+
+            try
+            {
+                var hellperDataSource = bussinessLogic.Get(Id);
+                var editItem = hellperDataSource.EditorItem;
+
+                var model = new SolidWasteActViewModel()
+                {
+                    Id = editItem.Id,
+                    ActDate = editItem.ActDate,
+                    ReceiverName = editItem.Receiver.Name,
+                    ReceiverLastName = editItem.Receiver.LastName,
+                    PositionName = editItem.Position.Name,
+                    Remark = editItem.Remark,
+                    Type = (int)editItem.Customer.Type,
+                    CustomerCode = editItem.Customer.Code,
+                    CustomerName = editItem.Customer.Name,
+                    CustomerContactInfo = editItem.Customer.ContactInfo,
+                    RepresentativeName = editItem.Representative.Name,
+                    TransporterCarNumber = editItem.Transporter.CarNumber,
+                    TransporterCarModel = editItem.Transporter.CarModel,
+                    TransporterDriverInfo = editItem.Transporter.DriverInfo,
+
+                    SolidWasteActDetails = new List<SolidWasteActDetailViewModel>()
+                };
+
+                foreach (var item in editItem.SolidWasteActDetails)
+                    model.SolidWasteActDetails.Add(new SolidWasteActDetailViewModel
+                    {
+                        WasteTypeId = item.WasteTypeId,
+                        WasteTypeName = item.WasteTypeName,
+                        Quantity = item.Quantity,
+                        UnitPrice = item.UnitPrice,
+                        Amount = item.Amount
+                    });
+
+                model.RecieverItemSource = hellperDataSource.RecieverItemSource;
+                model.CustomerItemSource = hellperDataSource.CustomerItemSource;
+                model.TransporterItemSource = hellperDataSource.TransporterItemSource;
+
+                LoadTypeItemSource(new List<LandfillItem>() {
+                                        new LandfillItem { Id = 0, Name = "მუნიციპალიტეტი" },
+                                        new LandfillItem { Id = 1, Name = "იურიდიული პირი" },
+                                        new LandfillItem { Id = 2, Name = "ფიზიკური პირი" },
+                                    }, 0);
+
+                LoadlandfillItemSource(hellperDataSource.LandfillItemSource, model.LandfillId);
+
+                var selectedWasteTypeId = (int?)null;
+                if (hellperDataSource.WasteTypeItemSource.Count > 0)
+                    selectedWasteTypeId = hellperDataSource.WasteTypeItemSource[0].Id;
+
+
+                LoadWasteTypeItemSource(hellperDataSource.WasteTypeItemSource, selectedWasteTypeId);
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+        }
+
+        [HttpPost]
+        [Authorization("SolidWasteActJunal.Edit")]
+        public JsonResult Edit(int id, DateTime actDate, int landfillId, string receiverName, string receiverLastName, string positionName, int type,
+                           string customerName, string customerCode, string customerContactInfo, string representativeName, string transporterCarNumber,
+                           string transporterCarModel, string transporterDriverInfo, string remark,
+                           List<SolidWasteActDetailViewModel> solidWasteActDetails)
+        {
+            var result = (int?)null;
+            var bussinessLogic = new SolidWasteActBusinessLogic();
+
             try
             {
                 var validationText = Validation(actDate, landfillId, receiverName, receiverLastName, positionName, type,
@@ -104,11 +266,10 @@
 
                 if (!string.IsNullOrEmpty(validationText))
                     throw new Exception(validationText);
-                //return //Json(validationText, JsonRequestBehavior.AllowGet);
-
 
                 var newItem = new SolidWasteActItem
                 {
+                    Id = id,
                     ActDate = actDate,
                     LandfillId = landfillId,
                     Receiver = new ReceiverItem
@@ -151,7 +312,7 @@
                             UnitPrice = item.UnitPrice
                         });
 
-                solidWasteActId = bussinessLogic.Create(newItem);
+                result = bussinessLogic.Edit(newItem);
 
             }
             catch (Exception ex)
@@ -164,159 +325,52 @@
                 bussinessLogic = null;
             }
 
-            return Json(solidWasteActId, JsonRequestBehavior.AllowGet);
-        }
-
-
-        [Authorization("SolidWasteAct.Detail")]
-        public ActionResult Detail(int Id)
-        {
-            return View(new SolidWasteActPrintViewModel
-            {
-                Id = Id
-            });
-        }
-
-        [HttpGet]
-        [Authorization("SolidWasteAct.Create")]
-        public JsonResult LoadCustomerByCode(int CustomerType)
-        {
-            var result = new List<CustomerSearchItem>();
-            var bussinessLogic = new CustomerBusinessLogic();
-
-            try
-            {
-                result = bussinessLogic.FindByCode(CustomerType);
-            }
-            catch (Exception ex)
-            {
-                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
-            }
-            finally
-            {
-                bussinessLogic = null;
-            }
-
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Authorization("SolidWasteAct.Create")]
-        public JsonResult LoadCustomerByName(int CustomerType)
+        [Authorization("SolidWasteActJunal.Delete")]
+        public ActionResult Delete(int id)
         {
-            var result = new List<CustomerSearchItem>();
-            var bussinessLogic = new CustomerBusinessLogic();
-
             try
             {
-                result = bussinessLogic.FindByName(CustomerType);
+                var model = new SolidWasteActInfoViewModel
+                {
+                    Id = id
+                };
+
+                return View(model);
             }
             catch (Exception ex)
             {
-                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+                return View();
             }
-            finally
-            {
-                bussinessLogic = null;
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        [Authorization("SolidWasteAct.Create")]
-        public JsonResult LoadTransporter(string Prefix)
+        [Authorization("SolidWasteActJunal.Delete")]
+        public JsonResult DeleteSolidWasteAct(int Id)
         {
-            var result = new List<TransporterSearchItem>();
-            var bussinessLogic = new TransporterBusinessLogic();
+            var bussinessLogic = new SolidWasteActBusinessLogic();
 
             try
             {
-                result = bussinessLogic.FindByCarNumber(Prefix.Trim());
+                bussinessLogic.Remove(Id);
             }
             catch (Exception ex)
             {
-                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
+                throw ex;
             }
             finally
             {
                 bussinessLogic = null;
             }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
-
-        [HttpPost]
-        [Authorization("SolidWasteAct.Create")]
-        public JsonResult LoadCarModel(string Prefix)
-        {
-            var result = new List<string>();
-            var bussinessLogic = new TransporterBusinessLogic();
-
-            try
-            {
-                result = bussinessLogic.FindCarModel(Prefix.Trim());
-            }
-            catch (Exception ex)
-            {
-                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
-            }
-            finally
-            {
-                bussinessLogic = null;
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [Authorization("SolidWasteAct.Create")]
-        public JsonResult CalculateWasteAmount(int customerType, int wasteTypeId, decimal quantity, bool isInQubeMeter)
-        {
-            var result = new SolidWasteActDetailItem();
-            var bussinessLogic = new WasteTypeBusinessLogic();
-
-            try
-            {
-                result = bussinessLogic.CalculateWastePrice((CustomerType)customerType, wasteTypeId, quantity, isInQubeMeter);
-            }
-            catch (Exception ex)
-            {
-                return Json(new List<ReceiverPositionSearchItem>(), JsonRequestBehavior.AllowGet);
-            }
-            finally
-            {
-                bussinessLogic = null;
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-
-        private void LoadWasteTypeItemSource(IList<WasteTypeSmartItem> wasteTypeDataSource, object selectedWasteTypeId)
-        {
-            ViewBag.WasteTypeItemSource = new SelectList(wasteTypeDataSource, "Id", "Name", selectedWasteTypeId);
-        }
-
-        private void LoadlandfillItemSource(IList<LandfillItem> landfillDataSource, object selectedLandfillId)
-        {
-            ViewBag.LandfillItemSource = new SelectList(landfillDataSource, "Id", "Name", selectedLandfillId);
-        }
-
-        private void LoadTypeItemSource(IList<LandfillItem> typeDataSource, object selectedType)
-        {
-            ViewBag.LandTypeItemSource = new SelectList(typeDataSource, "Id", "Name", selectedType);
-        }
-
-
-
-        #endregion Registration
 
         #region Filter
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult LoadFilterRegions()
         {
             var result = new List<RegionItem>();
@@ -339,7 +393,7 @@
         }
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult LoadFilterLandfills(bool selectAll, List<int> regionItemSource)
         {
             var result = new List<LandfillItem>();
@@ -362,7 +416,7 @@
         }
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult LoadFilterWasteType()
         {
             var result = new List<WasteTypeSmartItem>();
@@ -385,7 +439,7 @@
         }
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult LoadFilterCustomer()
         {
             var result = new List<CustomerRootItem>();
@@ -408,7 +462,7 @@
         }
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult LoadTransporterCarNumberForFilter()
         {
             var result = new List<ComboBoxItem>();
@@ -432,7 +486,7 @@
 
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult FilterSolidWasteAct(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource,
                                                 bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber,
@@ -486,7 +540,7 @@
         }
 
         [HttpPost]
-        [Authorization("SolidWasteAct.View")]
+        [Authorization("SolidWasteActJunal.Veiw")]
         public JsonResult LoadPageCount(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                         List<int> wasteTypeIdSource, List<int> customerIdSource,
                                         bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill,

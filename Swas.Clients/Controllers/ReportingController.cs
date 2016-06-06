@@ -19,14 +19,15 @@
         [HttpPost]
         public JsonResult DetailedReport(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource,
-                                                bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
+                                                bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill,
+                                                bool loadAllCarNumber, List<int> carNubmers)
         {
             var bussinessLogic = new ReportBusinessLogic();
             var result = string.Empty;
 
             try
             {
-                var report = bussinessLogic.LoadDetailedReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
+                var report = bussinessLogic.LoadDetailedReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
 
                 IList<SolidWasteActReportDetailReportViewModel> reportModel = new List<SolidWasteActReportDetailReportViewModel>();
                 var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;
@@ -42,6 +43,7 @@
                         Price = item.Price,
                         Quantity = item.Quantity,
                         ReceiverName = item.ReceiverName,
+                        CarNumber = item.CarNumber,
                         RegionName = item.RegionName,
                         UnitPrice = item.UnitPrice,
                         WasteTypeName = item.WasteTypeName,
@@ -65,14 +67,15 @@
 
         public JsonResult GroupedReport(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                         List<int> wasteTypeIdSource, List<int> customerIdSource,
-                                        bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
+                                        bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill,
+                                        bool loadAllCarNumber, List<int> carNubmers)
         {
             var bussinessLogic = new ReportBusinessLogic();
             var result = string.Empty;
 
             try
             {
-                var report = bussinessLogic.LoadGroupReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
+                var report = bussinessLogic.LoadGroupReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
 
                 IList<SolidWasteActTotalSumReportViewModel> reportModel = new List<SolidWasteActTotalSumReportViewModel>();
                 var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;
@@ -86,6 +89,7 @@
                         LandfillName = item.LandfillName,
                         Price = item.Price,
                         Quantity = item.Quantity,
+                        CarNumber = item.CarNumber,
                         ReceiverName = item.ReceiverName,
                         RegionName = item.RegionName,
                         WasteTypeName = item.WasteTypeName,

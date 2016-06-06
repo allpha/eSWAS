@@ -82,5 +82,34 @@
             return result;
         }
 
+        public List<ComboBoxItem> LoadCarModelForSolidWasteAct()
+        {
+            var result = new List<ComboBoxItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from transporter in Context.Transporters
+                          select new ComboBoxItem
+                          {
+                              Id = transporter.Id,
+                              Name = transporter.CarNumber
+                          }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+
     }
 }

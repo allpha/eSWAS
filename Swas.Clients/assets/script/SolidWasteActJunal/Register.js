@@ -10,9 +10,12 @@
         $recordNumber = null;
         $wasteTypeDataSource = [];
         $customerDataSource = [];
+        $carModelDataSource = [];
         $loadAllLandfill = true;
         $loadAllWasteType = true;
         $loadAllCustomer = true;
+        $loadAllCar = true;
+
 
         loadPageCount();
     });
@@ -45,6 +48,8 @@
         $customerDataSource = $('#customerSearchCombo').val();
         $loadAllWasteType = $('#allWasteTypeSelected').is(':checked');
         $loadAllCustomer = $('#allCustomerSelected').is(':checked');
+        $carModelDataSource = $('#carModelSearchCombo').val();
+        $loadAllCar = $('#allCarNumberSelected').is(':checked');
         $loadAllLandfill = false;
         loadPageCount();
 
@@ -64,38 +69,42 @@ function initTableItemSource(itemSource) {
                        '<td>' + itemSource[i].LandfillName + '</td>' +
                        '<td>' + itemSource[i].Receiver + '</td>' +
                        '<td>' + itemSource[i].Customer + '</td>' +
+                       '<td>' + itemSource[i].CarNumber + '</td>' +
                        '<td>' + itemSource[i].Quantity + '</td>' +
                        '<td>' + itemSource[i].Price + '</td>' +
-                       '<td>' +
-                            '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>' +
-                            '<a href="javascript:priview(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="icon-tag"></i></a>' +
-                            '<a target="_blank" href="/SolidWasteActPrint/Index/' + itemSource[i].Id + '" class="btn btn-xs default"><i class="fa fa-print"></i></a>' +
-                            '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>'
-                       '</td>' +
-                  '</tr>';
+                       '<td>';
+        if ($("#hasEdit").val() == "true")
+            row += '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>';
+        if ($("#hasDetial").val() == "true")
+            row += '<a href="javascript:priview(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="icon-tag"></i></a>';
+        if ($("#hasPrint").val() == "true")
+            row += '<a target="_blank" href="/SolidWasteActPrint/Index/' + itemSource[i].Id + '" class="btn btn-xs default"><i class="fa fa-print"></i></a>';
+        if ($("#hasDelete").val() == "true")
+            row += '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>';
+        row += '</td>' + '</tr>';
         $('#itemSource tr:last').after(row);
     }
 
 }
 
 function edit(id) {
-    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteAct/Edit/" + id);
+    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteActJurnal/Edit/" + id);
     $('#ajax-model-dialog-editor').click();
 }
 
 function priview(id) {
-    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteAct/Detail/" + id);
+    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteActJurnal/Detail/" + id);
     $('#ajax-model-dialog-editor').click();
 }
 
 function remove(id) {
-    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteAct/Delete/" + id);
+    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteActJurnal/Delete/" + id);
     $('#ajax-model-dialog-editor').click();
 }
 
 function loadRegoinItemSource() {
     $.ajax({
-        url: "/SolidWasteAct/LoadFilterRegions",
+        url: "/SolidWasteActJurnal/LoadFilterRegions",
         type: "POST",
         dataType: "json",
         data: {
@@ -114,10 +123,32 @@ function loadRegoinItemSource() {
 
 }
 
+function loadCarModel() {
+    $.ajax({
+        url: "/SolidWasteActJurnal/LoadTransporterCarNumberForFilter",
+        type: "POST",
+        dataType: "json",
+        data: {
+
+        },
+        success: function (data) {
+            var select2Name = "#carModelSearchCombo";
+            $(select2Name).empty();
+            for (var i = 0; i < data.length; i++) {
+                $(select2Name).append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
+            }
+
+        },
+        error: function (request, status, error) {
+        }
+    });
+
+}
+
 
 function loadLandfillSource(selectAll) {
     $.ajax({
-        url: "/SolidWasteAct/LoadFilterLandfills",
+        url: "/SolidWasteActJurnal/LoadFilterLandfills",
         type: "POST",
         dataType: "json",
         data: {
@@ -158,7 +189,7 @@ function loadLandfillSource(selectAll) {
 
 function loadWasteTypeItemSource() {
     $.ajax({
-        url: "/SolidWasteAct/LoadFilterWasteType",
+        url: "/SolidWasteActJurnal/LoadFilterWasteType",
         type: "POST",
         dataType: "json",
         data: {
@@ -180,7 +211,7 @@ function loadWasteTypeItemSource() {
 
 function loadCustomerItemSource() {
     $.ajax({
-        url: "/SolidWasteAct/LoadFilterCustomer",
+        url: "/SolidWasteActJurnal/LoadFilterCustomer",
         type: "POST",
         dataType: "json",
         data: {
@@ -233,7 +264,22 @@ function InitSearchCombos() {
         width: null
     });
 
+    $("#carModelSearchCombo").select2({
+        placeholder: comboPlaceholder,
+        allowClear: true,
+        width: null
+    });
 
+    $("#allCarNumberSelected").on("click", function () {
+        $('#carModelSearchCombo').prop("disabled", this.checked);
+        if (this.checked) {
+            $('#carModelSearchCombo').select2('val', '');
+            $("#carModelSearchCombo").select2({ placeholder: comboPlaceholder });
+        }
+        else {
+            $("#carModelSearchCombo").select2({ placeholder: comboPlaceholderToSelect });
+        }
+    });
 
 
     $("#allLandfillSelected").on("click", function () {
@@ -314,9 +360,11 @@ var $landfillDataSource = [];
 var $recordNumber = null;
 var $wasteTypeDataSource = [];
 var $customerDataSource = [];
+var $carModelDataSource = [];
 var $loadAllLandfill = true;
 var $loadAllWasteType = true;
 var $loadAllCustomer = true;
+var $loadAllCar = true;
 
 function loadPageCount() {
 
@@ -329,7 +377,7 @@ function loadPageCount() {
     InitPages(0);
 
     $.ajax({
-        url: "/SolidWasteAct/LoadPageCount",
+        url: "/SolidWasteActJurnal/LoadPageCount",
         type: "POST",
         dataType: "json",
         data: {
@@ -342,6 +390,8 @@ function loadPageCount() {
             loadAllWasteType: $loadAllWasteType,
             loadAllCustomer: $loadAllCustomer,
             loadAllLandfill: $loadAllLandfill,
+            loadAllCarNumber: $loadAllCar,
+            carNubmers: $carModelDataSource
         },
         success: function (data) {
             InitPages(data.pageCount)
@@ -364,7 +414,7 @@ function loadData(pageNum) {
     });
 
     $.ajax({
-        url: "/SolidWasteAct/FilterSolidWasteAct",
+        url: "/SolidWasteActJurnal/FilterSolidWasteAct",
         type: "POST",
         dataType: "json",
         data: {
@@ -378,6 +428,9 @@ function loadData(pageNum) {
             loadAllCustomer: $loadAllCustomer,
             loadAllLandfill: $loadAllLandfill,
             pageNumber: pageNum,
+            loadAllCarNumber: $loadAllCar,
+            carNubmers: $carModelDataSource,
+
         },
         success: function (data) {
             initTableItemSource(data);
@@ -418,6 +471,8 @@ function exportToExcel() {
                 loadAllWasteType: $loadAllWasteType,
                 loadAllCustomer: $loadAllCustomer,
                 loadAllLandfill: $loadAllLandfill,
+                loadAllCarNumber: $loadAllCar,
+                carNubmers: $carModelDataSource,
             },
             success: function (data) {
                 App.unblockUI(editorName);
@@ -452,6 +507,8 @@ function exportToExcel() {
                 loadAllWasteType: $loadAllWasteType,
                 loadAllCustomer: $loadAllCustomer,
                 loadAllLandfill: $loadAllLandfill,
+                loadAllCarNumber: $loadAllCar,
+                carNubmers: $carModelDataSource,
             },
             success: function (data) {
                 App.unblockUI(editorName);
@@ -489,6 +546,7 @@ jQuery(document).ready(function () {
     loadLandfillSource(true);
     loadWasteTypeItemSource();
     loadCustomerItemSource();
+    loadCarModel()
     FilterSolidWasteAct();
     exportToExcel();
 });

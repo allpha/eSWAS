@@ -14,12 +14,13 @@
     [ClientErrorHandler]
     public class AgreementController : Controller
     {
-        // GET: Region
+        [Authorization("Agreement.View")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorization("Agreement.View")]
         public JsonResult Load()
         {
             var result = new List<AgreementItem>();
@@ -42,7 +43,7 @@
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
-
+        [Authorization("Agreement.View")]
         public JsonResult LoadCustomer()
         {
             var result = new List<ComboBoxItem>();
@@ -65,8 +66,7 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
-        //Get Agreement/Create
+        [Authorization("Agreement.Create")]
         public ActionResult Create()
         {
             var NewItem = new AgreementViewModel()
@@ -79,8 +79,8 @@
             return View(NewItem);
         }
 
-        // POST: Agreement/Create
         [HttpPost]
+        [Authorization("Agreement.Create")]
         public JsonResult Create(string code, int customerId, DateTime startDate, DateTime endDate)
         {
             var bussinessLogic = new AgreementBusinessLogic();
@@ -107,7 +107,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Agreement/Edit/5
+        [Authorization("Agreement.Edit")]
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new AgreementBusinessLogic();
@@ -137,8 +137,8 @@
             }
         }
 
-        // POST: Agreement/Edit/5
         [HttpPost]
+        [Authorization("Agreement.Edit")]
         public JsonResult Edit(int id, string code, int customerId, DateTime startDate, DateTime endDate)
         {
             var bussinessLogic = new AgreementBusinessLogic();
@@ -166,7 +166,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Agreement/Delete/5
+        [Authorization("Agreement.Delete")]
         public ActionResult Delete(int id)
         {
 
@@ -193,8 +193,8 @@
             }
         }
 
-        // POST: Agreement/Delete/5
         [HttpPost]
+        [Authorization("Agreement.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new AgreementBusinessLogic();

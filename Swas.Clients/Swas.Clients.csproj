@@ -196,17 +196,18 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\AccountAutorization.cs" />
     <Compile Include="Common\CustomerTypeEnumDescirption.cs" />
     <Compile Include="Common\ClientErrorHandler.cs" />
     <Compile Include="Common\ExcelExporter.cs" />
+    <Compile Include="Common\Session.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\SolidWasteActJurnalController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandfillController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\AgreementController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
@@ -221,9 +222,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EditViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LandfillViewModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\AgreementViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -252,10 +251,10 @@
     <Content Include="assets\global\plugins\jquery-validation\js\jquery.validate.js" />
     <Content Include="assets\global\plugins\jquery-validation\js\jquery.validate.min.js" />
     <Content Include="assets\global\plugins\jquery.autocomplete.js" />
-    <Content Include="assets\pages\scripts\Agreement\Delete.js" />
-    <Content Include="assets\pages\scripts\Agreement\Edit.js" />
-    <Content Include="assets\pages\scripts\Agreement\Create.js" />
-    <Content Include="assets\pages\scripts\Agreement\Index.js" />
+    <Content Include="assets\script\Agreement\Delete.js" />
+    <Content Include="assets\script\Agreement\Edit.js" />
+    <Content Include="assets\script\Agreement\Create.js" />
+    <Content Include="assets\script\Agreement\Index.js" />
     <Content Include="assets\pages\scripts\BusyIndicator\BusyIndicator.js" />
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
@@ -266,6 +265,8 @@
     <Content Include="assets\pages\scripts\Permission\Delete.js" />
     <Content Include="assets\pages\scripts\Permission\Edit.js" />
     <Content Include="assets\pages\scripts\Permission\Index.js" />
+    <Content Include="assets\script\Account\Index.js" />
+    <Content Include="assets\script\SolidWasteActJunal\Detail.js" />
     <Content Include="assets\script\User\Disible.js" />
     <Content Include="assets\script\User\UnlockUser.js" />
     <Content Include="assets\script\User\Create.js" />
@@ -279,9 +280,9 @@
     <Content Include="assets\pages\scripts\Role\Index.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Detail.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Create.js" />
-    <Content Include="assets\pages\scripts\SolidWasteAct\Delete.js" />
-    <Content Include="assets\pages\scripts\SolidWasteAct\Edit.js" />
-    <Content Include="assets\pages\scripts\SolidWasteAct\Register.js" />
+    <Content Include="assets\script\SolidWasteActJunal\Delete.js" />
+    <Content Include="assets\script\SolidWasteActJunal\Edit.js" />
+    <Content Include="assets\script\SolidWasteActJunal\Register.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Index.js" />
     <Content Include="assets\pages\scripts\Landfill\Create.js" />
     <Content Include="assets\pages\scripts\Landfill\Delete.js" />
@@ -345,24 +346,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
@@ -403,6 +386,11 @@
     <Content Include="Views\User\PasswordReset.cshtml" />
     <Content Include="Views\User\UnlockPromt.cshtml" />
     <Content Include="Views\User\DisiblePromt.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\SolidWasteActJurnal\Detail.cshtml" />
+    <Content Include="Views\SolidWasteActJurnal\Index.cshtml" />
+    <Content Include="Views\SolidWasteActJurnal\Edit.cshtml" />
+    <Content Include="Views\SolidWasteActJurnal\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

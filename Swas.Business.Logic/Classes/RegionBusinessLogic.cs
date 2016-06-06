@@ -47,7 +47,7 @@
             return result;
         }
 
-        public List<RegionItem> LoadSearchSource()
+        public List<RegionItem> LoadSearchSource(Guid sessionId)
         {
             var result = new List<RegionItem>();
 
@@ -56,6 +56,9 @@
                 Connect();
 
                 result = (from region in Context.Regions
+                          join userRegion in Context.UserRegions on region.Id equals userRegion.RegionId
+                          join user in Context.Users on userRegion.UserId equals user.Id
+                          where user.SeassionId == sessionId
                           select new RegionItem
                           {
                               Id = region.Id,

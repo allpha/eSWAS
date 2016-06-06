@@ -25,6 +25,9 @@ namespace Swas.Clients.Models
         public decimal Quantity { get; set; }
         [Display(Name = "ღირებულება")]
         public decimal Price { get; set; }
+        [Display(Name = "მანქანის ნომერი")]
+        public string CarNumber { get; set; }
+
     }
 
 

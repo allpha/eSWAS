@@ -143,6 +143,10 @@
     <Compile Include="Migrations\201606040952400_Users_Update_CreateDate.Designer.cs">
       <DependentUpon>201606040952400_Users_Update_CreateDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606042059139_User_Add_Session_ActivityDate.cs" />
+    <Compile Include="Migrations\201606042059139_User_Add_Session_ActivityDate.Designer.cs">
+      <DependentUpon>201606042059139_User_Add_Session_ActivityDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -210,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606040952400_Users_Update_CreateDate.resx">
       <DependentUpon>201606040952400_Users_Update_CreateDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606042059139_User_Add_Session_ActivityDate.resx">
+      <DependentUpon>201606042059139_User_Add_Session_ActivityDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,6 +13,7 @@
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
         public string WasteTypeName { get; set; }
+        public string CarNumber { get; set; }
         public decimal Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Price { get; set; }
@@ -30,6 +31,7 @@
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
         public string WasteTypeName { get; set; }
+        public string CarNumber { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
     }

@@ -44,10 +44,12 @@ function initTableItemSource(itemSource) {
                      '<td>' +
                         moment(itemSource[i].EndDate).format('DD/MM/YYYY') +
                      '</td>' +
-                    '<td>' +
-                    '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>' +
-                    '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>' +
-                    '</td></tr>';
+                    '<td>';
+        if ($("#hasEdit").val() == "true")
+            row += '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>';
+        if ($("#hasDelete").val() == "true")
+            row += '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>';
+        row += '</td></tr>';
 
         $('#itemSource tr:last').after(row);
     }

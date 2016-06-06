@@ -26,6 +26,8 @@ namespace Swas.Clients.Models
         public string CustomerCode { get; set; }
         [Display(Name = "შემომტანის დასახელება")]
         public string CustomerName { get; set; }
+        [Display(Name = "მანქანის ნომერი")]
+        public string CarNumber { get; set; }
         [Display(Name = "მყარი ნარჩენის ტიპი")]
         public string WasteTypeName { get; set; }
         [Display(Name = "ნარჩენის მოცულობა")]
@@ -52,6 +54,9 @@ namespace Swas.Clients.Models
         public string CustomerCode { get; set; }
         [Display(Name = "შემომტანის დასახელება")]
         public string CustomerName { get; set; }
+        [Display(Name = "მანქანის ნომერი")]
+        public string CarNumber { get; set; }
+
         [Display(Name = "მყარი ნარჩენის ტიპი")]
         public string WasteTypeName { get; set; }
         [Display(Name = "მოცულობა")]

@@ -24,6 +24,9 @@
         public DateTime CreateDate { get; set; }
         public bool ChangePassword { get; set; }
 
+        public Guid? SeassionId { get; set; }
+        public DateTime? LastActivityDate { get; set; }
+
         public virtual Role Role { get; set; }
         public virtual ICollection<UserRegion> UserRegions { get; set; }
     }

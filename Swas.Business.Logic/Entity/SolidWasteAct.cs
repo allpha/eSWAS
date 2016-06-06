@@ -12,6 +12,7 @@
         public string ReceiverLastName { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
+        public string CarNumber { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal PaydAmount { get; set; }
