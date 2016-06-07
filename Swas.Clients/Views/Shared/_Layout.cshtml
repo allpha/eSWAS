@@ -9,13 +9,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Metronic | Extended Modals</title>
+    <title>მყარი ნარჩენების ელექტორუნული აღრიცხვის სისტემა</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    @*<link href="~/fonts/font1/stylesheet.css" rel="stylesheet" />*@
     <link href="~/fonts/stylesheet.css" rel="stylesheet" />
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 
@@ -45,7 +44,7 @@
     <link href="../assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
     <link href="../assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
-    <link rel="shortcut icon" href="favicon.ico" />
+    @*<link rel="shortcut icon" href="favicon.ico" />*@
 </head>
 <!-- END HEAD -->
 
@@ -55,12 +54,11 @@
         <!-- BEGIN HEADER INNER -->
         <div class="page-header-inner ">
             <!-- BEGIN LOGO -->
-            <div class="page-logo">
-                <a href="index.html">
-                    @*<img src="../assets/layouts/layout4/img/logo-light.png" alt="logo" class="logo-default" />*@
-                    @*<img src="~/assets/css/logo.jpg" alt="logo" class="logo-default" width="200px" height="30px"/>*@
-                </a>
-                <div class="menu-toggler sidebar-toggler">
+            <div class="page-logo" style="font-family: mtavrulibold; padding-top:20px;">
+                <span alt="logo" class="logo-default font-blue"> მყარი ნარჩენების</span><br />
+                <span alt="logo" class="logo-default font-blue"> მართვის სისტემა</span>
+
+                <div class="menu-toggler sidebar-toggler" style="margin-top:-10px;">
                     <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
                 </div>
             </div>
@@ -88,39 +86,35 @@
                                         @Globals.SessionContext.Current.User.FirstName  //@Globals.SessionContext.Current.User.LastName
                                     }
                                 </span>
-                                
-
-
-                                <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg" />
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 @*<li>
-                                        <a href="page_user_profile_1.html">
-                                            <i class="icon-user"></i> My Profile
-                                        </a>
+                                    <a href="page_user_profile_1.html">
+                                    <i class="icon-user"></i> My Profile
+                                    </a>
                                     </li>
                                     <li>
-                                        <a href="app_calendar.html">
-                                            <i class="icon-calendar"></i> My Calendar
-                                        </a>
+                                    <a href="app_calendar.html">
+                                    <i class="icon-calendar"></i> My Calendar
+                                    </a>
                                     </li>
                                     <li>
-                                        <a href="app_inbox.html">
-                                            <i class="icon-envelope-open"></i> My Inbox
-                                            <span class="badge badge-danger"> 3 </span>
-                                        </a>
+                                    <a href="app_inbox.html">
+                                    <i class="icon-envelope-open"></i> My Inbox
+                                    <span class="badge badge-danger"> 3 </span>
+                                    </a>
                                     </li>
                                     <li>
-                                        <a href="app_todo_2.html">
-                                            <i class="icon-rocket"></i> My Tasks
-                                            <span class="badge badge-success"> 7 </span>
-                                        </a>
+                                    <a href="app_todo_2.html">
+                                    <i class="icon-rocket"></i> My Tasks
+                                    <span class="badge badge-success"> 7 </span>
+                                    </a>
                                     </li>
                                     <li class="divider"> </li>
                                     <li>
-                                        <a href="page_user_lock_1.html">
-                                            <i class="icon-lock"></i> Lock Screen
-                                        </a>
+                                    <a href="page_user_lock_1.html">
+                                    <i class="icon-lock"></i> Lock Screen
+                                    </a>
                                     </li>*@
                                 <li>
                                     <a href="/Account/Logout">
@@ -129,13 +123,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- END USER LOGIN DROPDOWN -->
-                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                        @*<li class="dropdown dropdown-extended quick-sidebar-toggler">
-                                <span class="sr-only">Toggle Quick Sidebar</span>
-                                <i class="icon-logout"></i>
-                            </li>*@
-                        <!-- END QUICK SIDEBAR TOGGLER -->
                     </ul>
                 </div>
                 <!-- END TOP NAVIGATION MENU -->
@@ -158,90 +145,15 @@
             <div class="page-sidebar navbar-collapse collapse">
                 <!-- BEGIN SIDEBAR MENU -->
                 <ul class="page-sidebar-menu   " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                    <li class="nav-item start ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="icon-home"></i>
-                            <span class="title">მყარი ნარჩენები</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item start ">
-                                <a href="/SolidWasteAct/" class="nav-link ">
-                                    <span class="title">რეგისტრაცია</span>
-                                </a>
-                            </li>
-                            <li class="nav-item start ">
-                                <a href="/SolidWasteActJurnal/" class="nav-link ">
-                                    <span class="title">რეესტრი</span>
-                                </a>
-                            </li>
-                            <li class="nav-item start ">
-                                <a href="/Agreement/" class="nav-link ">
-                                    <span class="title">ხელშეკრულებები</span>
-                                </a>
-                            </li>
-                            <li class="nav-item start ">
-                                <a href="/Payment/" class="nav-link ">
-                                    <span class="title">გადახდები</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="heading">
-                        <h3 class="uppercase" style="font-family: mtavrulibold">ადმინისტრირება</h3>
-                    </li>
-                    <li class="nav-item  ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="icon-puzzle"></i>
-                            <span class="title">ცნობარი</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item  ">
-                                <a href="/Region/Index" class="nav-link ">
-                                    <span class="title">მდებარეობა</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="/Landfill/Index" class="nav-link ">
-                                    <span class="title">ნაგავსაყრელი</span>
-                                    <span class="badge badge-danger">2</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="/WasteType/Index" class="nav-link ">
-                                    <span class="title">ნარჩენის სახეობა</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    @{
+                        var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+                        if (string.IsNullOrEmpty(controllerName))
+                        {
+                            controllerName = string.Empty;
+                        }
+                    }
 
-                    <li class="nav-item  ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="icon-user"></i>
-                            <span class="title">მომხმარებლები</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item  ">
-                                <a href="/Permission/Index" class="nav-link ">
-                                    <span class="title">უფლებები</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="/Role/Index" class="nav-link ">
-                                    <span class="title">როლები</span>
-                                    <span class="badge badge-danger">2</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="/User/Index" class="nav-link ">
-                                    <span class="title">რეგისტრაცია</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
+                    @Html.Raw((new MainPageMenu()).GenerateMenu(controllerName))
 
                 </ul>
                 <!-- END SIDEBAR MENU -->
@@ -261,7 +173,7 @@
         <!-- END CONTENT -->
         <!-- BEGIN QUICK SIDEBAR -->
         @*<a href="javascript:;" class="page-quick-sidebar-toggler">
-                <i class="icon-login"></i>
+            <i class="icon-login"></i>
             </a>*@
         <!-- END QUICK SIDEBAR -->
     </div>
@@ -300,7 +212,11 @@
     <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/jquery.mockjax.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js" type="text/javascript"></script>
-    @*<script src="../assets/global/plugins/bootstrap-editable/inputs-ext/address/address.js" type="text/javascript"></script>*@
+    <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
 
 
     <!-- END PAGE LEVEL PLUGINS -->

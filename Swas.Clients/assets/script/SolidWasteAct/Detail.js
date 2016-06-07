@@ -5,9 +5,9 @@ function getActReviewDetail(itemSource) {
 
         text += '<tr>' +
                         '<td>' + itemSource[i].WasteTypeName + '</td>' +
-                        '<td style="text-align:right">' + itemSource[i].Quantity + '</td>' +
-                        '<td style="text-align:right">' + itemSource[i].UnitPrice + '</td>' +
-                        '<td style="text-align:right">' + itemSource[i].Amount + '</td>' +
+                        '<td style="text-align:right">' + Number(itemSource[i].Quantity).toFixed(2) + '</td>' +
+                        '<td style="text-align:right">' + Number(itemSource[i].UnitPrice).toFixed(2) + '</td>' +
+                        '<td style="text-align:right">' + Number(itemSource[i].Amount).toFixed(2) + '</td>' +
                       '</tr>';
 
     }
@@ -22,7 +22,7 @@ function generateActReview(data) {
             '<div class="form-body">' +
                 '<div class="form-group col-sm-12">' +
                     '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>თარიღი:</b></div>' +
-                    '<div class="col-sm-3" style="text-align:left">' + moment(data.ActDate).format('DD/MM/YYYY') + ' </div>' +
+                    '<div class="col-sm-3" style="text-align:left">' + moment(data.ActDate).format('DD/MM/YYYY HH:mm') + ' </div>' +
                     '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ფიზიკური/იურიდიული პირის დასახელება:</b> </div>' +
                     '<div class="col-sm-4" style="text-align:left">' + data.CustomerName + '</div>' +
                 '</div>' +
@@ -85,7 +85,7 @@ function generateActReview(data) {
                             '</tbody>' +
                         '</table>' +
                         '<div class="btn-group pull-right">' +
-                            '<b>სულ:&nbsp&nbsp</b>' + data.TotalAmount + ' ₾' +
+                            '<b>სულ:&nbsp&nbsp</b>' + Number(data.TotalAmount).toFixed(2) + ' ₾' +
                         '</div>' +
                     '</div>' +
                 '</div>' +

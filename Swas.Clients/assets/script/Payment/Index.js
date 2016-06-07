@@ -66,7 +66,7 @@ function initTableItemSource(itemSource) {
                        '<td>' + itemSource[i].CustomerName + '</td>' +
                         '<td>' + itemSource[i].CustomerCode + '</td>' +
                         '<td>' + itemSource[i].CustomerInfo + '</td>' +
-                       '<td style="text-align:right">' + itemSource[i].Quantity.toFixed(2) + ' ტ</td>' +
+                       '<td style="text-align:right">' + itemSource[i].Quantity.toFixed(2) + ' ტ.</td>' +
                        '<td style="text-align:right">' + itemSource[i].Price.toFixed(2) + ' ₾</td>' +
                        '<td style="text-align:right">' + itemSource[i].PaidAmount.toFixed(2) + ' ₾</td>' +
                        '<td style="text-align:right">' + itemSource[i].DebtAmount.toFixed(2) + ' ₾</td>' +

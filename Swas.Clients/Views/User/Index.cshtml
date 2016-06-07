@@ -10,8 +10,17 @@
         <div class="portlet light bordered" id="viewBody">
             <div class="portlet-title">
                 <div class="caption caption-md">
-                    <i class="icon-pointer font-red"></i>
-                    <span class="caption-subject font-red bold uppercase" style="font-family: mtavrulibold">მომხმარებლები</span>
+                    <i class="icon-pointer font-blue"></i>
+                    <span class="caption-subject font-blue bold uppercase" style="font-family: mtavrulibold">მომხმარებლები</span>
+                </div>
+                <div class="btn-group pull-right">
+                    @if (Globals.SessionContext.HasPermission("SolidWasteAct.Create"))
+                    {
+                        <button style="margin-right:5px" class="btn blue btn-outline" onclick="javascript:create();">
+                            <i class="fa fa-plus"></i>
+                            ახალი
+                        </button>
+                    }
                 </div>
             </div>
 
@@ -19,23 +28,6 @@
             <div id="ajax-modal" class="modal fade" data-width="800" tabindex="-1"> </div>
 
             <div class="portlet-body">
-
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="btn-group pull-right">
-                                @if (Globals.SessionContext.HasPermission("SolidWasteAct.Create"))
-                                {
-                                    <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
-                                        <i class="fa fa-plus"></i>
-                                        ახალი
-                                    </button>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
                 @if (Globals.SessionContext.HasPermission("User.Delete"))
                 {
@@ -102,7 +94,7 @@
 
 </div>
 @section PageScripts{
-    <script src="~/assets/pages/scripts/BusyIndicator/BusyIndicator.js"></script>
+    <script src="~/assets/script/BusyIndicator/BusyIndicator.js"></script>
     <script src="~/assets/script/User/Index.js"></script>
 }
 

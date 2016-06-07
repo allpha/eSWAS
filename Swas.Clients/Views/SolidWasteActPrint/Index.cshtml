@@ -22,7 +22,7 @@
             <tr>
                 <td colspan="2" style="text-align:center;">
                     <p>პოლიგონზე მყარი ნარჩენების განთავსების აქტი #@Html.DisplayFor(model => model.Id)</p>
-                    <p>თარიღი: @Model.ActDate.Day.ToString("00")/@Model.ActDate.Month.ToString("00")/@Model.ActDate.Year.ToString()</p>
+                    <p>თარიღი: @Model.ActDate.Day.ToString("00")/@Model.ActDate.Month.ToString("00")/@Model.ActDate.Year.ToString() @Model.ActDate.Hour.ToString("00"):@Model.ActDate.Minute.ToString("00")</p>
                 </td>
 
             </tr>

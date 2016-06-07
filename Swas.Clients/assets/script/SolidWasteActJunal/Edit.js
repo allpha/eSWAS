@@ -154,7 +154,7 @@ function updataTotalSumValue() {
         totalSum += $itemSource[i].Amount;
     }
 
-    $('#totalSum').text(totalSum + ' ₾');
+    $('#totalSum').text(Number(totalSum).toFixed(2) + ' ₾');
 }
 
 $('#btWasteSave').click(function () {
@@ -203,9 +203,9 @@ $('#btWasteSave').click(function () {
 
                     var hidden = '<input type="hidden" id="hidden' + data.WasteTypeId + '" value="Norway">'
                     var row = '<tr><td class="trWasteTypeName">' + data.WasteTypeName +
-                               '</td> <td class="trQuantity">' + data.Quantity +
-                               '</td> <td class="trUnitPrice">' + data.UnitPrice +
-                               '</td><td class="trAmount">' + data.Amount +
+                               '</td> <td class="trQuantity" style="text-align: right;">' + Number(data.Quantity).toFixed(2) +
+                               '</td> <td class="trUnitPrice" style="text-align: right;">' + Number(data.UnitPrice).toFixed(2) +
+                               '</td><td class="trAmount" style="text-align: right;">' + Number(data.Amount).toFixed(2) +
                                 '</td>' + editButton + removeButton + ' </tr>' + hidden;
 
                     $('#SolidWastActDetailTable tr:last').after(row);
@@ -232,9 +232,9 @@ $('#btWasteSave').click(function () {
                 else {
 
                     $selectedRow.find(".trWasteTypeName").html(data.WasteTypeName);
-                    $selectedRow.find(".trQuantity").html(data.Quantity);
-                    $selectedRow.find(".trUnitPrice").html(data.UnitPrice);
-                    $selectedRow.find(".trAmount").html(data.Amount);
+                    $selectedRow.find(".trQuantity").html(Number(data.Quantity).toFixed(2));
+                    $selectedRow.find(".trUnitPrice").html(Number(data.UnitPrice).toFixed(2));
+                    $selectedRow.find(".trAmount").html(Number(data.Amount).toFixed(2));
 
                     UpdateItemSource(data.WasteTypeId, data.WasteTypeName, data.Quantity, data.UnitPrice, data.Amount);
                     updataTotalSumValue();
@@ -366,9 +366,9 @@ function getActReviewDetail() {
 
         text += '<tr>' +
                         '<td>' + $itemSource[i].WasteTypeName + '</td>' +
-                        '<td style="text-align:right">' + $itemSource[i].Quantity + '</td>' +
-                        '<td style="text-align:right">' + $itemSource[i].UnitPrice + '</td>' +
-                        '<td style="text-align:right">' + $itemSource[i].Amount + '</td>' +
+                        '<td style="text-align:right">' +Number($itemSource[i].Quantity).toFixed(2) + '</td>' +
+                        '<td style="text-align:right">' + Number($itemSource[i].UnitPrice).toFixed(2) + '</td>' +
+                        '<td style="text-align:right">' + Number($itemSource[i].Amount).toFixed(2) + '</td>' +
                       '</tr>';
 
         totalAmount += $itemSource[i].Amount;
@@ -449,7 +449,7 @@ function generateActReview() {
                             '</tbody>' +
                         '</table>' +
                         '<div class="btn-group pull-right">' +
-                            '<b>სულ:&nbsp&nbsp</b>' + actDetailInfo.TotalAmount + ' ₾' +
+                            '<b>სულ:&nbsp&nbsp</b>' + Number(actDetailInfo.TotalAmount).toFixed(2) + ' ₾' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -484,9 +484,9 @@ function AddDetailTableDataSource(dataSourse) {
 
         var hidden = '<input type="hidden" id="hidden' + data.WasteTypeId + '" value="Norway">'
         var row = '<tr><td class="trWasteTypeName">' + data.WasteTypeName +
-                   '</td> <td class="trQuantity">' + data.Quantity +
-                   '</td> <td class="trUnitPrice">' + data.UnitPrice +
-                   '</td><td class="trAmount">' + data.Amount +
+                   '</td> <td class="trQuantity" style="text-align: right;">' + Number(data.Quantity).toFixed(2) +
+                   '</td> <td class="trUnitPrice" style="text-align: right;">' + Number(data.UnitPrice).toFixed(2) +
+                   '</td><td class="trAmount" style="text-align: right;">' +  Number( data.Amount).toFixed(2) +
                     '</td>' + editButton + removeButton + ' </tr>' + hidden;
 
         $('#SolidWastActDetailTable tr:last').after(row);
@@ -505,6 +505,8 @@ function AddDetailTableDataSource(dataSourse) {
             UnitPrice: data.UnitPrice,
             Amount: data.Amount
         });
+
+        updataTotalSumValue()
     }
 }
 

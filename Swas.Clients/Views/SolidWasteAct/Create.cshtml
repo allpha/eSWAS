@@ -25,11 +25,11 @@
                                 თარიღი:
                             </div>
                             <div class="col-sm-4">
-                                <div class="input-group date date-picker" id="ActDateFromPicker" data-date-format="mm/dd/yyyy">
-                                    <input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate.Month.ToString("00")/@Model.ActDate.Day.ToString("00")/@Model.ActDate.Year.ToString()">
-                                    @*<input type="datetime" class="form-control" name="ActDate" id="ActDate" size="6" readonly value="@Model.ActDate">*@
+
+                                <div class="input-group date form_datetime" id="ActDateFromPicker">
+                                    <input type="text" size="16" readonly class="form-control" name="ActDate" id="ActDate" value="@Model.ActDate.Month.ToString("00")/@Model.ActDate.Day.ToString("00")/@Model.ActDate.Year.ToString() @Model.ActDate.Hour.ToString("00"):@Model.ActDate.Minute.ToString("00")">
                                     <span class="input-group-btn">
-                                        <button class="btn default" type="button" style="margin-left:0.3px;">
+                                        <button class="btn default date-set" type="button">
                                             <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
@@ -144,32 +144,57 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-sm-12" style="padding:10px;">
-                            <div class="btn-group pull-right" style="margin-bottom:10px; margin-right:14px;">
-                                <a id="addWaste" class="btn default" data-target="#detailEditorDialog" data-toggle="modal">
-                                    <i class="fa fa-plus"></i>
-                                    მყარი ნარჩენის დამატება
-                                </a>
-                            </div>
 
-                            <div class="col-md-12">
-                                <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center;">დასახელება</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი</th>
-                                            <th style="height: 100%;vertical-align: middle; text-align: center;width: 79px;"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                                <div class="btn-group pull-right">
-                                    <b>სულ:&nbsp&nbsp</b> <label id="totalSum">0 ₾</label>
+                        <div class="form-group col-sm-12" style="padding:10px;">
+
+                            <div class="tabbable-line">
+                                <ul class="nav nav-tabs ">
+                                    <li class="active">
+                                        <a href="#tab_15_1" data-toggle="tab" style="font-size:15px;">
+                                            მყარი ნარჩენები
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_15_1">
+
+                                        <span class="btn btn-xs default pull-right" style="margin-top:-60px;" data-target="#detailEditorDialog" data-toggle="modal" id="addWaste">
+                                            <i class="fa fa-plus"></i>
+                                        </span>
+                                        <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: left;">დასახელება</th>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">რ-ბ[ტონა]</th>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ერთეულის&#13;&#10;ფასი</th>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">ჯამი</th>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: center;width: 79px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div class="btn-group pull-right">
+                                            <b>სულ:&nbsp&nbsp</b> <label id="totalSum">0 ₾</label>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
+
+
+                        @*<div class="form-group col-sm-12" style="padding:10px;">
+                                <div class="btn-group pull-right" style="margin-bottom:10px; margin-right:14px;">
+                                    <a id="addWaste" class="btn default" data-target="#detailEditorDialog" data-toggle="modal">
+                                        <i class="fa fa-plus"></i>
+                                        მყარი ნარჩენის დამატება
+                                    </a>
+                                </div>
+
+                                <div class="col-md-12">
+                                </div>
+                            </div>*@
 
 
                         <div class="form-group col-sm-12">
@@ -288,7 +313,7 @@
     <div class="modal-footer">
         <div class="btn-group pull-left display-hide" id="btEditDiv">
             <a id="btEdit" class="btn green">
-                <i class="fa fa-angle-left"></i>
+                <i class="fa fa-chevron-left"></i>
                 რედაქტირება
             </a>
         </div>
@@ -296,12 +321,13 @@
         <div class="btn-group pull-right" id="btNexDiv">
             <a id="next" class="btn green">
                 შემდეგი
-                <i class="fa fa-angle-right"></i>
+                <i class="fa fa-chevron-right"></i>
             </a>
         </div>
 
         <div class="btn-group pull-right display-hide" id="btSaveDiv">
             <a id="btSave" class="btn green">
+                <i class="fa fa-chevron-down"></i>
                 დასრულება
             </a>
         </div>
@@ -316,9 +342,19 @@
     var transporterItemSource = @Html.Raw(Json.Encode(Model.TransporterItemSource));
 </script>
 
-<script src="~/assets/pages/scripts/SolidWasteAct/Create.js"></script>
+<script src="~/assets/script/SolidWasteAct/Create.js"></script>
 
 <script>
+
+
+    $(".form_datetime").datetimepicker({
+        autoclose: true,
+        isRTL: App.isRTL(),
+        format: "mm/dd/yyyy hh:ii",
+        pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
+    });
+
+
 
     $('#detailEditorDialog').on('shown.bs.modal', function () {
         $('#radioQuantityTon').focus();

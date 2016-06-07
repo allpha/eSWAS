@@ -69,8 +69,8 @@ function initTableItemSource(itemSource) {
                        '<td>' + itemSource[i].Receiver + '</td>' +
                        '<td>' + itemSource[i].Customer + '</td>' +
                        '<td>' + itemSource[i].CarNumber + '</td>' +
-                       '<td>' + itemSource[i].Quantity + '</td>' +
-                       '<td>' + itemSource[i].Price + '</td>' +
+                       '<td style="text-align: right;">' + Number(itemSource[i].Quantity).toFixed(2) + ' ტ.</td>' +
+                       '<td style="text-align: right;">' + Number(itemSource[i].Price).toFixed(2) + ' ₾</td>' +
                        '<td>';
         if ($("#hasDetial").val() == "true") row += '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="icon-tag"></i></a>';
         if ($("#hasPrint").val() == "true") row += '<a target="_blank" href="/SolidWasteActPrint/Index/' + itemSource[i].Id + '" class="btn btn-xs default"><i class="fa fa-print"></i></a>';
