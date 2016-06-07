@@ -1,4 +1,4 @@
-﻿
+﻿@using Swas.Clients.Common
 @{
     ViewBag.Title = "Index";
 }
@@ -16,7 +16,7 @@
             </div>
 
             <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>
-            <div id="ajax-modal" class="modal fade" data-width="800"  tabindex="-1"> </div>
+            <div id="ajax-modal" class="modal fade" data-width="800" tabindex="-1"> </div>
 
             <div class="portlet-body">
 
@@ -24,14 +24,59 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group pull-right">
-                                <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
-                                    <i class="fa fa-plus"></i>
-                                    ახალი
-                                </button>
+                                @if (Globals.SessionContext.HasPermission("SolidWasteAct.Create"))
+                                {
+                                    <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
+                                        <i class="fa fa-plus"></i>
+                                        ახალი
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                @if (Globals.SessionContext.HasPermission("User.Delete"))
+                {
+                    <input type="hidden" id="hasDelete" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasDelete" value="false" />
+                }
+                @if (Globals.SessionContext.HasPermission("User.Edit"))
+                {
+                    <input type="hidden" id="hasEdit" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasEdit" value="false" />
+                }
+                @if (Globals.SessionContext.HasPermission("User.Unlock"))
+                {
+                    <input type="hidden" id="hasUnlock" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasUnlock" value="false" />
+                }
+                @if (Globals.SessionContext.HasPermission("User.Disible"))
+                {
+                    <input type="hidden" id="hasDisible" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasDisible" value="false" />
+                }
+                @if (Globals.SessionContext.HasPermission("User.ChangePassword"))
+                {
+                    <input type="hidden" id="hasChangePassword" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasChangePassword" value="false" />
+                }
 
                 <div class="table-scrollable table-scrollable-borderless">
                     <table class="table table-hover table-light" id="itemSource">

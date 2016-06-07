@@ -153,7 +153,7 @@
                                          CustomerType = Group.Key.CustomerType,
                                          WasteTypeName = Group.Key.WasteTypeName,
                                          CarNumber = Group.Key.CarNumber,
-                                         ReceiverName = Group.Key.ReceiverName + " " +Group.Key.ReceiverLastName,
+                                         ReceiverName = Group.Key.ReceiverName + " " + Group.Key.ReceiverLastName,
                                          Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
                                          Price = Group.Sum(a => a == null ? 0 : a.Amount)
                                      }).ToList();
@@ -176,6 +176,98 @@
             return result;
         }
 
+        public ReportItem LoadPayment(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+                                        List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
+        {
+            var result = new ReportItem
+            {
+                ReportData = new List<SolidWasteActTotalSumReportItem>(),
+                TotalQuantity = 0M,
+                TotalAmount = 0M
+            };
+
+
+            try
+            {
+                Connect();
+
+                if (customerIdSource == null) customerIdSource = new List<int>();
+                if (wasteTypeIdSource == null) wasteTypeIdSource = new List<int>();
+                if (landFillIdSource == null) landFillIdSource = new List<int>();
+
+                var reportData = (from solidWasteAct in Context.SolidWasteActs
+                                  join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                                  join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
+                                  join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
+                                  from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
+                                  where (id.HasValue && solidWasteAct.Id == id.Value) ||
+                                         (!id.HasValue &&
+                                         ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
+                                         ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
+                                         ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
+                                         ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
+                                         ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
+                                  group solidWasteActDetail by new
+                                  {
+                                      Id = solidWasteAct.Id,
+                                      ActDate = solidWasteAct.ActDate,
+                                      CusotmerCode = customer.Code,
+                                      CustomerName = customer.Name,
+                                      ContactInfo = customer.ContactInfo,
+                                      LandfillName = landfill.Name,
+                                  } into Group
+                                  select new PaymentInfoItem
+                                  {
+                                      ActId = Group.Key.Id,
+                                      ActDate = Group.Key.ActDate,
+                                      CustomerCode = Group.Key.CusotmerCode,
+                                      CustomerName = Group.Key.CustomerName,
+                                      LandfillName = Group.Key.LandfillName,
+                                      CustomerInfo = Group.Key.ContactInfo,
+                                      Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
+                                      Price = Group.Sum(a => a == null ? 0 : a.Amount)
+                                  }).OrderByDescending(a => a.ActId).ToList();
+
+
+                var solidWasteActIdSource = reportData.Select(a => a.ActId).ToList();
+
+                var paymentItemSource = (from payment in Context.Payments
+                                         where solidWasteActIdSource.Contains(payment.SolidWasteActId)
+                                         group payment by new
+                                         {
+                                             payment.SolidWasteActId
+                                         } into Group
+                                         select new
+                                         {
+                                             SolidWasteActId = Group.Key.SolidWasteActId,
+                                             Amount = Group.Sum(a => a.Amount)
+                                         }).ToDictionary(key => key.SolidWasteActId, value => value.Amount);
+
+                foreach (var item in reportData)
+                    if (paymentItemSource.ContainsKey(item.ActId))
+                    {
+                        item.PaidAmount = paymentItemSource[item.ActId];
+                        item.DebtAmount = item.Price - item.PaidAmount;
+                    }
+                    else
+                    {
+                        item.PaidAmount = 0;
+                        item.DebtAmount = 0;
+                    }
+
+                result.ReportData = reportData;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
 
     }
 }

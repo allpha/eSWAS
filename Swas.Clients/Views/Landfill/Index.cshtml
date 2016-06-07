@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Swas.Clients.Models.LandfillViewModel>
-
+@using Swas.Clients.Common
 @{
     ViewBag.Title = "ნაგავსაყრელების ცნობარი";
 }
@@ -24,14 +24,37 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group pull-right">
-                                <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
-                                    <i class="fa fa-plus"></i>
-                                    ახალი
-                                </button>
+                                @if (Globals.SessionContext.HasPermission("Landfill.Insert"))
+                                {
+                                    <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
+                                        <i class="fa fa-plus"></i>
+                                        ახალი
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                @if (Globals.SessionContext.HasPermission("Landfill.Delete"))
+                {
+                    <input type="hidden" id="hasDelete" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasDelete" value="false" />
+                }
+
+
+                @if (Globals.SessionContext.HasPermission("Landfill.Edit"))
+                {
+                    <input type="hidden" id="hasEdit" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasEdit" value="false" />
+                }
 
                 <div class="table-scrollable table-scrollable-borderless">
                     <table class="table table-hover table-light" id="regionsItemSource">
@@ -54,5 +77,5 @@
 </div>
 
 @section PageScripts{
-    <script src="~/assets/pages/scripts/Landfill/Index.js"></script>
+    <script src="~/assets/script/Landfill/Index.js"></script>
 }

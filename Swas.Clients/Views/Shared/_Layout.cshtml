@@ -1,4 +1,4 @@
-﻿
+﻿@using Swas.Clients.Common
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -57,7 +57,8 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="index.html">
-                    <img src="../assets/layouts/layout4/img/logo-light.png" alt="logo" class="logo-default" />
+                    @*<img src="../assets/layouts/layout4/img/logo-light.png" alt="logo" class="logo-default" />*@
+                    @*<img src="~/assets/css/logo.jpg" alt="logo" class="logo-default" width="200px" height="30px"/>*@
                 </a>
                 <div class="menu-toggler sidebar-toggler">
                     <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -81,51 +82,59 @@
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown dropdown-user dropdown-dark">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <span class="username username-hide-on-mobile"> ადმინისტრატორი </span>
+                                <span class="username username-hide-on-mobile">
+                                    @if (Globals.SessionContext.Current.User != null)
+                                    {
+                                        @Globals.SessionContext.Current.User.FirstName  //@Globals.SessionContext.Current.User.LastName
+                                    }
+                                </span>
+                                
+
+
                                 <img alt="" class="img-circle" src="../assets/layouts/layout4/img/avatar9.jpg" />
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
+                                @*<li>
+                                        <a href="page_user_profile_1.html">
+                                            <i class="icon-user"></i> My Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="app_calendar.html">
+                                            <i class="icon-calendar"></i> My Calendar
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="app_inbox.html">
+                                            <i class="icon-envelope-open"></i> My Inbox
+                                            <span class="badge badge-danger"> 3 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="app_todo_2.html">
+                                            <i class="icon-rocket"></i> My Tasks
+                                            <span class="badge badge-success"> 7 </span>
+                                        </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="page_user_lock_1.html">
+                                            <i class="icon-lock"></i> Lock Screen
+                                        </a>
+                                    </li>*@
                                 <li>
-                                    <a href="page_user_profile_1.html">
-                                        <i class="icon-user"></i> My Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="app_calendar.html">
-                                        <i class="icon-calendar"></i> My Calendar
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="app_inbox.html">
-                                        <i class="icon-envelope-open"></i> My Inbox
-                                        <span class="badge badge-danger"> 3 </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="app_todo_2.html">
-                                        <i class="icon-rocket"></i> My Tasks
-                                        <span class="badge badge-success"> 7 </span>
-                                    </a>
-                                </li>
-                                <li class="divider"> </li>
-                                <li>
-                                    <a href="page_user_lock_1.html">
-                                        <i class="icon-lock"></i> Lock Screen
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="page_user_login_1.html">
-                                        <i class="icon-key"></i> Log Out
+                                    <a href="/Account/Logout">
+                                        <i class="icon-key"></i> გამოსვლა
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->
                         <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                        <li class="dropdown dropdown-extended quick-sidebar-toggler">
-                            <span class="sr-only">Toggle Quick Sidebar</span>
-                            <i class="icon-logout"></i>
-                        </li>
+                        @*<li class="dropdown dropdown-extended quick-sidebar-toggler">
+                                <span class="sr-only">Toggle Quick Sidebar</span>
+                                <i class="icon-logout"></i>
+                            </li>*@
                         <!-- END QUICK SIDEBAR TOGGLER -->
                     </ul>
                 </div>
@@ -209,7 +218,7 @@
 
                     <li class="nav-item  ">
                         <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="icon-puzzle"></i>
+                            <i class="icon-user"></i>
                             <span class="title">მომხმარებლები</span>
                             <span class="arrow"></span>
                         </a>
@@ -233,7 +242,7 @@
                         </ul>
                     </li>
 
-                   
+
                 </ul>
                 <!-- END SIDEBAR MENU -->
             </div>
@@ -252,8 +261,8 @@
         <!-- END CONTENT -->
         <!-- BEGIN QUICK SIDEBAR -->
         @*<a href="javascript:;" class="page-quick-sidebar-toggler">
-            <i class="icon-login"></i>
-        </a>*@
+                <i class="icon-login"></i>
+            </a>*@
         <!-- END QUICK SIDEBAR -->
     </div>
     <!-- END CONTAINER -->

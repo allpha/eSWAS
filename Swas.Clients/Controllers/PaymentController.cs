@@ -2,6 +2,7 @@
 {
     using Business.Logic.Classes;
     using Business.Logic.Entity;
+    using Clients.Common;
     using Clients.Models;
     using System;
     using System.Collections.Generic;
@@ -13,46 +14,163 @@
 
     public class PaymentController : Controller
     {
-        // GET: SolidWasteAct
+        [Authorization("Payments.View")]
         public ActionResult Index()
         {
             return View();
         }
 
 
-        public ActionResult Edit(int Id)
+        [Authorization("Payments.Edit")]
+        public ActionResult Edit(int id)
         {
-            return View();
+            return View(new EditViewModel { Id = id});
+        }
 
-            //var bussinessLogic = new RegionBusinessLogic();
+        [HttpPost]
+        [Authorization("Payments.Edit")]
+        public JsonResult GetPayment(int id)
+        {
+            var result = (PaymentInfoItem)null;
+            var bussinessLogic = new PaymentBusinessLogic();
 
-            //try
-            //{
-            //    var regionItem = bussinessLogic.Get(Id);
+            try
+            {
+                result = bussinessLogic.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
 
-            //    var model = new RegionViewModel
-            //    {
-            //        Id = regionItem.Id,
-            //        Name = regionItem.Name
-            //    };
-
-            //    return View(model);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //finally
-            //{
-            //    bussinessLogic = null;
-            //}
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
+        [HttpPost]
+        [Authorization("Payments.Edit")]
+        public JsonResult SavePayment(int id, List<PaymentHistoryItem> payments)
+        {
+            var bussinessLogic = new PaymentBusinessLogic();
+
+            try
+            {
+                bussinessLogic.Insert(id, payments);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
+
+        }
 
         #region Filter
 
         [HttpPost]
+        [Authorization("Payments.View")]
+        public JsonResult LoadFilterRegions()
+        {
+            var result = new List<RegionItem>();
+            var bussinessLogic = new RegionBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadSearchSource(Globals.SessionContext.Current.User.SessionId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization("Payments.View")]
+        public JsonResult LoadFilterLandfills(bool selectAll, List<int> regionItemSource)
+        {
+            var result = new List<LandfillItem>();
+            var bussinessLogic = new LandfillBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForSearch(selectAll, regionItemSource);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization("Payments.View")]
+        public JsonResult LoadFilterWasteType()
+        {
+            var result = new List<WasteTypeSmartItem>();
+            var bussinessLogic = new WasteTypeBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForSearch();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorization("Payments.View")]
+        public JsonResult LoadFilterCustomer()
+        {
+            var result = new List<CustomerRootItem>();
+            var bussinessLogic = new CustomerBusinessLogic();
+
+            try
+            {
+                result = bussinessLogic.LoadForSearch();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        [Authorization("Payments.View")]
         public JsonResult Load(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource,
                                                 bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber)
@@ -91,6 +209,7 @@
         }
 
         [HttpPost]
+        [Authorization("Payments.View")]
         public JsonResult LoadPageCount(int? id, string fromDate, string endDate, List<int> landFillIdSource,
                                         List<int> wasteTypeIdSource, List<int> customerIdSource,
                                         bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)

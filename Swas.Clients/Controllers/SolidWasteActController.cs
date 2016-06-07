@@ -169,6 +169,7 @@
 
 
         [Authorization("SolidWasteAct.Detail")]
+        //[Authorization("Payments.Detail")]
         public ActionResult Detail(int Id)
         {
             return View(new SolidWasteActPrintViewModel

@@ -35,8 +35,6 @@ namespace Swas.Clients.Controllers
             {
                 var userInfo = bussinessLogic.Login(userName, password);
                 Globals.SessionContext.SetUser(userInfo);
-                //  Response.Redirect("SolidWasteAct/Index",true);
-                //return RedirectToAction("Index", "SolidWasteAct");
                 return Json(new { ok = true, newurl = Url.Action("Index", "SolidWasteAct") });
 
             }
@@ -49,6 +47,31 @@ namespace Swas.Clients.Controllers
             {
                 bussinessLogic = null;
             }
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            try
+            {
+                Globals.SessionContext.Clear();
+                return RedirectToAction("LogIn", "Account");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Error()
+        {
             return View();
         }
 

@@ -14,13 +14,14 @@
     [ClientErrorHandler]
     public class RegionController : Controller
     {
-        // GET: Region
+        [Authorization("Region.View")]
         public ActionResult Index()
         {
             return View(new List<RegionViewModel>());
         }
 
         [HttpPost]
+        [Authorization("Region.View")]
         public JsonResult LoadRegions()
         {
             var result = new List<RegionViewModel>();
@@ -50,7 +51,7 @@
         }
 
 
-        //Get Region/Create
+        [Authorization("Region.Insert")]
         public ActionResult Create()
         {
             var NewItem = new RegionViewModel();
@@ -58,8 +59,9 @@
             return View(NewItem);
         }
 
-        // POST: Region/Create
+
         [HttpPost]
+        [Authorization("Region.Insert")]
         public JsonResult Create(string name)
         {
             var bussinessLogic = new RegionBusinessLogic();
@@ -83,7 +85,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Region/Edit/5
+        [Authorization("Region.Edit")]
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new RegionBusinessLogic();
@@ -110,8 +112,8 @@
             }
         }
 
-        // POST: Region/Edit/5
         [HttpPost]
+        [Authorization("Region.Edit")]
         public JsonResult Edit(int id, string name)
         {
             var bussinessLogic = new RegionBusinessLogic();
@@ -121,7 +123,7 @@
                 bussinessLogic.Edit(new RegionItem { Id = id, Name = name });
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -133,7 +135,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Region/Delete/5
+        [Authorization("Region.Delete")]
         public ActionResult Delete(int id)
         {
 
@@ -160,8 +162,8 @@
             }
         }
 
-        // POST: Region/Delete/5
         [HttpPost]
+        [Authorization("Region.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new RegionBusinessLogic();

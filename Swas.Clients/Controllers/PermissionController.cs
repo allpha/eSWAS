@@ -14,13 +14,14 @@
     [ClientErrorHandler]
     public class PermissionController : Controller
     {
-        // GET: Region
+        [Authorization("Permission.View")]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorization("Permission.View")]
         public JsonResult Load()
         {
             var result = new List<PermissionItem>();
@@ -42,6 +43,7 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("Permission.Insert")]
         public ActionResult Create()
         {
             var NewItem = new PermissionViewModel
@@ -54,6 +56,7 @@
         }
 
         [HttpPost]
+        [Authorization("Permission.Insert")]
         public JsonResult Create(string descirption, string name)
         {
             var bussinessLogic = new PermissionBusinessLogic();
@@ -78,6 +81,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("Permission.Edit")]
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new PermissionBusinessLogic();
@@ -106,6 +110,7 @@
         }
 
         [HttpPost]
+        [Authorization("Permission.Edit")]
         public JsonResult Edit(int id, string name, string description)
         {
             var bussinessLogic = new PermissionBusinessLogic();
@@ -127,6 +132,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("Permission.Delete")]
         public ActionResult Delete(int id)
         {
             var bussinessLogic = new PermissionBusinessLogic();
@@ -153,6 +159,7 @@
         }
 
         [HttpPost]
+        [Authorization("Permission.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new PermissionBusinessLogic();

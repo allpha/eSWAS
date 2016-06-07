@@ -236,17 +236,34 @@
         }
 
 
-        public void Insert(int solidWasteActId, decimal amount)
+        public void Insert(int solidWasteActId, List<PaymentHistoryItem> payments)
         {
             try
             {
                 Connect();
 
-                Context.Payments.Add(new Payment
+                var paymentHistory = (from payment in Context.Payments
+                                      where payment.SolidWasteActId == solidWasteActId
+                                      select payment).ToList();
+
+                foreach (var payment in paymentHistory)
+                    Context.Payments.Remove(payment);
+
+                if (payments != null)
                 {
-                    PayDate = DateTime.Now,
-                    Amount = amount
-                });
+                    foreach (var payment in payments)
+                    {
+                        var date = new DateTime(payment.PayDate.Year, payment.PayDate.Month, payment.PayDate.Day);
+                        Context.Payments.Add(new Payment
+                        {
+                            SolidWasteActId = solidWasteActId,
+                            PayDate = date,
+                            Amount = payment.Amount
+                        });
+                    }
+                }
+
+                Context.SaveChanges();
             }
             catch (Exception ex)
             {

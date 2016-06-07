@@ -1,4 +1,4 @@
-﻿@model Swas.Clients.Models.SolidWasteActViewModel
+﻿@model Swas.Clients.Models.EditViewModel
 
 @{
     Layout = null;
@@ -20,160 +20,80 @@
                         </div>
 
                         <div class="col-md-12 caption-subject font-black-cascade uppercase">
-                            <div class="col-md-2" style="text-align:right;">აქტი:</div>
-                            <div class="col-md-4" style="text-align:left;">#1000001</div>
-                            <div class="col-md-2" style="text-align:right;">დასახელება:</div>
-                            <div class="col-md-4" style="text-align:left;">შ.პ.ს პეტრე პავლეე საქარტველო ნაგავსაყრელი</div>
+                            <div class="col-md-2" style="text-align:right;"><b>აქტი:</b></div>
+                            <div class="col-md-4" style="text-align:left;">#<label id="ActId"></label></div>
+                            <div class="col-md-2" style="text-align:right;"><b>დასახელება:</b></div>
+                            <div class="col-md-4" style="text-align:left;"><label id="CustomerName"></label></div>
                         </div>
                         <div style="margin-top:10px;" class="col-md-12 caption-subject font-black-cascade uppercase">
-                            <div class="col-md-2" style="text-align:right;">თარიღი:</div>
-                            <div class="col-md-4" style="text-align:left;">14/14/2015</div>
-                            <div class="col-md-2" style="text-align:right;">საინ.კოდი:</div>
-                            <div class="col-md-4" style="text-align:left;">111112312</div>
+                            <div class="col-md-2" style="text-align:right;"><b>თარიღი:</b></div>
+                            <div class="col-md-4" style="text-align:left;"><label id="ActDate"></label></div>
+                            <div class="col-md-2" style="text-align:right;"><b>საინ.კოდი:</b></div>
+                            <div class="col-md-4" style="text-align:left;"><label id="CustomerCode"></label></div>
                         </div>
                         <div style="margin-top:10px;" class="col-md-12 caption-subject font-black-cascade uppercase">
-                            <div class="col-md-2" style="text-align:right;">ნაგავსაყრელი:</div>
-                            <div class="col-md-4" style="text-align:left;">გივის ნაგავსაყრელი</div>
-                            <div class="col-md-2" style="text-align:right;">ტელ:</div>
-                            <div class="col-md-4" style="text-align:left;">111-333-444-555</div>
+                            <div class="col-md-2" style="text-align:right;"><b>ნაგავსაყრელი:</b></div>
+                            <div class="col-md-4" style="text-align:left;"><label id="LandfillName"></label></div>
+                            <div class="col-md-2" style="text-align:right;"><b>ტელ:</b></div>
+                            <div class="col-md-4" style="text-align:left;"><label id="CustomerInfo"></label></div>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-md-12">&nbsp;</div>
 
-                            <div class="portlet-title">&nbsp;</div>
+                        <div class="col-md-12 caption-desc font-black-cascade">
 
-                            <div class="caption col-md-12 caption-desc font-black-cascade">
-
-                                <div class="col-md-4" style="text-align:left">
-                                    გადასახდელი თანხა:
-                                    <div ><b> 150.34 ₾ </b></div>
-                                </div>
-
-                                <div class="col-md-4" style="text-align:left">
-                                    გადახდილი თანხა:
-                                    <div ><b> 150.34 ₾ </b></div>
-                                </div>
-
-                                <div class="col-md-4" style="text-align:left">
-                                    ნაშთი:
-                                    <div><b> 150.34 ₾ </b></div>
-                                </div>
-                            </div>
-
-
-                            <div class="portlet-title">&nbsp;</div>
-
-
-                            <div class="portlet-body">
-                                <div class="mt-element-list">
-                                    <div class="mt-list-head list-default green">
-                                        <div class="mt-list-title uppercase">
+                            <div class="tabbable-line">
+                                <ul class="nav nav-tabs ">
+                                    <li class="active">
+                                        <a href="#tab_15_1" data-toggle="tab">
                                             გადახდების ისტორია
-                                            <span class="badge badge-default pull-right bg-hover-green-jungle">
-                                                <a class="font-white" href="javascript:;">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-                                            </span>
-                                        </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_15_1">
+                                        <span class="badge badge-default pull-right bg-hover-green-jungle" style="margin-top:-60px;" data-target="#detailEditorDialog" data-toggle="modal" id="addPayment">
+                                            <a class="font-white" href="javascript:;">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </span>
 
-                                    </div>
-                                    <div class="mt-list-container list-default">
-                                        <ul>
-                                            <li class="mt-list-item">
-                                                <div class="list-icon-container done">
-                                                    <a href="javascript:;">
-                                                        <i class="icon-check"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="list-datetime">
-                                                    11am
-                                                    <br /> 8 Nov
-                                                </div>
-                                                <div class="list-item-content">
-                                                    <h3 class="uppercase bold">
-                                                        <a href="javascript:;">Concept Proof</a>
-                                                    </h3>
-                                                    <p>Lorem ipsum dolor sit amet</p>
-                                                </div>
-                                            </li>
-                                            <li class="mt-list-item">
-                                                <div class="list-icon-container">
-                                                    <a href="javascript:;">
-                                                        <i class="icon-close"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="list-datetime">
-                                                    11am
-                                                    <br /> 8 Nov
-                                                </div>
-                                                <div class="list-item-content">
-                                                    <h3 class="uppercase bold">
-                                                        <a href="javascript:;">Listings Feature</a>
-                                                    </h3>
-                                                    <p>Lorem ipsum dolor sit amet</p>
-                                                </div>
-                                            </li>
-                                            <li class="mt-list-item">
-                                                <div class="list-icon-container">
-                                                    <a href="javascript:;">
-                                                        <i class="icon-close"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="list-datetime">
-                                                    11am
-                                                    <br /> 8 Nov
-                                                </div>
-                                                <div class="list-item-content">
-                                                    <h3 class="uppercase bold">
-                                                        <a href="javascript:;">Listings Feature</a>
-                                                    </h3>
-                                                    <p>Lorem ipsum dolor sit amet</p>
-                                                </div>
-                                            </li>
-                                            <li class="mt-list-item">
-                                                <div class="list-icon-container done">
-                                                    <a href="javascript:;">
-                                                        <i class="icon-check"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="list-datetime">
-                                                    11am
-                                                    <br /> 8 Nov
-                                                </div>
-                                                <div class="list-item-content">
-                                                    <h3 class="uppercase bold">
-                                                        <a href="javascript:;">Listings Feature</a>
-                                                    </h3>
-                                                    <p>Lorem ipsum dolor sit amet</p>
-                                                </div>
-                                            </li>
-                                            <li class="mt-list-item">
-                                                <div class="list-icon-container">
-                                                    <a href="javascript:;">
-                                                        <i class="icon-close"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="list-datetime">
-                                                    11am
-                                                    <br /> 8 Nov
-                                                </div>
-                                                <div class="list-item-content">
-                                                    <h3 class="uppercase bold">
-                                                        <a href="javascript:;">Listings Feature</a>
-                                                    </h3>
-                                                    <p>Lorem ipsum dolor sit amet</p>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        <table id="SolidWastActDetailTable" class="table table-bordered table-hover" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: left;">გადახდის თარიღი</th>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: center; width: 100px;">თანხა</th>
+                                                    <th style="height: 100%;vertical-align: middle; text-align: center;width: 79px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <div class="portlet light portlet-fit bordered">
-                            </div>
                         </div>
 
+                        <div class="col-md-12 caption-desc font-black-cascade" style="margin-top:-35px;">
+                            <div class="col-md-4" style="text-align:right">
+                                &nbsp;
+                            </div>
+
+                            <div class="col-md-3" style="text-align:right">
+                                <b>გადასახდელი თანხა</b>
+                                <div><b> <label id="TotalPayAmount">0.00</label> ₾ </b></div>
+                            </div>
+
+                            <div class="col-md-3" style="text-align:right">
+                                <b>გადახდილი თანხა</b>
+                                <div><b> <label id="PaidAmount">0.00</label> ₾ </b></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <b>ნაშთი</b>
+                                <div><b> <label id="RemainAmount">0.00</label> ₾</b></div>
+                            </div>
+                        </div>
                     </div>
                 </form>
                 <!-- END FORM-->
@@ -181,19 +101,59 @@
         </div>
     </div>
 
+
+    @*data-focus-on="input:PayDate"*@
+    <div id="detailEditorDialog" class="modal fade" tabindex="-2">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">გადახდების ისტორია</h5>
+        </div>
+        <form action="#" class="form-horizontal form-row-seperated" id="addPaymentForm" name="addPaymentForm">
+            <div class="modal-body">
+                <div id="wasteEditorErrorText" class="alert alert-danger display-hide">
+
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-4 control-label" style="text-align:right;" for="PayDate">გადახდის თარიღი</label>
+                    <div class="col-md-8">
+                        <div class="input-group date date-picker" id="PayDatePicker" data-date-format="mm/dd/yyyy">
+                            <input type="datetime" class="form-control" name="PayDate" id="PayDate" size="6" readonly>
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button" style="margin-left:0.3px;">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="form-control-focus"> </div>
+                        <span class="help-block">შეიყვანეთ გადახდილი თანხა.</span>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-4 control-label" style="text-align:right;" for="Amount">გადახდილი თანხა</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="Amount" id="Amount">
+                        <div class="form-control-focus"> </div>
+                        <span class="help-block">შეიყვანეთ გადახდილი თანხა.</span>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </form>
+
+        <div class="modal-footer">
+            <button type="button" class="btn green" id="tbSavePaymentHistory">შენახვა</button>
+            <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal" id="btWasteClose">გაუქმება</button>
+        </div>
+    </div>
+
     <div class="modal-footer">
-        <button type="button" class="btn green" id="btSave">წაშლა</button>
+        <button type="button" class="btn green" id="btSave">შენახვა</button>
         <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
     </div>
-    @*<input type="hidden" name="Id" id="Id" value="@Model.Id" />*@
+    <input type="hidden" name="Id" id="Id" value="@Model.Id" />
 
 </div>
-@*<script>
-        var recieverItemSource = @Html.Raw(Json.Encode(Model.RecieverItemSource));
-        var customerItemSource = @Html.Raw(Json.Encode(Model.CustomerItemSource));
-        var transporterItemSource = @Html.Raw(Json.Encode(Model.TransporterItemSource));
-        var modelSolidWasteTypeItemSource = @Html.Raw(Json.Encode(Model.SolidWasteActDetails));
-    </script>*@
 
-
-
+<script src="~/assets/script/Payment/Edit.js"></script>

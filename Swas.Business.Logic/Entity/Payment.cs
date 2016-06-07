@@ -25,4 +25,11 @@
         public decimal Amount { get; set; }
     }
 
+    public class PaymentHistoryForJsonItem
+    {
+        public string PayDate { get; set; }
+        public decimal Amount { get; set; }
+    }
+
+
 }

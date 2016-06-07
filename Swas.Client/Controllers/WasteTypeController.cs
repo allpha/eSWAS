@@ -92,42 +92,50 @@
 
         // POST: Waste/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,LessQuantity,FromQuantity,EndQuantity,MoreQuantity,MunicipalityLessQuantityPrice,MunicipalityIntervalQuantityPrice,MunicipalityMoreQuantityPrice,LegalPersonLessQuantityPrice,LegalPersonIntervalQuantityPrice,LegalPersonMoreQuantityPrice,PhysicalPersonLessQuantityPrice,PhysicalPersonIntervalQuantityPrice,PhysicalPersonMoreQuantityPrice,Coeficient")]WasteTypeViewModel model)
+        public JsonResult Create(string name, decimal lessQuantity, decimal fromQuantity, decimal endQuantity, decimal moreQuantity,
+                                    decimal municipalityLessQuantityPrice, decimal municipalityIntervalQuantityPrice, decimal municipalityMoreQuantityPrice,
+                                    decimal legalPersonLessQuantityPrice, decimal legalPersonIntervalQuantityPrice, decimal legalPersonMoreQuantityPrice,
+                                    decimal physicalPersonLessQuantityPrice, decimal physicalPersonIntervalQuantityPrice, decimal physicalPersonMoreQuantityPrice,
+                                    decimal coeficient)
         {
             var bussinessLogic = new WasteTypeBusinessLogic();
 
             try
             {
 
+
+
+
                 bussinessLogic.Create(new WasteTypeItem
                 {
-                    Name = model.Name,
-                    LessQuantity = model.LessQuantity,
-                    FromQuantity = model.FromQuantity,
-                    EndQuantity = model.EndQuantity,
-                    MoreQuantity = model.MoreQuantity,
-                    MunicipalityLessQuantityPrice = model.MunicipalityLessQuantityPrice,
-                    MunicipalityIntervalQuantityPrice = model.MunicipalityIntervalQuantityPrice,
-                    MunicipalityMoreQuantityPrice = model.MunicipalityMoreQuantityPrice,
-                    LegalPersonLessQuantityPrice = model.LegalPersonLessQuantityPrice,
-                    LegalPersonIntervalQuantityPrice = model.LegalPersonIntervalQuantityPrice,
-                    LegalPersonMoreQuantityPrice = model.LegalPersonMoreQuantityPrice,
-                    PhysicalPersonLessQuantityPrice = model.PhysicalPersonLessQuantityPrice,
-                    PhysicalPersonIntervalQuantityPrice = model.PhysicalPersonIntervalQuantityPrice,
-                    PhysicalPersonMoreQuantityPrice = model.PhysicalPersonMoreQuantityPrice,
-                    Coeficient = model.Coeficient
+                    Name = name,
+                    LessQuantity = lessQuantity,
+                    FromQuantity = fromQuantity,
+                    EndQuantity = endQuantity,
+                    MoreQuantity = moreQuantity,
+                    MunicipalityLessQuantityPrice = municipalityLessQuantityPrice,
+                    MunicipalityIntervalQuantityPrice = municipalityIntervalQuantityPrice,
+                    MunicipalityMoreQuantityPrice = municipalityMoreQuantityPrice,
+                    LegalPersonLessQuantityPrice = legalPersonLessQuantityPrice,
+                    LegalPersonIntervalQuantityPrice = legalPersonIntervalQuantityPrice,
+                    LegalPersonMoreQuantityPrice = legalPersonMoreQuantityPrice,
+                    PhysicalPersonLessQuantityPrice = physicalPersonLessQuantityPrice,
+                    PhysicalPersonIntervalQuantityPrice = physicalPersonIntervalQuantityPrice,
+                    PhysicalPersonMoreQuantityPrice = physicalPersonMoreQuantityPrice,
+                    Coeficient = coeficient
                 });
 
-                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                return View();
+                throw ex;
             }
             finally
             {
                 bussinessLogic = null;
             }
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
         // GET: Waste/Edit/5
@@ -173,7 +181,11 @@
 
         // POST: Waste/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, [Bind(Include = "Id,Name,LessQuantity,FromQuantity,EndQuantity,MoreQuantity,MunicipalityLessQuantityPrice,MunicipalityIntervalQuantityPrice,MunicipalityMoreQuantityPrice,LegalPersonLessQuantityPrice,LegalPersonIntervalQuantityPrice,LegalPersonMoreQuantityPrice,PhysicalPersonLessQuantityPrice,PhysicalPersonIntervalQuantityPrice,PhysicalPersonMoreQuantityPrice,Coeficient")]WasteTypeViewModel model)
+        public JsonResult Edit(int id, string name, decimal lessQuantity, decimal fromQuantity, decimal endQuantity, decimal moreQuantity,
+                                    decimal municipalityLessQuantityPrice, decimal municipalityIntervalQuantityPrice, decimal municipalityMoreQuantityPrice,
+                                    decimal legalPersonLessQuantityPrice, decimal legalPersonIntervalQuantityPrice, decimal legalPersonMoreQuantityPrice,
+                                    decimal physicalPersonLessQuantityPrice, decimal physicalPersonIntervalQuantityPrice, decimal physicalPersonMoreQuantityPrice,
+                                    decimal coeficient)
         {
             var bussinessLogic = new WasteTypeBusinessLogic();
 
@@ -181,34 +193,35 @@
             {
                 bussinessLogic.Edit(new WasteTypeItem
                 {
-                    Id = model.Id,
-                    Name = model.Name,
-                    LessQuantity = model.LessQuantity,
-                    FromQuantity = model.FromQuantity,
-                    EndQuantity = model.EndQuantity,
-                    MoreQuantity = model.MoreQuantity,
-                    MunicipalityLessQuantityPrice = model.MunicipalityLessQuantityPrice,
-                    MunicipalityIntervalQuantityPrice = model.MunicipalityIntervalQuantityPrice,
-                    MunicipalityMoreQuantityPrice = model.MunicipalityMoreQuantityPrice,
-                    LegalPersonLessQuantityPrice = model.LegalPersonLessQuantityPrice,
-                    LegalPersonIntervalQuantityPrice = model.LegalPersonIntervalQuantityPrice,
-                    LegalPersonMoreQuantityPrice = model.LegalPersonMoreQuantityPrice,
-                    PhysicalPersonLessQuantityPrice = model.PhysicalPersonLessQuantityPrice,
-                    PhysicalPersonIntervalQuantityPrice = model.PhysicalPersonIntervalQuantityPrice,
-                    PhysicalPersonMoreQuantityPrice = model.PhysicalPersonMoreQuantityPrice,
-                    Coeficient = model.Coeficient
+                    Id = id,
+                    LessQuantity = lessQuantity,
+                    FromQuantity = fromQuantity,
+                    EndQuantity = endQuantity,
+                    MoreQuantity = moreQuantity,
+                    MunicipalityLessQuantityPrice = municipalityLessQuantityPrice,
+                    MunicipalityIntervalQuantityPrice = municipalityIntervalQuantityPrice,
+                    MunicipalityMoreQuantityPrice = municipalityMoreQuantityPrice,
+                    LegalPersonLessQuantityPrice = legalPersonLessQuantityPrice,
+                    LegalPersonIntervalQuantityPrice = legalPersonIntervalQuantityPrice,
+                    LegalPersonMoreQuantityPrice = legalPersonMoreQuantityPrice,
+                    PhysicalPersonLessQuantityPrice = physicalPersonLessQuantityPrice,
+                    PhysicalPersonIntervalQuantityPrice = physicalPersonIntervalQuantityPrice,
+                    PhysicalPersonMoreQuantityPrice = physicalPersonMoreQuantityPrice,
+                    Coeficient = coeficient
+
                 });
 
-                return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                throw ex;
             }
             finally
             {
                 bussinessLogic = null;
             }
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
         // GET: Waste/Delete/5
@@ -239,7 +252,7 @@
 
         // POST: Waste/Delete/5
         [HttpPost]
-        public ActionResult Delete(int Id, FormCollection collection)
+        public JsonResult Remove(int Id)
         {
             var bussinessLogic = new WasteTypeBusinessLogic();
 
@@ -247,17 +260,17 @@
             {
                 bussinessLogic.Remove(Id);
 
-                return RedirectToAction("Index");
-
             }
             catch (Exception ex)
             {
-                return View();
+                throw ex;
             }
             finally
             {
                 bussinessLogic = null;
             }
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -35,7 +35,7 @@
         }
         private string ErrorUrl
         {
-            get { return "/Home/Error"; }
+            get { return "/Account/Error"; }
         }
 
         #endregion
@@ -72,7 +72,7 @@
                               }).FirstOrDefault();
 
             if (permission == null)
-                filterContext.HttpContext.Response.Redirect(String.Format("{0}?error={1}", ErrorUrl, "მოთხოვნილ რესურსზე წვდომა თქვენი მომხმარებლისთვის შეზღუდულია."), true);
+                filterContext.HttpContext.Response.Redirect(String.Format("{0}", ErrorUrl), true);
         }
 
         #endregion

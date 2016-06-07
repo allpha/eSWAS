@@ -1,5 +1,6 @@
 ﻿namespace Swas.Client.Controllers
 {
+    using Clients.Common;
     using Swas.Business.Logic.Classes;
     using Swas.Business.Logic.Entity;
     using Swas.Clients.Models;
@@ -12,6 +13,7 @@
     public class WasteTypeController : Controller
     {
         // GET: Waste
+        [Authorization("WasteType.View")]
         public ActionResult Index()
         {
             var bussinessLogic = new WasteTypeBusinessLogic();
@@ -55,6 +57,7 @@
 
         }
 
+        [Authorization("WasteType.View")]
         public JsonResult LoadWasteTypes()
         {
             var result = new List<WasteTypeViewModel>();
@@ -99,7 +102,7 @@
         }
 
 
-        //Get Waste/Create
+        [Authorization("WasteType.Insert")]
         public ActionResult Create()
         {
             try
@@ -129,8 +132,9 @@
             }
         }
 
-        // POST: Waste/Create
+
         [HttpPost]
+        [Authorization("WasteType.Insert")]
         public JsonResult Create(string name, decimal lessQuantity, decimal fromQuantity, decimal endQuantity, decimal moreQuantity,
                                  decimal municipalityLessQuantityPrice, decimal municipalityIntervalQuantityPrice, decimal municipalityMoreQuantityPrice,
                                  decimal legalPersonLessQuantityPrice, decimal legalPersonIntervalQuantityPrice, decimal legalPersonMoreQuantityPrice,
@@ -173,7 +177,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Waste/Edit/5
+        [Authorization("WasteType.Edit")]
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new WasteTypeBusinessLogic();
@@ -214,8 +218,9 @@
             }
         }
 
-        // POST: Waste/Edit/5
+        
         [HttpPost]
+        [Authorization("WasteType.Edit")]
         public JsonResult Edit(int id, string name, decimal lessQuantity, decimal fromQuantity, decimal endQuantity, decimal moreQuantity,
                                  decimal municipalityLessQuantityPrice, decimal municipalityIntervalQuantityPrice, decimal municipalityMoreQuantityPrice,
                                  decimal legalPersonLessQuantityPrice, decimal legalPersonIntervalQuantityPrice, decimal legalPersonMoreQuantityPrice,
@@ -258,7 +263,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Waste/Delete/5
+        [Authorization("WasteType.Delete")]
         public ActionResult Delete(int id)
         {
             var bussinessLogic = new WasteTypeBusinessLogic();
@@ -284,8 +289,9 @@
             }
         }
 
-        // POST: Waste/Delete/5
+        
         [HttpPost]
+        [Authorization("WasteType.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new WasteTypeBusinessLogic();

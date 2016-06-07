@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Swas.Clients.Models.RegionViewModel>
-
+@using Swas.Clients.Common
 @{
     ViewBag.Title = "რეგიონების ცნობარი";
 }
 
 <div class="row">
-    <div class="col-md-12 " >
+    <div class="col-md-12 ">
         <!-- BEGIN SAMPLE FORM PORTLET-->
         <div class="portlet light bordered" id="viewBody">
             <div class="portlet-title">
@@ -18,20 +18,43 @@
             <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>
             <div id="ajax-modal" class="modal fade" tabindex="-1"> </div>
 
-            <div class="portlet-body" >
+            <div class="portlet-body">
 
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group pull-right">
-                                <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
-                                    <i class="fa fa-plus"></i>
-                                    ახალი
-                                </button>
+                                @if (Globals.SessionContext.HasPermission("Region.Insert"))
+                                {
+                                    <button style="margin-right:5px" class="btn red btn-outline" onclick="javascript:create();">
+                                        <i class="fa fa-plus"></i>
+                                        ახალი
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                @if (Globals.SessionContext.HasPermission("Region.Delete"))
+                {
+                    <input type="hidden" id="hasDelete" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasDelete" value="false" />
+                }
+
+
+                @if (Globals.SessionContext.HasPermission("Region.Edit"))
+                {
+                    <input type="hidden" id="hasEdit" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasEdit" value="false" />
+                }
 
                 <div class="table-scrollable table-scrollable-borderless">
                     <table class="table table-hover table-light" id="regionsItemSource">
@@ -43,16 +66,15 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div >
-    
+    </div>
+
 </div>
 
 @section PageScripts{
-    <script src="~/assets/pages/scripts/Region/Index.js"></script>
+    <script src="~/assets/script/Region/Index.js"></script>
 }

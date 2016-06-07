@@ -7,7 +7,7 @@
 <div id="editorDialog">
     <div class="modal-header" style="vertical-align:middle">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h5 class="modal-title font-black" style="font-family: mtavrulibold; margin-top:10px;">რეგიონის შექმნა</h5>
+        <h5 class="modal-title font-black" style="font-family: mtavrulibold; margin-top:10px;">მყარი ნარჩენის ტიპის შექმნა</h5>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -22,22 +22,151 @@
                             </div>
 
                             <div class="form-group form-md-line-input">
-                                <label class="col-md-3 control-label input-sm" for="Name"> @Html.DisplayNameFor(model => model.Name) </label>
-                                <div class="col-md-9">
+                                <label class="col-md-2 control-label input-sm" for="Name"> @Html.DisplayNameFor(model => model.Name) </label>
+                                <div class="col-md-10">
                                     <input type="text" class="form-control input-sm" placeholder="" name="Name" id="Name">
                                     <div class="form-control-focus"> </div>
                                     <span class="help-block">შეიყვანეთ ნარჩენის ტიპის დასახელება.</span>
                                 </div>
                             </div>
 
-                            <div class="form-group form-md-line-input">
-                                <div class="col-md-3">
+                            <div class="form-group form-md-line-input" style="text-align: center;  vertical-align: middle;">
+                                <div class="col-md-4">
 
                                 </div>
-                                <div class="col-md-9">
-                                    <a href="javascript:;" id="LessQuantityEditor" data-type="LessQuantityEditor" data-pk="1" > 2</a>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.LessQuantity)
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.FromQuantity)
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.EndQuantity)
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.MoreQuantity)
+                                </div>
+
+                                @*<div class="col-md-6">
+
+                                </div>*@
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                @Html.LabelFor(model => model.CountDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.LessQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LessQuantity, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.FromQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FromQuantity, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.EndQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EndQuantity, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.MoreQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MoreQuantity, "", new { @class = "text-danger" })
+                                </div>
+
+                                @*<div class="col-md-6">
+
+                                </div>*@
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                @Html.LabelFor(model => model.MunicipalityDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.MunicipalityLessQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MunicipalityLessQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.MunicipalityIntervalQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MunicipalityIntervalQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.MunicipalityMoreQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MunicipalityMoreQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                                @*<div class="col-md-6">
+
+                                </div>*@
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                @Html.LabelFor(model => model.LegalPersionDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.LegalPersonLessQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LegalPersonLessQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.LegalPersonIntervalQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LegalPersonIntervalQuantityPrice, "", new { @class = "text-danger" })
+
+
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.LegalPersonMoreQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LegalPersonMoreQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                @Html.LabelFor(model => model.PhisicalPersionDestcription, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.PhysicalPersonLessQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhysicalPersonLessQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.PhysicalPersonIntervalQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhysicalPersonIntervalQuantityPrice, "", new { @class = "text-danger" })
+
+
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.PhysicalPersonMoreQuantityPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhysicalPersonMoreQuantityPrice, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                @Html.LabelFor(model => model.Coeficient, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Coeficient, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Coeficient, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
                     </form>
                     <!-- END FORM-->
                 </div>
@@ -53,60 +182,4 @@
 
 </div>
 
-<script src="~/assets/pages/scripts/Landfill/Create.js"></script>
-<script>
-
-    jQuery(document).ready(function () {
-
-        $('#LessQuantityEditor').editable({
-            emptytext: 'გთხოვთ შეავსოთ მონაცემები',
-            validate: function(value) {
-                if (value.LessQuantity == '') return 'არ შეიძლება იყოს ცარიელი!';
-            },
-            value: {
-                LessQuantity : @Model.LessQuantity,
-                MunicipalityLessQuantityPrice : @Model.MunicipalityLessQuantityPrice,
-                LegalPersonLessQuantityPrice : @Model.LegalPersonLessQuantityPrice,
-                PhysicalPersonLessQuantityPrice : @Model.PhysicalPersonLessQuantityPrice,
-            },
-            display: function (value) {
-                if (!value) {
-                    $(this).empty();
-                    return;
-                }
-                var html = '<b>' + $('<div>').text(value.LessQuantity).html() + ' ტონაზე ნაკლები ნარჩენის ფასი, ' +
-                            'მუნიციპალიტეტისთვის ' + $('<div>').text(value.MunicipalityLessQuantityPrice).html() + '₾,' +
-                            'იურიდიული პირისთვის ' + $('<div>').text(value.LegalPersonLessQuantityPrice).html() + '₾,' +
-                            'ფიზიკური პირისთვის ' + $('<div>').text(value.PhysicalPersonLessQuantityPrice).html() + '₾ </b> ';
-
-                $(this).html(html);
-            }
-        });
-
-
-
-        $('#LessQuantity').editable({
-            validate: function (value) {
-                if ($.trim(value) == '') return 'ის არის აუცილებელი ველი';
-            }
-        });
-
-        $('#EndQuantity').editable({
-            validate: function (value) {
-                if ($.trim(value) == '') return 'ის არის აუცილებელი ველი';
-            }
-        });
-
-        $('#FromQuantity').editable({
-            validate: function (value) {
-                if ($.trim(value) == '') return 'ის არის აუცილებელი ველი';
-            }
-        });
-
-        $('#MoreQuantity').editable({
-            validate: function (value) {
-                if ($.trim(value) == '') return 'ის არის აუცილებელი ველი';
-            }
-        });
-    });
-</script>
+<script src="~/assets/script/WasteType/Create.js"></script>

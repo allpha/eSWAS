@@ -238,6 +238,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assemblies\EPPlus.dll" />
+    <Content Include="assets\css\IMG_7370.jpg" />
+    <Content Include="assets\css\logo.jpg" />
     <Content Include="assets\css\PrintPage.css" />
     <Content Include="assets\global\plugins\autocomplite\auto-complete.css" />
     <Content Include="assets\global\plugins\autocomplite\auto-complete.js" />
@@ -258,13 +260,14 @@
     <Content Include="assets\pages\scripts\BusyIndicator\BusyIndicator.js" />
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
-    <Content Include="assets\pages\scripts\Payment\Detail.js" />
-    <Content Include="assets\pages\scripts\Payment\Edit.js" />
-    <Content Include="assets\pages\scripts\Payment\Index.js" />
-    <Content Include="assets\pages\scripts\Permission\Create.js" />
-    <Content Include="assets\pages\scripts\Permission\Delete.js" />
-    <Content Include="assets\pages\scripts\Permission\Edit.js" />
-    <Content Include="assets\pages\scripts\Permission\Index.js" />
+    <Content Include="assets\script\BusyIndicator\BusyIndicator.js" />
+    <Content Include="assets\script\Payment\Detail.js" />
+    <Content Include="assets\script\Payment\Edit.js" />
+    <Content Include="assets\script\Payment\Index.js" />
+    <Content Include="assets\script\Permission\Create.js" />
+    <Content Include="assets\script\Permission\Delete.js" />
+    <Content Include="assets\script\Permission\Edit.js" />
+    <Content Include="assets\script\Permission\Index.js" />
     <Content Include="assets\script\Account\Index.js" />
     <Content Include="assets\script\SolidWasteActJunal\Detail.js" />
     <Content Include="assets\script\User\Disible.js" />
@@ -274,30 +277,29 @@
     <Content Include="assets\script\User\Delete.js" />
     <Content Include="assets\script\User\Edit.js" />
     <Content Include="assets\script\User\Index.js" />
-    <Content Include="assets\pages\scripts\Role\Create.js" />
-    <Content Include="assets\pages\scripts\Role\Delete.js" />
-    <Content Include="assets\pages\scripts\Role\Edit.js" />
-    <Content Include="assets\pages\scripts\Role\Index.js" />
+    <Content Include="assets\script\Role\Create.js" />
+    <Content Include="assets\script\Role\Delete.js" />
+    <Content Include="assets\script\Role\Edit.js" />
+    <Content Include="assets\script\Role\Index.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Detail.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Create.js" />
     <Content Include="assets\script\SolidWasteActJunal\Delete.js" />
     <Content Include="assets\script\SolidWasteActJunal\Edit.js" />
     <Content Include="assets\script\SolidWasteActJunal\Register.js" />
     <Content Include="assets\pages\scripts\SolidWasteAct\Index.js" />
-    <Content Include="assets\pages\scripts\Landfill\Create.js" />
-    <Content Include="assets\pages\scripts\Landfill\Delete.js" />
-    <Content Include="assets\pages\scripts\Landfill\Edit.js" />
-    <Content Include="assets\pages\scripts\Landfill\Index.js" />
-    <Content Include="assets\pages\scripts\Region\Delete.js" />
-    <Content Include="assets\pages\scripts\Region\Index.js" />
-    <Content Include="assets\pages\scripts\Region\Create.js" />
-    <Content Include="assets\pages\scripts\Region\Edit.js" />
+    <Content Include="assets\script\Landfill\Create.js" />
+    <Content Include="assets\script\Landfill\Delete.js" />
+    <Content Include="assets\script\Landfill\Edit.js" />
+    <Content Include="assets\script\Landfill\Index.js" />
+    <Content Include="assets\script\Region\Delete.js" />
+    <Content Include="assets\script\Region\Index.js" />
+    <Content Include="assets\script\Region\Create.js" />
+    <Content Include="assets\script\Region\Edit.js" />
     <Content Include="assets\pages\scripts\ui-extended-modals.min.js" />
-    <Content Include="assets\pages\scripts\WasteType\wasteTypeEditField.js" />
-    <Content Include="assets\pages\scripts\WasteType\Create.js" />
-    <Content Include="assets\pages\scripts\WasteType\Delete.js" />
-    <Content Include="assets\pages\scripts\WasteType\Edit.js" />
-    <Content Include="assets\pages\scripts\WasteType\Index.js" />
+    <Content Include="assets\script\WasteType\Create.js" />
+    <Content Include="assets\script\WasteType\Delete.js" />
+    <Content Include="assets\script\WasteType\Edit.js" />
+    <Content Include="assets\script\WasteType\Index.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -391,6 +393,9 @@
     <Content Include="Views\SolidWasteActJurnal\Index.cshtml" />
     <Content Include="Views\SolidWasteActJurnal\Edit.cshtml" />
     <Content Include="Views\SolidWasteActJurnal\Delete.cshtml" />
+    <Content Include="Views\WasteType\Edit.cshtml" />
+    <Content Include="Views\WasteType\Delete.cshtml" />
+    <Content Include="Views\Account\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

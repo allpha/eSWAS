@@ -106,10 +106,52 @@
             {
                 bussinessLogic = null;
             }
-            
+
             return Json(new { fileName = result }, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public JsonResult PaymentReport(int? id, string fromDate, string endDate, List<int> landFillIdSource,
+                                        List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill)
+        {
+            var bussinessLogic = new ReportBusinessLogic();
+            var result = string.Empty;
+
+            try
+            {
+                var report = bussinessLogic.LoadPayment(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
+
+                IList<SolidWasteActPaymentReportViewModel> reportModel = new List<SolidWasteActPaymentReportViewModel>();
+                var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;
+
+                foreach (var item in (List<PaymentInfoItem>)report.ReportData)
+                    reportModel.Add(new SolidWasteActPaymentReportViewModel
+                    {
+                        Id = item.ActId,
+                        ActDate = item.ActDate,
+                        CustomerCode = item.CustomerCode,
+                        CustomerName = item.CustomerName,
+                        LandfillName = item.LandfillName,
+                        Price = item.Price,
+                        Quantity = item.Quantity,
+                        PaidAmount = item.PaidAmount,
+                        DebtAmount = item.DebtAmount
+                    });
+
+                result = ExcelExporter.ExportData(reportModel, "Statistic");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+            return Json(new { fileName = result }, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpGet]
         public void DownloadFile(string fileName)
         {
@@ -171,5 +213,6 @@
 
     }
 }
+
 
 

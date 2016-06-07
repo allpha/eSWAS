@@ -1,5 +1,6 @@
 ﻿namespace Swas.Client.Controllers
 {
+    using Clients.Common;
     using Swas.Business.Logic.Classes;
     using Swas.Business.Logic.Entity;
     using Swas.Clients.Models;
@@ -11,13 +12,14 @@
 
     public class LandfillController : Controller
     {
-        // GET: Landfill
+        [Authorization("Landfill.View")]
         public ActionResult Index()
         {
             return View(new List<LandfillViewModel>());
         }
 
         [HttpPost]
+        [Authorization("Landfill.View")]
         public JsonResult LoadLangfills()
         {
             var result = new List<LandfillViewModel>();
@@ -47,7 +49,7 @@
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //Get Landfill/Create
+        [Authorization("Landfill.Insert")]
         public ActionResult Create()
         {
             var bussinessLogic = new RegionBusinessLogic();
@@ -78,8 +80,9 @@
             ViewBag.RegionItemSource = new SelectList(regionDataSource, "Id", "Name", selectedRegionId);
         }
 
-        // POST: Landfill/Create
+        
         [HttpPost]
+        [Authorization("Landfill.Insert")]
         public JsonResult Create(int regionId, string name)
         {
             var bussinessLogic = new LandfillBusinessLogic();
@@ -105,7 +108,7 @@
         }
 
 
-        // GET: Landfill/Edit/5
+        [Authorization("Landfill.Edit")]
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new LandfillBusinessLogic();
@@ -135,8 +138,8 @@
             }
         }
 
-        // POST: Landfill/Edit/5
         [HttpPost]
+        [Authorization("Landfill.Edit")]
         public JsonResult Edit(int id, int regionId, string name)
         {
             var bussinessLogic = new LandfillBusinessLogic();
@@ -158,7 +161,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Landfill/Delete/5
+        [Authorization("Landfill.Delete")]
         public ActionResult Delete(int id)
         {
             var bussinessLogic = new LandfillBusinessLogic();
@@ -183,8 +186,8 @@
             }
         }
 
-        // POST: Landfill/Delete/5
         [HttpPost]
+        [Authorization("Landfill.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new LandfillBusinessLogic();

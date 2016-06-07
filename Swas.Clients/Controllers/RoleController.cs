@@ -15,13 +15,14 @@ namespace Swas.Clients.Controllers
     [ClientErrorHandler]
     public class RoleController : Controller
     {
-        // GET: Region
+        [Authorization("Role.View")]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorization("Role.View")]
         public JsonResult Load()
         {
             var result = new List<RoleItem>();
@@ -44,6 +45,7 @@ namespace Swas.Clients.Controllers
         }
 
         [HttpPost]
+        [Authorization("User.View")]
         public JsonResult LoadPermissions()
         {
             var result = new List<ComboBoxItem>();
@@ -65,7 +67,7 @@ namespace Swas.Clients.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [Authorization("Role.Insert")]
         public ActionResult Create()
         {
             var NewItem = new RoleViewModel
@@ -77,6 +79,7 @@ namespace Swas.Clients.Controllers
         }
 
         [HttpPost]
+        [Authorization("Role.Insert")]
         public JsonResult Create(string descirption, List<int> permissions)
         {
             var bussinessLogic = new RoleBusinessLogic();
@@ -115,6 +118,7 @@ namespace Swas.Clients.Controllers
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("Role.Edit")]
         public ActionResult Edit(int Id)
         {
             var bussinessLogic = new RoleBusinessLogic();
@@ -154,6 +158,7 @@ namespace Swas.Clients.Controllers
         }
 
         [HttpPost]
+        [Authorization("Role.Edit")]
         public JsonResult Edit(int id, string descirption, List<int> permissions)
         {
             var bussinessLogic = new RoleBusinessLogic();
@@ -191,6 +196,7 @@ namespace Swas.Clients.Controllers
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("Role.Delete")]
         public ActionResult Delete(int id)
         {
             var bussinessLogic = new RoleBusinessLogic();
@@ -217,6 +223,7 @@ namespace Swas.Clients.Controllers
         }
 
         [HttpPost]
+        [Authorization("Role.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new RoleBusinessLogic();

@@ -65,4 +65,28 @@ namespace Swas.Clients.Models
         public decimal Price { get; set; }
     }
 
+
+    public class SolidWasteActPaymentReportViewModel
+    {
+        [Display(Name = "#")]
+        public int Id { get; set; }
+        [Display(Name = "მიღების თარიღი")]
+        public DateTime ActDate { get; set; }
+        [Display(Name = "ნაგავსაყრელი")]
+        public string LandfillName { get; set; }
+        [Display(Name = "შემომტანის საინდეფიკაციო კოდი")]
+        public string CustomerCode { get; set; }
+        [Display(Name = "შემომტანის დასახელება")]
+        public string CustomerName { get; set; }
+        [Display(Name = "ნარჩენის რაოდენობა")]
+        public decimal Quantity { get; set; }
+        [Display(Name = "ღირებულება")]
+        public decimal Price { get; set; }
+        [Display(Name = "გადახდილი თანხა")]
+        public decimal PaidAmount { get; set; }
+        [Display(Name = "ნაშთი")]
+        public decimal DebtAmount { get; set; }
+    }
+
+
 }

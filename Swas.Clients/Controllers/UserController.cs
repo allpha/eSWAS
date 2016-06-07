@@ -14,11 +14,13 @@
     [ClientErrorHandler]
     public class UserController : Controller
     {
+        [Authorization("User.View")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorization("User.View")]
         public JsonResult Load()
         {
             var result = new List<UserItem>();
@@ -43,6 +45,7 @@
         }
 
         [HttpPost]
+        [Authorization("User.View")]
         public JsonResult LoadRegions()
         {
             var result = new List<ComboBoxItem>();
@@ -66,6 +69,7 @@
         }
 
         [HttpPost]
+        [Authorization("User.View")]
         public JsonResult LoadRoles()
         {
             var result = new List<ComboBoxItem>();
@@ -89,6 +93,7 @@
         }
 
 
+        [Authorization("User.Insert")]
         public ActionResult Create()
         {
             return View();
@@ -113,6 +118,7 @@
         }
 
         [HttpPost]
+        [Authorization("User.Insert")]
         public JsonResult Create(string userName, string email, bool useEmailAsUserName, int roleId, string firstName, string lastName, string privateNumber, string birthDate, string jobPosition, List<int> regions)
         {
             var bussinessLogic = new UserBusinessLogic();
@@ -146,12 +152,14 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("User.Edit")]
         public ActionResult Edit(int id)
         {
             return View(new EditViewModel { Id = id });
         }
 
         [HttpPost]
+        [Authorization("User.Edit")]
         public JsonResult Get(int id)
         {
             var bussinessLogic = new UserBusinessLogic();
@@ -173,6 +181,7 @@
         }
 
         [HttpPost]
+        [Authorization("User.Edit")]
         public JsonResult Edit(int id, string userName, string email, bool useEmailAsUserName, int roleId, string firstName, string lastName, string privateNumber, string birthDate, string jobPosition, List<int> regions)
         {
             var bussinessLogic = new UserBusinessLogic();
@@ -207,12 +216,14 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("User.Delete")]
         public ActionResult Delete(int id)
         {
             return View(new EditViewModel { Id = id });
         }
 
         [HttpPost]
+        [Authorization("User.Delete")]
         public JsonResult Remove(int Id)
         {
             var bussinessLogic = new UserBusinessLogic();
@@ -233,6 +244,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("User.Disible")]
         public ActionResult DisiblePromt(int id)
         {
             return View(new EditViewModel { Id = id });
@@ -240,6 +252,7 @@
 
 
         [HttpPost]
+        [Authorization("User.Disible")]
         public JsonResult Disible(int id)
         {
             var bussinessLogic = new UserBusinessLogic();
@@ -260,6 +273,7 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("User.Unlock")]
         public ActionResult UnlockPromt(int id)
         {
             return View(new EditViewModel { Id = id });
@@ -267,6 +281,7 @@
 
 
         [HttpPost]
+        [Authorization("User.Unlock")]
         public JsonResult Unlock(int Id)
         {
             var bussinessLogic = new UserBusinessLogic();
@@ -287,12 +302,14 @@
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorization("User.ChangePassword")]
         public ActionResult PasswordReset(int id)
         {
             return View(new EditViewModel { Id = id });
         }
 
         [HttpPost]
+        [Authorization("User.ChangePassword")]
         public JsonResult ResetPassword(int Id)
         {
             var bussinessLogic = new UserBusinessLogic();

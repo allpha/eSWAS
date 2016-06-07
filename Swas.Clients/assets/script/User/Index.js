@@ -22,6 +22,24 @@
 function initTableItemSource(itemSource) {
 
     for (var i = 0; i < itemSource.length; i++) {
+
+        var editButton = '';
+        var removeButton = '';
+        var unlockButton = '';
+        var disableButton = '';
+        var changePasswordButton = '';
+        if ($("#hasEdit").val() == "true")
+            editButton = '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>';
+        if ($("#hasDelete").val() == "true")
+            removeButton = '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>';
+        if ($("#hasUnlock").val() == "true")
+            unlockButton = '<a href="javascript:unlock(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="glyphicon glyphicon-user"></i></a>';
+        if ($("#hasDisible").val() == "true")
+            disableButton = '<a href="javascript:setDisible(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="glyphicon glyphicon-eye-close"></i></a>';
+        if ($("#hasChangePassword").val() == "true")
+            changePasswordButton = '<a href="javascript:changePassword(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="glyphicon glyphicon-wrench"></i></a>';
+
+
         var row = '<tr>'+
                     '<td>' + itemSource[i].FirstName + '&nbsp' + itemSource[i].LastName + '</td>' +
                     '<td>' + itemSource[i].PrivateNumber + '</td>' +
@@ -31,12 +49,11 @@ function initTableItemSource(itemSource) {
                     '<td>' + itemSource[i].RoleName + '</td>' +
                     '<td>' + itemSource[i].Status + '</td>' +
                     '<td>' +
-                    '<a href="javascript:edit(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>' +
-                    //'<a href="javascript:view(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-edit"></i></a>' +
-                    '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>' +
-                    '<a href="javascript:unlock(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="glyphicon glyphicon-user"></i></a>' +
-                    '<a href="javascript:setDisible(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="glyphicon glyphicon-eye-close"></i></a>' +
-                    '<a href="javascript:changePassword(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="glyphicon glyphicon-wrench"></i></a>' +
+                     editButton +
+                     removeButton +
+                     unlockButton +
+                    disableButton +
+                    changePasswordButton +
                     '</td></tr>';
 
         $('#itemSource tr:last').after(row);
@@ -84,3 +101,4 @@ jQuery(document).ready(function () {
     BusyIndicator.init("#editorDialog");
     load();
 });
+
