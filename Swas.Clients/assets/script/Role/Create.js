@@ -34,7 +34,7 @@ var FormValidationMd = function () {
 
 
     var handleValidation = function () {
-        var form1 = $('#registrationForm');
+        var form1 = $('#changePasswordForm');
         var errorEditor = $('.alert-danger', form1);
 
         form1.validate({

@@ -28,8 +28,7 @@
 
             try
             {
-                //var report = bussinessLogic.LoadDetailedReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
-                var report = bussinessLogic.LoadDetailedReport(id, null, null, landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
+                var report = bussinessLogic.LoadDetailedReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
                 IList<SolidWasteActReportDetailReportViewModel> reportModel = new List<SolidWasteActReportDetailReportViewModel>();
                 var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;
 

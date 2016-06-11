@@ -2974,6 +2974,7 @@
     <Content Include="assets\pages\img\logo-big.png" />
     <Content Include="assets\pages\img\logo-invert.png" />
     <Content Include="assets\pages\img\logo.png" />
+    <Content Include="assets\script\Account\PasswordChange.js" />
     <Content Include="assets\script\Agreement\Delete.js" />
     <Content Include="assets\script\Agreement\Edit.js" />
     <Content Include="assets\script\Agreement\Create.js" />
@@ -3323,6 +3324,7 @@
     <Content Include="assets\global\plugins\revo-slider\fonts\revicons\revicons.woff" />
     <Content Include="assets\global\plugins\revo-slider\images\.DS_Store" />
     <Content Include="assets\layouts\layout7\img\Thumbs.db" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\new.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -3392,6 +3394,7 @@
     <Content Include="Views\WasteType\Edit.cshtml" />
     <Content Include="Views\WasteType\Delete.cshtml" />
     <Content Include="Views\Account\Error.cshtml" />
+    <Content Include="Views\Account\ChangePasswrod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

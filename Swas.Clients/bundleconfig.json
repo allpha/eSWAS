@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "assets/script/Account/Index.min.js",
+    "inputFiles": [
+      "assets/script/Account/Index.min.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/script/Account/Index.js",
+    "inputFiles": [
+      "assets/script/Account/Index.js"
+    ]
+  }
+]

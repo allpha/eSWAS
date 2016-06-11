@@ -133,8 +133,8 @@
                     UseEmailAsUserName = useEmailAsUserName,
                     RoleId = roleId,
                     FirstName = firstName,
-                    LastName = userName,
-                    PrivateNumber = lastName,
+                    LastName = lastName,
+                    PrivateNumber = privateNumber,
                     BirthDate = (string.IsNullOrEmpty(birthDate) ? (DateTime?)null : DateTime.ParseExact(birthDate, "MM/dd/yyyy", null)),
                     JobPosition = jobPosition,
                     Regions = regions == null ? new List<int>() : regions
@@ -197,8 +197,8 @@
                     UseEmailAsUserName = useEmailAsUserName,
                     RoleId = roleId,
                     FirstName = firstName,
-                    LastName = userName,
-                    PrivateNumber = lastName,
+                    LastName = lastName,
+                    PrivateNumber = privateNumber,
                     BirthDate = (string.IsNullOrEmpty(birthDate) ? (DateTime?)null : DateTime.ParseExact(birthDate, "MM/dd/yyyy", null)),
                     JobPosition = jobPosition,
                     Regions = regions == null ? new List<int>() : regions

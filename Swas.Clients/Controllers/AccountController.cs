@@ -36,7 +36,6 @@ namespace Swas.Clients.Controllers
                 var userInfo = bussinessLogic.Login(userName, password);
                 Globals.SessionContext.SetUser(userInfo);
                 return Json(new { ok = true, newurl = Url.Action("Index", "SolidWasteAct") });
-
             }
             catch (Exception ex)
             {
@@ -47,7 +46,6 @@ namespace Swas.Clients.Controllers
             {
                 bussinessLogic = null;
             }
-            return View();
         }
 
 
@@ -75,5 +73,34 @@ namespace Swas.Clients.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ChangePasswrod()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult ChangePasswrod(string oldPassword, string newPassword, string retryNewPassword)
+        {
+            var bussinessLogic = new LoginBusinessLogic();
+
+            try
+            {
+                bussinessLogic.ChangePassword(Globals.SessionContext.Current.User.SessionId, oldPassword, newPassword, retryNewPassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
     }
 }

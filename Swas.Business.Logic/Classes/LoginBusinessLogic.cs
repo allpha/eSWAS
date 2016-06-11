@@ -67,5 +67,47 @@
 
             return result;
         }
+
+        public void ChangePassword(Guid sessionId, string oldPassword, string newPassword, string retryNewPassword)
+        {
+            try
+            {
+                Connect();
+
+                if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(retryNewPassword))
+                    throw new Exception("ახალი პაროლი არ შეიძლება იყოს ცარიელი");
+
+                if (newPassword == oldPassword)
+                    throw new Exception("ძველი და ახალი პაროლები არ შეიძლება იყვნენ ერთნაირი");
+
+                if (CryptoProvider.ComputeMD5Hash(newPassword) != CryptoProvider.ComputeMD5Hash(retryNewPassword))
+                    throw new Exception("ახალი პაროლები არ ემთხვევა ერთმანეთს");
+
+
+
+                var userInfo = (from user in Context.Users
+                                where user.SeassionId == sessionId
+                                select user).FirstOrDefault();
+
+                if (userInfo == null)
+                    throw new Exception("მომხმარებელი ვერ მოიძებნა");
+
+                if (CryptoProvider.ComputeMD5Hash(oldPassword) != userInfo.Password)
+                    throw new Exception("ძველი პაროლი არასწორია");
+
+                userInfo.Password = CryptoProvider.ComputeMD5Hash(newPassword);
+                Context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+        }
     }
 }

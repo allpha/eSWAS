@@ -449,11 +449,9 @@ function exportToExcel() {
             target: editorName,
             animate: true
         });
-
         $.ajax({
             url: "/Reporting/DetailedReport",
             type: "POST",
-            contentType: 'application/json; charset=utf-8',
             dataType: "json",
             data: {
                 id: $recordNumber,
@@ -474,7 +472,7 @@ function exportToExcel() {
                 window.open('/Reporting/DownloadFile?fileName=' + data.fileName, '_blank');
             },
             error: function (textStatus, errorThrown) {
-                alert('მოხდა სერვერსული შეცდომა + ' + textStatus);
+                alert('მოხდა სერვერსული შეცდომა + ' + textStatus.responseText);
                 App.unblockUI(editorName);
             }
         });
