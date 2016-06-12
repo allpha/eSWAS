@@ -444,7 +444,7 @@
 
             try
             {
-                var itemSource = bussinessLogic.Load(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, pageNumber, loadAllCarNumber, carNubmers);
+                var itemSource = bussinessLogic.Load(Globals.SessionContext.Current.SessionId, id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, pageNumber, loadAllCarNumber, carNubmers);
 
                 foreach (var item in itemSource)
                     result.Add(new SolidWasteActInfoViewModel
@@ -498,7 +498,7 @@
 
             try
             {
-                result = bussinessLogic.LoadPageCount(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
+                result = bussinessLogic.LoadPageCount(Globals.SessionContext.Current.SessionId, id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
             }
             catch (Exception ex)
             {

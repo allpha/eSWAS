@@ -77,6 +77,12 @@
                     }
                 }
 
+                public static Guid SessionId {
+                    get
+                    {
+                        return (HttpContext.Current.Session[Http.Session.UserAuthParam] as UserInfo).SessionId;
+                    }
+                }
                 #endregion
             }
 

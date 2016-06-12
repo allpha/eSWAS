@@ -16,7 +16,7 @@
 
         private int _recordCount = 25;
 
-        public int LoadPageCount(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+        public int LoadPageCount(Guid sessionId, int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
                                  List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, bool loadAllCarNumber, List<int> carNumbers)
         {
             var result = (int)0;
@@ -32,19 +32,21 @@
 
                 var pageCount = (from solidWasteAct in Context.SolidWasteActs
                                  join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                                 join userRegion in Context.UserRegions on landfill.RegionId equals userRegion.RegionId
+                                 join user in Context.Users on userRegion.UserId equals user.Id
                                  join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
                                  join transporter in Context.Transporters on solidWasteAct.TransporterId equals transporter.Id
                                  join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
                                  join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
                                  from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
-                                 where (id.HasValue && solidWasteAct.Id == id.Value) ||
+                                 where  ((id.HasValue && solidWasteAct.Id == id.Value) ||
                                         (!id.HasValue &&
                                         ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
                                         ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
                                         ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
                                         ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
                                         ((loadAllCarNumber) || (!loadAllCarNumber && carNumbers.Contains(solidWasteAct.CustomerId))) &&
-                                        ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
+                                        ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))) && user.SeassionId == sessionId
                                  group solidWasteActDetail by new
                                  {
                                      Id = solidWasteAct.Id,
@@ -72,7 +74,7 @@
 
 
 
-        public List<SolidWasteActInfoItem> Load(int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
+        public List<SolidWasteActInfoItem> Load(Guid sessionId, int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber, bool loadAllCarNumber, List<int> carNumbers)
         {
             var result = new List<SolidWasteActInfoItem>();
@@ -88,19 +90,21 @@
 
                 result = (from solidWasteAct in Context.SolidWasteActs
                           join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
+                          join userRegion in Context.UserRegions on landfill.RegionId equals userRegion.RegionId
+                          join user in Context.Users on userRegion.UserId equals user.Id
                           join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
                           join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
                           join transporter in Context.Transporters on solidWasteAct.TransporterId equals transporter.Id
                           join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
                           from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
-                          where (id.HasValue && solidWasteAct.Id == id.Value) ||
+                          where ((id.HasValue && solidWasteAct.Id == id.Value) ||
                                  (!id.HasValue &&
                                  ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
                                  ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
                                  ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
                                  ((loadAllCarNumber) || (!loadAllCarNumber && carNumbers.Contains(solidWasteAct.CustomerId))) &&
                                  ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
-                                 ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))
+                                 ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))) && user.SeassionId == sessionId
                           group solidWasteActDetail by new
                           {
                               Id = solidWasteAct.Id,
@@ -578,7 +582,6 @@
 
             return result;
         }
-
 
         public int Edit(SolidWasteActItem item)
         {

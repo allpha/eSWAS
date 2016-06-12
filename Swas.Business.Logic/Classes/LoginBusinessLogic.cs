@@ -44,6 +44,7 @@
                         FirstName = userInfo.FirstName,
                         LastName = userInfo.LastName,
                         Email = userInfo.Email,
+                        NeedChangePassword = userInfo.ChangePassword
                     };
 
                     result.Permissions = (from rolePermission in Context.RolePermissions
@@ -109,5 +110,41 @@
             }
 
         }
+
+        public void ChangePassword(Guid sessionId, string newPassword, string retryNewPassword)
+        {
+            try
+            {
+                Connect();
+
+                if (string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(retryNewPassword))
+                    throw new Exception("ახალი პაროლი არ შეიძლება იყოს ცარიელი");
+
+                if (CryptoProvider.ComputeMD5Hash(newPassword) != CryptoProvider.ComputeMD5Hash(retryNewPassword))
+                    throw new Exception("ახალი პაროლები არ ემთხვევა ერთმანეთს");
+
+                var userInfo = (from user in Context.Users
+                                where user.SeassionId == sessionId
+                                select user).FirstOrDefault();
+
+                if (userInfo == null)
+                    throw new Exception("მომხმარებელი ვერ მოიძებნა");
+
+                userInfo.Password = CryptoProvider.ComputeMD5Hash(newPassword);
+                userInfo.ChangePassword = false;
+                Context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+        }
+
     }
 }

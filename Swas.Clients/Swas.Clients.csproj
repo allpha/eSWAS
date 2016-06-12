@@ -2974,6 +2974,9 @@
     <Content Include="assets\pages\img\logo-big.png" />
     <Content Include="assets\pages\img\logo-invert.png" />
     <Content Include="assets\pages\img\logo.png" />
+    <Content Include="assets\script\Account\Index.min.js">
+      <DependentUpon>Index.js</DependentUpon>
+    </Content>
     <Content Include="assets\script\Account\PasswordChange.js" />
     <Content Include="assets\script\Agreement\Delete.js" />
     <Content Include="assets\script\Agreement\Edit.js" />
@@ -3037,7 +3040,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="fonts\lgv-bebas-neue-bold-bold.ttf" />
     <Content Include="fonts\BOGMtavruli-Bold.ttf" />
     <Content Include="fonts\bpg_nino_mtavruli_normal-webfont.eot" />
     <Content Include="fonts\bpg_nino_mtavruli_normal-webfont.ttf" />

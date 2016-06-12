@@ -1,34 +1,31 @@
-﻿function login() {
+﻿function updateErrorEditor(editor, text) {
 
-    BusyIndicator.setBusy();
-
-    $.ajax({
-        url: "/Account/LogIn",
-        type: "POST",
-        dataType: "json",
-        data: {
-            userName: $("#username").val(),
-            password: $("#password").val(),
-        },
-        success: function (data) {
-            if (data.ok)
-                window.location = data.newurl;
-            BusyIndicator.unsetBusy();
-        },
-        error: function (request, status, error) {
-            updateErrorEditor(request.responseText)
-            BusyIndicator.unsetBusy();
-        }
-    });
-}
-
-function updateErrorEditor(text) {
-    var form1 = $('#LoginForm');
-    var errorEditor = $('.alert-danger', form1);
+    var errorEditor = $(editor);
 
     errorEditor.text(text);
     errorEditor.append(' <button class="close" data-close="alert"></button> ');
     errorEditor.show();
+}
+
+function hideErrorEditor(editor, text) {
+    var errorEditor = $(editor);
+    errorEditor.hide();
+}
+
+function updataErrorEditorByValidatorError(editor, errorList) {
+    if (errorList != null) {
+        var errorEditor = $(editor);
+
+        errorEditor.text("");
+
+        errorEditor.append(' <button class="close" data-close="alert"></button> ');
+        var errorText = "";
+
+        for (var i = 0; i < errorList.length; i++)
+            errorEditor.append(errorList[i].element.placeholder + " - " + errorList[i].message + "<br />");
+
+        errorEditor.show();
+    }
 }
 
 
@@ -37,9 +34,9 @@ var Login = function () {
     var handleLogin = function () {
 
         $('.login-form').validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
+            errorElement: 'span',
+            errorClass: 'help-block',
+            focusInvalid: false,
             rules: {
                 username: {
                     required: true
@@ -49,22 +46,13 @@ var Login = function () {
                 },
             },
 
-            messages: {
-                username: {
-                    required: "Username is required."
-                },
-                password: {
-                    required: "Password is required."
-                }
+            invalidHandler: function (event, validator) {
+                updataErrorEditorByValidatorError("#errorEditor", validator.errorList);
             },
 
-            invalidHandler: function (event, validator) { //display error alert on form submit   
-                $('.alert-danger', $('.login-form')).show();
-            },
-
-            highlight: function (element) { // hightlight error inputs
+            highlight: function (element) {
                 $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+                    .closest('.form-group').addClass('has-error');
             },
 
             success: function (label) {
@@ -84,9 +72,48 @@ var Login = function () {
         $('.login-form input').keypress(function (e) {
             if (e.which == 13) {
                 if ($('.login-form').validate().form()) {
-                    $('.login-form').submit(); //form validation success, call ajax form submit
+                    $('.login-form').submit();
                 }
                 return false;
+            }
+        });
+
+        $('.forget-form').validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            rules: {
+                newPassword: {
+                    minlength: 6,
+                    required: true
+                },
+                reNewPassword: {
+                    minlength: 6,
+                    equalTo: "#newPassword",
+                    required: true
+                },
+            },
+
+            invalidHandler: function (event, validator) { //display error alert on form submit   
+                updataErrorEditorByValidatorError("#changePasswordErrorEditor", validator.errorList);
+            },
+
+            highlight: function (element) { // hightlight error inputs
+                $(element)
+                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+            },
+
+            success: function (label) {
+                label.closest('.form-group').removeClass('has-error');
+                label.remove();
+            },
+
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.closest('.input-icon'));
+            },
+
+            submitHandler: function (form) {
+                changePassword();
             }
         });
 
@@ -99,23 +126,19 @@ var Login = function () {
             }
         });
 
-        $('#forget-password').click(function () {
-            $('.login-form').hide();
-            $('.forget-form').show();
-        });
 
         $('#back-btn').click(function () {
+            hideErrorEditor("#errorEditor");
             $('.login-form').show();
             $('.forget-form').hide();
         });
+
     }
     return {
-        //main function to initiate the module
         init: function () {
-
+            $('.forget-form').hide();
             handleLogin();
 
-            // init background slide images
             $('.login-bg').backstretch([
                 "../assets/css/IMG_7370.jpg"
             ], {
@@ -133,3 +156,59 @@ jQuery(document).ready(function () {
     BusyIndicator.init("#MainForm");
     Login.init();
 });
+
+
+function login() {
+
+    BusyIndicator.setBusy();
+
+    $.ajax({
+        url: "/Account/LogIn",
+        type: "POST",
+        dataType: "json",
+        data: {
+            userName: $("#username").val(),
+            password: $("#password").val(),
+        },
+        success: function (data) {
+            if (!data.ok && data.needChangePassword) {
+                $('.login-form').hide();
+                $('.forget-form').show();
+            } else
+                if (data.ok && !data.needChangePassword)
+                    window.location = data.newurl;
+
+            BusyIndicator.unsetBusy();
+        },
+        error: function (request, status, error) {
+            updateErrorEditor("#errorEditor", request.responseText)
+            BusyIndicator.unsetBusy();
+        }
+    });
+}
+
+function changePassword() {
+
+    BusyIndicator.setBusy();
+
+    $.ajax({
+        url: "/Account/FirstLoginChangePasswrod",
+        type: "POST",
+        dataType: "json",
+        data: {
+            newPassword: $("#newPassword").val(),
+            retryNewPassword: $("#reNewPassword").val(),
+        },
+        success: function (data) {
+            if (data.ok && !data.needChangePassword)
+                window.location = data.newurl;
+
+            BusyIndicator.unsetBusy();
+
+        },
+        error: function (request, status, error) {
+            updateErrorEditor("#changePasswordErrorEditor", request.responseText)
+            BusyIndicator.unsetBusy();
+        }
+    });
+}

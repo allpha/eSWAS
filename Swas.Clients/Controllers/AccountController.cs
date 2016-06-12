@@ -35,7 +35,13 @@ namespace Swas.Clients.Controllers
             {
                 var userInfo = bussinessLogic.Login(userName, password);
                 Globals.SessionContext.SetUser(userInfo);
-                return Json(new { ok = true, newurl = Url.Action("Index", "SolidWasteAct") });
+
+                if (userInfo.NeedChangePassword)
+                {
+                    return Json(new { ok = false, needChangePassword = true, newurl = string.Empty });
+                }
+                else
+                    return Json(new { ok = true, needChangePassword = false, newurl = Url.Action("Index", "SolidWasteAct") });
             }
             catch (Exception ex)
             {
@@ -102,5 +108,31 @@ namespace Swas.Clients.Controllers
 
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+
+        public JsonResult FirstLoginChangePasswrod(string newPassword, string retryNewPassword)
+        {
+            var bussinessLogic = new LoginBusinessLogic();
+
+            try
+            {
+                bussinessLogic.ChangePassword(Globals.SessionContext.Current.User.SessionId, newPassword, retryNewPassword);
+                return Json(new { ok = true, needChangePassword = false, newurl = Url.Action("Index", "SolidWasteAct") });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                bussinessLogic = null;
+            }
+
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

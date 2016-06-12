@@ -56,10 +56,11 @@
                     <h1>მყარი ნარჩენების აღრიცხვის სისტემა</h1>
                     <p> </p>
                     <form action="javascript:;" class="login-form" method="post" name="LoginForm" id="LoginForm">
-                        <div class="alert alert-danger display-hide">
+                        <div id="errorEditor" class="alert alert-danger display-hide">
                             <button class="close" data-close="alert"></button>
-                            <span>Enter any username and password. </span>
+                            <span></span>
                         </div>
+
                         <div class="row">
                             <div class="col-xs-6">
                                 <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="მომხმარებელი" id="username" name="username" required />
@@ -78,20 +79,51 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <div class="login-footer">
-                    <div class="row bs-reset">
-                        <div class="col-xs-5 bs-reset">
+
+                    <form class="forget-form" action="javascript:;" method="post">
+                        <div class="form-group">
+                            <h3 class="font-green">პაროლის ცვლილება</h3>
                         </div>
-                        <div class="col-xs-7 bs-reset">
-                            <div class="login-copyright text-right">
-                                <p>Copyright &copy; </p>
-                            </div>
+                        @*<p> Enter your e-mail address below to reset your password. </p>
+
+                        <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" />
+                </div>*@
+                <div class="row">
+
+                    <div class="col-xs-12" style="margin-top:60px;">
+                        <div id="changePasswordErrorEditor" class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="ახალი პაროლი" id="newPassword" name="newPassword" required />
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="გაიმეორეთ ახალი პაროლი" id="reNewPassword" name="reNewPassword" required />
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="back-btn" class="btn green btn-outline">უკან</button>
+                    <button type="submit" class="btn btn-success uppercase pull-right">შეცვლა</button>
+                </div>
+                </form>
+
+            </div>
+            <div class="login-footer">
+                <div class="row bs-reset">
+                    <div class="col-xs-5 bs-reset">
+                    </div>
+                    <div class="col-xs-7 bs-reset">
+                        <div class="login-copyright text-right">
+                            <p>Copyright &copy; </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- END : LOGIN PAGE 5-1 -->
     <!--[if lt IE 9]>
