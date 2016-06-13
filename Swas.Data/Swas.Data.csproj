@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\SolidWasteActHistory.cs" />
     <Compile Include="Entity\UserRegion.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\RolePermission.cs" />

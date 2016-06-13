@@ -37,7 +37,7 @@
                     SolidWasteActDetails = new List<SolidWasteActDetailViewModel>()
                 };
 
-                var hellperDataSource = bussinessLogic.LoadHellperSource(CustomerType.Municipal);
+                var hellperDataSource = bussinessLogic.LoadHellperSource(Globals.SessionContext.Current.SessionId, CustomerType.Municipal);
 
                 model.RecieverItemSource = hellperDataSource.RecieverItemSource;
                 model.CustomerItemSource = hellperDataSource.CustomerItemSource;

@@ -81,6 +81,8 @@ function initTableItemSource(itemSource) {
             row += '<a target="_blank" href="/SolidWasteActPrint/Index/' + itemSource[i].Id + '" class="btn btn-xs default"><i class="fa fa-print"></i></a>';
         if ($("#hasDelete").val() == "true")
             row += '<a href="javascript:remove(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-remove"></i></a>';
+        if ($("#hasHistory").val() == "true")
+            row += '<a href="javascript:history(' + itemSource[i].Id + ');" class="btn btn-xs default"><i class="fa fa-history"></i></a>';
         row += '</td>' + '</tr>';
         $('#itemSource tr:last').after(row);
     }
@@ -101,6 +103,12 @@ function remove(id) {
     $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteActJurnal/Delete/" + id);
     $('#ajax-model-dialog-editor').click();
 }
+
+function history(id) {
+    $('#ajax-model-dialog-editor').attr("data-url", "/SolidWasteActHistory/Index/?solidWasteActId=" + id);
+    $('#ajax-model-dialog-editor').click();
+}
+
 
 function loadRegoinItemSource() {
     $.ajax({

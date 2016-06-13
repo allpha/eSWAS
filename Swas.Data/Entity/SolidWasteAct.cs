@@ -16,6 +16,7 @@
         public string Remark { get; set; }
         public DateTime CreateDate { get; set; }
 
+        public bool HasHistory { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Transporter Transporter { get; set; }
         public virtual Landfill Landfill { get; set; }
@@ -24,5 +25,6 @@
         public virtual Representative Representative { get; set; }
         public virtual ICollection<SolidWasteActDetail> SolidWasteActDetails { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<SolidWasteActHistory> SolidWasteActHistories { get; set; }
     }
 }

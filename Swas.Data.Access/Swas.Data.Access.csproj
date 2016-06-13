@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
+    <Compile Include="Maps\SolidWasteActHistoryMap.cs" />
     <Compile Include="Maps\UserRegionMap.cs" />
     <Compile Include="Maps\UserMap.cs" />
     <Compile Include="Maps\RolePermissionMap.cs" />
@@ -147,6 +148,18 @@
     <Compile Include="Migrations\201606042059139_User_Add_Session_ActivityDate.Designer.cs">
       <DependentUpon>201606042059139_User_Add_Session_ActivityDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606132134201_SolidWasteActHistory.cs" />
+    <Compile Include="Migrations\201606132134201_SolidWasteActHistory.Designer.cs">
+      <DependentUpon>201606132134201_SolidWasteActHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606132139594_SodliWasteActFix.cs" />
+    <Compile Include="Migrations\201606132139594_SodliWasteActFix.Designer.cs">
+      <DependentUpon>201606132139594_SodliWasteActFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606132302207_Payment_FIX.cs" />
+    <Compile Include="Migrations\201606132302207_Payment_FIX.Designer.cs">
+      <DependentUpon>201606132302207_Payment_FIX.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -217,6 +230,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606042059139_User_Add_Session_ActivityDate.resx">
       <DependentUpon>201606042059139_User_Add_Session_ActivityDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606132134201_SolidWasteActHistory.resx">
+      <DependentUpon>201606132134201_SolidWasteActHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606132139594_SodliWasteActFix.resx">
+      <DependentUpon>201606132139594_SodliWasteActFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606132302207_Payment_FIX.resx">
+      <DependentUpon>201606132302207_Payment_FIX.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

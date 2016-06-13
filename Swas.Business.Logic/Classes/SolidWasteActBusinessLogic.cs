@@ -6,6 +6,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+    using System.Net.Http;  
+    using System.IO;
+
 
     public class SolidWasteActBusinessLogic : BusinessLogicBase
     {
@@ -39,7 +43,7 @@
                                  join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
                                  join solidWasteActDetail in Context.SolidWasteActDetails on solidWasteAct.Id equals solidWasteActDetail.SolidWasteActId into LeftJoinSolidWasteActDetail
                                  from solidWasteActDetail in LeftJoinSolidWasteActDetail.DefaultIfEmpty()
-                                 where  ((id.HasValue && solidWasteAct.Id == id.Value) ||
+                                 where ((id.HasValue && solidWasteAct.Id == id.Value) ||
                                         (!id.HasValue &&
                                         ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
                                         ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
@@ -71,8 +75,6 @@
 
             return result;
         }
-
-
 
         public List<SolidWasteActInfoItem> Load(Guid sessionId, int? id, DateTime? fromDate, DateTime? endDate, List<int> landFillIdSource,
                                                 List<int> wasteTypeIdSource, List<int> customerIdSource, bool loadAllWasteType, bool loadAllCustomer, bool loadAllLandfill, int pageNumber, bool loadAllCarNumber, List<int> carNumbers)
@@ -128,7 +130,7 @@
                               ReceiverLastName = Group.Key.ReceiverLastName,
                               Quantity = Group.Sum(a => a == null ? 0 : a.Quantity),
                               Price = Group.Sum(a => a == null ? 0 : a.Amount)
-                          }).OrderByDescending(a=>a.Id).Skip((pageNumber - 1) * _recordCount).Take(_recordCount).ToList();
+                          }).OrderByDescending(a => a.Id).Skip((pageNumber - 1) * _recordCount).Take(_recordCount).ToList();
             }
             catch (Exception ex)
             {
@@ -397,7 +399,7 @@
             return item.Id;
         }
 
-        public SolidWasteActHelperDataItem Get(int Id)
+        public SolidWasteActHelperDataItem Get(Guid sessionId, int Id)
         {
 
             var result = new SolidWasteActHelperDataItem()
@@ -468,7 +470,7 @@
 
                 if (result != null && result.EditorItem != null)
                 {
-                    var resource = LoadHellperItemSource(result.EditorItem.Customer.Type);
+                    var resource = LoadHellperItemSource(sessionId,result.EditorItem.Customer.Type);
                     if (resource != null)
                     {
                         result.CustomerItemSource = resource.CustomerItemSource;
@@ -583,7 +585,7 @@
             return result;
         }
 
-        public int Edit(SolidWasteActItem item)
+        public int Edit(SolidWasteActItem item, string absoluteUri)
         {
             var result = 0;
 
@@ -591,6 +593,27 @@
             {
                 Connect();
                 Validate(item);
+
+                #region Save history
+
+                var uri = string.Format("http://{0}/SolidWasteActPrint/Index/{1}", absoluteUri, item.Id);
+                WebRequest req = HttpWebRequest.Create(uri);
+                req.Method = "GET";
+
+                string source = string.Empty;
+                using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+                {
+                    source = reader.ReadToEnd();
+                }
+
+                Context.SolidWasteActHistories.Add(new SolidWasteActHistory
+                {
+                    SolidWasteActId = item.Id,
+                    Content = source,
+                    CreateDate = DateTime.Now,
+                });
+
+                #endregion Save history
 
                 #region Customer
 
@@ -790,7 +813,6 @@
                 #endregion SolidWasteActDetails
 
                 result = updateItem.Id;
-
             }
             catch (Exception ex)
             {
@@ -840,7 +862,7 @@
             }
         }
 
-        private SolidWasteActHelperDataItem LoadHellperItemSource(CustomerType customerType)
+        private SolidWasteActHelperDataItem LoadHellperItemSource(Guid sessionId, CustomerType customerType)
         {
             var result = new SolidWasteActHelperDataItem
             {
@@ -851,6 +873,9 @@
 
             var landfillItemSource = (from region in Context.Regions
                                       join landfill in Context.Landfills on region.Id equals landfill.RegionId
+                                      join userRegion in Context.UserRegions on region.Id equals userRegion.RegionId
+                                      join user in Context.Users on userRegion.UserId equals user.Id
+                                      where user.SeassionId == sessionId
                                       orderby region.Name ascending
                                       select new
                                       {
@@ -956,7 +981,7 @@
             return result;
         }
 
-        public SolidWasteActHelperDataItem LoadHellperSource(CustomerType customerType)
+        public SolidWasteActHelperDataItem LoadHellperSource(Guid sessionId, CustomerType customerType)
         {
             var result = new SolidWasteActHelperDataItem
             {
@@ -966,7 +991,7 @@
             try
             {
                 Connect();
-                result = LoadHellperItemSource(customerType);
+                result = LoadHellperItemSource(sessionId, customerType);
 
             }
             catch (Exception ex)

@@ -111,7 +111,7 @@
                             <div class="col-sm-4" style="text-align:left">
                             </div>
                             <div class="col-sm-2" style="text-align:right; font-size:13px;">
-                                ავტომობილის ნომერი:
+                                ავტოსატრანსპორტო საშუალების ნომერი:
                             </div>
                             <div class="col-sm-4" style="text-align:left">
                                 <input type="text" class="form-control" name="TransporterCarNumber" id="TransporterCarNumber">
@@ -124,7 +124,7 @@
                             <div class="col-sm-4" style="text-align:left">
                             </div>
                             <div class="col-sm-2" style="text-align:right; font-size:13px;">
-                                ავტომობილის მარკა:
+                                ავტომობილის მოდელი:
                             </div>
                             <div class="col-sm-4" style="text-align:left">
                                 <input type="text" class="form-control" name="TransporterCarModel" id="TransporterCarModel">
@@ -296,10 +296,10 @@
                             <div> ბეჭდვა </div>
                         </a>
 
-                        @*<a id="closeWindow" href="javascript:;" class="icon-btn">
+                        <a id="closeWindow" href="javascript:;" onclick="windowCloseClick()" class="icon-btn">
                                 <i class="fa fa-close"></i>
                                 <div> დახურვა </div>
-                            </a>*@
+                            </a>
 
                     </td>
                 </tr>
@@ -319,6 +319,12 @@
         </div>
 
         <div class="btn-group pull-right" id="btNexDiv">
+            <a class="btn grey-salsa btn-outline" data-dismiss="modal">
+                <i class="fa fa-close"></i>
+                გაუქმება
+            </a>
+
+            @*<button type="button" class="btn grey-salsa btn-outline" ></button>*@
             <a id="next" class="btn green">
                 შემდეგი
                 <i class="fa fa-chevron-right"></i>
@@ -326,6 +332,11 @@
         </div>
 
         <div class="btn-group pull-right display-hide" id="btSaveDiv">
+            <a class="btn grey-salsa btn-outline" data-dismiss="modal">
+                <i class="fa fa-close"></i>
+                გაუქმება
+            </a>
+
             <a id="btSave" class="btn green">
                 <i class="fa fa-chevron-down"></i>
                 დასრულება
@@ -351,6 +362,7 @@
         autoclose: true,
         isRTL: App.isRTL(),
         format: "mm/dd/yyyy hh:ii",
+        minuteStep: 1,
         pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
     });
 

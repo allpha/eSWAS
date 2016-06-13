@@ -11,4 +11,10 @@ namespace Swas.Clients.Models
     {
         public int Id { get; set; }
     }
+
+    public class HistoryViewModel
+    {
+        public string Content { get; set; }
+    }
+
 }

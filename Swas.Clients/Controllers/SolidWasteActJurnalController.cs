@@ -184,7 +184,7 @@
 
             try
             {
-                var hellperDataSource = bussinessLogic.Get(Id);
+                var hellperDataSource = bussinessLogic.Get(Globals.SessionContext.Current.SessionId, Id);
                 var editItem = hellperDataSource.EditorItem;
 
                 var model = new SolidWasteActViewModel()
@@ -193,6 +193,7 @@
                     ActDate = editItem.ActDate,
                     ReceiverName = editItem.Receiver.Name,
                     ReceiverLastName = editItem.Receiver.LastName,
+                    LandfillId = editItem.LandfillId,
                     PositionName = editItem.Position.Name,
                     Remark = editItem.Remark,
                     Type = (int)editItem.Customer.Type,
@@ -312,7 +313,7 @@
                             UnitPrice = item.UnitPrice
                         });
 
-                result = bussinessLogic.Edit(newItem);
+                result = bussinessLogic.Edit(newItem, ((System.Web.HttpRequestWrapper)this.Request).Url.Authority);
 
             }
             catch (Exception ex)

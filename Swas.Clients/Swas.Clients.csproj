@@ -204,6 +204,7 @@
     <Compile Include="Common\ClientErrorHandler.cs" />
     <Compile Include="Common\ExcelExporter.cs" />
     <Compile Include="Common\Session.cs" />
+    <Compile Include="Controllers\SolidWasteActHistoryController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\SolidWasteActJurnalController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -2985,6 +2986,7 @@
     <Content Include="assets\pages\scripts\BusyIndicator\BusyIndicator.js" />
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
+    <Content Include="assets\script\AmountToDecimal\AmountToDecimal.js" />
     <Content Include="assets\script\BusyIndicator\BusyIndicator.js" />
     <Content Include="assets\script\Payment\Detail.js" />
     <Content Include="assets\script\Payment\Edit.js" />
@@ -2994,6 +2996,7 @@
     <Content Include="assets\script\Permission\Edit.js" />
     <Content Include="assets\script\Permission\Index.js" />
     <Content Include="assets\script\Account\Index.js" />
+    <Content Include="assets\script\SolidWasteActHistory\Index.js" />
     <Content Include="assets\script\SolidWasteActJunal\Detail.js" />
     <Content Include="assets\script\User\Disible.js" />
     <Content Include="assets\script\User\UnlockUser.js" />
@@ -3397,6 +3400,8 @@
     <Content Include="Views\WasteType\Delete.cshtml" />
     <Content Include="Views\Account\Error.cshtml" />
     <Content Include="Views\Account\ChangePasswrod.cshtml" />
+    <Content Include="Views\SolidWasteActHistory\Index.cshtml" />
+    <Content Include="Views\SolidWasteActHistory\LoadHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

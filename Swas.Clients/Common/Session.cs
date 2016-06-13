@@ -83,6 +83,14 @@
                         return (HttpContext.Current.Session[Http.Session.UserAuthParam] as UserInfo).SessionId;
                     }
                 }
+
+                public static string UserName
+                {
+                    get
+                    {
+                        return string.Format("{0} {1}", Globals.SessionContext.Current.User.FirstName, Globals.SessionContext.Current.User.LastName);
+                    }
+                }
                 #endregion
             }
 

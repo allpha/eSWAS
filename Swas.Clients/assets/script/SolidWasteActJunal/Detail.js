@@ -51,14 +51,14 @@ function generateActReview(data) {
                 '<div class="form-group col-sm-12">' +
                     '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების თანამდებობა:</b></div>' +
                     '<div class="col-sm-3" style="text-align:left">' + data.PositionName + '</div>' +
-                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მარკა:</b> </div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მოდელი:</b> </div>' +
                     '<div class="col-sm-4" style="text-align:left">' + data.TransporterCarModel + '</div>' +
                 '</div>' +
 
                 '<div class="form-group col-sm-12">' +
                     '<div class="col-sm-2" style="text-align:right; font-size:13px;"></div>' +
                     '<div class="col-sm-3" style="text-align:left"></div>' +
-                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის ნომერი:</b> </div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტოსატრანსპორტო საშუალების ნომერი:</b> </div>' +
                     '<div class="col-sm-4" style="text-align:left">' + data.TransporterCarNumber + '</div>' +
                 '</div>' +
 

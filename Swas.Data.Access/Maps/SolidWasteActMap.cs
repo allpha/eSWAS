@@ -2,6 +2,8 @@
 {
     using Entity;
     using System.Data.Entity.ModelConfiguration;
+    using System.ComponentModel.DataAnnotations.Schema;
+
 
     public class SolidWasteActMap : EntityTypeConfiguration<SolidWasteAct>
     {
@@ -10,6 +12,8 @@
         {
             HasKey(a => a.Id);
             Property(one => one.Remark).HasMaxLength(4000).IsRequired();
+            Property(one => one.HasHistory).IsRequired();
+            Property(one => one.CreateDate).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
 
             HasRequired(a => a.Landfill)
               .WithMany(a => a.SolidWasteActs)

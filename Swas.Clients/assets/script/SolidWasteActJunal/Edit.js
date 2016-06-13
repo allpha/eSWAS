@@ -111,7 +111,7 @@ function saveSolidWasteAct() {
             $('#isSaved').val('saved')
         },
         error: function (textStatus, errorThrown) {
-            updateErrorEditor($('.alert-danger'), textStatus)
+            updateErrorEditor($('#confirmationErrorEditor'), textStatus)
             App.unblockUI(editorName);
         }
     });
@@ -415,14 +415,14 @@ function generateActReview() {
                 '<div class="form-group col-sm-12">' +
                     '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>მიმღების თანამდებობა:</b></div>' +
                     '<div class="col-sm-3" style="text-align:left">' + document.getElementById("PositionName").value + '</div>' +
-                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მარკა:</b> </div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტოსატრანსპორტო საშუალების ნომერი:</b> </div>' +
                     '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterCarNumber").value + '</div>' +
                 '</div>' +
 
                 '<div class="form-group col-sm-12">' +
                     '<div class="col-sm-2" style="text-align:right; font-size:13px;"></div>' +
                     '<div class="col-sm-3" style="text-align:left"></div>' +
-                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის ნომერი:</b> </div>' +
+                    '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ავტომობილის მოდელი:</b> </div>' +
                     '<div class="col-sm-4" style="text-align:left">' + document.getElementById("TransporterCarModel").value + '</div>' +
                 '</div>' +
 
@@ -616,9 +616,6 @@ jQuery(document).ready(function () {
                         '<h4 class="media-heading">{{Code}} - {{Name}}</h4>',
                         '<p><b>საკონტაქტო ინფორმაცია:</b> {{ContactInfo}}</p>',
                         '<p><b>წარმომადგენელი:</b> {{RepresentativeName}}</p>',
-                        '<p><b>მანქანის ნომერი:</b> {{CarNumber}}</p>',
-                        '<p><b>მანქანის მოდელი:</b> {{CarModel}}</p>',
-                        '<p><b>მძღოლი:</b> {{DriverInfo}}</p>',
                     '</div>',
               '</div>',
             ].join(''))
@@ -628,9 +625,6 @@ jQuery(document).ready(function () {
         $("#CustomerName").val(selection.Name);
         $("#CustomerContactInfo").val(selection.ContactInfo);
         $("#RepresentativeName").val(selection.RepresentativeName);
-        $("#TransporterCarNumber").val(selection.CarNumber);
-        $("#TransporterCarModel").val(selection.CarModel);
-        $("#TransporterDriverInfo").val(selection.DriverInfo);
     });
 
     $('#CustomerName').typeahead(null, {
@@ -644,9 +638,6 @@ jQuery(document).ready(function () {
                         '<h4 class="media-heading">{{Code}} - {{Name}}</h4>',
                         '<p><b>საკონტაქტო ინფორმაცია:</b> {{ContactInfo}}</p>',
                         '<p><b>წარმომადგენელი:</b> {{RepresentativeName}}</p>',
-                        '<p><b>მანქანის ნომერი:</b> {{CarNumber}}</p>',
-                        '<p><b>მანქანის მოდელი:</b> {{CarModel}}</p>',
-                        '<p><b>მძღოლი:</b> {{DriverInfo}}</p>',
                     '</div>',
               '</div>',
             ].join(''))
@@ -656,9 +647,6 @@ jQuery(document).ready(function () {
         $("#CustomerCode").val(selection.Code);
         $("#CustomerContactInfo").val(selection.ContactInfo);
         $("#RepresentativeName").val(selection.RepresentativeName);
-        $("#TransporterCarNumber").val(selection.CarNumber);
-        $("#TransporterCarModel").val(selection.CarModel);
-        $("#TransporterDriverInfo").val(selection.DriverInfo);
     });
 
     $('#TransporterCarNumber').typeahead(null, {
@@ -701,9 +689,6 @@ jQuery(document).ready(function () {
                 $("#CustomerName").val('');
                 $("#CustomerContactInfo").val('');
                 $("#RepresentativeName").val('');
-                $("#TransporterCarNumber").val('');
-                $("#TransporterCarModel").val('');
-                $("#TransporterDriverInfo").val('');
                 removeTableData();
 
                 customerCodeDataSource.clear();

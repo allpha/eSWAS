@@ -1,0 +1,36 @@
+﻿@model Swas.Clients.Models.EditViewModel
+
+@{
+    Layout = null;
+}
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-blue-chambray" style="font-family: mtavrulibold; margin-top:10px;">აქტის ისტორია</h5>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" id="Id" value="@Model.Id" />
+
+        <div class="table-scrollable table-scrollable-borderless">
+            <table class="table table-hover table-light" id="historyItemSource">
+                <thead>
+                    <tr class="uppercase">
+                        <th width="50px" style="font-family: mtavrulibold"> #</th>
+                        <th style="font-family: mtavrulibold"> თარიღი</th>
+                        <th width="100px"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="btn-group pull-right" data-dismiss="modal" id="btSaveDiv">
+            <a id="btSave" class="btn green">
+                დახურვა
+            </a>
+        </div>
+    </div>
+
+</div>
+<script src="~/assets/script/SolidWasteActHistory/Index.js"></script>

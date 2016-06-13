@@ -204,6 +204,16 @@
                 <input type="hidden" id="hasEdit" value="false" />
             }
 
+            @if (Globals.SessionContext.HasPermission("SolidWasteActJunal.History"))
+            {
+                <input type="hidden" id="hasHistory" value="true" />
+            }
+            else
+            {
+                <input type="hidden" id="hasHistory" value="false" />
+            }
+
+
 
             <div class="table-scrollable table-scrollable-borderless">
                 <table class="table table-hover table-light" id="itemSource">
@@ -217,7 +227,7 @@
                             <th style="font-family: mtavrulibold"> @Html.DisplayNameFor(model => model.CarNumber)</th>
                             <th style="font-family: mtavrulibold; text-align:right;"> @Html.DisplayNameFor(model => model.Quantity)</th>
                             <th style="font-family: mtavrulibold; text-align:right;"> @Html.DisplayNameFor(model => model.Price)</th>
-                            <th width="180px"></th>
+                            <th width="210px"></th>
                         </tr>
                     </thead>
                     @*<tbody></tbody>*@

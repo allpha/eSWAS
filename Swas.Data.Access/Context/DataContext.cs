@@ -33,6 +33,7 @@
         public virtual DbSet<RolePermission> RolePermissions { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRegion> UserRegions { get; set; }
+        public virtual DbSet<SolidWasteActHistory> SolidWasteActHistories { get; set; }
 
 
 
@@ -60,6 +61,7 @@
             modelBuilder.Configurations.Add(new RolePermissionMap());
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new UserRegionMap());
+            modelBuilder.Configurations.Add(new SolidWasteActHistoryMap());
         }
 
         public void OpenConection()
