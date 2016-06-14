@@ -6,9 +6,11 @@
     {
         public int Id { get; set; }
         public CustomerType Type { get; set; }
+        public string TypeDescription { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string ContactInfo { get; set; }
+        
     }
 
 

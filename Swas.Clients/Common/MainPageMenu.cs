@@ -83,7 +83,8 @@
                         "WasteType.View",
                         "Permission.View",
                         "Role.View",
-                        "User.View"
+                        "User.View",
+                        "User.Customer",
                     }
                 },
                 new RootManu
@@ -115,6 +116,13 @@
                             ControllerName = "WasteType",
                             PermissionName = "WasteType.View"
 
+                        },
+                        new ChildMenu
+                        {
+                            Url = "/Customer/",
+                            Title = "შემომტანი",
+                            ControllerName = "Customer",
+                            PermissionName = "Customer.View"
                         },
                     }
                 },

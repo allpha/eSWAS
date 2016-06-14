@@ -6,7 +6,7 @@
         var money_2 = Math.abs(numb - money_1);
         money_2 = (!money_2) ? 0 : Math.round(money_2 * 100); 
 
-        return translate_number_ge(money_1) + " " + currency_1 + " და " + translate_number_ge(money_2) + " " + currency_2;
+        return translate_number_ge(money_1) + " " + currency_1 + " და " + money_2 + " " + currency_2;
     } else {
         return translate_number_ge(parseInt(numb, 10));
     }

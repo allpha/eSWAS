@@ -35,6 +35,12 @@
                 if (wasteTypeIdSource == null) wasteTypeIdSource = new List<int>();
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
 
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 0, 0);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
+
                 var pageCount = (from solidWasteAct in Context.SolidWasteActs
                                  join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
                                  join customer in Context.Customers on solidWasteAct.CustomerId equals customer.Id
@@ -84,6 +90,13 @@
                 if (customerIdSource == null) customerIdSource = new List<int>();
                 if (wasteTypeIdSource == null) wasteTypeIdSource = new List<int>();
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
+
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 0, 0);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
+
 
                 result = (from solidWasteAct in Context.SolidWasteActs
                           join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id

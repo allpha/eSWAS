@@ -17,37 +17,34 @@
     <div id="header">
 
         <input type="hidden" name="totalAmount" id="totalAmount" value="@Html.DisplayFor(model => model.TotalAmount)" />
-
-
         <table width="100%">
-
-
             <tr>
-                <td colspan="2" style="text-align:center;font-size:20px">
-                    <p>პოლიგონზე მყარი ნარჩენების განთავსების აქტი #@Html.DisplayFor(model => model.Id)</p>
-                    <p>თარიღი: @Model.ActDate.Day.ToString("00")/@Model.ActDate.Month.ToString("00")/@Model.ActDate.Year.ToString() @Model.ActDate.Hour.ToString("00"):@Model.ActDate.Minute.ToString("00")</p>
+                <td>
+                    <img src="~/assets/script/AmountToDecimal/image001.png" width="200px" height="100px"/>
                 </td>
-
+                <td style="text-align:center;font-size:15px;">
+                    <p style="margin-left:-150px;">პოლიგონზე მყარი ნარჩენების განთავსების აქტი #@Html.DisplayFor(model => model.Id)</p>
+                    <p style="margin-left:-150px;">თარიღი: @Model.ActDate.Day.ToString("00")/@Model.ActDate.Month.ToString("00")/@Model.ActDate.Year.ToString() @Model.ActDate.Hour.ToString("00"):@Model.ActDate.Minute.ToString("00")</p>
+                </td>
             </tr>
-
             <tr>
                 <td colspan="2">
                     <table align="left">
                         <thead>
                             <tr>
-                                <th colspan="2" style="font-size:20px; font-weight:normal;text-align:left">მიმღები</th>
+                                <th colspan="2" style="font-size:15px; font-weight:normal;text-align:left">მიმღები</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr><td>&nbsp;</td></tr>
 
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold">ნაგავსაყრელის მდებარეობა:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.LandfillName)</td>
+                                <td width="220px" style="text-align:right; font-size:13px; font-weight:bold">ნაგავსაყრელის მდებარეობა:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.LandfillName)</td>
                             </tr>
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;"><b>სახელი, გვარი, პოზიცია:</b></td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Model.ReceiverName @Model.ReceiverLastName, @Model.PositionName  </td>
+                                <td style="text-align:right; font-size:13px; font-weight:bold; text-align:right;"><b>სახელი, გვარი, პოზიცია:</b></td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Model.ReceiverName @Model.ReceiverLastName, @Model.PositionName  </td>
                             </tr>
                         </tbody>
                     </table>
@@ -63,46 +60,41 @@
 
             <tr>
                 <td colspan="2" width="100%">
-                    <table align="left" style="font-size:18px;">
+                    <table align="left">
                         <thead>
                             <tr>
-                                <th colspan="2" style="font-size:20px; font-weight:normal;text-align:left">შემომტანი</th>
+                                <th colspan="2" style="font-size:15px; font-weight:normal;text-align:left">შემომტანი</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr><td>&nbsp;</td></tr>
 
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">დასახელება:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerName)</td>
+                                <td width="220px" style="text-align:right; font-size:13px; font-weight:bold; text-align:right;">დასახელება:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerName)</td>
                             </tr>
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">საინდენტიფიკაციო კოდი:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerCode)</td>
-                            </tr>
-
-                            <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">საკონტაქტო ინფორმაცია:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerContactInfo)</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">წარმომადგენელი:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.RepresentativeName)</td>
+                                <td style="text-align:right; font-size:13px; font-weight:bold; text-align:right;">საინდენტიფიკაციო კოდი:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerCode)</td>
                             </tr>
 
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">ავტომობილის მოდელი:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterCarModel)</td>
+                                <td style="text-align:right; font-size:13px; font-weight:bold; text-align:right;">საკონტაქტო ინფორმაცია:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.CustomerContactInfo)</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; font-size:13px; font-weight:bold; text-align:right;">წარმომადგენელი:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.RepresentativeName)</td>
                             </tr>
 
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">ავტოსატრანსპორტო საშუალების ნომერი:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterCarNumber)</td>
+                                <td style="text-align:right; font-size:13px; font-weight:bold; text-align:right;">ავტსანტრანსპორტო საშვალება:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterCarModel), @Html.DisplayFor(model => model.TransporterCarNumber)</td>
                             </tr>
 
                             <tr>
-                                <td style="text-align:left; font-size:16px; font-weight:bold; text-align:right;">მძღოლი:</td>
-                                <td style="text-align:left; font-size:16px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterDriverInfo)</td>
+                                <td style="text-align:right; font-size:13px; font-weight:bold; text-align:right;">მძღოლი:</td>
+                                <td style="text-align:left; font-size:13px; font-weight:normal">&nbsp;&nbsp;@Html.DisplayFor(model => model.TransporterDriverInfo)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -110,9 +102,6 @@
 
             </tr>
 
-            <tr>
-                <td colspan="2">&nbsp;</td>
-            </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
             </tr>
@@ -156,7 +145,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p style="text-align:right;font-size:13px;">სულ&nbsp;@Html.DisplayFor(model => model.TotalAmount)&nbsp;ლარი</p>
+                    <p style="text-align:right;font-size:13px;">სულ:&nbsp;@Html.DisplayFor(model => model.TotalAmount)&nbsp;ლარი</p>
                     <p style="text-align:right;font-size:13px;">თანხა სიტყვიერად:&nbsp; <label Id="totext"></label></p>
 
                 </td>
@@ -164,7 +153,7 @@
             <tr>
                 <td colspan="2">
                     <table>
-                        <tr style="font-size:16px;">
+                        <tr style="font-size:13px;">
                             <td style="text-align:right">შენიშვნა:</td>
                             <td>&nbsp;@Html.DisplayFor(model => model.Remark)</td>
                         </tr>
@@ -175,11 +164,11 @@
     </div>
 
     <div id="footer">
-        <table style="font-size:8px;" width="100%">
+        <table style="font-size:9px;" width="100%">
             <tr>
                 <td colspan="2">
-                    <p style="font-size:9px;">დამატებითი ინფორმაცია</p>
-                    <p style="font-size:9px; font-style:italic;">აღნიშნული თანხა ჩარიცხული უნდა იქნეს ქვემოთ მითითებულ საბანკო ანგარიშზე. აქტის გამოწერიდან არაუგვიანეს 10(ათი) კალენდარული დღის განმავლობაში. წინააღმდეგ შემთხვევაში გავრცელდება საქართველოს კანონიმდებლობით გათვალისწინებული საჯარიმო სანქციები</p>
+                    <p style="font-size:10px;">დამატებითი ინფორმაცია</p>
+                    <p style="font-size:10px; font-style:italic;">აღნიშნული თანხა ჩარიცხული უნდა იქნეს ქვემოთ მითითებულ საბანკო ანგარიშზე. აქტის გამოწერიდან არაუგვიანეს 10(ათი) კალენდარული დღის განმავლობაში. წინააღმდეგ შემთხვევაში გავრცელდება საქართველოს კანონიმდებლობით გათვალისწინებული საჯარიმო სანქციები</p>
                 </td>
             </tr>
 
@@ -196,8 +185,8 @@
                         </tr>
 
                         <tr>
-                            <td width="50%" style="text-align:left; font-size:9px;">მიმღების ხელმოწერა</td>
-                            <td width="50%" style="text-align:right; font-size:9px;">შემომტანი ფიზ.იურ. პირის ხელმოწერა</td>
+                            <td width="50%" style="text-align:left; font-size:10px;">მიმღების ხელმოწერა</td>
+                            <td width="50%" style="text-align:right; font-size:10px;">შემომტანი ფიზ.იურ. პირის ხელმოწერა</td>
                         </tr>
                     </table>
                 </td>
@@ -259,8 +248,5 @@
 
 <script src="~/assets/script/AmountToDecimal/AmountToDecimal.js"></script>
 <script>
-    //alert(translate_number('123123123.1', true, false, false));
-
-    //alert(translate_number(document.getElementById("totalAmount").value, true, true, true));
     document.getElementById("totext").innerHTML = translate_number(document.getElementById("totalAmount").value, true, false, false);
 </script>

@@ -178,13 +178,13 @@
                 Connect();
 
                 result = (from customer in Context.Customers
-                                        where customer.Type == (int)CustomerType.Juridical
-                                        orderby customer.Code ascending
-                                        select new ComboBoxItem
-                                        {
-                                            Id = customer.Id,
-                                            Name = customer.Code + " - " + customer.Name,
-                                        }).ToList();
+                          where customer.Type == (int)CustomerType.Juridical
+                          orderby customer.Code ascending
+                          select new ComboBoxItem
+                          {
+                              Id = customer.Id,
+                              Name = customer.Code + " - " + customer.Name,
+                          }).ToList();
             }
             catch (Exception ex)
             {
@@ -196,6 +196,146 @@
             }
 
             return result;
+        }
+
+        public List<CustomerItem> Load()
+        {
+            var result = new List<CustomerItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from customer in Context.Customers
+                          orderby customer.Code ascending
+                          select new CustomerItem
+                          {
+                              Id = customer.Id,
+                              Name = customer.Name,
+                              Code = customer.Code,
+                              Type = (CustomerType)customer.Type,
+                              ContactInfo = customer.ContactInfo
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+        public CustomerItem Get(int id)
+        {
+            var result = new CustomerItem();
+
+            try
+            {
+                Connect();
+
+                result = (from customer in Context.Customers
+                          where customer.Id == id
+                          select new CustomerItem
+                          {
+                              Id = customer.Id,
+                              Name = customer.Name,
+                              Code = customer.Code,
+                              Type = (CustomerType)customer.Type,
+                              ContactInfo = customer.ContactInfo
+                          }).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+        public void Create(CustomerItem item)
+        {
+            try
+            {
+                Connect();
+
+                Context.Customers.Add(new Customer
+                {
+                    Type = (int)item.Type,
+                    Code = item.Code,
+                    Name = item.Name,
+                    ContactInfo = item.ContactInfo
+                });
+
+                Context.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
+
+        public void Edit(CustomerItem item)
+        {
+            try
+            {
+                Connect();
+
+                var customerInfo = (from customer in Context.Customers
+                                    where customer.Id == item.Id
+                                    select customer).FirstOrDefault();
+
+                customerInfo.Type = (int)item.Type;
+                customerInfo.Code = item.Code;
+                customerInfo.Name = item.Name;
+                customerInfo.ContactInfo = item.ContactInfo;
+
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                Connect();
+
+                var customerInfo = (from customer in Context.Customers
+                                    where customer.Id == id
+                                    select customer).FirstOrDefault();
+
+                Context.Customers.Remove(customerInfo);
+
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("წაშლა შეუძლებელია. ჩანაწერი უკვე გამოყენებულია");
+            }
+            finally
+            {
+                Dispose();
+            }
         }
 
     }

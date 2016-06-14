@@ -1,0 +1,76 @@
+﻿@model Swas.Clients.Models.CustomerViewModel
+
+@{
+    Layout = null;
+}
+
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">შემომტანის რედაქტირება</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 ">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet-body">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal" id="registrationForm">
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="Type"> ტიპი </label>
+                                <div class="col-md-9">
+                                    @Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.LandTypeItemSource, new { @class = "form-control" })
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ მომხმარებლის ტიპი.</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="Code"> საინდეტიფიკაციო კოდი </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="" name="Code" id="Code" value="@Model.Code">
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ საინდეტიფიკაციო კოდი.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="Name"> დასახელება </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="" name="Name" id="Name" value="@Model.Name">
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ დასახელება.</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="ContactInfo"> საკონტაქტო ინფორმაცია </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="" name="ContactInfo" id="ContactInfo" value="@Model.ContactInfo">
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ საკონტაქტო ინფორმაცია.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="Id" value="@Model.Id"/>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+            <button type="button" class="btn green" id="btSave">შენახვა</button>
+        </div>
+    </div>
+</div>
+<script src="~/assets/pages/scripts/BusyIndicator/BusyIndicator.js"></script>
+<script src="~/assets/script/Customer/Edit.js"></script>

@@ -34,6 +34,12 @@
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
                 if (carNumbers == null) carNumbers = new List<int>();
 
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 0, 0);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
+
                 var pageCount = (from solidWasteAct in Context.SolidWasteActs
                                  join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
                                  join userRegion in Context.UserRegions on landfill.RegionId equals userRegion.RegionId
@@ -49,7 +55,7 @@
                                         ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
                                         ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
                                         ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
-                                        ((loadAllCarNumber) || (!loadAllCarNumber && carNumbers.Contains(solidWasteAct.CustomerId))) &&
+                                        ((loadAllCarNumber) || (!loadAllCarNumber && carNumbers.Contains(transporter.Id))) &&
                                         ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))) && user.SeassionId == sessionId
                                  group solidWasteActDetail by new
                                  {
@@ -90,6 +96,12 @@
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
                 if (carNumbers == null) carNumbers = new List<int>();
 
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 0, 0);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
+
                 result = (from solidWasteAct in Context.SolidWasteActs
                           join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
                           join userRegion in Context.UserRegions on landfill.RegionId equals userRegion.RegionId
@@ -104,7 +116,7 @@
                                  ((!fromDate.HasValue) || (fromDate.HasValue && solidWasteAct.ActDate >= fromDate.Value)) &&
                                  ((!endDate.HasValue) || (endDate.HasValue && solidWasteAct.ActDate <= endDate.Value)) &&
                                  ((loadAllLandfill) || landFillIdSource.Contains(solidWasteAct.LandfillId)) &&
-                                 ((loadAllCarNumber) || (!loadAllCarNumber && carNumbers.Contains(solidWasteAct.CustomerId))) &&
+                                 ((loadAllCarNumber) || (!loadAllCarNumber && carNumbers.Contains(transporter.Id))) &&
                                  ((loadAllCustomer) || (!loadAllCustomer && customerIdSource.Contains(solidWasteAct.CustomerId))) &&
                                  ((loadAllWasteType) || (!loadAllWasteType && wasteTypeIdSource.Contains(solidWasteActDetail.WasteTypeId))))) && user.SeassionId == sessionId
                           group solidWasteActDetail by new

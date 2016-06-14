@@ -204,6 +204,7 @@
     <Compile Include="Common\ClientErrorHandler.cs" />
     <Compile Include="Common\ExcelExporter.cs" />
     <Compile Include="Common\Session.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\SolidWasteActHistoryController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\SolidWasteActJurnalController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Models\LandfillViewModels.cs" />
     <Compile Include="Models\AgreementViewModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
@@ -2987,7 +2989,12 @@
     <Content Include="assets\pages\scripts\components-select2.js" />
     <Content Include="assets\pages\scripts\components-select2.min.js" />
     <Content Include="assets\script\AmountToDecimal\AmountToDecimal.js" />
+    <Content Include="assets\script\AmountToDecimal\image001.png" />
     <Content Include="assets\script\BusyIndicator\BusyIndicator.js" />
+    <Content Include="assets\script\Customer\Delete.js" />
+    <Content Include="assets\script\Customer\Edit.js" />
+    <Content Include="assets\script\Customer\Create.js" />
+    <Content Include="assets\script\Customer\Index.js" />
     <Content Include="assets\script\Payment\Detail.js" />
     <Content Include="assets\script\Payment\Edit.js" />
     <Content Include="assets\script\Payment\Index.js" />
@@ -3402,6 +3409,10 @@
     <Content Include="Views\Account\ChangePasswrod.cshtml" />
     <Content Include="Views\SolidWasteActHistory\Index.cshtml" />
     <Content Include="Views\SolidWasteActHistory\LoadHistory.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
