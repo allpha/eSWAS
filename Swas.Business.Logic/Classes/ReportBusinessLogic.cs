@@ -34,6 +34,12 @@
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
                 if (carNumbers == null) carNumbers = new List<int>();
 
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 1, 1);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
+
                 result.ReportData = (from solidWasteAct in Context.SolidWasteActs
                                      join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
                                      join receiver in Context.Receivers on solidWasteAct.ReceiverId equals receiver.Id
@@ -110,6 +116,11 @@
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
                 if (carNumbers == null) carNumbers = new List<int>();
 
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 1, 1);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
 
                 result.ReportData = (from solidWasteAct in Context.SolidWasteActs
                                      join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
@@ -194,6 +205,12 @@
                 if (customerIdSource == null) customerIdSource = new List<int>();
                 if (wasteTypeIdSource == null) wasteTypeIdSource = new List<int>();
                 if (landFillIdSource == null) landFillIdSource = new List<int>();
+
+                if (fromDate.HasValue)
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 1, 1);
+
+                if (endDate.HasValue)
+                    endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
 
                 var reportData = (from solidWasteAct in Context.SolidWasteActs
                                   join landfill in Context.Landfills on solidWasteAct.LandfillId equals landfill.Id
