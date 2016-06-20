@@ -28,7 +28,7 @@
 
             try
             {
-                var report = bussinessLogic.LoadDetailedReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
+                var report = bussinessLogic.LoadDetailedReport(Globals.SessionContext.Current.User.SessionId, id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
                 IList<SolidWasteActReportDetailReportViewModel> reportModel = new List<SolidWasteActReportDetailReportViewModel>();
                 var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;
 
@@ -75,7 +75,7 @@
 
             try
             {
-                var report = bussinessLogic.LoadGroupReport(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
+                var report = bussinessLogic.LoadGroupReport(Globals.SessionContext.Current.User.SessionId, id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill, loadAllCarNumber, carNubmers);
 
                 IList<SolidWasteActTotalSumReportViewModel> reportModel = new List<SolidWasteActTotalSumReportViewModel>();
                 var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;
@@ -83,6 +83,7 @@
                 foreach (var item in (List<SolidWasteActTotalSumReportItem>)report.ReportData)
                     reportModel.Add(new SolidWasteActTotalSumReportViewModel
                     {
+                        Id = item.Id,
                         Year = item.ActDate,
                         CustomerCode = item.CustomerCode,
                         CustomerName = item.CustomerName,
@@ -92,7 +93,6 @@
                         CarNumber = item.CarNumber,
                         ReceiverName = item.ReceiverName,
                         RegionName = item.RegionName,
-                        WasteTypeName = item.WasteTypeName,
                         CustomerType = custoemrTypeDescription[item.CustomerType]
                     });
 
@@ -118,7 +118,7 @@
 
             try
             {
-                var report = bussinessLogic.LoadPayment(id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
+                var report = bussinessLogic.LoadPayment(Globals.SessionContext.Current.User.SessionId, id, ConvertStringToDate(fromDate), ConvertStringToDate(endDate), landFillIdSource, wasteTypeIdSource, customerIdSource, loadAllWasteType, loadAllCustomer, loadAllLandfill);
 
                 IList<SolidWasteActPaymentReportViewModel> reportModel = new List<SolidWasteActPaymentReportViewModel>();
                 var custoemrTypeDescription = (new CustomerTypeDescriotion()).Description;

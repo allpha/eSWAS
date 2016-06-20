@@ -4,14 +4,13 @@
 
 function saveRole(errorEditor) {
     BusyIndicator.setBusy();
-
     $.ajax({
         url: "/Role/Create",
         type: "POST",
         dataType: "json",
         data: {
             descirption: $("#description").val(),
-            permissions: $('#permissionCombo').val()
+            permissions: $('#permissionSelector').val()
         },
         success: function (data) {
             location.href = '/Role/Index';
@@ -34,7 +33,7 @@ var FormValidationMd = function () {
 
 
     var handleValidation = function () {
-        var form1 = $('#changePasswordForm');
+        var form1 = $('#registrationForm');
         var errorEditor = $('.alert-danger', form1);
 
         form1.validate({
@@ -47,7 +46,7 @@ var FormValidationMd = function () {
                     minlength: 2,
                     required: true
                 },
-                permissionCombo: {
+                permissionSelector: {
                     minlength: 1,
                     required: true
                 },
@@ -101,11 +100,12 @@ function loadPermission() {
 
         },
         success: function (data) {
-            var select2Name = "#permissionCombo";
+            var select2Name = "#permissionSelector";
             $(select2Name).empty();
             for (var i = 0; i < data.length; i++) {
                 $(select2Name).append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
             }
+            $('#permissionSelector').multiSelect();
             BusyIndicator.unsetBusy();
         },
         error: function (request, status, error) {
@@ -116,11 +116,13 @@ function loadPermission() {
 }
 
 function initPermission() {
-    $("#permissionCombo").select2({
-        placeholder: "გთხოვთ აირჩიოთ უფლებები",
-        allowClear: true,
-        width: null
-    });
+    //$("#permissionCombo").select2({
+    //    placeholder: "გთხოვთ აირჩიოთ უფლებები",
+    //    allowClear: true,
+    //    width: null
+    //});
+
+    
 
     loadPermission();
 }
@@ -129,6 +131,7 @@ function initPermission() {
 jQuery(document).ready(function () {
 
     BusyIndicator.init("#editorDialog");
+
     initPermission();
     FormValidationMd.init();
 });

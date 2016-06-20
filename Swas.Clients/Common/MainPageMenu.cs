@@ -119,10 +119,39 @@
                         },
                         new ChildMenu
                         {
+                            Url = "/Reciever/",
+                            Title = "მიმღები",
+                            ControllerName = "Reciever",
+                            PermissionName = "Reciever.View"
+                        },
+                        new ChildMenu
+                        {
+                            Url = "/Position/",
+                            Title = "მიმღების თანამდებობა",
+                            ControllerName = "Position",
+                            PermissionName = "Position.View"
+                        },
+                        new ChildMenu
+                        {
                             Url = "/Customer/",
                             Title = "შემომტანი",
                             ControllerName = "Customer",
                             PermissionName = "Customer.View"
+                        },
+
+                        new ChildMenu
+                        {
+                            Url = "/Representative/",
+                            Title = "წარმომადგენელი",
+                            ControllerName = "Representative",
+                            PermissionName = "Representative.View"
+                        },
+                        new ChildMenu
+                        {
+                            Url = "/Transporter/",
+                            Title = "ტრანსპორტი",
+                            ControllerName = "Transporter",
+                            PermissionName = "Transporter.View"
                         },
                     }
                 },

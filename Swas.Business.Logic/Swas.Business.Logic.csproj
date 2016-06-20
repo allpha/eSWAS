@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\RepresentativeBusinessLogic.cs" />
+    <Compile Include="Classes\PositionBusinessLogic.cs" />
     <Compile Include="Classes\SolidWasteActHistoryBusinessLogic.cs" />
     <Compile Include="Classes\LoginBusinessLogic.cs" />
     <Compile Include="Classes\PaymentBusinessLogic.cs" />
@@ -60,7 +62,7 @@
     <Compile Include="Classes\ReportBusinessLogic.cs" />
     <Compile Include="Classes\TransporterBusinessLogic.cs" />
     <Compile Include="Classes\CustomerBusinessLogic.cs" />
-    <Compile Include="Classes\ReceiverPositionBusinessLogic.cs" />
+    <Compile Include="Classes\ReceiverBusinessLogic.cs" />
     <Compile Include="Common\ComputeMD5Hash.cs" />
     <Compile Include="Entity\SolidWasteActHistory.cs" />
     <Compile Include="Entity\User.cs" />

@@ -40,6 +40,8 @@ namespace Swas.Clients.Models
 
     public class SolidWasteActTotalSumReportViewModel
     {
+        [Display(Name = "#")]
+        public int Id { get; set; }
         [Display(Name = "წელი")]
         public int Year { get; set; }
         [Display(Name = "გეოგრაფიული არეალი")]
@@ -57,8 +59,6 @@ namespace Swas.Clients.Models
         [Display(Name = "მანქანის ნომერი")]
         public string CarNumber { get; set; }
 
-        [Display(Name = "მყარი ნარჩენის ტიპი")]
-        public string WasteTypeName { get; set; }
         [Display(Name = "მოცულობა")]
         public decimal Quantity { get; set; }
         [Display(Name = "ღირებულება")]

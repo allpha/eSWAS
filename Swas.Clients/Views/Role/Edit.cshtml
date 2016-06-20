@@ -6,7 +6,7 @@
 <div id="editorDialog">
     <div class="modal-header" style="vertical-align:middle">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">უფლების შექმნა</h5>
+        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">როლის რედაქტირება</h5>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -17,26 +17,23 @@
                     <form action="#" class="form-horizontal" id="registrationForm">
                         <div class="form-body">
                             <div class="alert alert-danger display-hide">
-
                             </div>
-
                             <div class="form-group form-md-line-input">
                                 <label class="col-md-3 control-label" for="form_control_1"> @Html.DisplayNameFor(model => model.Description) </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" placeholder="" value="@Model.Description" name="description" id="description">
                                     <div class="form-control-focus"> </div>
-                                    <span class="help-block">შეიყვანეთ უფლების აღწერილობა.</span>
+                                    <span class="help-block">შეიყვანეთ როლის დასახელება.</span>
                                 </div>
                             </div>
 
                             <div class="form-group form-md-line-input">
                                 <label class="col-md-3 control-label" for="form_control_1"> უფლებები </label>
                                 <div class="col-md-9">
-                                    <select id="permissionCombo" name="permissionCombo" class="form-control select2" multiple></select>
-                                    <div class="form-control-focus"> </div>
-                                    <span class="help-block">აირჩით უფლებები.</span>
+                                    <select multiple="multiple" class="multi-select" id="permissionSelector" name="permissionSelector"></select>
                                 </div>
                             </div>
+
                             <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
                         </div>
 

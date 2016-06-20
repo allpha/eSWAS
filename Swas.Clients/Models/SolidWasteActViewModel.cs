@@ -12,7 +12,7 @@ namespace Swas.Clients.Models
     {
         [Display(Name = "#")]
         public int Id { get; set; }
-        [Display(Name = "თარიღი")]
+        [Display(Name = "შემოტანის თარიღი")]
         //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ActDate { get; set; }
         [Display(Name = "ნაგავსაყრელი")]

@@ -1,0 +1,72 @@
+﻿@using Swas.Clients.Common
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-12 ">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light bordered" id="viewBody">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-pointer font-blue-madison"></i>
+                    <span class="caption-subject font-blue-madison bold uppercase" style="font-family: mtavrulibold">იურიდიული პირის წარმომადგენლი</span>
+                </div>
+                <div class="btn-group pull-right">
+                    @if (Globals.SessionContext.HasPermission("Representative.Insert"))
+                    {
+                        <button style="margin-right:5px" class="btn blue-madison btn-outline" onclick="javascript:create();">
+                            <i class="fa fa-plus"></i>
+                            ახალი
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>
+            <div id="ajax-modal" class="modal fade" data-width="800" tabindex="-1"> </div>
+
+            <div class="portlet-body">
+
+                @if (Globals.SessionContext.HasPermission("Representative.Delete"))
+                {
+                    <input type="hidden" id="hasDelete" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasDelete" value="false" />
+                }
+                @if (Globals.SessionContext.HasPermission("Representative.Edit"))
+                {
+                    <input type="hidden" id="hasEdit" value="true" />
+                }
+                else
+                {
+                    <input type="hidden" id="hasEdit" value="false" />
+                }
+
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light" id="itemSource">
+                        <thead>
+                            <tr class="uppercase">
+                                <th style="font-family: mtavrulibold"> დასახელება</th>
+                                <th width="100px">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section PageScripts{
+    <script src="~/assets/script/BusyIndicator/BusyIndicator.js"></script>
+    <script src="~/assets/script/Representative/Index.js"></script>
+}
+
+
+

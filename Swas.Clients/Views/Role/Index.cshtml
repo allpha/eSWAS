@@ -24,7 +24,7 @@
             </div>
 
             <a id="ajax-model-dialog-editor" data-url="/home/test" data-toggle="modal"> </a>
-            <div id="ajax-modal" class="modal fade" tabindex="-1"> </div>
+            <div id="ajax-modal" class="modal fade" data-width="800" tabindex="-1"> </div>
 
             <div class="portlet-body">
 
@@ -62,8 +62,13 @@
     </div>
 
 </div>
+@section PageStyle{
+    <link href="../assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
+}
+
 @section PageScripts{
     <script src="~/assets/script/Role/Index.js"></script>
+    <script src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 }
 
 

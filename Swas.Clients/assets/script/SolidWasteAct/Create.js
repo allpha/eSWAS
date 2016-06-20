@@ -384,7 +384,7 @@ function generateActReview() {
         '<form action="#" class="form-horizontal form-row-seperated">' +
             '<div class="form-body">' +
                 '<div class="form-group col-sm-12">' +
-                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>თარიღი:</b></div>' +
+                    '<div class="col-sm-2" style="text-align:right; font-size:13px;"><b>შემოტანის თარიღი:</b></div>' +
                     '<div class="col-sm-3" style="text-align:left">' + document.getElementById("ActDate").value + '</div>' +
                     '<div class="col-sm-3" style="text-align:right; font-size:13px;"><b>ფიზიკური/იურიდიული პირის დასახელება:</b> </div>' +
                     '<div class="col-sm-4" style="text-align:left">' + document.getElementById("CustomerName").value + '</div>' +

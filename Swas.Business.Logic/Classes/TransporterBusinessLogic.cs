@@ -109,6 +109,156 @@
 
             return result;
         }
+        public List<TransporterItem> Load()
+        {
+            var result = new List<TransporterItem>();
+
+            try
+            {
+                Connect();
+
+                result = (from transporter in Context.Transporters
+                          select new TransporterItem
+                          {
+                              Id = transporter.Id,
+                              CarModel = transporter.CarModel,
+                              CarNumber = transporter.CarNumber,
+                              DriverInfo = transporter.DriverInfo,
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+        public TransporterItem Get(int id)
+        {
+            var result = new TransporterItem();
+
+            try
+            {
+                Connect();
+
+                result = (from transporter in Context.Transporters
+                          where transporter.Id == id
+                          select new TransporterItem
+                          {
+                              Id = transporter.Id,
+                              CarModel = transporter.CarModel,
+                              CarNumber = transporter.CarNumber,
+                              DriverInfo = transporter.DriverInfo,
+                          }).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+
+            return result;
+        }
+
+        public void Insert(TransporterItem item)
+        {
+            try
+            {
+                Connect();
+
+                Context.Transporters.Add(new Transporter
+                {
+                    CarNumber = item.CarNumber,
+                    CarModel = item.CarModel,
+                    DriverInfo = item.DriverInfo,
+                });
+
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
+
+        public void Edit(TransporterItem item)
+        {
+            try
+            {
+                Connect();
+
+                var transporterInfo = (from transporter in Context.Transporters
+                                          where transporter.Id == item.Id
+                                          select transporter).FirstOrDefault();
+
+                if (transporterInfo != null)
+                {
+                    transporterInfo.CarNumber= item.CarNumber;
+                    transporterInfo.CarModel = item.CarModel;
+                    transporterInfo.DriverInfo = item.DriverInfo;
+
+                    Context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("ჩანაწერი ვერ მოიძებნა");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
+
+        public void Remove(int id)
+        {
+            try
+            {
+                Connect();
+
+                var transporterInfo = (from transporter in Context.Transporters
+                                       where transporter.Id == id
+                                       select transporter).FirstOrDefault();
+
+
+                if (transporterInfo != null)
+                {
+                    Context.Transporters.Remove(transporterInfo);
+
+                    Context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("ჩანაწერი ვერ მოიძებნა");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
 
 
     }

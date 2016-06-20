@@ -23,6 +23,7 @@
 
     public class SolidWasteActTotalSumReportItem
     {
+        public int Id { get; set; }
         public int ActDate { get; set; }
         public string RegionName { get; set; }
         public string LandfillName { get; set; }

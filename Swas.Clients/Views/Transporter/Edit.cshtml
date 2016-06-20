@@ -1,0 +1,69 @@
+﻿@model Swas.Clients.Models.EditViewModel
+@{
+    Layout = null;
+}
+
+<div id="editorDialog">
+    <div class="modal-header" style="vertical-align:middle">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h5 class="modal-title font-dark-grey" style="font-family: mtavrulibold; margin-top:10px;">ტრანსპორტის რედაქტირება</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 ">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet-body">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal" id="registrationForm">
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="CarModel"> მოდელი </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="" name="CarModel" id="CarModel">
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ მოდელი.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="CarNumber"> ნომერი </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="" name="CarNumber" id="CarNumber">
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ ნომერი.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label" for="DriverInfo"> მძღოლი </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="" name="DriverInfo" id="DriverInfo">
+                                    <div class="form-control-focus"> </div>
+                                    <span class="help-block">შეიყვანეთ მძღოლი.</span>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="Id" id="Id" value="@Model.Id"/>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">გაუქმება</button>
+            <button type="button" class="btn green" id="btSave">შენახვა</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/script/BusyIndicator/BusyIndicator.js"></script>
+<script src="~/assets/script/Transporter/Edit.js"></script>>

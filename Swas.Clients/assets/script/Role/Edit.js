@@ -12,7 +12,7 @@ function saveRole(errorEditor) {
         data: {
             id: $("#Id").val(),
             descirption: $("#description").val(),
-            permissions: $('#permissionCombo').val()
+            permissions: $('#permissionSelector').val()
         },
         success: function (data) {
             location.href = '/Role/Index';
@@ -48,7 +48,7 @@ var FormValidationMd = function () {
                     minlength: 2,
                     required: true
                 },
-                permissionCombo: {
+                permissionSelector: {
                     minlength: 1,
                     required: true
                 },
@@ -102,7 +102,7 @@ function loadPermission() {
 
         },
         success: function (data) {
-            var select2Name = "#permissionCombo";
+            var select2Name = "#permissionSelector";
             var selectedValues = $(select2Name).val();
             var existingSelectedValues = []
             if (selectedPermissions == null)
@@ -125,6 +125,9 @@ function loadPermission() {
                 $(select2Name).append('<option value="' + data[i].Id + '">' + data[i].Name + '</option>');
             }
             $(select2Name).val(existingSelectedValues).trigger("change");
+            
+            $("#permissionSelector").multiSelect();
+
             BusyIndicator.unsetBusy();
         },
         error: function (request, status, error) {
@@ -135,11 +138,11 @@ function loadPermission() {
 }
 
 function initPermission() {
-    $("#permissionCombo").select2({
-        placeholder: "გთხოვთ აირჩიოთ უფლებები",
-        allowClear: true,
-        width: null
-    });
+    //$("#permissionCombo").select2({
+    //    placeholder: "გთხოვთ აირჩიოთ უფლებები",
+    //    allowClear: true,
+    //    width: null
+    //});
 
     loadPermission();
 }

@@ -97,7 +97,7 @@
                 if (carNumbers == null) carNumbers = new List<int>();
 
                 if (fromDate.HasValue)
-                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 1, 1);
+                    fromDate = new DateTime(fromDate.Value.Year, fromDate.Value.Month, fromDate.Value.Day, 0, 0, 0);
 
                 if (endDate.HasValue)
                     endDate = new DateTime(endDate.Value.Year, endDate.Value.Month, endDate.Value.Day, 23, 59, 59);
